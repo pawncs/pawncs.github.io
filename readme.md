@@ -82,6 +82,7 @@ git push oringin master
 ~~~
 >第一次提交到本分支，`origin`是远程仓库默认名称，`master`是分支名称
 >第2-n次提交到相同分支时，可简化为`git push`;同时，若仓库和本地不一致，应先执行`git pull`
+-----
 <div class="title3">有关ssh</div>
 
 + 查看SSH内容（可以检查是否生成了本地SSH）
