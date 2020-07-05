@@ -18,7 +18,7 @@
 </style>
 
 <div class="title1">有关命令行的那些事</div>
-===
+------
 <div class="title3">常见的Linux命令</div>
 
 >时刻注意自己的路径
@@ -91,5 +91,5 @@ cat ~/.ssh/id_rsa.pub
 ~~~cmd
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ~~~
----
+-----
 ![](https://qgt-style.oss-cn-hangzhou.aliyuncs.com/newcoursep4/g1/g1-2-2/tenor.gif)
