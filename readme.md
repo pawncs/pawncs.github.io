@@ -1,25 +1,30 @@
 <style>
 .title1{
     font-size:36px;
-    color:#ffd600;
+    color:#e7767f;
+    /* 桃红 */
+
 }
 .title2{
     font-size:29px;
-    color:#ffea00;
+    color:#176f58;
+    /* 祖母绿 */
 }
 .title3{
     font-size:22px;
-    color:#ffff00;
+    color:#21a675;
+    /* 石绿 */
 }
 .title4{
     font-size:15px;
-    color:#ffff8d;
+    color:#a8cd34;
+    /* 柳绿 */
 }
 </style>
 
 <div class="title1">有关命令行的那些事</div>
 
-------
+-----
 <div class="title3">常见的Linux命令</div>
 
 >时刻注意自己的路径
@@ -45,6 +50,7 @@ cd 文件目录
 rm -rf 文件
 ~~~
 >仓库地址在仓库中获取（ssh）
+
 -----
 <div class="title3">有关git</div>
 <div class="title4">全局配置</div>
@@ -82,6 +88,7 @@ git push oringin master
 ~~~
 >第一次提交到本分支，`origin`是远程仓库默认名称，`master`是分支名称
 >第2-n次提交到相同分支时，可简化为`git push`;同时，若仓库和本地不一致，应先执行`git pull`
+
 -----
 <div class="title3">有关ssh</div>
 
