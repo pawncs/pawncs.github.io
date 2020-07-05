@@ -18,6 +18,7 @@
 </style>
 
 <div class="title1">有关命令行的那些事</div>
+
 ------
 <div class="title3">常见的Linux命令</div>
 
@@ -44,7 +45,7 @@ cd 文件目录
 rm -rf 文件
 ~~~
 >仓库地址在仓库中获取（ssh）
----
+-----
 <div class="title3">有关git</div>
 <div class="title4">全局配置</div>
 
