@@ -1,6 +1,8 @@
 ---
 title: Session和简易登录
 date: 2020-07-14 18:24:05
+categories:
+- Java Web
 tags: 
 - note
 ---

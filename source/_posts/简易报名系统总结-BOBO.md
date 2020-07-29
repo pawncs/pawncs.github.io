@@ -1,6 +1,8 @@
 ---
 title: 简易报名系统总结-BOBO
 date: 2020-07-07 17:28:59
+categories:
+- Java Web
 tags: 
 - note
 ---
