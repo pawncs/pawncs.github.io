@@ -99,5 +99,6 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
+  # git@gitee.com:pawncs/blog.git
   repository: git@github.com:pawncs/pawncs.github.io.git
   branch: master

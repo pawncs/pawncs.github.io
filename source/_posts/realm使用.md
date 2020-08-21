@@ -29,8 +29,17 @@ tags:
     color:#a8cd34;
     /* 柳绿 */
 }
-</style>
+.name{
 
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+<div class="name">by pawncs</div>
 <div class="title2">一、安装</div>
 
 将其作为Gradle插件安装。
@@ -150,4 +159,9 @@ realm.executeTransaction(new Realm.Transaction() {
 + 此错误为未在表AdroidManifest.xml中注册Application
 ~~~
 java.lang.IllegalStateException: Call `Realm.init(Context)` before calling this method.
+~~~
+
++ 实体类必须构建一个无参构造函数，不然会报编译错误
+~~~
+Compilation failed; see the compiler error output for details.
 ~~~
