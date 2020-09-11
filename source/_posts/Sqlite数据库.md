@@ -29,7 +29,18 @@ tags:
     color:#a8cd34;
     /* 柳绿 */
 }
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
 </style>
+
+<div class="name">by pawncs</div>
 
 [视频](https://www.imooc.com/video/13277)
 <div class="title2">一、SQLite是什么</div>
