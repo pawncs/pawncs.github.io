@@ -1,9 +1,11 @@
 ---
-title: scss
-date: 2020-09-12 16:49:12
+title: scss入门
+date: 2020-09-13 14:38:12
 categories:
 - html,css,js
 tags:
+- SCSS
+- CSS
 - study
 ---
 <style>
@@ -40,6 +42,14 @@ tags:
 </style>
 
 <div class="name">by pawncs</div>
+
+-----
+<div class="title2">零、摘要</div>
+
+-----
+1. 什么是SCSS和SASS，以及如何安装。
+   
+2. 展示了变量、嵌套、混合功能的简单使用。
 
 -----
 <div class="title2">一、SASS</div>
@@ -162,9 +172,61 @@ Sass允许将一套CSS样式嵌套进另一套样式中，内层的样式将他�
 
 -----
 
-<div class="title3">4.1 未完待续</div>
-<div class="title4">未完待续</div>
+>我们可用混合（mixin/include）来解决代码复用的问题
+<div class="title3">4.1 无参数混合</div>
 
+<div class="title4">混合的使用方式</div>
 
+~~~scss
+@mixin square {
+  width: 100px;
+  height: 100px;
+}
+
+// 应用：
+.user-avatar {
+  @include square;
+}
+.admin-avatar {
+  @include square;
+}
+~~~
+>`@mixin` : 定义可复用的样式  
+>`@include` : 应用可复用的样式
+
+<div class="title3">4.2 有参数混合</div>
+<div class="title4">参数无默认值</div>
+
+~~~scss
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+// 应用
+.avatar {
+  @include square(100px);
+}
+~~~
+需传入变量 `$size`
+
+<div class="title4">参数有默认值</div>
+
+~~~scss
+@mixin square($size: 100px) {
+  width: $size;
+  height: $size;
+}
+
+// 不传参数就会使用默认的值 100px
+.avatar {
+  @include square;
+}
+
+// 传入参数就会使用传入的值 200px
+.avatar-200 {
+  @include square($size: 200px);
+}
+~~~
 
 -----
