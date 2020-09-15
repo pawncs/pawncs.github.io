@@ -44,9 +44,9 @@ tags:
 
 CSS引用形式
 =========
-~~~
+
 行内式，☆内部样式(style标签)，外部样式
-~~~
+
 
 选择器
 =====
@@ -58,46 +58,47 @@ CSS引用形式
 
 字体
 ===
->加粗：
->~~~
->font-weight:bold;
->~~~
+加粗：
+~~~
+font-weight:bold;
+~~~
 >bold释义：大胆的，英勇的；黑体的；厚颜无耻的；险峻的  
 >本专业释义：粗体，粗的
 
 优先级
 ====  
 >当选择器重复选取时的优先级
->~~~
->id选取>class选取>标签选取
->同级的时候比较过程中最高级的数量（例如用了几次id选取）
->~~~
+
+id选取>class选取>标签选取
+同级的时候比较过程中最高级的数量（例如用了几次id选取）
+
 
 padding,border和margin
 ========================
->padding
->~~~
->可在导航栏发挥大用（不让贴着边）
->padding:20px 30px;
->指上下20，左右30。
->默认参数顺序为：上右下左（顺时针）
->~~~
-box-sizing:bording-box或content-box;
+## padding
+
+可在导航栏发挥大用（不让贴着边）  
+padding:20px 30px;  
+指上下20，左右30。  
+默认参数顺序为：上右下左（顺时针）  
+
+>box-sizing:bording-box或content-box;
 
 border:直线，虚线
 >border-style:solid,dashed    
 
 border例
-~~~
-border-top:1px solid black;
-border-top:none;(不显示)
+~~~css
+border-top:1px solid black;  
+border-top:none; 
+//不显示
 ~~~
 
 ·阴影
-~~~
-box-shadow:2px 2px 2px 1px rgba(0,0,0,0.2);
+
+box-shadow:2px 2px 2px 1px rgba(0,0,0,0.2);  
 x偏移 y偏移 阴影模糊半径 阴影扩散半径 阴影颜色
-~~~
+
 
 .子级元素撑开父级元素宽度
 =======================
@@ -120,24 +121,22 @@ display:none,,block,inline,inline-block
 inline-block时，将父元素的font-size设为0，消除空白折叠现象
 
 
-`position`
+position
 ========
->relative（相对定位）  
-~~~
+>relative（相对定位）    
+
 相对自己进行偏移
-~~~
 >absolute（绝对定位）
-~~~
+
 相对最先遇到的非static的祖先元素进行偏移
-~~~  
 >fixed（固定定位）  
-~~~
+
 不随着页面滚动而改变
-~~~
+
 >sticky(粘性定位)  
-~~~
+
 看起来很好玩，，——经过的时候回粘下来
-~~~
+
 
 
 
@@ -145,7 +144,7 @@ inline-block时，将父元素的font-size设为0，消除空白折叠现象
 
 去除浏览器自带样式
 ===============
-~~~
+~~~css
 html,
 body {
     height: 100%;
@@ -177,8 +176,8 @@ p {
 
 CSS中的计算：
 ===========
-~~~
 calc:
+~~~css
 width:calc(100% - 480px);
 ~~~
 
@@ -190,22 +189,21 @@ width:calc(100% - 480px);
 伪类
 =====
 事件伪类：
-~~~
-hover
-光标覆盖时
-active
-光标点击时
+
+hover : 光标覆盖时  
+active : 光标点击时
 
 注意：hover一定要在active之前
 
 focus:获得焦点后
-~~~
+
 
 CSS装饰
 ================
-~~~
-cursor : pointer,,添加小手手；default;text;等一切鼠标悬浮的效果
-~~~
+
+cursor :   
+pointer,,添加小手手；default;text;等一切鼠标悬浮的效果
+
 
 
 
