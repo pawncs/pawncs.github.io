@@ -1,6 +1,6 @@
 ---
 title: javascript入门
-date: 2020-09-22 14:28:39
+date: 2020-09-25 00:33:11
 categories:
 - html,css,js
 tags:
@@ -153,9 +153,70 @@ let number3 = 10;//十进制的10
 
 小数形式，科学计数法形式
 ~~~js
-let floatNumber = 1.2;
+let floatNumber1 = 1.2;
 
-let floatNumber = 3.33e7;//3.33*10^7
+let floatNumber2 = 3.33e7;//3.33*10^7
 ~~~
+浮点数最高精度为17位。但要注意其精度丢失的问题。（0.1 + 0.2 != 0.3）
+<div class="title4">NaN</div>
+
+当两个变量执行了运算，且返回的结果仍然应该是数字类型，但是执行的数学运算未成功，就会返回`NaN`.
+~~~js
+let a = 'number';
+let b = 10;
+let c = a / b;
+console.log(c); // NaN
+console.log(typeof c); // number
+~~~
+
+其他会出现`NaN`的情况:
++ 0/0
++ 字符串乘以数字
++ `NaN`和其他数进行运算
+<div class="title3">2.3 类型转换/字符串拼接</div>
+<div class="title4">隐式转换</div>
+
+数字字符串(`string`)和数字(`number`)做加法运算，数字会隐式转换为字符串  
+数字字符串和数字做非加法运算，字符串会隐式转换为数字
+~~~js
+console.log(20+'20'); // 2020
+// 调换位置亦可
+console.log('20'+20); // 2020
+
+console.log('20'-10); // 10
+console.log(10*'10'); // 100
+console.log(10/'2'); // 5
+~~~
+<div class="title4">强制类型转换</div>
+
+`parseInt()`,`parseFloat()`
+
+<div class="title4">字符串拼接</div>
+
+用+号。不过我个人更喜欢模板字符串。即使用反引号` `` `将${}括起来这种。
+<div class="title3">2.4 运算符</div>
+<div class="title4">相等/全等</div>
+
+区别：相等运算时可能会进行隐式转换
+~~~js
+let number1 = '45';
+let number2 = 45;
+console.log(number1 == number2); // true
+~~~
+而全等运算会判断类型
+~~~js
+let number1 = '45';
+let number2 = 45;
+console.log(number1 === number2); // false
+~~~
+推荐使用全等。
+
+<div class="title3">2.5、布尔类型/条件判断</div>
+
+特别：  
+| 数据类型 | true | false |
+| :----: | :----: | :----: |
+| 字符串 | 非空字符串 | ""(空字符串) |
+| 数字 | 非零数字 | 0 |
 
 -----
