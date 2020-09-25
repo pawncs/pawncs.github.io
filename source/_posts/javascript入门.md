@@ -1,6 +1,6 @@
 ---
 title: javascript入门
-date: 2020-09-25 00:33:11
+date: 2020-09-26 00:33:11
 categories:
 - html,css,js
 tags:
@@ -218,5 +218,59 @@ console.log(number1 === number2); // false
 | :----: | :----: | :----: |
 | 字符串 | 非空字符串 | ""(空字符串) |
 | 数字 | 非零数字 | 0 |
+
+-----
+-----
+<div class="title2">三、数组</div>
+
+-----
+
+用`[]`表示，可以储存不同类型的数据。
+其他和Java，C等差不多，此处略。
+~~~js
+let arr = [1,'第一名',true,[2,'第二名',false]];
+~~~
+<div class="title3">3.1 增删改查</div>
+
+~~~js
+//增-push
+变量名.push('要添加的值');
+//一次多个
+schools.push('河海大学', '大连理工大学', '哈尔滨工业大学');
+
+//增加在开头 -unshift
+array.unshift(`待增加元素`);
+~~~
+
+~~~js
+//从后往前删 pop
+schools.pop();
+
+//从前往后删 shift
+schools.shift();
+
+//删除指定位置 splice
+//我更愿意理解为分割，返回从第一个参数为下标往后数第二个参数为个数的所有内容。
+school.splice(1);
+school.splice(0,2);
+~~~
+
+~~~js
+//改 splice
+//三个参数，第三个为替换为的内容
+let schools = ['清华大学', '北京大学', '浙江大学', '同济大学'];
+
+schools.splice(2, 0, '江西理工大学');
+console.log(schools); //  ["清华大学", "北京大学", "江西理工大学", "浙江大学", "同济大学"]
+~~~
+
+~~~js
+//查 indexOf()
+//第一个参数为寻找的内容，第二个参数为开始的下标，默认为0.返回找到的下标，-1表示未寻得。
+let schools = ['清华大学', '北京大学', '浙江大学', '同济大学'];
+
+let result = schools.indexOf('浙江大学', 3);
+console.log(result); // -1
+~~~
 
 -----
