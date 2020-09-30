@@ -1,6 +1,6 @@
 ---
 title: javascript入门
-date: 2020-09-26 00:33:11
+date: 2020-09-30 23:33:11
 categories:
 - html,css,js
 tags:
@@ -271,6 +271,192 @@ let schools = ['清华大学', '北京大学', '浙江大学', '同济大学'];
 
 let result = schools.indexOf('浙江大学', 3);
 console.log(result); // -1
+~~~
+
+-----
+-----
+<div class="title2">四、函数</div>
+
+-----
+<div class="title3">4.1 函数的声明</div>
+
+<div class="title4">使用function声明函数</div>
+
+~~~js
+function print(){
+    //TODO
+}
+~~~
+<div class="title4">使用函数表达式声明函数</div>
+
+~~~js
+let print = function(){
+    //TODO
+}
+~~~
+此处为将一个匿名函数赋值给变量
+<div class="title4">函数声明的提升</div>
+
+当声明函数时，这段代码会自动提升到头部。所以可以：
+> 先使用，再声明
+
+当然，只有使用function声明时才会自动提升，使用函数表达式则不会。
+<div class="title4">函数重复声明</div>
+
+后面的会覆盖前面的。
+<div class="title4">立即执行函数</div>
+
+>IIFE (immediately invokable function expression)
+
+~~~js
+(function() {
+  console.log("这个函数只执行一次");
+})();
+~~~
+<div class="title3">4.2 函数参数</div>
+
+~~~js
+// 参数 figure(位数) txt(文本) 
+function code(figure, txt) {
+  const num1 = Math.random() * 0.9 + 0.1;
+  const num2 = Math.floor(num1 * Math.pow(10, figure));
+
+  console.log(txt + num2);
+}
+~~~
+> 不用声明类型
+
+<div class="title3">4.2 参数默认值</div>
+
+使用等号给参数默认值
+`function code(figure, txt = "随机数：") {/*TODO*/}`
+<div class="title3">4.3 计时器</div>
+
+三种延迟法：(`setTimeOut()`)
+~~~js
+console.log(1);
+
+/**
+ * 第一个参数是代码，注意代码需用引号包裹，否则会立即执行代码
+ * 第二个参数是 1000，即 1000ms 后执行 console.log(2)
+ */
+setTimeout('console.log(2)', 1000);
+
+/**
+ * 第一个参数是匿名函数
+ * 第二个参数是 2000，即 2s 后执行 console.log(3)
+ */
+setTimeout(function () {
+  console.log(3);
+}, 2000);
+
+// 第一个参数是函数名，注意函数名后不要加小括号“()”，否则会立即执行 print4
+setTimeout(print4, 3000);
+
+console.log(5);
+
+function print4() {
+  console.log(4);
+}
+~~~
+我们可以再递归函数中使用计时器，来完成倒计时。
+~~~js
+// 首先定义计时总秒数，单位 s
+let i = 60;
+
+// 定义变量用来储存定时器的编号
+let timerId;
+
+// 写一个函数，这个函数即每次要执行的代码，能够完成上述的 1、2、3
+function count() {
+  console.log(i);
+  i--;
+  if (i > 0) {
+    timerId = setTimeout(count, 1000);
+  } else {
+    // 清除计时器
+    clearTimeout(timerId);
+  }
+}
+
+// 首次调用该函数，开始第一次计时
+count();
+~~~
+
+有另一个方法，`setInterval()`,和`setTimeOut()`用法完全一致，但是他是无限次调用。
+~~~js
+let i = 60;
+print();
+let timer = setInterval(print, 1000);
+
+function print() {
+  console.log(i);
+  i--;
+  if (i < 1) {
+    clearInterval(timer);
+  }
+}
+~~~
+
+-----
+-----
+<div class="title2">五、对象</div>
+
+-----
+> 对象（object）是JavaScript语言的核心概念，也是最重要的数据类型。所有对象都继承自`Object`.
+
+~~~js
+let person = {
+  name: 'henry',
+  age: 18,
+  run: function() {
+    console.log('running');
+  }
+}
+
+person.run();
+~~~
+本质上就是一些键值对。其中键名都是字符串，所以引号可加可不加。
+
+访问所有键：`Object.keys(person)`
+~~~js
+// 第一步：创建构造函数
+function People(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+// 第二步：通过 new 创建对象实例
+let person = new People('henry', 18);
+console.log(person);
+~~~
+构造函数方式创建对象。
+<div class="title3">5.1 属性操作</div>
+
+<div class="title4">属性读取</div>
+
+有点运算符和方括号运算符两种方式。
+~~~js
+console.log(person.name);
+console.log(person['name']);
+~~~
+效果相同。但是后者可以使用变量。  
+属性的赋值也可以使用点运算符和方括号运算符。
+
+<div class="title4">属性删除和增加</div>
+
+删除：delete命令。  
+增加：直接写进去。
+~~~js
+let person = {
+  name: 'henry',
+  age: 18
+}
+
+//删除name属性
+delete person.name;
+//增加gender属性
+person.gender = 'male';
 ~~~
 
 -----
