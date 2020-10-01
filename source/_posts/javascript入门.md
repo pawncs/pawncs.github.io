@@ -1,6 +1,6 @@
 ---
 title: javascript入门
-date: 2020-09-30 23:33:11
+date: 2020-10-01 23:33:11
 categories:
 - html,css,js
 tags:
@@ -458,5 +458,221 @@ delete person.name;
 //增加gender属性
 person.gender = 'male';
 ~~~
+我们可以用in来判断一个对象有无某个属性。`'name' in person;`
+或者用Object原型对象自带的方法`hasOwnProperty`
+~~~js
+person.hasOwnProperty('name');
+~~~
+
+<div class="title3">5.2 对象继承</div>
+
+~~~js
+// 字面量
+let o1 = {
+  name: 'alice',
+};
+
+// 构造函数
+let o2 = new Object();
+let o3 = new Object();
+
+// 继承
+let o4 = new o1();
+~~~
+个人理解为，JS的对象和类是混在一起的，既可以做对象，也可以用作JAVA中的类。
+
+<div class="title4">JSON格式转换</div>
+
+~~~js
+// 一个 JSON 字符串
+const jsonStr =
+  '{"sites":[{"name":"Runoob", "url":"www.runoob.com"},{"name":"Google", "url":"www.google.com"},{"name":"Taobao", "url":"www.taobao.com"}]}';
+
+// 转成 JavaScript 对象
+const obj = JSON.parse(jsonStr);
+//转为JSON
+const jsonStr2 = JSON.stringify(obj);
+~~~
+<div class = "title3">5.3内置对象</div>
+
+<div class = "title4">Math</div>
+
+~~~js
+Math.E // 常数e。
+Math.LN2 // 2 的自然对数。
+Math.LN10 // 10 的自然对数。
+Math.LOG2E // 以 2 为底的e的对数。
+Math.LOG10E // 以 10 为底的e的对数。
+Math.PI // 常数π。
+Math.SQRT1_2 // 0.5 的平方根。
+Math.SQRT2 // 2 的平方根。
+
+Math.abs() // 绝对值
+Math.ceil() // 向上取整
+Math.floor() // 向下取整
+Math.round() // 四舍五入取整
+Math.max() // 最大值
+Math.min() // 最小值
+Math.pow() // 指数运算
+Math.sqrt() // 平方根
+Math.log() // 自然对数
+Math.exp() // e的指数
+Math.random() // 随机数
+~~~
+<div class = "title4">Storage</div>
+
+该接口用于脚本在浏览器保存数据。两个对象部署了这个接口:`window.sessionStorage`和`window.localStorage`
+~~~js
+//数据写入，第一个参数为键名key,第二个为键值value
+window.localStorage.setItem('myLocalStorage', 'storage Value');
+//如果不是字符串类型则先转换为字符串，如下：
+const obj = {
+  name: 'henry',
+  age: 18
+}
+const value = JSON.stringify(obj);
+window.localStorage.setItem('myLocalStorage', value);
+
+//数据读取，接受key，返回value
+window.localStorage.getItem('myLocalStorage');
+
+//清除缓存
+window.localStorage.clear();
+~~~
+<div class = "title4">String</div>
+
+>`String`是JS原生提供的三大包装对象之一(另两个是`Number`和`Boolean`)  
+
+`let v2 = new String('abc');`  
+包装对象的目的：
+1. 使得JavaScript的对象涵盖所有值
+2. 使得原始类型的值可以方便地调用某些方法
+<div class = "title4">Array</div>
+
+>也是JS的原生对象
+
+~~~js
+//连接数组 join()
+let arr = [1, 2, 3, 4];
+arr.join(' ') // '1 2 3 4'
+arr.join(' | ') // "1 | 2 | 3 | 4"
+arr.join() // "1,2,3,4"
+//和split作用刚好相反
+
+//倒序 reverse()
+//略
+
+//排序 sort()
+//没有参数就按照字典排序，或者可以传入函数
+let arr = [
+  { name: 'jenny', age: 18 },
+  { name: 'tom', age: 10 },
+  { name: 'mary', age: 40 }
+];
+
+arr.sort(function(a, b) {
+  return a.age - b.age;
+});
+
+console.log(arr);
+//此处传入的函数，当返回值大于0时，交换前后位置（当前的顺序是错误的）（原先a在前面），小于0时，按照原先的顺序。
+~~~
+遍历
+~~~js
+//map
+let arr = [
+  { name: 'jenny', age: 18 },
+  { name: 'tom', age: 10 },
+  { name: 'mary', age: 40 }
+];
+
+// elem: 数组成员
+// index: 成员下标
+// a: 整个数组
+// 返回由elem.name组成的数组
+const handledArr = arr.map(function(elem, index, a) {
+  elem.age += 1;
+  console.log(elem, index, a);
+  return elem.name
+});
+
+console.log(arr);
+console.log(handledArr);
+
+//forEach
+//forEach没有返回值
+const handledArr = arr.forEach(function(elem, index, a) {
+  elem.age += 1;
+  console.log(elem, index, a);
+  return elem.name//不会返回。
+});
+~~~
+<div class = "title4">Date</div>
+
+~~~js
+//获取当前时间
+let now = new Date();
+console.log(now);
+
+// 传入表示“年月日时分秒”的数字
+let dt1 = new Date(2020, 0, 6, 0, 0, 0);
+console.log(dt1);
+
+// 传入日期字符串
+let dt2 = new Date('2020-1-6');
+console.log(dt2);
+
+// 传入距离国际标准时间的毫秒数
+let dt3 = new Date(1578240000000);
+console.log(dt3);
+~~~
+日期运算
+~~~js
+let dt1 = new Date(2020, 2, 1);
+let dt2 = new Date(2020, 3, 1);
+
+// 求差值
+let diff = dt2 - dt1;
+
+// 一天的毫秒数
+let ms = 24 * 60 * 60 * 1000;
+
+console.log(diff / ms); // 31
+~~~
+早晚比较
+~~~js
+let dt1 = new Date(2020, 2, 1);
+let dt2 = new Date(2020, 3, 1);
+
+console.log(dt1 > dt2); // false
+console.log(dt1 < dt2); // true
+~~~
+解析日期字符串：`Date.parse()`
+~~~js
+let dt = Date.parse('2020-1-6');
+console.log(dt); // 1578240000000
+~~~
+时间对象转时间字符串：to方法
+~~~js
+let dt = new Date();
+let dtStr = dt.toJSON();
+
+console.log(dtStr); // 2020-01-03T09:44:18.220Z
+~~~
+获取事件对象的年月日：get方法
+~~~js
+let dt = new Date();
+dt.getTime(); // 返回实例距离1970年1月1日00:00:00的毫秒数。
+dt.getDate(); // 返回实例对象对应每个月的几号（从1开始）。
+dt.getDay(); // 返回星期几，星期日为0，星期一为1，以此类推。
+dt.getFullYear(); // 返回四位的年份。
+dt.getMonth(); // 返回月份（0表示1月，11表示12月）。
+dt.getHours(); // 返回小时（0-23）。
+dt.getMilliseconds(); // 返回毫秒（0-999）。
+dt.getMinutes(); // 返回分钟（0-59）。
+dt.getSeconds(); // 返回秒（0-59）。
+~~~
+以上部分也可通过set方法设置  
+<strong>注意月份</strong>
 
 -----
