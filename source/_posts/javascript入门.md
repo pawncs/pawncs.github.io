@@ -1,6 +1,6 @@
 ---
 title: javascript入门
-date: 2020-10-01 23:33:11
+date: 2020-10-02 23:33:11
 categories:
 - html,css,js
 tags:
@@ -674,5 +674,71 @@ dt.getSeconds(); // 返回秒（0-59）。
 ~~~
 以上部分也可通过set方法设置  
 <strong>注意月份</strong>
+
+-----
+<div class="title2">六、BOM</div>
+
+-----
+>和浏览器有关的对象，我们叫<strong>浏览器对象模型（Browser Object Model）</strong>
+
+<div class="title4">BOM对象</div>
+
++ window(窗口)：window是整个网页的框架，装载网页的内容
++ navigator（浏览器）：存储浏览器相关信息
++ history（历史）：用来存储网页栈（前进后退）
++ screen（显示屏幕）：显示屏幕的信息（硬件信息）
++ Location（地址）：当前访问的地址（网址）信息
+
+<div class="title3">6.1 window</div>
+
+>window对象是浏览器的默认对象，可以隐式调用window对象的属性和方法
+
+例如`console.log()`,我们不需要写`window.console.log()`
+
+[MDN文档—Window](https://developer.mozilla.org/zh-CN/docs/Web/API/Window)
+
+<div class="title3">6.2 Location</div>
+
+[MDN文档—Location](https://developer.mozilla.org/zh-CN/docs/Web/API/Location)  
+|属性|值|解释|
+|:--|:--|:--|
+|href|https://developer.mozilla.org/zh-CN/search?q=123|网页的地址|
+|hostname|developer.mozilla.org|网页域名|
+|host|developer.mozilla.org|网页域名 + 端口信息，这里端口默认80省略，所以和hostname相同|
+|protocol|https:|代表协议信息|
+|origin|https://developer.mozilla.org|页面来源的域名的标准形式|
+|pathname|/zh-CN/search|包含url路径部分|
+|search|?q=123|URL参数|
+
+<div class="title4">Location方法</div>
+
+只需重点掌握一个 : `reload()`
+~~~js
+setTimeout(function () {
+  window.location.reload();
+}, 3000);
+~~~
+刷新页面
+<div class="title4">跳转到新的地址</div>
+
+`window.location = 'https://www.youkeda.com';`
+直接赋值即可。
+
+<div class="title3">6.3 History</div>
+
+[MDN文档—History](https://developer.mozilla.org/zh-CN/docs/Web/API/History)
+> 存储窗口的历史记录
+
+两个方法：`back()`和`forward()`  
+分别对应返回和前进按钮。
+
+<div class="title3">6.4 Navifator</div>
+
+>表示用户代理的状态和标识，也即浏览器的基本信息。
+
+了解一个属性：`userAgent`，当前浏览器的用户代理
+<div class="title3">6.4 screen</div>
+
+[MDN文档——screen](https://developer.mozilla.org/zh-CN/docs/Web/API/Screen)
 
 -----
