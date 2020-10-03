@@ -1,6 +1,6 @@
 ---
 title: javascript入门
-date: 2020-10-02 23:33:11
+date: 2020-10-03 22:23:11
 categories:
 - html,css,js
 tags:
@@ -740,5 +740,143 @@ setTimeout(function () {
 <div class="title3">6.4 screen</div>
 
 [MDN文档——screen](https://developer.mozilla.org/zh-CN/docs/Web/API/Screen)
+
+-----
+-----
+<div class="title2">七、DOM</div>
+
+-----
+>是整个Javascript甚至整个前端最核心的内容
+
+><strong>文档对象模型</strong>，Document Object Model ——DOM。可以将 `web页面` 和 `脚本或编程语言联系起来` 。
+
+DOM是一种规范，只要遵循这种规范，任何语言都可以与web页面（文档）（由HTML和CSS绘制）联系起来
+<div class="title4">DOM 映射</div>
+
+DOM树：
+~~~
+    DOCUMENT
+       |
+      HTML
+     /    \
+   HEAD   BODY
+    |      |
+  TITLE   DIV
+         /   \
+        H1    P
+~~~
+其中DOCUMENT就是根节点，每个HTML标签就是DOM节点，称为`Node`或者`Element`
+<div class="title3">7.1 访问DOM</div>
+
+获取document对象：`window.document`
+
+<div class="title4">选择器查询</div>
+
+`document.querySelector('.class')`
+
+迭代查询：即在document的某个后代节点上查询
+
+`class = document.querySelector('.class');class2 = class.quertSelector('.class2')`
+
+这里主要关注的是子节点和document一样都是DOM树上的节点就可。
+
+以上是返回查询到的第一个节点，如果要查询所有节点，则函数换为 `querySelectorAll` .返回`NodeList`对象，可以像数组一样访问。(我猜大概是用了对象的中括号运算符， `class['key']` 这样)
+
+和原生的DOM查询函数的区别：query类的函数返回的是拷贝的原始数据，getElementById等getElement类（原生查询函数）的函数返回的就是原始数据，会随着DOM节点的变化而变化。
+<div class="title3">7.2 DOM属性</div>
+
+<div class = 'title4'>DOM类别</div>
+
+若有代码如下：
+~~~html
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <title>123</title>
+</head>
+<body>
+  <div id="test">123</div>
+  <script>
+  let divDom = document.querySelector('div#test');
+console.log(divDom.nodeType, divDom.nodeName, divDom.nodeValue);
+console.log('---------');
+
+let txtDom = divDom.firstChild;
+console.log(txtDom.nodeType, txtDom.nodeName, txtDom.nodeValue);
+console.log('---------');
+
+let attDom = divDom.attributes.id;
+console.log(attDom.nodeType, attDom.nodeName, attDom.nodeValue);
+
+  </script>
+</body>
+~~~
+|节点|nodeType|nodeName|nodeValue|类型|
+|:--|:--|:--|:--|:--|
+|divDom|1|DIV|null|元素节点|
+|txtDom|3|#text|123|文本节点|
+|attDom|2|id|test|特性节点|
+
+总结：
+1. 无论是标签还是属性还是字符串都是`Element`，不同的地方在于nodeType为1，2，3.
+2. HTML标签都是 元素节点 。`nodeName`表示标签名称。
+3. 纯文本都是 文本节点，`nodeValue`表示文本内容。
+4. 标签的属性都是特性节点，`nodeName` 表示key,`nodeName`表示属性value.
+5. `attributes`可以获取元素节点所有属性，返回的是一个字典。（Map）.
+
+<div class = 'title4'>DOM内容</div>
+
+可以通过元素节点的属性获得。
+
++ outerHTML  
+    整个DOM的HTML代码
++ innerHTML  
+  DOM内部HTML代码
++ innerText  
+  DOM内部纯文本内容
+
+<div class = 'title4'>DOM亲属</div>
+
+节点的firstChild,lastChild，childNodes,parentNode等属性，用以获取子节点。
+
+<div class = 'title4'>DOM样式</div>
+
+可以通过节点的classList属性获取其所有类名，style属性获取其CSSStyle.
+~~~js
+const h1Dom = document.querySelector('h1');
+console.log(h1Dom.classList);
+console.log(h1Dom.style);
+console.log(h1Dom.style.color);
+~~~
+<div class = 'title4'>DOM数据属性*</div>
+
+标签可以通过 `data-*` 属性存储数据。在节点中可以通过 `dataset` 属性获取关于`*`的键值对。
+若`<div data-qqq = "123"/>`则 `divDom.dataset.qqq === "123";//true`
+
+<div class = 'title3'>7.3 DOM 操作</div>
+
+~~~js
+//创建标签节点
+let a = document.createElement(tagName);
+
+//添加子节点
+document.body.appendChild(a);
+~~~
+如果想在某个目标子节点之前添加，可以使用`insertBefore(newNode,referenceNode)`方法。
+
+<div class = 'title4'>设置属性和样式</div>
+
+~~~js
+//1.setAttribute,可以设置所有属性
+img.setAttribute('style', 'width: 100%; height: 100%;');
+//2.这个可以单独替换某个样式
+dom.style.color = 'xxxx';
+//3.或者可以给不同的class设置不同的样式，这里单纯操作classList就可以了
+/*
+ * https://developer.mozilla.org/zh-CN/docs/Web/API/Element/classList
+ * classList的基础操作。
+ */
+
+~~~
 
 -----
