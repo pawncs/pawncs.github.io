@@ -880,3 +880,96 @@ dom.style.color = 'xxxx';
 ~~~
 
 -----
+-----
+<div class="title2">八、DOM事件</div>
+
+-----
+有关`MouseEvent`的一些属性  
+|属性|解释|
+|:-|:-|:-|
+|target|点击事件触发的Dom节点|
+|type|事件名称|
+|pageX/pageY|鼠标事件触发的页面坐标|
+
+
+[事件文档](https://developer.mozilla.org/zh-CN/docs/Web/Events)  
+注意事件：冒泡，捕获，委托。
+
+阻止冒泡
+~~~js
+// ......省略
+likeBtn.addEventListener('click', function(e) {
+  // 点击事件
+  e.stopPropagation()
+
+// ......省略
+~~~
+
+-----
+-----
+<div class="title2">九、网络请求</div>
+
+-----
+<div class="title4">URL格式说明</div>
+
++ 协议与域名间以`://`分隔。
++ 路径（path）以单斜杠`/`分隔。
+  + windows的文件夹分隔符为`\`。
++ 参数
+  + 路径与参数之间用`?`分隔。
+  + 多个参数用`&`分隔
+  + 参数用参数名=参数值(`key=value`)的格式表示。
+
+<div class="title3">9.1 API + GET + POST</div>
+
+<div class="title4">API</div>
+
+> API(Application Programming Interface),应用程序接口
+
+API一般是预先定义的函数，目的是为了开发人员快速访问某个程序，无须了解内部机制的细节。
+
+<div class="title4">fetch调用API（GET）</div>
+
+~~~js
+fetch(
+  '${URL}'
+)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (myJson) {
+    console.log(myJson);
+  });
+~~~
+`fetch`是一个`Primise`对象
+
+-----
+
+<div class="title4">fetch调用API（POST）</div>
+
+~~~js
+// 把JSON数据序列化成字符串
+const data = JSON.stringify({
+  username: 'admin',
+  password: '123456'
+});
+
+fetch(
+  `${URL}`,
+  {
+    method: 'POST',
+    body: data,
+    headers: {
+      'content-type': 'application/json'
+    }
+  }
+)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    console.log(myJson);
+  });
+~~~
+
+-----
