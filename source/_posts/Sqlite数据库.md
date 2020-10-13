@@ -53,7 +53,10 @@ tags:
 + 程序驱动
 + 无数据类型
 + 支持事务操作
+
+-----
 <div class="title2">二、SQLite操作</div>
+
 <div class="title3">2.1 创建SQLite数据库</div>
 
 >SQLiteOpenHelper ————> 帮助类  
