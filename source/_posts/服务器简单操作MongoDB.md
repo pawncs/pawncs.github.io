@@ -77,6 +77,7 @@ sudo docker images
 sudo docker run -itd --name mongo -p 27017:27017 mongo --auth
 ~~~
 前两行安装，后一行启动
+（别的我都懂，但是真的装的好慢啊）
 
 ~~~
 sudo docker ps
@@ -149,5 +150,7 @@ exit
 <div class="title2">附录</div>
 -----
 需记住MongoDB的端口号，数据库名，数据库的用户名和密码。
+
+注意你的服务器的安全设置，需开放27017端口。
 
 -----
