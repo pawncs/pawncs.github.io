@@ -1,12 +1,10 @@
 ---
-title: JAVA数据库以及依赖等的配置
+title: java数据库以及依赖等的配置
 date: 2020-10-25 17:24:12
 categories:
 - Java Web
 tags:
 - dictionary
-- MongoDB
-- MySQL
 ---
 <style>
 .title1{
@@ -41,18 +39,6 @@ tags:
 }
 </style>
 
-<!-- ~~~
-制表符
-┏ ┳ ┓ ━ ╔ ╦ ╗ ═ ╒ ╤ ╕ 
-┣ ╋ ┫ ┃ ╠ ╬ ╣ ║ ╞ ╪ ╡
-┗ ┻ ┛   ╚ ╩ ╝   ╘ ╧ ╛
-
- ╱╲      ┄ ┄  ┅ ┅
-╱╱╲╲
-╲╲╱╱
- ╲╱      ┆ ┆  ┇ ┇ 
-~~~ -->
-
 <div class="name">by pawncs</div>
 
 -----
@@ -60,7 +46,6 @@ tags:
 
 -----
 <div class="title3">1.1 MYSQL</div>
-
 链接SQL：(YML)
 ~~~properties
 spring.datasource.driver-class-name=……cj.……
