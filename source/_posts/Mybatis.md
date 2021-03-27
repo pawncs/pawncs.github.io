@@ -50,7 +50,7 @@ tags:
 <a href="#Mybatis-1-2">1.2 sql语句</a> 
 
 -----
-<div class="title2">一、Mybatis入门</div>
+<div class="title2" id="Mybatis-1">一、Mybatis入门</div>
 
 -----
 <div class="title3">1.1 简介</div>
@@ -113,10 +113,74 @@ public interface UserDAO {
      @Insert("INSERT INTO user (user_name, pwd, nick_name,avatar,gmt_created,gmt_modified) VALUES(#{userName}, #{pwd}, #{nickName}, #{avatar},now(),now())")
      //三个设置分别是：允许数据库使用自增主键、设置表的主键字段名称，设置DO模型的主键字段
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
- 
-  int insert(UserDO userDO);
+    int insert(UserDO userDO);
 
+    @Update("update comment set content = #{content},gmt_modified = now() where id = #{id}")
+    int update(CommentDO commentDO);
+
+    @Delete("delete from comment where id = #{key}")
+    int delete(@Param("key")long id);
 }
 ~~~
+
+-----
+<div class="title2" id="Mybatis-2">二、Mybatis XML</div>
+
+-----
+一般情况下，我们不使用注解而是用XML来执行SQL语句。
+
+在application.properties中配置使用的映射xml文件。
+~~~properties
+mybatis.mapper-locations=classpath:[文件路径]/*.xml
+~~~
+配置完成并启动工程后，MyBatis会扫描指定路径，完成XML文件的加载。（如果有多个路径则用逗号隔开）
+
+<div class="title3" id="Mybatis-2-1">2.1 Mybatis XML Mapper</div>
+
+一个DAO.xml文件对应一个dao类。
+其头信息为：
+~~~xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+~~~
+
+然后加上根节点mapper(表示映射哪个dao类)和子节点（resultMap,表示某DO类的各个属性和数据库属性的关联）
+~~~xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="[DAO类的完整路径]">
+
+  <resultMap id="[唯一标识]" type="[DO类（实体类）的完整路径]">
+  <!-- id是设置主键 -->
+    <id column="id" property="id"/>
+    <!-- 其余属性 -->
+    <result column="[数据库列名]" property="[DO类属性名]"/>
+  </resultMap>
+
+</mapper>
+~~~
+<div class="title4">具体语句映射</div>
+
+~~~xml
+    <insert id="[方法名]" parameterType="[DO类全名]" useGeneratedKeys="true" keyProperty="id">
+        [对应insert的sql语句]
+    </insert>
+
+    <select id="[方法名]" resultMap="[resultMap id名]">
+        [select 的sql语句]
+    </select>
+~~~
+其他语句同理。（` useGeneratedKeys="true" keyProperty="id"`这俩属性是insert独有）
+<div class="title3" id="Mybatis-2-2">2.2 XML模式开发顺序</div>
+
+
+
+1. 创建DO对象
+2. 创建DAO接口并配置`@Mapper`注解
+3. 创建XML文件，完成`resultMap`配置
+4. 创建DAO接口方法
+5. 创建对应的XML语句
 
 -----

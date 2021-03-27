@@ -1,10 +1,10 @@
 ---
-title: java——GC
+title: java-GC
 date: 2021-03-20 22:16:36
 categories:
--Java
+- Java
 tags:
--JVM
+- JVM
 ---
 <style>
 .title1{
@@ -46,18 +46,20 @@ tags:
 <div class="title2" >零、目录</div>
 
 -----
-1. <a href="#java——GC1">GC</a>  
-2. <a href="#java——GC2">何时触发GC</a>  
-3. <a href="#java——GC3">如何找到该被清理的对象（存活检测）</a>
-   1. 引用计数法
-   2. 可达性分析法
-   3. 延伸  
-4. <a href="#java——GC4">如何进行清理</a>  
-5. <a href="#java——GC5">垃圾收集器</a>  
-6. <a href="#java——GCEX">参考</a>  
+   <a href="#java-GC1">一、GC</a>  
+   <a href="#java-GC2">二、何时触发GC</a>  
+   <a href="#java-GC3">三、如何找到该被清理的对象（存活检测）</a>
+   
+   3.1 引用计数法   
+   3.2 可达性分析法  
+   3.3 延伸  
+   
+   <a href="#java-GC4">四、如何进行清理</a>  
+   <a href="#java-GC5">五、垃圾收集器</a>  
+   <a href="#java-GCEX">EX、参考</a>  
 
 -----
-<div class="title2" id="java——GC1">一、GC</div>
+<div class="title2" id="java-GC1">一、GC</div>
 
 -----
 java中，内存的管理：对象的管理，即对象的分配和释放。
@@ -65,14 +67,14 @@ java中，内存的管理：对象的管理，即对象的分配和释放。
 在JAVA中，对象的释放，由GC来完成。
 
 -----
-<div class="title2" id="java——GC2">二、何时触发GC</div>
+<div class="title2" id="java-GC2">二、何时触发GC</div>
 
 -----
 
 [垃圾回收触发条件](https://hadyang.github.io/interview/docs/java/jvm/gc/#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E8%A7%A6%E5%8F%91%E6%9D%A1%E4%BB%B6)
 
 -----
-<div class="title2" id="java——GC3">三、如何找到该被清理的对象（存活检测）</div>
+<div class="title2" id="java-GC3">三、如何找到该被清理的对象（存活检测）</div>
 
 -----
 GC通常采取有向图的方式（节点为对象，边为引用类型）记录和管理堆（heap）中的所有对象。当其确认一些对象不可达时，GC就回收内存空间。下面除了介绍这种方式（可达性分析）,还介绍了引用计数法。
@@ -125,7 +127,7 @@ JVM中的引用类型：
 [Java中弱引用、软引用、虚引用及强引用的区别](https://www.jianshu.com/p/ade51a91dfd6)
 
 -----
-<div class="title2" id="java——GC4">四、如何进行清理</div>
+<div class="title2" id="java-GC4">四、如何进行清理</div>
 
 -----
 
@@ -142,7 +144,7 @@ JVM中的引用类型：
 
 
 -----
-<div class="title2" id="java——GC5">五、垃圾收集器</div>
+<div class="title2" id="java-GC5">五、垃圾收集器</div>
 
 -----
 + Serial Old收集器（单线程，serial针对新生代，使用复制算法，serial old收集器针对老年代，使用标记整理）（简单高效，带来停顿）
@@ -160,7 +162,7 @@ JVM中的引用类型：
 
 
 -----
-<div class="title2" id="java——GCEX">EX、参考</div>
+<div class="title2" id="java-GCEX">EX、参考</div>
 
 -----
 
