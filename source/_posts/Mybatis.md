@@ -1,6 +1,6 @@
 ---
 title: MyBatis
-date: 2021-03-17 08:57:24
+date: 2021-03-29 08:57:24
 categories:
 - Java Web
 tags:
@@ -46,8 +46,19 @@ tags:
 <div class="title2">零、目录</div>
 
 -----
-一、MyBatis 入门  
-<a href="#Mybatis-1-2">1.2 sql语句</a> 
+<a class="title4" href="#Mybatis-1">一、MyBatis 入门</a>  
+<a href="#Mybatis-1-1">1.1 简介</a>   
+<a href="#Mybatis-1-2">1.2 sql语句</a>  
+<a href="#Mybatis-1-3">1.3  MyBatis 映射对象</a>  
+<a href="#Mybatis-1-4">1.4 MyBatis DAO</a>  
+<a  class="title4" href="#Mybatis-2">二、MyBatis XML</a>  
+<a href="#Mybatis-2-1">2.1 Mybatis XML Mapper</a>   
+<a href="#Mybatis-2-2">2.2 XML模式开发顺序</a>  
+<a class="title4" href="#Mybatis-3">三、MyBatis 动态SQL</a>  
+<a href="#Mybatis-3-1">3.1 条件</a>   
+<a href="#Mybatis-3-2">3.2 循环</a>  
+<a class="title4" href="#Mybatis-4">四、MyBatis 分页</a>  
+<a class="title4" href="#Mybatis-ex">EX、MyBatis 开发文档</a>  
 
 -----
 <div class="title2" id="Mybatis-1">一、Mybatis入门</div>
@@ -184,3 +195,99 @@ mybatis.mapper-locations=classpath:[文件路径]/*.xml
 5. 创建对应的XML语句
 
 -----
+<div class="title2" id="Mybatis-3">三、MyBatis 动态SQL</div>
+<div class="title3" id="Mybatis-3-1">3.1 条件</div>
+
+~~~xml
+<select id="search" resultMap="userResultMap">
+  select * from user where
+    <if test="keyWord != null">
+      user_name like CONCAT('%',#{keyWord},'%')
+        or nick_name like CONCAT('%',#{keyWord},'%')
+    </if>
+    <if test="time != null">
+      and  gmt_created <![CDATA[ >= ]]> #{time}
+    </if>
+</select>
+~~~
+这里test通过才会让语句生效。
+> 为了防止batis解析失败，不能出现`><=%&`等符号。所以用` <![CDATA[ key ]]>`包裹。
+
+这里if未生效就会产生错误语句，所以将`where`换成对应语句。
+~~~xml
+<select id="search" resultMap="userResultMap">
+  select * from user
+   <where>
+      <if test="keyWord != null">
+          user_name like CONCAT('%',#{keyWord},'%')
+            or nick_name like CONCAT('%',#{keyWord},'%')
+      </if>
+      <if test="time != null">
+        and  gmt_created <![CDATA[ >= ]]> #{time}
+      </if>
+   </where>
+</select>
+~~~
+
+<div class="title3" id="Mybatis-3-2">3.2 循环</div>
+
+foreach标签
+~~~xml
+<!-- 例1 -->
+<insert id="[方法名]" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO user (user_name, pwd, nick_name,avatar,gmt_created,gmt_modified)
+    VALUES
+    <foreach collection="list" item="it" index="index" separator =",">
+        (#{it.userName}, #{it.pwd}, #{it.nickName}, #{it.avatar},now(),now())
+    </foreach >
+</insert>
+<!-- 例2 -->
+<select id="findByIds" resultMap="userResultMap">
+    select * from user
+    <where>
+        id in
+        <foreach item="item" index="index" collection="ids"
+                    open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </where>
+</select>
+~~~
+`separator`是给每条记录添加的分隔符  
+`index`是集合的索引值
+`open`和`close`是节点开始结束时自定义的分隔符
+
+<div class="title2" id="Mybatis-4">四、MyBatis 分页</div>
+
+-----
+通过第三方插件`pagehelper`来完成分页功能。
+>`pagehelper`的依赖
+
+~~~xml
+<dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper-spring-boot-starter</artifactId>
+    <version>1.2.13</version>
+</dependency>
+~~~
+`PageHelper.startPage(1, 3);`,第一个参数指定查询页数，第二个参数指定每页数目（从1开始而不是从0）。返回的是`Page`类型的对象。
+~~~java
+    public Paging<UserDO> getAll() {
+        // 设置当前页数为1，以及每页3条记录
+        Page<UserDO> page = PageHelper.startPage(1, 3).doSelectPage(() -> userDAO.findAll());
+
+        return new Paging<>(page.getPageNum(), page.getPageSize(), page.getPages(), page.getTotal(), page
+                .getResult());
+    }
+}
+~~~
+这里Paging是自制的分装类。
+
+-----
+<div class="title2" id="Mybatis-ex">EX、文档</div>
+
+[mybatis开发文档](https://mybatis.org/mybatis-3/zh/dynamic-sql.html)
+
+-----
+
+拓展.连接池,HikariCP(spring),[Druid(ali)](https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter)
