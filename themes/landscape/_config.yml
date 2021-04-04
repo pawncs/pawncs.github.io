@@ -30,8 +30,10 @@ show_count: false
 # Miscellaneous
 google_analytics:
 gauges_analytics:
-favicon: /favicon.png
+# 图标
+favicon: /klee32.ico
 twitter:
 google_plus:
 fb_admins:
 fb_app_id:
+
