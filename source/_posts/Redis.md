@@ -88,6 +88,7 @@ sudo docker ps
 + 引入依赖
 + 配置Redis服务器
 + 启动应用
+  
 依赖
 ~~~xml
 <dependency>
@@ -104,5 +105,7 @@ spring.redis.port=6379
 # Redis 服务器密码 
 spring.redis.password=
 ~~~
+
+而后会自动配置`StringRedisTemplate`类的对象。
 
 -----

@@ -31,7 +31,7 @@ show_count: false
 google_analytics:
 gauges_analytics:
 # 图标
-favicon: /klee32.ico
+favicon: /favicon.ico
 twitter:
 google_plus:
 fb_admins:
