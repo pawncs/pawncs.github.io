@@ -1,10 +1,11 @@
 ---
 title: http协议
-date: 2021-05-21 16:02:36
+date: 2021-07-07 12:02:36
 categories:
 - network
 tags:
 - dictionary
+- http
 ---
 <style>
 .title1{
@@ -336,6 +337,7 @@ http报文结构：
 </table>
 
 <div class="title3" id="http-4-1">4.1代表性状态码</div>
+
 + 200 OK
   + 请求已正常处理
   
@@ -576,8 +578,9 @@ http没有提供状态管理的功能，因此通过cookie保存session ID来保
 -----
 Http虽简单快捷，但随着时代的发展仍疲态尽显。因此出现了一些补充协议试图解决WEB的瓶颈。HTTP2.0也在指定规划中。  
 HTTP/2.0 七项核心技术：
+
 |技术|协议|
-|---|---|
+|-----|-----|
 |压缩|SPDY,Friendly|  
 |多路复用 |SPDY|
 |TLS义务化|Speed+Mobility|
@@ -585,6 +588,7 @@ HTTP/2.0 七项核心技术：
 |客户端拉曳(Client Pull)/服务器推送(Servel Push)|Speed+Mobility|
 |流量控制|SPDY|
 |WebSocket|Speed+Mobility|
+
 
 -----
 -----
