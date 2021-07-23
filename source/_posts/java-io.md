@@ -62,8 +62,6 @@ tags:
 <a href="#java-io-ex">EX、其他</a>  
 
 
-对象的序列化和反序列化
-
 -----
 <div class="title2" id="java-io-1">一、文件的编码</div>
 
@@ -196,6 +194,7 @@ InputStream的抽象方法
 -----
 -----
 <div class="title2" id="java-io-5">五、字符流</div>
+
 -----
 + 注意编码问题
 + 认识文本和文本文件
@@ -213,6 +212,7 @@ InputStream的抽象方法
 -----
 -----
 <div class="title2" id="java-io-6">六、对象的序列化和反序列化</div>
+
 -----
 
 >序列化和反序列化，就是Object和byte序列的互相转换。
