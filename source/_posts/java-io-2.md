@@ -213,8 +213,10 @@ handler                          ▽
 process <---------------   copy complete
 datagram     return OK
 ~~~
-
 -----
+-----
+<div id="java_io_2-ex" class="title2">EX、参考</div>
+
 -----
 [BIO，NIO，AIO概览](https://juejin.cn/post/6844903664256024584)  
 [同步/异步，阻塞/非阻塞概念深度解析](https://blog.csdn.net/lengxiao1993/article/details/78154467)  
