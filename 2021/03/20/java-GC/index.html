@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>java-GC | 诺亚方舟的货运仓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content=".title1{     font-size:36px;     color:#e7767f;     &#x2F;* 桃红 *&#x2F;  } .title2{     font-size:29px;     color:#176f58;     &#x2F;* 祖母绿 *&#x2F; } .title3{     font-size:22px;     color:#21a675;     &#x2F;* 石绿 *&#x2F; } .title4{">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-GC">
+<meta property="og:url" content="http://pawncs.github.io/2021/03/20/java-GC/index.html">
+<meta property="og:site_name" content="诺亚方舟的货运仓">
+<meta property="og:description" content=".title1{     font-size:36px;     color:#e7767f;     &#x2F;* 桃红 *&#x2F;  } .title2{     font-size:29px;     color:#176f58;     &#x2F;* 祖母绿 *&#x2F; } .title3{     font-size:22px;     color:#21a675;     &#x2F;* 石绿 *&#x2F; } .title4{">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-20T14:16:36.000Z">
+<meta property="article:modified_time" content="2021-11-30T06:05:27.246Z">
+<meta property="article:author" content="pawncs">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="诺亚方舟的货运仓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">诺亚方舟的货运仓</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">pawncs的笔记之地</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pawncs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java-GC" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/20/java-GC/" class="article-date">
+  <time datetime="2021-03-20T14:16:36.000Z" itemprop="datePublished">2021-03-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java-GC
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2" >零、目录</div>
+
+<hr>
+<p>   <a href="#java-GC1">一、GC</a><br>   <a href="#java-GC2">二、何时触发GC</a><br>   <a href="#java-GC3">三、如何找到该被清理的对象（存活检测）</a></p>
+<p>   3.1 引用计数法<br>   3.2 可达性分析法<br>   3.3 延伸  </p>
+<p>   <a href="#java-GC4">四、如何进行清理</a><br>   <a href="#java-GC5">五、垃圾收集器</a><br>   <a href="#java-GCEX">EX、参考</a>  </p>
+<hr>
+<div class="title2" id="java-GC1">一、GC</div>
+
+<hr>
+<p>java中，内存的管理：对象的管理，即对象的分配和释放。</p>
+<p>在JAVA中，对象的释放，由GC来完成。</p>
+<hr>
+<div class="title2" id="java-GC2">二、何时触发GC</div>
+
+<hr>
+<p><a href="https://hadyang.github.io/interview/docs/java/jvm/gc/#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E8%A7%A6%E5%8F%91%E6%9D%A1%E4%BB%B6" target="_blank" rel="noopener">垃圾回收触发条件</a></p>
+<hr>
+<div class="title2" id="java-GC3">三、如何找到该被清理的对象（存活检测）</div>
+
+<hr>
+<p>GC通常采取有向图的方式（节点为对象，边为引用类型）记录和管理堆（heap）中的所有对象。当其确认一些对象不可达时，GC就回收内存空间。下面除了介绍这种方式（可达性分析）,还介绍了引用计数法。</p>
+<blockquote>
+<p>判断是否可达-&gt;引用计数法、可达性分析法。</p>
+</blockquote>
+<div class="title3">3.1 引用计数法</div>
+
+<p>引用计数法</p>
+<ul>
+<li>简单，但速度较慢 </li>
+<li>无法判断是否循环利用</li>
+<li>java未用  </li>
+</ul>
+<blockquote>
+<p>每个对象包含一个引用计数器，当一个句柄同一个对象连接时，加一，超出作用域，或者设为null,减一。垃圾收集器在对象列表中移动巡视，发现引用计数为0，就释放他占据的空间。但这样无法判断循环引用（要找到他们，垃圾收集器要做更多工作）。(参考《JAVA编程思想第四版》P684)</p>
+</blockquote>
+<div class="title3">3.2 可达性分析法</div>
+
+<p>可达性分析法：</p>
+<blockquote>
+<p>从”GC Root”对象作为起点进行搜索，若其到一个对象间没有可达路径，则称该对象不可达。当一个对象多次（至少2次）被判断为不可达（没有逃脱成为可回收对象的可能性），则真正的回收他。</p>
+<blockquote>
+<p>“基于这么一个原理：所有非死锁的对象最终都肯定能回溯到一个句柄，该句柄要么存在堆栈，要么存在静态存储空间。这个回溯链可能会经历许多对象。”——《JAVA编程思想第四版》P684</p>
+</blockquote>
+</blockquote>
+<p><a href="https://hadyang.github.io/interview/docs/java/jvm/gc/#%E6%A0%B9%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">GC Root</a></p>
+<div class="title3">3.3 延伸-引用</div>
+
+<p>JVM中的引用类型：</p>
+<ul>
+<li>强引用</li>
+<li>软引用</li>
+<li>弱引用</li>
+<li>虚引用</li>
+</ul>
+<p>最终目标是什么引用类型取决于max(所有链条的min(单链上所有边的强度))</p>
+<ul>
+<li><p>强引用（StrongReference）<br>形如A a = new A();<br>区别：<strong>强引用禁止目标被垃圾收集器收集</strong></p>
+</li>
+<li><p>软引用（SoftReference）：  </p>
+<pre><code>内存溢出前清理目标，若和引用队列关联，则加入引用队列。其他情况可以选择清理的时间或是否清楚他们</code></pre></li>
+<li><p>弱引用（WeakReference）：  </p>
+<pre><code>在GC时会回收所有的weakReference.若和引用队列关联，则加入引用队列    </code></pre></li>
+<li><p>虚引用（PhantomReference）：  </p>
+<pre><code>&lt;strong&gt;GC时并不会清除虚引用，虚引用必须由程序明确清除&lt;/strong&gt;同时也不能通过虚引用取得对象的实例。  
+（虚引用主要用于跟踪垃圾回收的状态。不能单独使用，只能跟队列联合使用）</code></pre></li>
+</ul>
+<div class="title4">参考</div>
+
+<p><a href="https://www.jianshu.com/p/825cca41d962" target="_blank" rel="noopener">软引用、弱引用、虚引用-他们的特点及应用场景</a>  </p>
+<p><a href="https://www.jianshu.com/p/ade51a91dfd6" target="_blank" rel="noopener">Java中弱引用、软引用、虚引用及强引用的区别</a></p>
+<hr>
+<div class="title2" id="java-GC4">四、如何进行清理</div>
+
+<hr>
+<p>标记清除算法(Mark-Sweep)、复制算法(Copying)、标记整理算法(Mark-Compact)、<strong>分带收集算法（generational collection）</strong></p>
+<ul>
+<li><p>标记清除：可能产生太多碎片</p>
+</li>
+<li><p>复制：解决标记清除的缺陷。（实现简单，运行高效，不易产生内存碎片）缺点是只能使用一半的内存。且效率和存活对象数量有关。</p>
+</li>
+<li><p>标记整理（压缩法）：解决赋值法的缺陷。充分利用空间。标记完后将存活对象向一端移动。</p>
+</li>
+<li><p><strong>分带收集算法（generational collection）</strong>。根据对象存活的生命周期将内存划分为若干个不同的区域。（老年代和新生代）。老年代每次只有少量回收，新生代每次会有多个回收-&gt;新生代使用复制算法，老年代使用标记整理（压缩算法）<br>（都会要求程序停止运行（一般情况））</p>
+<blockquote>
+<p>记忆集</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<div class="title2" id="java-GC5">五、垃圾收集器</div>
+
+<hr>
+<ul>
+<li><p>Serial Old收集器（单线程，serial针对新生代，使用复制算法，serial old收集器针对老年代，使用标记整理）（简单高效，带来停顿）</p>
+</li>
+<li><p>ParNew （serial 的多线程版）</p>
+</li>
+<li><p>Parallel Scavenge收集器 （回收时不需要暂停其他用户线程，使用复制算法）（目的是为了达到可控的吞吐量）（没懂什么意思）（吞吐量 = 运行代码/（运行代码+垃圾收集））</p>
+</li>
+<li><p>Parallel Old收集器 （Parallel Scavenge的老年代版本）（多线程和标记整理算法）</p>
+</li>
+<li><p>CMS（Concurrent Mark Sweep） 收集器 （获取最短回收停顿时间为目的的收集器，并发，采用Mark-SWeep算法）(标记清除、运行在老年代)</p>
+</li>
+<li><p>G1收集器面向服务端，充分利用CPU，多核，并发并行，能建立可预测的停顿时间（使命是替换掉CMS）</p>
+</li>
+</ul>
+<hr>
+<div class="title2" id="java-GCEX">EX、参考</div>
+
+<hr>
+<ul>
+<li><p><a href="https://blog.csdn.net/weixin_44027397/article/details/114383323?spm=1001.2014.3001.5501" target="_blank" rel="noopener">Java中的GC简单介绍</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/yrwan95/article/details/82829186?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161490811816780271538995%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=161490811816780271538995&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-2-82829186.pc_search_result_hbase_insert&utm_term=java%E4%B8%89%E7%A7%8D%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">Java 垃圾回收机制与几种垃圾回收算法</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/lucky_jiexia/article/details/105823438" target="_blank" rel="noopener">《剑指Java面试-Offer直通车》–Java底层知识GC</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/ThinkWon/article/details/103831676" target="_blank" rel="noopener">深入理解Java虚拟机-垃圾回收器与内存分配策略</a></p>
+</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2021/03/20/java-GC/" data-id="ckwlqil0a001pls3n4goufops" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/03/23/java-%E7%B1%BB%E5%8A%A0%E8%BD%BD/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java-类加载
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/20/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">字符集与编码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Web/">Java Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/else/">else</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html-css-js/">html,css,js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/" rel="tag">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/" rel="tag">IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/" rel="tag">REST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/" rel="tag">RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Realm/" rel="tag">Realm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SCSS/" rel="tag">SCSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/" rel="tag">SQLite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/" rel="tag">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/" rel="tag">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/note/" rel="tag">note</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/IO/" style="font-size: 12.5px;">IO</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MongoDB/" style="font-size: 12.5px;">MongoDB</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SCSS/" style="font-size: 10px;">SCSS</a> <a href="/tags/SQLite/" style="font-size: 10px;">SQLite</a> <a href="/tags/dictionary/" style="font-size: 20px;">dictionary</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/note/" style="font-size: 17.5px;">note</a> <a href="/tags/study/" style="font-size: 15px;">study</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/03/Restful%E9%A3%8E%E6%A0%BC/">Restful风格</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/18/kafka/">kafka 初探</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/23/%E5%86%85%E6%A0%B8%E6%80%81%E4%B8%8E%E7%94%A8%E6%88%B7%E6%80%81/">内核态与用户态</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/19/java-io-2/">java_io_2</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 pawncs<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

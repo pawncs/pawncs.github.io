@@ -1,0 +1,2124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>诺亚方舟的货运仓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="诺亚方舟的货运仓">
+<meta property="og:url" content="http://pawncs.github.io/page/3/index.html">
+<meta property="og:site_name" content="诺亚方舟的货运仓">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="pawncs">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="诺亚方舟的货运仓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">诺亚方舟的货运仓</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">pawncs的笔记之地</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pawncs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Spring-Data-MongoDB" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/14/Spring-Data-MongoDB/" class="article-date">
+  <time datetime="2020-10-14T08:26:38.000Z" itemprop="datePublished">2020-10-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java-Web/">Java Web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/14/Spring-Data-MongoDB/">Spring_Data_MongoDB</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">零、目录</div>
+
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">╔═══════╦ 一、配置  </span><br><span class="line">║       ╠═══ 1.1 添加依赖  </span><br><span class="line">║       ╚═══ 1.2 配置数据库  </span><br><span class="line">║   </span><br><span class="line">╠═══════╦ 二、CRUD（增删改查）  </span><br><span class="line">║       ╠═══ 2.1 Create —— 增加数据  </span><br><span class="line">║       ╠═══ 2.2 Retrieve —— 查询数据  </span><br><span class="line">║       ╠═══ 2.3 Update —— 更新数据  </span><br><span class="line">║       ╚═══ 2.4 Delete —— 删除数据  </span><br><span class="line">║   </span><br><span class="line">╠════════ 三、QUERY  </span><br><span class="line">║       </span><br><span class="line">╚════════ 四、分页</span><br></pre></td></tr></table></figure>
+
+<hr>
+<div class="title2">一、配置</div>
+
+<hr>
+<div class="title3">1.1 添加依赖</div>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-mongodb<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<div class="title3">1.2 配置数据库</div>
+
+<p>修改 <code>application.properties</code> 文件，或者新建同名yml文件，使用Yml语法。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 购买的云服务器的公网 IP</span></span><br><span class="line"><span class="meta">spring.data.mongodb.host</span>=<span class="string">xxx.xxx.xxx.xxx</span></span><br><span class="line"><span class="comment"># MongoDB 服务的端口号</span></span><br><span class="line"><span class="meta">spring.data.mongodb.port</span>=<span class="string">27017</span></span><br><span class="line"><span class="comment"># 创建的数据库及用户名和密码</span></span><br><span class="line"><span class="meta">spring.data.mongodb.database</span>= <span class="string">数据库名</span></span><br><span class="line"><span class="meta">spring.data.mongodb.username</span>= <span class="string">用户名</span></span><br><span class="line"><span class="meta">spring.data.mongodb.password</span>= <span class="string">密码</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<div class="title2">二、CRUD</div>
+
+<hr>
+<div class="title3">2.1 Create —— 增加数据</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.data.mongodb.core.MongoTemplate;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> MongoTemplate mongoTemplate;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Class1 class1 = <span class="keyword">new</span> Class1();</span><br><span class="line">    class1.setAttribute(<span class="string">"添加某属性"</span>);</span><br><span class="line">    <span class="comment">// 添加其他属性</span></span><br><span class="line">    mongoTemplate.insert(class1);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>系统会自动为主键 <code>id</code> 属性赋值。</p>
+<div class="title3">2.2 Retrieve —— 查询数据</div>
+
+<p>此处ID为主键ID。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据id，返回对象</span></span><br><span class="line">mongoTemplate.findById(id, ClassName<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"><span class="comment">//根据Query,返回列表</span></span><br><span class="line">mongoTemplate.find(query, ClassName<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"><span class="comment">//有关Query如何创建放在第三章</span></span><br></pre></td></tr></table></figure>
+
+<div class="title3">2.3 Update —— 更新数据</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改 id=1 的数据</span></span><br><span class="line">Query query = <span class="keyword">new</span> Query(Criteria.where(<span class="string">"id"</span>).is(<span class="string">"1"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把歌名修改为 “new name”</span></span><br><span class="line">Update updateData = <span class="keyword">new</span> Update();</span><br><span class="line">updateData.set(<span class="string">"name"</span>, <span class="string">"new name"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行修改，修改返回结果的是一个对象</span></span><br><span class="line">UpdateResult result = mongoTemplate.updateFirst(query, updateData, ClassName<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"><span class="comment">// 修改的记录数大于 0 ，表示修改成功</span></span><br><span class="line">System.out.println(<span class="string">"修改的数据记录数量："</span> + result.getModifiedCount());</span><br></pre></td></tr></table></figure>
+
+<p>先使用条件对象<code>Criteria</code>构建条件对象<code>Query</code>的实例，再用修改对象<code>Update</code>设置需要修改的字段。最后用<code>mongoTemplate</code>的方法完成修改</p>
+<div class="title3">2.4 Delete —— 删除数据</div>
+
+<p>函数<code>mongoTemplate.remove()</code>删除数据。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Song song = <span class="keyword">new</span> Song();</span><br><span class="line">song.setId(songId);<span class="comment">//主键ID</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行删除</span></span><br><span class="line">DeleteResult result = mongoTemplate.remove(song);</span><br><span class="line"><span class="comment">// 删除的记录数大于 0 ，表示删除成功</span></span><br><span class="line">System.out.println(<span class="string">"删除的数据记录数量："</span> + result.getDeletedCount());</span><br></pre></td></tr></table></figure>
+
+<hr>
+<div class="title2">三、Query</div>
+
+<hr>
+<p>Query条件对象的实例根据Criteria条件对象的实例构建<br><code>Query query = new Query(criteria);</code></p>
+<div class="title4">Criteria单一使用</div>
+
+<p><code>Criteria criteria1 = Criteria.where(&quot;条件字段名&quot;).is(&quot;条件值&quot;)</code></p>
+<div class="title4">Criteria组合使用</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//or</span></span><br><span class="line">Criteria criteria = <span class="keyword">new</span> Criteria();</span><br><span class="line">criteria.orOperator(criteria1, criteria2);</span><br><span class="line"><span class="comment">//and</span></span><br><span class="line">Criteria criteria = <span class="keyword">new</span> Criteria();</span><br><span class="line">criteria.andOperator(criteria1, criteria2);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<div class="title2">四、分页</div>
+
+<hr>
+<p>让查询支持分页：只需调用<code>PageRequest.of()</code>构建一个分页对象，而后注入查询对象即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.data.domain.PageRequest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.domain.Pageable;</span><br><span class="line"></span><br><span class="line"><span class="comment">//第一个参数是页码（从0开始计数），第二个参数是每页的数量。</span></span><br><span class="line">Pageable pageable = PageRequest.of(<span class="number">0</span> , <span class="number">20</span>);</span><br><span class="line">query.with(pageable);</span><br></pre></td></tr></table></figure>
+
+<p>计算查询总数，以计算总共多少页。<br>实现分页功能还需：</p>
+<ul>
+<li>调用<code>count(query,XXX.class)</code>方法获取查询总数。</li>
+<li>根据结果，分页条件，总数三个数据，构建分页器对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.data.domain.Page;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.repository.support.PageableExecutionUtils;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 总数</span></span><br><span class="line"><span class="keyword">long</span> count = mongoTemplate.count(query, Song<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"><span class="comment">// 构建分页器</span></span><br><span class="line">Page&lt;Song&gt; pageResult = PageableExecutionUtils.getPage(songs, pageable, <span class="keyword">new</span> LongSupplier() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getAsLong</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/10/14/Spring-Data-MongoDB/" data-id="ckwlqikzz000yls3n1nas4t94" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-服务器简单操作MongoDB" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/13/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9CMongoDB/" class="article-date">
+  <time datetime="2020-10-13T13:14:34.000Z" itemprop="datePublished">2020-10-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/13/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9CMongoDB/">服务器简单操作MongoDB</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+<div class="name">by pawncs</div>
+
+<p>首先登陆自己的系统，不提。</p>
+<hr>
+<div class="title2">一、安装</div>
+
+<hr>
+<div class="title3">1.1 安装Docker</div>
+
+<p>用Docker安装MongDB，比较自动，方便。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y update</span><br><span class="line">sudo yum -y install epel-release</span><br><span class="line">sudo yum -y install docker-io</span><br></pre></td></tr></table></figure>
+<p>分别更新系统所有包，安装扩展包，安装docker.注意不能写install docker.<br>使用root账号可去除sudo.</p>
+<div class="title3">1.1 安装MongoDB</div>
+
+<div class="title4">启动Docker</div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start docker</span><br><span class="line">sudo docker version</span><br></pre></td></tr></table></figure>
+
+<div class="title4">安装MongoDB并启动</div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull mongo:latest</span><br><span class="line">sudo docker images</span><br><span class="line"></span><br><span class="line">sudo docker run -itd --name mongo -p 27017:27017 mongo --auth</span><br></pre></td></tr></table></figure>
+<p>前两行安装，后一行启动<br>（别的我都懂，但是真的装的好慢啊）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker ps</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>检查是否启动成功</p>
+</blockquote>
+<p>MongoDB默认端口号为27017</p>
+<hr>
+<hr>
+<div class="title2">二、创建账户</div>
+
+<hr>
+<div class="title3">2.1 登录</div>
+
+<div class="title4">登录数据库</div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker exec -it mongo mongo admin</span><br></pre></td></tr></table></figure>
+<p>该命令为登入MongDB软件控制台，出现 <code>&gt;</code> 后，后面可以输入数据库操作命令了</p>
+<div class="title4">创建管理员账户</div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123; user:&#39;admin&#39;,pwd:&#39;123456&#39;,roles:[ &#123; role:&#39;root&#39;, db: &#39;admin&#39;&#125;]&#125;);</span><br><span class="line">db.auth(&#39;admin&#39;, &#39;123456&#39;)</span><br></pre></td></tr></table></figure>
+<p>创建完admin账户后，才可以继续创建数据库步骤</p>
+<blockquote>
+<p>注意，管理员账户不能读写数据库。管理员是数据库软件MongoDB的管理员，只有软件的实例————数据库的用户可以读写数据库</p>
+</blockquote>
+<hr>
+<hr>
+<div class="title2">三、创建数据库实例</div>
+
+<hr>
+<p>均需在MongoDB登录状态下执行</p>
+<div class="title3">3.1 切换数据库</div>
+
+<p><code>use</code>是创建并切换到指定数据库的意思，若已存在就直接切换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use practice</span><br></pre></td></tr></table></figure>
+
+<div class="title3">3.2 创建读写用户</div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123; user:&#39;xxxx&#39;,pwd:&#39;xxxxxx&#39;,roles:[&#123; role:&#39;root&#39;, db: &#39;admin&#39;&#125;,&#123; role:&#39;dbAdmin&#39;, db: &#39;practice&#39;&#125;]&#125;);</span><br></pre></td></tr></table></figure>
+
+<div class="title4">验证</div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.auth(&#39;xxxx&#39;, &#39;xxxxxx&#39;)</span><br></pre></td></tr></table></figure>
+<p>返回1代表成功了。</p>
+<hr>
+<hr>
+<div class="title2">四、退出登录</div>
+-----
+退出MongoDB
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<hr>
+<hr>
+<div class="title2">附录</div>
+-----
+需记住MongoDB的端口号，数据库名，数据库的用户名和密码。
+
+<p>注意你的服务器的安全设置，需开放27017端口。</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/10/13/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%80%E5%8D%95%E6%93%8D%E4%BD%9CMongoDB/" data-id="ckwlqil0q0033ls3nbu7md47k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-javascript入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/10/03/javascript%E5%85%A5%E9%97%A8/" class="article-date">
+  <time datetime="2020-10-03T14:23:11.000Z" itemprop="datePublished">2020-10-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/html-css-js/">html,css,js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/03/javascript%E5%85%A5%E9%97%A8/">javascript入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">一、认识Javascript</div>
+
+<hr>
+<p>JavaScript主要由以下三部分组成：</p>
+<ol>
+<li>核心（ECMAscript）</li>
+<li>文档对象模型(DOM)</li>
+<li>浏览器对象模型(BOM)</li>
+</ol>
+<div class="title3">1.1 核心（ECMAscript）</div>
+
+<blockquote>
+<p><code>ECMAScript</code>规定了这门语言的基本组成部分</p>
+</blockquote>
+<p>主要由以下部分组成：</p>
+<ul>
+<li><p>语法</p>
+</li>
+<li><p>类型</p>
+</li>
+<li><p>语句</p>
+</li>
+<li><p>关键字</p>
+</li>
+<li><p>保留字</p>
+</li>
+<li><p>操作符</p>
+</li>
+<li><p>对象</p>
+</li>
+</ul>
+<p>有了这些，<code>JavaScript</code>可以完成基本的逻辑以及数据处理。</p>
+<div class="title3">1.2 文档对象模型（DOM）</div>
+
+<blockquote>
+<p><code>DOM</code>的功能为获取<code>html</code>标签，并对标签进行其他操作（增删样式，添加事件）。</p>
+</blockquote>
+<p>这些功能的实现基于以下接口：</p>
+<ul>
+<li><p>DOM 遍历和范围：<br>可以找到页面中所有标签</p>
+</li>
+<li><p>DOM 事件：<br>可以给标签添加事件（如给图片添加拖动事件）</p>
+</li>
+<li><p>DOM 样式：<br>可以更改页面中所有元素的样式，如更改某一段文字的颜色</p>
+<div class="title3">1.3 浏览器对象模型(BOM)</div>
+
+</li>
+</ul>
+<blockquote>
+<p><code>BOM</code>处理和浏览器相关的东西</p>
+</blockquote>
+<p>如：</p>
+<ul>
+<li><p>弹出新窗口功能</p>
+</li>
+<li><p>移动、缩放、关闭浏览器窗口的功能</p>
+</li>
+<li><p>给用户提供显示器分辨率的功能</p>
+</li>
+<li><p>提供浏览器信息</p>
+</li>
+</ul>
+<div class="title3">1.4 JavaScript的书写位置</div>
+
+<blockquote>
+<p>和<code>css</code>一样，分为<code>HTML</code>内部和外部。</p>
+</blockquote>
+<div class="title4">内部</div>
+
+<p>使用<code>script</code>标签内嵌。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// script标签嵌入JavaScript代码</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// JavaScript代码</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> name = <span class="string">"Bob"</span>;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"我的名字叫："</span>+name);</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里的规范为：<code>&lt;script&gt;</code>标签的位置位于<code>body</code>标签内部，并保证是末尾。</p>
+</blockquote>
+<p>其实该标签写在哪都可，但是在进行<code>DOM</code>操作时，如果不注意位置，会出现奇怪的报错。</p>
+<div class="title4">外部</div>
+
+<p>代码写在<code>XXX.js</code>文件中，由引入标签引入即可。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'index.js'</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>书写位置与内部书写方式一致，即在<code>body</code>标签的内部，但是在末尾</p>
+<hr>
+<hr>
+<div class="title2">二、基础数据类型</div>
+
+<hr>
+<div class="title3">2.1 变量</div>
+
+<p>在<code>JavaScript</code>中定义变量的关键词有两个：<code>let</code> , <code>const</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">'Will Smith'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(name);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>曾经也有关键词 <code>var</code>， 但其会导致未知的错误，因此已经不常用了</p>
+</blockquote>
+<div class="title4">let 和 const 的异同</div>
+
+<ul>
+<li>const定义的变量只能赋值一次，let定义的变量可以多次赋值</li>
+<li>const定义的变量需要赋值，否则会报错；let定义的变量可以不赋初始值（默认为<code>undefined</code>）。<div class="title3">2.2 数值类型</div>
+
+</li>
+</ul>
+<blockquote>
+<p>整数、浮点数、NaN(Not a Number),等。</p>
+</blockquote>
+<div class="title4">整数</div>
+
+<p>八进制和十六进制，十进制</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> number1 = <span class="number">010</span>; <span class="comment">// 八进制的8</span></span><br><span class="line"><span class="keyword">let</span> number2 = <span class="number">0x11</span>; <span class="comment">// 十六进制的17</span></span><br><span class="line"><span class="keyword">let</span> number3 = <span class="number">10</span>;<span class="comment">//十进制的10</span></span><br></pre></td></tr></table></figure>
+<div class="title4">浮点数</div>
+
+<p>小数形式，科学计数法形式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> floatNumber1 = <span class="number">1.2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> floatNumber2 = <span class="number">3.33e7</span>;<span class="comment">//3.33*10^7</span></span><br></pre></td></tr></table></figure>
+<p>浮点数最高精度为17位。但要注意其精度丢失的问题。（0.1 + 0.2 != 0.3）</p>
+<div class="title4">NaN</div>
+
+<p>当两个变量执行了运算，且返回的结果仍然应该是数字类型，但是执行的数学运算未成功，就会返回<code>NaN</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">'number'</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> c = a / b;</span><br><span class="line"><span class="built_in">console</span>.log(c); <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> c); <span class="comment">// number</span></span><br></pre></td></tr></table></figure>
+
+<p>其他会出现<code>NaN</code>的情况:</p>
+<ul>
+<li>0/0</li>
+<li>字符串乘以数字</li>
+<li><code>NaN</code>和其他数进行运算<div class="title3">2.3 类型转换/字符串拼接</div>
+<div class="title4">隐式转换</div>
+
+</li>
+</ul>
+<p>数字字符串(<code>string</code>)和数字(<code>number</code>)做加法运算，数字会隐式转换为字符串<br>数字字符串和数字做非加法运算，字符串会隐式转换为数字</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">20</span>+<span class="string">'20'</span>); <span class="comment">// 2020</span></span><br><span class="line"><span class="comment">// 调换位置亦可</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'20'</span>+<span class="number">20</span>); <span class="comment">// 2020</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'20'</span><span class="number">-10</span>); <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">10</span>*<span class="string">'10'</span>); <span class="comment">// 100</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">10</span>/<span class="string">'2'</span>); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<div class="title4">强制类型转换</div>
+
+<p><code>parseInt()</code>,<code>parseFloat()</code></p>
+<div class="title4">字符串拼接</div>
+
+<p>用+号。不过我个人更喜欢模板字符串。即使用反引号<code>``</code>将${}括起来这种。</p>
+<div class="title3">2.4 运算符</div>
+<div class="title4">相等/全等</div>
+
+<p>区别：相等运算时可能会进行隐式转换</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> number1 = <span class="string">'45'</span>;</span><br><span class="line"><span class="keyword">let</span> number2 = <span class="number">45</span>;</span><br><span class="line"><span class="built_in">console</span>.log(number1 == number2); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>而全等运算会判断类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> number1 = <span class="string">'45'</span>;</span><br><span class="line"><span class="keyword">let</span> number2 = <span class="number">45</span>;</span><br><span class="line"><span class="built_in">console</span>.log(number1 === number2); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>推荐使用全等。</p>
+<div class="title3">2.5、布尔类型/条件判断</div>
+
+<p>特别：<br>| 数据类型 | true | false |<br>| :—-: | :—-: | :—-: |<br>| 字符串 | 非空字符串 | “”(空字符串) |<br>| 数字 | 非零数字 | 0 |</p>
+<hr>
+<hr>
+<div class="title2">三、数组</div>
+
+<hr>
+<p>用<code>[]</code>表示，可以储存不同类型的数据。<br>其他和Java，C等差不多，此处略。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="string">'第一名'</span>,<span class="literal">true</span>,[<span class="number">2</span>,<span class="string">'第二名'</span>,<span class="literal">false</span>]];</span><br></pre></td></tr></table></figure>
+<div class="title3">3.1 增删改查</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//增-push</span></span><br><span class="line">变量名.push(<span class="string">'要添加的值'</span>);</span><br><span class="line"><span class="comment">//一次多个</span></span><br><span class="line">schools.push(<span class="string">'河海大学'</span>, <span class="string">'大连理工大学'</span>, <span class="string">'哈尔滨工业大学'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//增加在开头 -unshift</span></span><br><span class="line">array.unshift(<span class="string">`待增加元素`</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从后往前删 pop</span></span><br><span class="line">schools.pop();</span><br><span class="line"></span><br><span class="line"><span class="comment">//从前往后删 shift</span></span><br><span class="line">schools.shift();</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除指定位置 splice</span></span><br><span class="line"><span class="comment">//我更愿意理解为分割，返回从第一个参数为下标往后数第二个参数为个数的所有内容。</span></span><br><span class="line">school.splice(<span class="number">1</span>);</span><br><span class="line">school.splice(<span class="number">0</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//改 splice</span></span><br><span class="line"><span class="comment">//三个参数，第三个为替换为的内容</span></span><br><span class="line"><span class="keyword">let</span> schools = [<span class="string">'清华大学'</span>, <span class="string">'北京大学'</span>, <span class="string">'浙江大学'</span>, <span class="string">'同济大学'</span>];</span><br><span class="line"></span><br><span class="line">schools.splice(<span class="number">2</span>, <span class="number">0</span>, <span class="string">'江西理工大学'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(schools); <span class="comment">//  ["清华大学", "北京大学", "江西理工大学", "浙江大学", "同济大学"]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查 indexOf()</span></span><br><span class="line"><span class="comment">//第一个参数为寻找的内容，第二个参数为开始的下标，默认为0.返回找到的下标，-1表示未寻得。</span></span><br><span class="line"><span class="keyword">let</span> schools = [<span class="string">'清华大学'</span>, <span class="string">'北京大学'</span>, <span class="string">'浙江大学'</span>, <span class="string">'同济大学'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> result = schools.indexOf(<span class="string">'浙江大学'</span>, <span class="number">3</span>);</span><br><span class="line"><span class="built_in">console</span>.log(result); <span class="comment">// -1</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<hr>
+<div class="title2">四、函数</div>
+
+<hr>
+<div class="title3">4.1 函数的声明</div>
+
+<div class="title4">使用function声明函数</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="title4">使用函数表达式声明函数</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> print = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//TODO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此处为将一个匿名函数赋值给变量</p>
+<div class="title4">函数声明的提升</div>
+
+<p>当声明函数时，这段代码会自动提升到头部。所以可以：</p>
+<blockquote>
+<p>先使用，再声明</p>
+</blockquote>
+<p>当然，只有使用function声明时才会自动提升，使用函数表达式则不会。</p>
+<div class="title4">函数重复声明</div>
+
+<p>后面的会覆盖前面的。</p>
+<div class="title4">立即执行函数</div>
+
+<blockquote>
+<p>IIFE (immediately invokable function expression)</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"这个函数只执行一次"</span>);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<div class="title3">4.2 函数参数</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 参数 figure(位数) txt(文本) </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">code</span>(<span class="params">figure, txt</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> num1 = <span class="built_in">Math</span>.random() * <span class="number">0.9</span> + <span class="number">0.1</span>;</span><br><span class="line">  <span class="keyword">const</span> num2 = <span class="built_in">Math</span>.floor(num1 * <span class="built_in">Math</span>.pow(<span class="number">10</span>, figure));</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(txt + num2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>不用声明类型</p>
+</blockquote>
+<div class="title3">4.2 参数默认值</div>
+
+<p>使用等号给参数默认值<br><code>function code(figure, txt = &quot;随机数：&quot;) {/*TODO*/}</code></p>
+<div class="title3">4.3 计时器</div>
+
+<p>三种延迟法：(<code>setTimeOut()</code>)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 第一个参数是代码，注意代码需用引号包裹，否则会立即执行代码</span></span><br><span class="line"><span class="comment"> * 第二个参数是 1000，即 1000ms 后执行 console.log(2)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">setTimeout(<span class="string">'console.log(2)'</span>, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 第一个参数是匿名函数</span></span><br><span class="line"><span class="comment"> * 第二个参数是 2000，即 2s 后执行 console.log(3)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">&#125;, <span class="number">2000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第一个参数是函数名，注意函数名后不要加小括号“()”，否则会立即执行 print4</span></span><br><span class="line">setTimeout(print4, <span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print4</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="number">4</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以再递归函数中使用计时器，来完成倒计时。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先定义计时总秒数，单位 s</span></span><br><span class="line"><span class="keyword">let</span> i = <span class="number">60</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义变量用来储存定时器的编号</span></span><br><span class="line"><span class="keyword">let</span> timerId;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写一个函数，这个函数即每次要执行的代码，能够完成上述的 1、2、3</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">  i--;</span><br><span class="line">  <span class="keyword">if</span> (i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    timerId = setTimeout(count, <span class="number">1000</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 清除计时器</span></span><br><span class="line">    clearTimeout(timerId);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 首次调用该函数，开始第一次计时</span></span><br><span class="line">count();</span><br></pre></td></tr></table></figure>
+
+<p>有另一个方法，<code>setInterval()</code>,和<code>setTimeOut()</code>用法完全一致，但是他是无限次调用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i = <span class="number">60</span>;</span><br><span class="line">print();</span><br><span class="line"><span class="keyword">let</span> timer = setInterval(print, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">print</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">  i--;</span><br><span class="line">  <span class="keyword">if</span> (i &lt; <span class="number">1</span>) &#123;</span><br><span class="line">    clearInterval(timer);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<hr>
+<div class="title2">五、对象</div>
+
+<hr>
+<blockquote>
+<p>对象（object）是JavaScript语言的核心概念，也是最重要的数据类型。所有对象都继承自<code>Object</code>.</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: <span class="number">18</span>,</span><br><span class="line">  run: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'running'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">person.run();</span><br></pre></td></tr></table></figure>
+<p>本质上就是一些键值对。其中键名都是字符串，所以引号可加可不加。</p>
+<p>访问所有键：<code>Object.keys(person)</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一步：创建构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二步：通过 new 创建对象实例</span></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> People(<span class="string">'henry'</span>, <span class="number">18</span>);</span><br><span class="line"><span class="built_in">console</span>.log(person);</span><br></pre></td></tr></table></figure>
+<p>构造函数方式创建对象。</p>
+<div class="title3">5.1 属性操作</div>
+
+<div class="title4">属性读取</div>
+
+<p>有点运算符和方括号运算符两种方式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person[<span class="string">'name'</span>]);</span><br></pre></td></tr></table></figure>
+<p>效果相同。但是后者可以使用变量。<br>属性的赋值也可以使用点运算符和方括号运算符。</p>
+<div class="title4">属性删除和增加</div>
+
+<p>删除：delete命令。<br>增加：直接写进去。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除name属性</span></span><br><span class="line"><span class="keyword">delete</span> person.name;</span><br><span class="line"><span class="comment">//增加gender属性</span></span><br><span class="line">person.gender = <span class="string">'male'</span>;</span><br></pre></td></tr></table></figure>
+<p>我们可以用in来判断一个对象有无某个属性。<code>&#39;name&#39; in person;</code><br>或者用Object原型对象自带的方法<code>hasOwnProperty</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person.hasOwnProperty(<span class="string">'name'</span>);</span><br></pre></td></tr></table></figure>
+
+<div class="title3">5.2 对象继承</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字面量</span></span><br><span class="line"><span class="keyword">let</span> o1 = &#123;</span><br><span class="line">  name: <span class="string">'alice'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 构造函数</span></span><br><span class="line"><span class="keyword">let</span> o2 = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="keyword">let</span> o3 = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 继承</span></span><br><span class="line"><span class="keyword">let</span> o4 = <span class="keyword">new</span> o1();</span><br></pre></td></tr></table></figure>
+<p>个人理解为，JS的对象和类是混在一起的，既可以做对象，也可以用作JAVA中的类。</p>
+<div class="title4">JSON格式转换</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个 JSON 字符串</span></span><br><span class="line"><span class="keyword">const</span> jsonStr =</span><br><span class="line">  <span class="string">'&#123;"sites":[&#123;"name":"Runoob", "url":"www.runoob.com"&#125;,&#123;"name":"Google", "url":"www.google.com"&#125;,&#123;"name":"Taobao", "url":"www.taobao.com"&#125;]&#125;'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 转成 JavaScript 对象</span></span><br><span class="line"><span class="keyword">const</span> obj = <span class="built_in">JSON</span>.parse(jsonStr);</span><br><span class="line"><span class="comment">//转为JSON</span></span><br><span class="line"><span class="keyword">const</span> jsonStr2 = <span class="built_in">JSON</span>.stringify(obj);</span><br></pre></td></tr></table></figure>
+<div class = "title3">5.3内置对象</div>
+
+<div class = "title4">Math</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.E <span class="comment">// 常数e。</span></span><br><span class="line"><span class="built_in">Math</span>.LN2 <span class="comment">// 2 的自然对数。</span></span><br><span class="line"><span class="built_in">Math</span>.LN10 <span class="comment">// 10 的自然对数。</span></span><br><span class="line"><span class="built_in">Math</span>.LOG2E <span class="comment">// 以 2 为底的e的对数。</span></span><br><span class="line"><span class="built_in">Math</span>.LOG10E <span class="comment">// 以 10 为底的e的对数。</span></span><br><span class="line"><span class="built_in">Math</span>.PI <span class="comment">// 常数π。</span></span><br><span class="line"><span class="built_in">Math</span>.SQRT1_2 <span class="comment">// 0.5 的平方根。</span></span><br><span class="line"><span class="built_in">Math</span>.SQRT2 <span class="comment">// 2 的平方根。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.abs() <span class="comment">// 绝对值</span></span><br><span class="line"><span class="built_in">Math</span>.ceil() <span class="comment">// 向上取整</span></span><br><span class="line"><span class="built_in">Math</span>.floor() <span class="comment">// 向下取整</span></span><br><span class="line"><span class="built_in">Math</span>.round() <span class="comment">// 四舍五入取整</span></span><br><span class="line"><span class="built_in">Math</span>.max() <span class="comment">// 最大值</span></span><br><span class="line"><span class="built_in">Math</span>.min() <span class="comment">// 最小值</span></span><br><span class="line"><span class="built_in">Math</span>.pow() <span class="comment">// 指数运算</span></span><br><span class="line"><span class="built_in">Math</span>.sqrt() <span class="comment">// 平方根</span></span><br><span class="line"><span class="built_in">Math</span>.log() <span class="comment">// 自然对数</span></span><br><span class="line"><span class="built_in">Math</span>.exp() <span class="comment">// e的指数</span></span><br><span class="line"><span class="built_in">Math</span>.random() <span class="comment">// 随机数</span></span><br></pre></td></tr></table></figure>
+<div class = "title4">Storage</div>
+
+<p>该接口用于脚本在浏览器保存数据。两个对象部署了这个接口:<code>window.sessionStorage</code>和<code>window.localStorage</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数据写入，第一个参数为键名key,第二个为键值value</span></span><br><span class="line"><span class="built_in">window</span>.localStorage.setItem(<span class="string">'myLocalStorage'</span>, <span class="string">'storage Value'</span>);</span><br><span class="line"><span class="comment">//如果不是字符串类型则先转换为字符串，如下：</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  name: <span class="string">'henry'</span>,</span><br><span class="line">  age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> value = <span class="built_in">JSON</span>.stringify(obj);</span><br><span class="line"><span class="built_in">window</span>.localStorage.setItem(<span class="string">'myLocalStorage'</span>, value);</span><br><span class="line"></span><br><span class="line"><span class="comment">//数据读取，接受key，返回value</span></span><br><span class="line"><span class="built_in">window</span>.localStorage.getItem(<span class="string">'myLocalStorage'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//清除缓存</span></span><br><span class="line"><span class="built_in">window</span>.localStorage.clear();</span><br></pre></td></tr></table></figure>
+<div class = "title4">String</div>
+
+<blockquote>
+<p><code>String</code>是JS原生提供的三大包装对象之一(另两个是<code>Number</code>和<code>Boolean</code>)  </p>
+</blockquote>
+<p><code>let v2 = new String(&#39;abc&#39;);</code><br>包装对象的目的：</p>
+<ol>
+<li>使得JavaScript的对象涵盖所有值</li>
+<li>使得原始类型的值可以方便地调用某些方法<div class = "title4">Array</div>
+
+</li>
+</ol>
+<blockquote>
+<p>也是JS的原生对象</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//连接数组 join()</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">arr.join(<span class="string">' '</span>) <span class="comment">// '1 2 3 4'</span></span><br><span class="line">arr.join(<span class="string">' | '</span>) <span class="comment">// "1 | 2 | 3 | 4"</span></span><br><span class="line">arr.join() <span class="comment">// "1,2,3,4"</span></span><br><span class="line"><span class="comment">//和split作用刚好相反</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//倒序 reverse()</span></span><br><span class="line"><span class="comment">//略</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//排序 sort()</span></span><br><span class="line"><span class="comment">//没有参数就按照字典排序，或者可以传入函数</span></span><br><span class="line"><span class="keyword">let</span> arr = [</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">'jenny'</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">'tom'</span>, <span class="attr">age</span>: <span class="number">10</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">'mary'</span>, <span class="attr">age</span>: <span class="number">40</span> &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">arr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a.age - b.age;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arr);</span><br><span class="line"><span class="comment">//此处传入的函数，当返回值大于0时，交换前后位置（当前的顺序是错误的）（原先a在前面），小于0时，按照原先的顺序。</span></span><br></pre></td></tr></table></figure>
+<p>遍历</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//map</span></span><br><span class="line"><span class="keyword">let</span> arr = [</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">'jenny'</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">'tom'</span>, <span class="attr">age</span>: <span class="number">10</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">'mary'</span>, <span class="attr">age</span>: <span class="number">40</span> &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// elem: 数组成员</span></span><br><span class="line"><span class="comment">// index: 成员下标</span></span><br><span class="line"><span class="comment">// a: 整个数组</span></span><br><span class="line"><span class="comment">// 返回由elem.name组成的数组</span></span><br><span class="line"><span class="keyword">const</span> handledArr = arr.map(<span class="function"><span class="keyword">function</span>(<span class="params">elem, index, a</span>) </span>&#123;</span><br><span class="line">  elem.age += <span class="number">1</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(elem, index, a);</span><br><span class="line">  <span class="keyword">return</span> elem.name</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arr);</span><br><span class="line"><span class="built_in">console</span>.log(handledArr);</span><br><span class="line"></span><br><span class="line"><span class="comment">//forEach</span></span><br><span class="line"><span class="comment">//forEach没有返回值</span></span><br><span class="line"><span class="keyword">const</span> handledArr = arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">elem, index, a</span>) </span>&#123;</span><br><span class="line">  elem.age += <span class="number">1</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(elem, index, a);</span><br><span class="line">  <span class="keyword">return</span> elem.name<span class="comment">//不会返回。</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class = "title4">Date</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取当前时间</span></span><br><span class="line"><span class="keyword">let</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="built_in">console</span>.log(now);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 传入表示“年月日时分秒”的数字</span></span><br><span class="line"><span class="keyword">let</span> dt1 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2020</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(dt1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 传入日期字符串</span></span><br><span class="line"><span class="keyword">let</span> dt2 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2020-1-6'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(dt2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 传入距离国际标准时间的毫秒数</span></span><br><span class="line"><span class="keyword">let</span> dt3 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">1578240000000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(dt3);</span><br></pre></td></tr></table></figure>
+<p>日期运算</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dt1 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2020</span>, <span class="number">2</span>, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">let</span> dt2 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2020</span>, <span class="number">3</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求差值</span></span><br><span class="line"><span class="keyword">let</span> diff = dt2 - dt1;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一天的毫秒数</span></span><br><span class="line"><span class="keyword">let</span> ms = <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(diff / ms); <span class="comment">// 31</span></span><br></pre></td></tr></table></figure>
+<p>早晚比较</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dt1 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2020</span>, <span class="number">2</span>, <span class="number">1</span>);</span><br><span class="line"><span class="keyword">let</span> dt2 = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2020</span>, <span class="number">3</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(dt1 &gt; dt2); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(dt1 &lt; dt2); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>解析日期字符串：<code>Date.parse()</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dt = <span class="built_in">Date</span>.parse(<span class="string">'2020-1-6'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(dt); <span class="comment">// 1578240000000</span></span><br></pre></td></tr></table></figure>
+<p>时间对象转时间字符串：to方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dt = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">let</span> dtStr = dt.toJSON();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(dtStr); <span class="comment">// 2020-01-03T09:44:18.220Z</span></span><br></pre></td></tr></table></figure>
+<p>获取事件对象的年月日：get方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dt = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">dt.getTime(); <span class="comment">// 返回实例距离1970年1月1日00:00:00的毫秒数。</span></span><br><span class="line">dt.getDate(); <span class="comment">// 返回实例对象对应每个月的几号（从1开始）。</span></span><br><span class="line">dt.getDay(); <span class="comment">// 返回星期几，星期日为0，星期一为1，以此类推。</span></span><br><span class="line">dt.getFullYear(); <span class="comment">// 返回四位的年份。</span></span><br><span class="line">dt.getMonth(); <span class="comment">// 返回月份（0表示1月，11表示12月）。</span></span><br><span class="line">dt.getHours(); <span class="comment">// 返回小时（0-23）。</span></span><br><span class="line">dt.getMilliseconds(); <span class="comment">// 返回毫秒（0-999）。</span></span><br><span class="line">dt.getMinutes(); <span class="comment">// 返回分钟（0-59）。</span></span><br><span class="line">dt.getSeconds(); <span class="comment">// 返回秒（0-59）。</span></span><br></pre></td></tr></table></figure>
+<p>以上部分也可通过set方法设置<br><strong>注意月份</strong></p>
+<hr>
+<div class="title2">六、BOM</div>
+
+<hr>
+<blockquote>
+<p>和浏览器有关的对象，我们叫<strong>浏览器对象模型（Browser Object Model）</strong></p>
+</blockquote>
+<div class="title4">BOM对象</div>
+
+<ul>
+<li>window(窗口)：window是整个网页的框架，装载网页的内容</li>
+<li>navigator（浏览器）：存储浏览器相关信息</li>
+<li>history（历史）：用来存储网页栈（前进后退）</li>
+<li>screen（显示屏幕）：显示屏幕的信息（硬件信息）</li>
+<li>Location（地址）：当前访问的地址（网址）信息</li>
+</ul>
+<div class="title3">6.1 window</div>
+
+<blockquote>
+<p>window对象是浏览器的默认对象，可以隐式调用window对象的属性和方法</p>
+</blockquote>
+<p>例如<code>console.log()</code>,我们不需要写<code>window.console.log()</code></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window" target="_blank" rel="noopener">MDN文档—Window</a></p>
+<div class="title3">6.2 Location</div>
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Location" target="_blank" rel="noopener">MDN文档—Location</a><br>|属性|值|解释|<br>|:–|:–|:–|<br>|href|<a href="https://developer.mozilla.org/zh-CN/search?q=123|网页的地址|" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/search?q=123|网页的地址|</a><br>|hostname|developer.mozilla.org|网页域名|<br>|host|developer.mozilla.org|网页域名 + 端口信息，这里端口默认80省略，所以和hostname相同|<br>|protocol|https:|代表协议信息|<br>|origin|<a href="https://developer.mozilla.org|页面来源的域名的标准形式|">https://developer.mozilla.org|页面来源的域名的标准形式|</a><br>|pathname|/zh-CN/search|包含url路径部分|<br>|search|?q=123|URL参数|</p>
+<div class="title4">Location方法</div>
+
+<p>只需重点掌握一个 : <code>reload()</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.location.reload();</span><br><span class="line">&#125;, <span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>刷新页面</p>
+<div class="title4">跳转到新的地址</div>
+
+<p><code>window.location = &#39;https://www.youkeda.com&#39;;</code><br>直接赋值即可。</p>
+<div class="title3">6.3 History</div>
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History" target="_blank" rel="noopener">MDN文档—History</a></p>
+<blockquote>
+<p>存储窗口的历史记录</p>
+</blockquote>
+<p>两个方法：<code>back()</code>和<code>forward()</code><br>分别对应返回和前进按钮。</p>
+<div class="title3">6.4 Navifator</div>
+
+<blockquote>
+<p>表示用户代理的状态和标识，也即浏览器的基本信息。</p>
+</blockquote>
+<p>了解一个属性：<code>userAgent</code>，当前浏览器的用户代理</p>
+<div class="title3">6.4 screen</div>
+
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Screen" target="_blank" rel="noopener">MDN文档——screen</a></p>
+<hr>
+<hr>
+<div class="title2">七、DOM</div>
+
+<hr>
+<blockquote>
+<p>是整个Javascript甚至整个前端最核心的内容</p>
+</blockquote>
+<blockquote>
+<p><strong>文档对象模型</strong>，Document Object Model ——DOM。可以将 <code>web页面</code> 和 <code>脚本或编程语言联系起来</code> 。</p>
+</blockquote>
+<p>DOM是一种规范，只要遵循这种规范，任何语言都可以与web页面（文档）（由HTML和CSS绘制）联系起来</p>
+<div class="title4">DOM 映射</div>
+
+<p>DOM树：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  DOCUMENT</span><br><span class="line">     |</span><br><span class="line">    HTML</span><br><span class="line">   &#x2F;    \</span><br><span class="line"> HEAD   BODY</span><br><span class="line">  |      |</span><br><span class="line">TITLE   DIV</span><br><span class="line">       &#x2F;   \</span><br><span class="line">      H1    P</span><br></pre></td></tr></table></figure>
+<p>其中DOCUMENT就是根节点，每个HTML标签就是DOM节点，称为<code>Node</code>或者<code>Element</code></p>
+<div class="title3">7.1 访问DOM</div>
+
+<p>获取document对象：<code>window.document</code></p>
+<div class="title4">选择器查询</div>
+
+<p><code>document.querySelector(&#39;.class&#39;)</code></p>
+<p>迭代查询：即在document的某个后代节点上查询</p>
+<p><code>class = document.querySelector(&#39;.class&#39;);class2 = class.quertSelector(&#39;.class2&#39;)</code></p>
+<p>这里主要关注的是子节点和document一样都是DOM树上的节点就可。</p>
+<p>以上是返回查询到的第一个节点，如果要查询所有节点，则函数换为 <code>querySelectorAll</code> .返回<code>NodeList</code>对象，可以像数组一样访问。(我猜大概是用了对象的中括号运算符， <code>class[&#39;key&#39;]</code> 这样)</p>
+<p>和原生的DOM查询函数的区别：query类的函数返回的是拷贝的原始数据，getElementById等getElement类（原生查询函数）的函数返回的就是原始数据，会随着DOM节点的变化而变化。</p>
+<div class="title3">7.2 DOM属性</div>
+
+<div class = 'title4'>DOM类别</div>
+
+<p>若有代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>123<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"test"</span>&gt;</span>123<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> divDom = <span class="built_in">document</span>.querySelector(<span class="string">'div#test'</span>);</span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(divDom.nodeType, divDom.nodeName, divDom.nodeValue);</span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(<span class="string">'---------'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="keyword">let</span> txtDom = divDom.firstChild;</span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(txtDom.nodeType, txtDom.nodeName, txtDom.nodeValue);</span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(<span class="string">'---------'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript"><span class="keyword">let</span> attDom = divDom.attributes.id;</span></span><br><span class="line"><span class="javascript"><span class="built_in">console</span>.log(attDom.nodeType, attDom.nodeName, attDom.nodeValue);</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left">节点</th>
+<th align="left">nodeType</th>
+<th align="left">nodeName</th>
+<th align="left">nodeValue</th>
+<th align="left">类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">divDom</td>
+<td align="left">1</td>
+<td align="left">DIV</td>
+<td align="left">null</td>
+<td align="left">元素节点</td>
+</tr>
+<tr>
+<td align="left">txtDom</td>
+<td align="left">3</td>
+<td align="left">#text</td>
+<td align="left">123</td>
+<td align="left">文本节点</td>
+</tr>
+<tr>
+<td align="left">attDom</td>
+<td align="left">2</td>
+<td align="left">id</td>
+<td align="left">test</td>
+<td align="left">特性节点</td>
+</tr>
+</tbody></table>
+<p>总结：</p>
+<ol>
+<li>无论是标签还是属性还是字符串都是<code>Element</code>，不同的地方在于nodeType为1，2，3.</li>
+<li>HTML标签都是 元素节点 。<code>nodeName</code>表示标签名称。</li>
+<li>纯文本都是 文本节点，<code>nodeValue</code>表示文本内容。</li>
+<li>标签的属性都是特性节点，<code>nodeName</code> 表示key,<code>nodeName</code>表示属性value.</li>
+<li><code>attributes</code>可以获取元素节点所有属性，返回的是一个字典。（Map）.</li>
+</ol>
+<div class = 'title4'>DOM内容</div>
+
+<p>可以通过元素节点的属性获得。</p>
+<ul>
+<li>outerHTML<br>  整个DOM的HTML代码</li>
+<li>innerHTML<br>DOM内部HTML代码</li>
+<li>innerText<br>DOM内部纯文本内容</li>
+</ul>
+<div class = 'title4'>DOM亲属</div>
+
+<p>节点的firstChild,lastChild，childNodes,parentNode等属性，用以获取子节点。</p>
+<div class = 'title4'>DOM样式</div>
+
+<p>可以通过节点的classList属性获取其所有类名，style属性获取其CSSStyle.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> h1Dom = <span class="built_in">document</span>.querySelector(<span class="string">'h1'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(h1Dom.classList);</span><br><span class="line"><span class="built_in">console</span>.log(h1Dom.style);</span><br><span class="line"><span class="built_in">console</span>.log(h1Dom.style.color);</span><br></pre></td></tr></table></figure>
+<div class = 'title4'>DOM数据属性*</div>
+
+<p>标签可以通过 <code>data-*</code> 属性存储数据。在节点中可以通过 <code>dataset</code> 属性获取关于<code>*</code>的键值对。<br>若<code>&lt;div data-qqq = &quot;123&quot;/&gt;</code>则 <code>divDom.dataset.qqq === &quot;123&quot;;//true</code></p>
+<div class = 'title3'>7.3 DOM 操作</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建标签节点</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">document</span>.createElement(tagName);</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加子节点</span></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(a);</span><br></pre></td></tr></table></figure>
+<p>如果想在某个目标子节点之前添加，可以使用<code>insertBefore(newNode,referenceNode)</code>方法。</p>
+<div class = 'title4'>设置属性和样式</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.setAttribute,可以设置所有属性</span></span><br><span class="line">img.setAttribute(<span class="string">'style'</span>, <span class="string">'width: 100%; height: 100%;'</span>);</span><br><span class="line"><span class="comment">//2.这个可以单独替换某个样式</span></span><br><span class="line">dom.style.color = <span class="string">'xxxx'</span>;</span><br><span class="line"><span class="comment">//3.或者可以给不同的class设置不同的样式，这里单纯操作classList就可以了</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * https://developer.mozilla.org/zh-CN/docs/Web/API/Element/classList</span></span><br><span class="line"><span class="comment"> * classList的基础操作。</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<hr>
+<div class="title2">八、DOM事件</div>
+
+<hr>
+<p>有关<code>MouseEvent</code>的一些属性<br>|属性|解释|<br>|:-|:-|:-|<br>|target|点击事件触发的Dom节点|<br>|type|事件名称|<br>|pageX/pageY|鼠标事件触发的页面坐标|</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Events" target="_blank" rel="noopener">事件文档</a><br>注意事件：冒泡，捕获，委托。</p>
+<p>阻止冒泡</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ......省略</span></span><br><span class="line">likeBtn.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 点击事件</span></span><br><span class="line">  e.stopPropagation()</span><br><span class="line"></span><br><span class="line"><span class="comment">// ......省略</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<hr>
+<div class="title2">九、网络请求</div>
+
+<hr>
+<div class="title4">URL格式说明</div>
+
+<ul>
+<li>协议与域名间以<code>://</code>分隔。</li>
+<li>路径（path）以单斜杠<code>/</code>分隔。<ul>
+<li>windows的文件夹分隔符为<code>\</code>。</li>
+</ul>
+</li>
+<li>参数<ul>
+<li>路径与参数之间用<code>?</code>分隔。</li>
+<li>多个参数用<code>&amp;</code>分隔</li>
+<li>参数用参数名=参数值(<code>key=value</code>)的格式表示。</li>
+</ul>
+</li>
+</ul>
+<div class="title3">9.1 API + GET + POST</div>
+
+<div class="title4">API</div>
+
+<blockquote>
+<p>API(Application Programming Interface),应用程序接口</p>
+</blockquote>
+<p>API一般是预先定义的函数，目的是为了开发人员快速访问某个程序，无须了解内部机制的细节。</p>
+<div class="title4">fetch调用API（GET）</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fetch(</span><br><span class="line">  <span class="string">'$&#123;URL&#125;'</span></span><br><span class="line">)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> response.json();</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span> (<span class="params">myJson</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(myJson);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p><code>fetch</code>是一个<code>Primise</code>对象</p>
+<hr>
+<div class="title4">fetch调用API（POST）</div>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把JSON数据序列化成字符串</span></span><br><span class="line"><span class="keyword">const</span> data = <span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">  username: <span class="string">'admin'</span>,</span><br><span class="line">  password: <span class="string">'123456'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">fetch(</span><br><span class="line">  <span class="string">`<span class="subst">$&#123;URL&#125;</span>`</span>,</span><br><span class="line">  &#123;</span><br><span class="line">    method: <span class="string">'POST'</span>,</span><br><span class="line">    body: data,</span><br><span class="line">    headers: &#123;</span><br><span class="line">      <span class="string">'content-type'</span>: <span class="string">'application/json'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> response.json();</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="keyword">function</span>(<span class="params">myJson</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(myJson);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/10/03/javascript%E5%85%A5%E9%97%A8/" data-id="ckwlqil0d0020ls3n3sas2b8p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Scss入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/16/Scss%E5%85%A5%E9%97%A8/" class="article-date">
+  <time datetime="2020-09-16T06:38:12.000Z" itemprop="datePublished">2020-09-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/html-css-js/">html,css,js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/16/Scss%E5%85%A5%E9%97%A8/">scss入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">零、摘要</div>
+
+<hr>
+<ol>
+<li><p>什么是SCSS和SASS，以及如何安装。</p>
+</li>
+<li><p>展示了变量、嵌套、混合功能的简单使用。</p>
+</li>
+</ol>
+<hr>
+<div class="title2">一、SASS</div>
+
+<hr>
+<div class="title3">1.1 什么是SASS</div>
+
+<ul>
+<li>SASS是一款CSS的预编译器，定义了一种新的编程语言，需要先编译成CSS才能被浏览器理解。</li>
+<li>SASS比CSS更像一种编程语言，有变量，函数，控制语句，导入，嵌套等高级功能。</li>
+<li>类似的预编译器还有<code>less</code>,<code>Stylus</code>等<div class="title4">有了这些功能，SASS可以</div>
+</li>
+</ul>
+<ol>
+<li>提供变量，实现一键替换主题色之类的功能</li>
+<li>用嵌套写法减少选择器的重复书写</li>
+<li>用混用功能解决代码复用问题</li>
+<li>用函数进行复杂的运算</li>
+<li>把央视代码模块化，减少不同的模块的代码间不必要的相互影响，提高代码安全性</li>
+<li>……</li>
+</ol>
+<div class="title3">1.2 安装</div>
+<div class="title4">安装sass</div>
+
+<p>参考 <a href="https://sass.bootcss.com/documentation" target="_blank" rel="noopener">sass文档</a> 安装到本地，然后配置到ideaj,vs等。（自行百度）</p>
+<p>在HTML文件中直接引入编译后的CSS文件即可</p>
+<div class="title4">Sass和Scss</div>
+
+<p>Scss是Sass 3 为了兼容CSS引入的新语法（任何标准的CSS3样式表都是具有相同语义的有效的Scss文件）</p>
+<blockquote>
+<p>文件后缀为<code>.scss</code></p>
+</blockquote>
+<hr>
+<div class="title2">二、变量</div>
+
+<hr>
+<div class="title3">2.1 变量</div>
+
+<p>提供了SassScript的新功能。可用于任何属性，允许属性使用变量、算术运算等额外功能<br>变量以“$”开头，赋值方法与CSS一样:<br><code>$width: 10px;</code>   </p>
+<div class="title4">使用变量</div>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#main</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="variable">$width</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>变量类型为字符串一般不需要双引号，除非某些特殊情况，如有双斜杠“//”，则需要单引号或者双引号（因为<code>//</code>表示注释）</p>
+<div class="title4">定义类似于数组的变量</div>
+
+<p><code>$animals: puppy kitty chick;</code></p>
+<p>可配合循环语句使用</p>
+<div class="title4">支持简单计算</div>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$width</span>: <span class="number">10px</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#main</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="variable">$width</span> / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因此可以方便的定义长宽比固定的元素，如</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$width</span>: <span class="number">10px</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#main</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="variable">$width</span> / <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="variable">$width</span> * <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="title3">2.2 插值法</div>
+
+<p><code>#{}</code> 插值可以在Sass样式表的任何一个地方使用</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$name</span>: <span class="string">"mail"</span>;</span><br><span class="line"><span class="variable">$top-or-bottom</span>: <span class="string">"top"</span>;</span><br><span class="line"><span class="variable">$left-or-right</span>: <span class="string">"left"</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.icon-</span>#&#123;<span class="variable">$name</span>&#125; &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: url(<span class="string">"/icons/#&#123;$name&#125;.svg"</span>);</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  #&#123;<span class="variable">$top-or-bottom</span>&#125;: <span class="number">0</span>;</span><br><span class="line">  #&#123;<span class="variable">$left-or-right</span>&#125;: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以用插值法插入任何类型的变量，不仅仅是字符串</p>
+</blockquote>
+<hr>
+<div class="title2">三、嵌套</div>
+
+<hr>
+<blockquote>
+<p>将共同的选择器提取出来，防止选择器过长</p>
+</blockquote>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">main <span class="selector-class">.double</span> <span class="selector-class">.item</span> <span class="selector-class">.links</span> &#123;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">margin-right</span>: <span class="number">20px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="title3">3.1 嵌套</div>
+<div class="title4">嵌套规则</div>
+
+<p>Sass允许将一套CSS样式嵌套进另一套样式中，内层的样式将他的外层的选择器作为父选择器。</p>
+<div class="title4">父选择器 &</div>
+
+<p>在嵌套时，有时候需要直接使用嵌套外层的福选择器，（例如，给元素设定<code>hover</code>样式时，可以用’&amp;’代表规则外层的父选择器）</p>
+<blockquote>
+<p>个人认为更像插值（可以字符串拼接）</p>
+</blockquote>
+<hr>
+<div class="title2">四、复用：mixin/include</div>
+
+<hr>
+<blockquote>
+<p>我们可用混合（mixin/include）来解决代码复用的问题</p>
+</blockquote>
+<div class="title3">4.1 无参数混合</div>
+
+<div class="title4">混合的使用方式</div>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> square &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 应用：</span></span><br><span class="line"><span class="selector-class">.user-avatar</span> &#123;</span><br><span class="line">  <span class="keyword">@include</span> square;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.admin-avatar</span> &#123;</span><br><span class="line">  <span class="keyword">@include</span> square;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>@mixin</code> : 定义可复用的样式<br><code>@include</code> : 应用可复用的样式</p>
+</blockquote>
+<div class="title3">4.2 有参数混合</div>
+<div class="title4">参数无默认值</div>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> square(<span class="variable">$size</span>) &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="variable">$size</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="variable">$size</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 应用</span></span><br><span class="line"><span class="selector-class">.avatar</span> &#123;</span><br><span class="line">  <span class="keyword">@include</span> square(<span class="number">100px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需传入变量 <code>$size</code></p>
+<div class="title4">参数有默认值</div>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> square(<span class="variable">$size</span>: <span class="number">100px</span>) &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="variable">$size</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="variable">$size</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不传参数就会使用默认的值 100px</span></span><br><span class="line"><span class="selector-class">.avatar</span> &#123;</span><br><span class="line">  <span class="keyword">@include</span> square;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 传入参数就会使用传入的值 200px</span></span><br><span class="line"><span class="selector-class">.avatar-200</span> &#123;</span><br><span class="line">  <span class="keyword">@include</span> square(<span class="variable">$size</span>: <span class="number">200px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<div class="title2">五、自定义函数</div>
+
+<hr>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@function</span> psd2px(<span class="variable">$px</span>) &#123;</span><br><span class="line">  @return #&#123;$px / 2&#125;px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.header</span> &#123;</span><br><span class="line">  <span class="comment">// 假设设计稿上高度是100px，那么函数参数就写100，计算后返回的值就是 50px</span></span><br><span class="line">  <span class="attribute">height</span>: psd2px(<span class="number">100</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/09/16/Scss%E5%85%A5%E9%97%A8/" data-id="ckwlqikzy000uls3n7bva7j56" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SCSS/" rel="tag">SCSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-移动端Web开发" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/15/%E7%A7%BB%E5%8A%A8%E7%AB%AFWeb%E5%BC%80%E5%8F%91/" class="article-date">
+  <time datetime="2020-09-15T05:00:04.000Z" itemprop="datePublished">2020-09-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/html-css-js/">html,css,js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/15/%E7%A7%BB%E5%8A%A8%E7%AB%AFWeb%E5%BC%80%E5%8F%91/">移动端Web开发</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">一、认识meta </div>
+
+<hr>
+<blockquote>
+<p><code>&lt;meta&gt;</code> 在 <code>&lt;head&gt;</code> 标签内</p>
+</blockquote>
+<div class="title3">1.1 meta元素</div>
+
+<blockquote>
+<p>元数据信息：meta-infortion<br>元数据：用来描述数据的数据  </p>
+</blockquote>
+<p><code>&lt;meta&gt;</code> 是一个自闭合元素，只有开始标签，没有结束标签。</p>
+<p>对meta元素进行设置指的是通过标签属性进行设置。</p>
+<ol>
+<li>charset的属性<ul>
+<li>utf-8<br>(UTF-8是HTML5的默认属性，涵盖了世界上几乎所有字符和符号)(没有他，中文就是乱码)</li>
+</ul>
+</li>
+<li>viewport的属性<ul>
+<li>width：viewport的宽度</li>
+<li>height：viewport的高度</li>
+<li>initial-scale：初始的缩放比例</li>
+<li>minimum-scale：允许用户缩放到的最小比例</li>
+<li>maximum-scale：允许用户缩放到的最大比例</li>
+<li>user-scalable:用户是否可以手动缩放</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 声明文档使用的字符编码 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 设置移动端视图 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- H5页面窗口自动调整到设备宽度，并禁止用户缩放页面 --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<hr>
+<div class="title2">二、认识新单位 rem/em</div>
+
+<hr>
+<blockquote>
+<p>rem 是一个相对长度单位。在不同的环境中，1rem可以转化为不同的px的值。</p>
+</blockquote>
+<div class="title3">2.1 单位rem和px之间的转换</div>
+
+<p>rem和px之间的转换比取决于页根元素(<code>&lt;html&gt;&lt;/html&gt;</code>)的字体大小.1 rem = 根元素的字体大小</p>
+<p>例：浏览器默认字体大小为16px,则2.5rem = 2.5 * 16 px = 40px</p>
+<blockquote>
+<p>一般浏览器默认为16px.最小显示为10px.即设置10px以下的数值一般是没有用的，显示的时候都会按10px显示，除非用到了CSS的transform。</p>
+</blockquote>
+<div class="title3">2.1 单位em</div>
+
+<p>rem是根据根元素的字体大小转换的，em是根据本级元素的字体大小转换的（当本级元素未确定时，根据父元素）</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="comment">// 父元素的字体大小为 20px</span></span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line"></span><br><span class="line">  &gt; <span class="selector-class">.child</span> &#123;</span><br><span class="line">    <span class="comment">// 子元素的字体大小为 0.7 * 20px = 14px</span></span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">0.7em</span>; </span><br><span class="line">    <span class="comment">// 特别注意：子元素的宽度为 10 * 14px = 140px</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">10em</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<div class="title2">三、认识新单位 vw/vh</div>
+
+<hr>
+<ul>
+<li>1vw = 1/100 视口宽度 </li>
+<li>1vh = 1/100 视口高度</li>
+</ul>
+<div class="title3">3.1 模态框</div>
+
+<p>指页面中弹出的窗口。此时需要给整个视口加上半透明覆盖层。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 将蒙层的宽高设置为视口的宽度和高度</span><br><span class="line"><span class="selector-tag">width</span>: 100<span class="selector-tag">vw</span>;</span><br><span class="line"><span class="selector-tag">height</span>: 100<span class="selector-tag">vh</span>;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/09/15/%E7%A7%BB%E5%8A%A8%E7%AB%AFWeb%E5%BC%80%E5%8F%91/" data-id="ckwlqil0s003als3nhm15habg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-CSS补充" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/14/CSS%E8%A1%A5%E5%85%85/" class="article-date">
+  <time datetime="2020-09-14T07:32:11.000Z" itemprop="datePublished">2020-09-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/html-css-js/">html,css,js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/14/CSS%E8%A1%A5%E5%85%85/">CSS补充.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+<div class="name">by pawncs</div>
+
+<h1 id="CSS引用形式"><a href="#CSS引用形式" class="headerlink" title="CSS引用形式"></a>CSS引用形式</h1><p>行内式，☆内部样式(style标签)，外部样式</p>
+<h1 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h1><blockquote>
+<p>后代选择器（p a）<br>交集选择器(a.special)<br>子代选择器(a&gt;.special)<br>并集选择器(a,.special)<br>兄弟选择器(a+.special)</p>
+</blockquote>
+<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><p>加粗：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">font-weight:bold;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>bold释义：大胆的，英勇的；黑体的；厚颜无耻的；险峻的<br>本专业释义：粗体，粗的</p>
+</blockquote>
+<h1 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h1><blockquote>
+<p>当选择器重复选取时的优先级</p>
+</blockquote>
+<p>id选取&gt;class选取&gt;标签选取<br>同级的时候比较过程中最高级的数量（例如用了几次id选取）</p>
+<h1 id="padding-border和margin"><a href="#padding-border和margin" class="headerlink" title="padding,border和margin"></a>padding,border和margin</h1><h2 id="padding"><a href="#padding" class="headerlink" title="padding"></a>padding</h2><p>可在导航栏发挥大用（不让贴着边）<br>padding:20px 30px;<br>指上下20，左右30。<br>默认参数顺序为：上右下左（顺时针）  </p>
+<blockquote>
+<p>box-sizing:bording-box或content-box;</p>
+</blockquote>
+<p>border:直线，虚线</p>
+<blockquote>
+<p>border-style:solid,dashed    </p>
+</blockquote>
+<p>border例</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">border-top</span><span class="selector-pseudo">:1px</span> <span class="selector-tag">solid</span> <span class="selector-tag">black</span>;  </span><br><span class="line"><span class="selector-tag">border-top</span><span class="selector-pseudo">:none</span>; </span><br><span class="line">//不显示</span><br></pre></td></tr></table></figure>
+
+<p>·阴影</p>
+<p>box-shadow:2px 2px 2px 1px rgba(0,0,0,0.2);<br>x偏移 y偏移 阴影模糊半径 阴影扩散半径 阴影颜色</p>
+<h1 id="子级元素撑开父级元素宽度"><a href="#子级元素撑开父级元素宽度" class="headerlink" title=".子级元素撑开父级元素宽度"></a>.子级元素撑开父级元素宽度</h1><p>min-width(作用存疑)或者添加浮动</p>
+<p>超出部分隐藏：overflow:hidden</p>
+<h1 id="background"><a href="#background" class="headerlink" title="background"></a>background</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">background-size:cover,content</span><br><span class="line">cover为拉伸，content为不改变长宽比的情况下最大</span><br><span class="line">也可以直接写百分数</span><br><span class="line"></span><br><span class="line">设置渐变色：</span><br><span class="line">background:linear-gradient(方向，开始色号，结束色号);</span><br></pre></td></tr></table></figure>
+
+<p>display:none,,block,inline,inline-block<br>inline-block时，将父元素的font-size设为0，消除空白折叠现象</p>
+<h1 id="position"><a href="#position" class="headerlink" title="position"></a>position</h1><blockquote>
+<p>relative（相对定位）    </p>
+</blockquote>
+<p>相对自己进行偏移</p>
+<blockquote>
+<p>absolute（绝对定位）</p>
+</blockquote>
+<p>相对最先遇到的非static的祖先元素进行偏移</p>
+<blockquote>
+<p>fixed（固定定位）  </p>
+</blockquote>
+<p>不随着页面滚动而改变</p>
+<blockquote>
+<p>sticky(粘性定位)  </p>
+</blockquote>
+<p>看起来很好玩，，——经过的时候回粘下来</p>
+<p>有关遮挡：z-index:越大离观察者越近</p>
+<h1 id="去除浏览器自带样式"><a href="#去除浏览器自带样式" class="headerlink" title="去除浏览器自带样式"></a>去除浏览器自带样式</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>,</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">ul</span>,</span><br><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span>,</span><br><span class="line"><span class="selector-tag">h2</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 浏览器都有自己的默认样式，以上部分为清除浏览器默认样式 */</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="CSS中的计算："><a href="#CSS中的计算：" class="headerlink" title="CSS中的计算："></a>CSS中的计算：</h1><p>calc:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">width</span><span class="selector-pseudo">:calc(100</span>% <span class="selector-tag">-</span> 480<span class="selector-tag">px</span>);</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h1><p>标签内部的前面或后面添加行内元素（span）</p>
+<h1 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a>伪类</h1><p>事件伪类：</p>
+<p>hover : 光标覆盖时<br>active : 光标点击时</p>
+<p>注意：hover一定要在active之前</p>
+<p>focus:获得焦点后</p>
+<h1 id="CSS装饰"><a href="#CSS装饰" class="headerlink" title="CSS装饰"></a>CSS装饰</h1><p>cursor :<br>pointer,,添加小手手；default;text;等一切鼠标悬浮的效果</p>
+<h1 id="浮动布局flex"><a href="#浮动布局flex" class="headerlink" title="浮动布局flex"></a>浮动布局flex</h1><p>justify-content:定义了项目在水平方向上的对齐方式  </p>
+<blockquote>
+<p>flex-start,flex-end,center,space-between,space-around,space-evenly</p>
+</blockquote>
+<p>align-items属性定义项目在垂直方向上如何对齐</p>
+<blockquote>
+<p>flex-start,flex-end,center,baseline(以项目第一行文字为基线对齐),stretch(默认)(拉伸)</p>
+</blockquote>
+<p>flex-direction:项目的排列方向</p>
+<blockquote>
+<p>column(纵向),row,row-reverse,column-reverse</p>
+</blockquote>
+<p>flex-wrap:压缩时换不换行</p>
+<blockquote>
+<p>nowrap:不换行；wrap换行;wrap-reverse换行后第一行在下面</p>
+</blockquote>
+<p>容器里放不下时是否压缩：<br>flex:(与其他设置在flex容器上的属性不同，这个属性设置在项目上)</p>
+<blockquote>
+<p>none,1(自动充满剩余空间)</p>
+</blockquote>
+<h1 id="多行文本省略"><a href="#多行文本省略" class="headerlink" title="多行文本省略"></a>多行文本省略</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 隐藏超出部分 */</span></span><br><span class="line"><span class="selector-tag">overflow</span> : <span class="selector-tag">hidden</span>;</span><br><span class="line"><span class="comment">/* 文本超出就用省略号 */</span></span><br><span class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</span><br><span class="line"><span class="comment">/* 把对象作为弹性伸缩盒子模型显示 */</span></span><br><span class="line"><span class="selector-tag">display</span>: <span class="selector-tag">-webkit-box</span>;</span><br><span class="line"><span class="comment">/* WebKit内核的浏览器的私有属性，设置文本超出2行就用省略号 */</span></span><br><span class="line"><span class="selector-tag">-webkit-line-clamp</span>: 2;</span><br><span class="line"><span class="comment">/* WebKit内核的浏览器的私有属性，设置或检索伸缩盒对象的子元素的排列方式 */</span></span><br><span class="line"><span class="selector-tag">-webkit-box-orient</span>: <span class="selector-tag">vertical</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="CSS响应式"><a href="#CSS响应式" class="headerlink" title="CSS响应式"></a>CSS响应式</h1><p>使一个网站能兼容多个终端，而不是为每个终端做一个版本</p>
+<blockquote>
+<p>响应式布局主要通过规定<strong>特定的宽度范围使用特定的布局</strong>来实现在不同的设备上应用不同的布局</p>
+</blockquote>
+<h3 id="媒体查询-media"><a href="#媒体查询-media" class="headerlink" title="媒体查询 @media"></a>媒体查询 <code>@media</code></h3><p>当满足特定条件时，才使用对应的CSS属性块</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> screen <span class="keyword">and</span> (<span class="attribute">max-width:</span> <span class="number">600px</span>) &#123;</span><br><span class="line">  <span class="selector-class">.topnav</span> &#123;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-class">.column</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="CSS关键帧-keyframes（动画）"><a href="#CSS关键帧-keyframes（动画）" class="headerlink" title="CSS关键帧@keyframes（动画）"></a>CSS关键帧@keyframes（动画）</h1><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@keyframes" target="_blank" rel="noopener">MDN文档</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/09/14/CSS%E8%A1%A5%E5%85%85/" data-id="ckwlqikzm0008ls3ng6ku5oqh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-安卓学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/12/%E5%AE%89%E5%8D%93%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2020-09-12T15:56:58.000Z" itemprop="datePublished">2020-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/12/%E5%AE%89%E5%8D%93%E5%AD%A6%E4%B9%A0/">安卓开发学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">零、目录</div>
+
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">┌----- 一、Android了解</span><br><span class="line">|       ├-----1.1 Android 概述</span><br><span class="line">|       ├-----1.2 Android 开发工具</span><br><span class="line">|       └-----1.3 第一个Android应用</span><br><span class="line">|</span><br><span class="line">├----- 二、UI组件</span><br><span class="line">|       ├-----2.1 布局管理器</span><br><span class="line">|       ├-----2.2 TextView</span><br><span class="line">|       ├-----2.3 Button</span><br><span class="line">|       ├-----2.4 EditText</span><br><span class="line">|       ├-----2.5 RadioButton</span><br><span class="line">|       ├-----2.6 复选框CheckBox</span><br><span class="line">|       ├-----2.7 ImageView</span><br><span class="line">|       ├-----2.8 列表视图ListView</span><br><span class="line">|       ├-----2.9 网格视图GridView</span><br><span class="line">|       ├-----2.10 滚动视图ScrollView &amp; HorizontalScrollView</span><br><span class="line">|       ├-----2.11 RecycleView</span><br><span class="line">|       └-----2.12 WebView</span><br><span class="line">|</span><br><span class="line">├----- 三、暂缺</span><br><span class="line">|       ├-----3.1 暂缺</span><br><span class="line">|       └-----3.2 暂缺</span><br><span class="line">|</span><br><span class="line">└----- 四、Activity和Fragment</span><br><span class="line">        ├-----4.1 Activity</span><br><span class="line">        └-----4.2 Fragment</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.bilibili.com/video/BV1Rt411e76H?from=search&seid=3602781529840559805" target="_blank" rel="noopener">视频地址</a></p>
+<hr>
+<div class="title2">一、Android了解</div>
+
+<hr>
+<div class="title3">1.1 Android概述</div>
+
+<ul>
+<li>Android是Google开发的操作系统</li>
+<li>Android是移动应用开发的表现形式之一<div class="title4">完整项目最精简流程</div>
+
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Android  </span></span><br><span class="line"><span class="comment">//    |  </span></span><br><span class="line"><span class="comment">//    ↓  </span></span><br><span class="line"><span class="comment">//   接口  </span></span><br><span class="line"><span class="comment">//    |  </span></span><br><span class="line"><span class="comment">//    ↓  </span></span><br><span class="line"><span class="comment">//  数据库</span></span><br></pre></td></tr></table></figure>
+
+<div class="title3">1.2 Android开发工具</div>
+
+<p>Android Studio，（Eclipse是上个时代的）</p>
+<ul>
+<li>下载JDK等安装环境……</li>
+<li>Gradle了解</li>
+</ul>
+<div class="title3">1.3 第一个Android应用</div>
+
+<p>新建一个Android项目，配置虚拟机启动就可以了。<br>主要关注这些:</p>
+<blockquote>
+<p>视图</p>
+</blockquote>
+<p>可以选Android或者Project这些。一般选择Android，可以隐藏很多不常用的文件。</p>
+<blockquote>
+<p>AndroidMainifest.xml  </p>
+</blockquote>
+<p>主配置文件，重要。在这里声明了所有的activity，同时设置了启动的activity.我理解为项目的入口</p>
+<blockquote>
+<p>res</p>
+</blockquote>
+<p>下放资源。其中layout放页面布局，values放字符串等调用信息，drawable放图片这些。其中layout中为了方便团队协作等，一般使用线性布局<code>LinearLayput</code></p>
+<blockquote>
+<p>build.gradle</p>
+</blockquote>
+<p>也是比较重要的文件。可以添加依赖，修改版本号等。</p>
+<hr>
+<div class="title2">二、UI组件</div>
+
+<hr>
+<div class="title3">2.1 布局管理器</div>
+
+<p>一个页面的元素之间相互位置的关系是谁来确定？他们的布局由谁来管理？</p>
+<div class="title4">线性布局(LinearLayout)</div>
+
+<p>最常用属性：</p>
+<ul>
+<li><p>android: id<br><code>=&quot;@+id/[……]&quot;</code>创建一个新ID</p>
+</li>
+<li><p>android: layout_width  </p>
+</li>
+<li><p>android: layout_height</p>
+</li>
+<li><p>android：layout_margin</p>
+</li>
+<li><p>android: layout_padding</p>
+</li>
+<li><p>android: background</p>
+</li>
+<li><p>android: orientation  </p>
+</li>
+</ul>
+<p>其他属性</p>
+<ul>
+<li><p>android: gravity<br>内部元素对齐方式（css的display?）</p>
+</li>
+<li><p>android: layout_weight<br>权重，用于内部平分父元素之类</p>
+</li>
+</ul>
+<p>大部分控件都会使用这些属性（大部分作用按字面意思理解）</p>
+<div class="title4">相对布局(RelativeLayout)</div>
+
+<p>最常用属性：</p>
+<ul>
+<li><p>android: layout_toLeftOf<br>在谁的左边</p>
+</li>
+<li><p>android: layout_toRightOf<br>在谁的右边</p>
+</li>
+<li><p>android: layout_alignBottom<br>和谁的底部对齐</p>
+</li>
+<li><p>android：layout_alignParentBottom<br>和父空间的底部对齐</p>
+</li>
+<li><p>android: layout_below<br>在谁的下面</p>
+</li>
+</ul>
+<p>大部分控件都会使用这些属性（大部分作用按字面意思理解）</p>
+<blockquote>
+<p>总体大概和HTML.CSS差不多。</p>
+</blockquote>
+<div class="title3">2.2 TextView</div>
+
+<blockquote>
+<p>intent-意图,页面跳转要这个类</p>
+</blockquote>
+<ul>
+<li><p>文字大小<br>单位用sp</p>
+</li>
+<li><p>文字溢出（显示不下使用…）<br>设置行数<code>maxLines</code>,然后设置<code>ellipsize=&quot;end&quot;</code></p>
+</li>
+<li><p>文字 + icon<br>eg:<code>drawableRight</code>属性</p>
+</li>
+<li><p>中划线、下划线<br>在逻辑代码里。获取对象后<code>.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG)</code>,然后设置抗锯齿，，（<code>antiAlias</code>）<br>下划线可以用同样的方法，也可以在逻辑代码里<code>setText()</code>方法里用html的代码实现。<code>Html.fromHtml(&lt;u&gt;待输入内容&lt;/u&gt;)</code></p>
+</li>
+<li><p>跑马灯  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">TextView</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 略 --&gt;</span></span><br><span class="line">android: ellipsize="marquee"</span><br><span class="line"><span class="comment">&lt;!-- 这里是重复次数 --&gt;</span></span><br><span class="line">android:marqieeRepeatLimit="marquee_forever"</span><br><span class="line"><span class="comment">&lt;!-- 这里设置单行 --&gt;</span></span><br><span class="line">android:singleLine="true"</span><br><span class="line"><span class="comment">&lt;!-- 焦点 --&gt;</span></span><br><span class="line">android：focusable="true"</span><br><span class="line">android:focusableInTouchMode="true"</span><br><span class="line"><span class="tag">&lt;/<span class="name">TextView</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里跑不起来的话<code>setSelected(true)</code>，或者<code>clickable=true</code><br><code>ellipsize</code>设置为”marquee”，重复次数设置<code>marqueeRepeatLimit</code>，这里要设置单行。<code>singleLine</code>,</p>
+</blockquote>
+<div class="title3">2.3 Button</div>
+
+</li>
+</ul>
+<blockquote>
+<p>Button是TextVeiw的子类。</p>
+</blockquote>
+<ul>
+<li><p>文字大小、颜色<br>textSize,textColor</p>
+</li>
+<li><p>自定义背景形状<br>新建一个shape文件（在资源文件里）<br>设置线条标签solid,角标签corners.<br>然后在布局文件里background属性中引用。<code>@drawable/bg_btn2</code></p>
+</li>
+<li><p>自定义按压效果<br>新建一个selector文件（资源文件里）  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">selector</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_pressed</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 没有按压设置为false --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">shape</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 具体,如solid,color,corners --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>是自定义背景形状的升级版</p>
+</blockquote>
+</li>
+<li><p>点击事件<br>除了在逻辑代码里添加，也可以在xml文件里加上属性onclick，设置方法名。示范：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Toast.makeText(<span class="keyword">this</span>,<span class="string">"弹出来的信息"</span>,Toast.LENGTH_SHORT).show();</span><br></pre></td></tr></table></figure>
+<div class="title3">2.4 EditText</div>
+
+</li>
+</ul>
+<blockquote>
+<p>和Button一样，是TextView的子类<br>它是可输入的子件。</p>
+</blockquote>
+<ul>
+<li><p>常用属性<br>默认值属性：<code>hint</code>（<code>placeholder</code>）<br>设置暗文属性：<code>inpytType = &quot;textPassword&quot;</code><br>设置只能输入数字：<code>inpytType = &quot;number&quot;</code> </p>
+</li>
+<li><p>监听事件<br>逻辑代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">editText.addTextChangedListener(<span class="keyword">new</span> TextWatcher()&#123;</span><br><span class="line"><span class="comment">// ……</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class="title3">2.5 RadioButton</div>
+
+</li>
+</ul>
+<blockquote>
+<p>一组可以放在<code>&lt;RadioGroup/&gt;</code>中</p>
+</blockquote>
+<ul>
+<li><p>常用属性<br>默认选中:<code>checked = &quot;true&quot;</code><br>去掉选框：<code>button:&quot;@null&quot;</code></p>
+</li>
+<li><p>自定义样式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">selector</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_checked</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 没有按压设置为false --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">shape</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 具体,如solid,color,corners --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>监听事件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">radioGroup.setOnCheckedChangeListener(<span class="keyword">new</span> RadioGroup.onCheckedChangeListener()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(RadioGroup group,@IdRes <span class="keyword">int</span> checkedId)</span></span>&#123;</span><br><span class="line">        RadioButton rb = (RadioButton)group.findViewById(checkedId);</span><br><span class="line">        Toast.makeText(RadioButtonActivity.<span class="keyword">this</span>,radioButton,getText(),Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class="title3">2.6 复选框CheckBox</div>
+</li>
+<li><p>常用属性</p>
+</li>
+<li><p>自定义样式</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">selector</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_checked</span>=<span class="string">"true"</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/icon_checkbox_false"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 没有按压设置为false --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">shape</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 具体,如solid,color,corners --&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">shape</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>监听事件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">checkBox.setOnCheckedChangeListener(<span class="keyword">new</span> CompoundButton.onCheckedChangeListener()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(CompoundButton button,<span class="keyword">boolean</span> isChecked)</span></span>&#123;</span><br><span class="line">        Toast.makeText(CheckBoxActivity.<span class="keyword">this</span>,isChecked?<span class="string">"选中"</span>:<span class="string">"未选中"</span>,Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<div class="title3">2.7 ImageView</div>
+</li>
+<li><p>常用属性<br><code>android：src=&quot;@drawable/bg_iron_man&quot;</code><br><code>android:scaleType=&quot;fitXY&quot;</code>撑满控件</p>
+<blockquote>
+<p>其他的<code>scaleType</code>：<br><code>fitXY</code>撑满控件;<code>fitCenter</code>保持宽高比缩放，直至完全显示;<code>centerCrop</code>保持宽高比缩放，直至完全覆盖控件，裁剪显示</p>
+</blockquote>
+</li>
+<li><p>加载网络图片<br>通过第三方开源库 <a href="https://github.com/bumptech/glide" target="_blank" rel="noopener">glide</a><br>简单用法实例<code>Glide.with(this).load(&quot;http://goo.gl/gEgYUd&quot;).into(imageView);</code></p>
+<blockquote>
+<p>通过gradle管理依赖  </p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>这里需要用到网络权限。所有申请的权限都要在mainfest里面申请。</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.INTERNET"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<div class="title3">2.8 列表视图ListView</div>
+
+<blockquote>
+<p>在实际开发中被RecycleView代替，这里仅做了解</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//TOSTUDY</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>我们先略过叭</p>
+</blockquote>
+<div class="title3">2.9 网格视图GridView</div>
+
+<blockquote>
+<p>在实际开发中被RecycleView代替，这里仅做了解</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//TOSTUDY</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>我们先略过叭</p>
+</blockquote>
+<div class="title3">2.10 滚动视图ScrollView & HorizontalScrollView</div>
+
+<blockquote>
+<p>将ScrollView套在最外面，使其可以上下滚动</p>
+</blockquote>
+<ul>
+<li>垂直滚动 ScrollView</li>
+<li>水平滚动 HorizontalScrollView<blockquote>
+<p>注意，ScrollView和HorizontalScrollView的子元素只能有一个</p>
+</blockquote>
+</li>
+</ul>
+<div class="title3">2.11 RecyclerView</div>
+
+<blockquote>
+<p>能够<strong>灵活</strong>实现大数据集的展示，视图复用管理比ListView更好，能够显示列表、网格、瀑布流等形式，且不同的ViewHolder能够实现item多元化的功能</p>
+</blockquote>
+<p><a href="https://kymjs.com/code/2016/07/10/01/" target="_blank" rel="noopener">深入浅出RecyclerView</a></p>
+<p><a href="https://www.jianshu.com/p/4f9591291365" target="_blank" rel="noopener">Android控件RecylerView</a></p>
+<p><a href="https://www.jianshu.com/p/4402327317bb" target="_blank" rel="noopener">Android RecyclerView从入门到玩坏</a></p>
+<div class="title4">添加依赖</div>
+
+<p>在build.gradle中先添加</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">'androidx.recyclerview:recyclerview:1.0.0'</span></span><br></pre></td></tr></table></figure>
+
+<div class="title3">2.12 WebView</div>
+
+<ul>
+<li><p>加载URL（网络或者本地assets文件夹下html）<br><code>webview.loadUrl(&quot;http://www.baidu.com&quot;)</code>或<code>loadUrl(&quot;file://android_assert/test.html&quot;)</code><br>若是接入网络URL，则需要JS支持，需在之前设置支持JS。<code>webView.getSettings().setJavaScroptEnabled(true)</code></p>
+</li>
+<li><p>直接加载html代码<br><code>webview.loadData()</code>或<code>webview.loadDateWithBaseURL()</code>。后者在编码设置中相对好些。前者可能会出现乱码等情况。</p>
+</li>
+<li><p>native和JavaScript相互调用</p>
+</li>
+</ul>
+<p>网页的前进后退</p>
+<ul>
+<li>webview.canGoBack()</li>
+<li>webview.goBack()</li>
+<li>webview.canGoForward()</li>
+<li>webview.goForward()</li>
+<li>webview.canGoBackOrForward(int step)</li>
+<li>webview.goBackOrForward(int step)</li>
+</ul>
+<blockquote>
+<p>按下返回键，默认是退出当前Activity,如果希望是WebView内页面后退</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onKeyDown</span><span class="params">(<span class="keyword">int</span> keyCode,KeyEvent event)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>((keyCode == KeyEvent.KEYCODE_BACK)&amp;&amp;webview.canGoBack())&#123;</span><br><span class="line">        webView.goBack();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.onKeyDown(keyCode,event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关注类<code>WebChormeClient</code></p>
+<blockquote>
+<p>从Android 9.0（API级别28）开始，默认情况下禁用明文支持。因此http的url均无法在webview中加载</p>
+</blockquote>
+<p>因此，需要在manifest中的application中添加</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:usesCleartextTraffic="true"</span><br></pre></td></tr></table></figure>
+
+<hr>
+<div class="title2">四、Activity和Fragment</div>
+
+<hr>
+<div class="title3">4.1 Activity</div>
+<div class="title4">Activity创建三部曲</div>
+
+<ol>
+<li>新建类继承Activity或其子类  </li>
+<li>在AndroidManifest中声明</li>
+<li>创建layout并在Activity中的onCreate中设置</li>
+</ol>
+<div class="title4">Activity生命周期</div>
+
+<p>creat-&gt;start-&gt;resume-&gt;pause-&gt;stop-&gt;destroy</p>
+<div class="title4">Activity跳转和数据传递</div>
+
+<ul>
+<li><p>显式跳转和隐式跳转<br>显式：<code>Intent intent = new Intent(this,Activity.class)</code><br>隐式：在注册的xml里仿照初始界面。action改为<code>com.skypan.test.Activity</code>(随便写).然后intent写<code>setAction(string)</code></p>
+</li>
+<li><p>Activity之间的数据传递  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//activity1</span></span><br><span class="line"><span class="comment">// 将两个参数放进去 此处只能放对象</span></span><br><span class="line">intent.putExtra(<span class="string">"value1"</span>, <span class="string">"100"</span>);</span><br><span class="line">intent.putExtra(<span class="string">"value2"</span>, <span class="string">"200"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//activity2</span></span><br><span class="line"><span class="comment">// 接收传递过来的Intent对象</span></span><br><span class="line">Intent intent = getIntent();</span><br><span class="line"><span class="comment">// 接收内部的参数</span></span><br><span class="line">String value1 = intent.getStringExtra(<span class="string">"value1"</span>);</span><br><span class="line">String value2 = intent.getStringExtra(<span class="string">"value2"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>startActivityForResult：启动Activity，结束后返回结果</p>
+</li>
+</ul>
+<div class="title1">附录</div>
+<div class="title4">有关support -4和appcompat-v7</div>
+
+<p>可以去包androidx中找找。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//import android.support.v4.app.Fragment;</span></span><br><span class="line"><span class="keyword">import</span> androidx.fragment.app.Fragment;</span><br><span class="line"><span class="comment">//import android.support.v7.app.AlertDialog;</span></span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AlertDialog;</span><br></pre></td></tr></table></figure>
+
+<p>这我是没想到的，我一直在找为什么他们标红的原因，采取了各种说法“版本不一致”“编辑器错误”等，还尝试过手动下载包到本地。。结果发现support被androidx代替了。。这。。</p>
+<div class="title4">有关错误细节</div>
+
+<p>在terminal端口输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew compileDebug --stacktrace -info</span><br></pre></td></tr></table></figure>
+<p>查错误详情  </p>
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew compileDebug --stacktrace -debug</span><br></pre></td></tr></table></figure>
+<p>再</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew compileDebugSources --stacktrace -info</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/09/12/%E5%AE%89%E5%8D%93%E5%AD%A6%E4%B9%A0/" data-id="ckwlqil0m002ols3nfodu9847" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Java包的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/11/Java%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2020-09-11T13:27:08.000Z" itemprop="datePublished">2020-09-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/11/Java%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/">Java包的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="包的使用"><a href="#包的使用" class="headerlink" title="包的使用"></a>包的使用</h1><h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><p><a href="https://www.jianshu.com/p/7074af79feb5" target="_blank" rel="noopener">JXL使用</a>EXCEL读取</p>
+<p><a href="https://www.cnblogs.com/wxc-xiaohuang/p/9532631.html" target="_blank" rel="noopener">JavaMailSender</a>发送邮件</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/09/11/Java%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="ckwlqikzr000gls3nfvyv4pdn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-开发文档" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/11/%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3/" class="article-date">
+  <time datetime="2020-09-11T12:52:51.000Z" itemprop="datePublished">2020-09-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/11/%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3/">开发文档</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="开发文档"><a href="#开发文档" class="headerlink" title="开发文档"></a>开发文档</h1><h2 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h2><p><a href="http://lbsyun.baidu.com/index.php?title=androidsdk/guide/create-project/androidstudio" target="_blank" rel="noopener">百度地图</a><br><a href="http://lbsyun.baidu.com/index.php?title=android-yingyan/guide/buildproject" target="_blank" rel="noopener">百度鹰眼</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/09/11/%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3/" data-id="ckwlqil0n002sls3n7ez01i10" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Android中碰到的错误" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/08/21/Android%E4%B8%AD%E7%A2%B0%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF/" class="article-date">
+  <time datetime="2020-08-20T18:43:34.000Z" itemprop="datePublished">2020-08-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/21/Android%E4%B8%AD%E7%A2%B0%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF/">Android中碰到的错误</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">一、Realm篇</div>
+
+<hr>
+<div class="title4">@PrimaryKey</div>
+
+<p>只有Integer和String和其相关类能作为主键。<br><code>Date</code>不行…(查了好几天)</p>
+<p>……<br>……<br>章结尾</p>
+<hr>
+<div class="title2">附录、显示错误细节</div>
+
+<hr>
+<p>在terminal端口输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew compileDebug --stacktrace -info</span><br></pre></td></tr></table></figure>
+<p>查错误详情  </p>
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew compileDebug --stacktrace -debug</span><br></pre></td></tr></table></figure>
+<p>再</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew compileDebugSources --stacktrace -info</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/08/21/Android%E4%B8%AD%E7%A2%B0%E5%88%B0%E7%9A%84%E9%94%99%E8%AF%AF/" data-id="ckwlqikze0002ls3n6qxx850g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/note/" rel="tag">note</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Web/">Java Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/else/">else</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html-css-js/">html,css,js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/" rel="tag">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/" rel="tag">IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/" rel="tag">REST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/" rel="tag">RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Realm/" rel="tag">Realm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SCSS/" rel="tag">SCSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/" rel="tag">SQLite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/" rel="tag">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/" rel="tag">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/note/" rel="tag">note</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/IO/" style="font-size: 12.5px;">IO</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MongoDB/" style="font-size: 12.5px;">MongoDB</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SCSS/" style="font-size: 10px;">SCSS</a> <a href="/tags/SQLite/" style="font-size: 10px;">SQLite</a> <a href="/tags/dictionary/" style="font-size: 20px;">dictionary</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/note/" style="font-size: 17.5px;">note</a> <a href="/tags/study/" style="font-size: 15px;">study</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/03/Restful%E9%A3%8E%E6%A0%BC/">Restful风格</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/18/kafka/">kafka 初探</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/23/%E5%86%85%E6%A0%B8%E6%80%81%E4%B8%8E%E7%94%A8%E6%88%B7%E6%80%81/">内核态与用户态</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/19/java-io-2/">java_io_2</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 pawncs<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

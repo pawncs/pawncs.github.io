@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>并发和线程 | 诺亚方舟的货运仓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content=".title1{     font-size:36px;     color:#e7767f;     &#x2F;* 桃红 *&#x2F;  } .title2{     font-size:29px;     color:#176f58;     &#x2F;* 祖母绿 *&#x2F; } .title3{     font-size:22px;     color:#21a675;     &#x2F;* 石绿 *&#x2F; } .title4{">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发和线程">
+<meta property="og:url" content="http://pawncs.github.io/2021/03/09/%E5%B9%B6%E5%8F%91%E5%92%8C%E7%BA%BF%E7%A8%8B/index.html">
+<meta property="og:site_name" content="诺亚方舟的货运仓">
+<meta property="og:description" content=".title1{     font-size:36px;     color:#e7767f;     &#x2F;* 桃红 *&#x2F;  } .title2{     font-size:29px;     color:#176f58;     &#x2F;* 祖母绿 *&#x2F; } .title3{     font-size:22px;     color:#21a675;     &#x2F;* 石绿 *&#x2F; } .title4{">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-09T12:28:37.000Z">
+<meta property="article:modified_time" content="2021-11-30T06:05:27.259Z">
+<meta property="article:author" content="pawncs">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="诺亚方舟的货运仓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">诺亚方舟的货运仓</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">pawncs的笔记之地</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pawncs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-并发和线程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/09/%E5%B9%B6%E5%8F%91%E5%92%8C%E7%BA%BF%E7%A8%8B/" class="article-date">
+  <time datetime="2021-03-09T12:28:37.000Z" itemprop="datePublished">2021-03-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      并发和线程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">零、目录</div>
+
+<hr>
+<ul>
+<li><a href="#并发和线程-part1">一、线程锁</a></li>
+<li><a href="#并发和线程-part2">二、并发容器</a></li>
+<li><a href="#并发和线程-part3">三、线程池</a></li>
+<li><a href="#并发和线程-partEX">EX、额外</a></li>
+</ul>
+<hr>
+<div class="title2" id="#并发和线程-part2">一、线程锁</div>
+
+<hr>
+<div class="title3">1.1、synchronized ——线程同步锁</div>  
+
+<ul>
+<li>可以作用在方法上，表明此方法只能由一个线程执行<br><code>public synchronized void sell(){/**todo*/}</code></li>
+<li><code>synchronized</code> 保护了关键方法，不允许其同事执行，必须一个个执行</li>
+<li><code>凡事，都有代价</code>（错乱）。<code>synchronized</code>的性能不高。因为其在运行时，其他线程都要等待，响应慢。</li>
+<li>适用范围：写操作的场景；尽量锁尽可能小的代码段</li>
+<li><code>synchronized</code> 满足原子性和可见性</li>
+</ul>
+<div class="title3">1.2、乐观锁和悲观锁</div>
+
+<ul>
+<li>乐观锁：<ul>
+<li><code>AtomicInteger</code>类的<code>incrementAndGet()</code>等方法。<br>其本质是不上锁，总是基于最新的数据进行更新。由于没上锁，所以提高了性能。不上锁的思想是乐观的，所以称之为乐观锁。（<code>AtomicBoolean</code>……）</li>
+</ul>
+</li>
+<li>悲观锁：<br>恰恰相反，<code>synchronized</code>关键字将方法执行前上锁，她假设了其他线程一定会修改数据，所以提前防范。上锁思想是悲观的，所以称之为悲观锁。</li>
+<li>乐观锁适用于读数据比重更大的应用场景，悲观锁适用于写数据比重更大的应用场景。</li>
+</ul>
+<hr>
+<div class="title2" id="并发和线程-part2">二、并发容器</div>
+
+<hr>
+<div class="title3">2.1 CompletableFuture</div>
+
+<ul>
+<li><p>是JAVA8的新特性</p>
+</li>
+<li><p>基本的多线程不利于任务的管理，因此使用<code>CompletableFuture</code></p>
+<ul>
+<li><p><code>CompletableFuture.supplyAsync(()-&gt;{})</code>方法运行异步任务并返回结果。他会将其参数（一个表达式）包装在一个新的类里（JDK内置），该类实现了<code>Runable</code>。（本质是在另一个线程里运行代码）</p>
+</li>
+<li><p>注册新的线程完毕后，使用<code>thenAccept()</code>方法（参数是之前的返回结果），自动执行下一个任务。（链式？）。其通常位于任务链的末尾。</p>
+</li>
+<li><p>中间如果有多步，使用<code>thenApply()</code>。使用方式如前。需要返回一个参数作为链的下一步的参数。</p>
+</li>
+<li><p><code>CompletableFuture</code>的任务链的返回值是<code>CompletableFuture&lt;T&gt;</code>，（若无返回值则T为void）。</p>
+</li>
+<li><p>如果需要等待其执行完，就需要等待所有任务线程执行完毕。（<code>get（）</code>方法）。下放示例代码中的<code>allOf()</code>方法目的是收集所有<code>CompletableFuture</code>对象（只支持数组）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  List&lt;CompletableFuture&gt; cfs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    studentList.forEach(s -&gt; &#123;</span><br><span class="line">  CompletableFuture&lt;Void&gt; cf = CompletableFuture.supplyAsync(() -&gt; &#123;</span><br><span class="line">      <span class="comment">//todo </span></span><br><span class="line">      &#125;);</span><br><span class="line">  cfs.add(cf);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="comment">// 等待所有的线程执行完毕</span></span><br><span class="line">  CompletableFuture.allOf(cfs.toArray(<span class="keyword">new</span> CompletableFuture[] &#123;&#125;)).get();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">  e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>CompletableFuture</code>对于不同的任务是并行的，但对于同一个任务是串行的。</p>
+</li>
+<li><p>有点像<code>parallelStream()</code>,不同的是前者注重的是流的元素的计算，后者的任务较为宽泛。</p>
+<blockquote>
+<p>在方法执行的时候，需要等待执行完成获得返回值就是同步，不等待继续执行程序就是异步。采用异步方式能支持多个任务并行执行，这种机制就是并发。<code>CompletableFuture</code>中，编排的任务是异步的，<code>get()</code>方法是同步的。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>实际上并发容器内部是由线程池实现的。我们也可以指定用哪个线程池运行任务：（第二个参数指定）<code>CompletableFuture.supplyAsync(
+    () -&gt; reg.regId(s),
+    EXECUTOR_SERVICE
+  )</code>。当遇到并发度高，任务执行慢的情况，就手动指定线程池，严格控制线程任务了。</p>
+</blockquote>
+<blockquote>
+<p>如果企业技术升级较慢，还处于java6时代，那么线程池就够了，java8就得用并发容器了。</p>
+</blockquote>
+<hr>
+<div class="title2" id="并发和线程-part3">三、线程池</div>
+
+<hr>
+<ul>
+<li>为了复用Thread对象，不用每次创建新的线程，引入了线程池的技术。（线程可以复用，可以执行A任务，也可以执行B任务）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建线程池核心代码</span></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.concurrent.BasicThreadFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentIDTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 线程工厂</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadFactory namedThreadFactory = <span class="keyword">new</span> BasicThreadFactory.Builder()</span><br><span class="line">    .namingPattern(<span class="string">"studentReg-pool-%d"</span>)</span><br><span class="line">    .daemon(<span class="keyword">true</span>)</span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 等待队列</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> BlockingQueue&lt;Runnable&gt; workQueue = <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;(<span class="number">1024</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 线程池服务</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadPoolExecutor EXECUTOR_SERVICE = <span class="keyword">new</span> ThreadPoolExecutor(</span><br><span class="line">        <span class="number">20</span>,</span><br><span class="line">        <span class="number">200</span>,</span><br><span class="line">        <span class="number">30</span>,</span><br><span class="line">        TimeUnit.SECONDS,</span><br><span class="line">        workQueue,</span><br><span class="line">        namedThreadFactory,</span><br><span class="line">        <span class="keyword">new</span> ThreadPoolExecutor.AbortPolicy()</span><br><span class="line">      );</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>需要引入依赖</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-lang3<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<div class="title3">3.1 创建线程工厂实例</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> BasicThreadFactory.Builder()</span><br><span class="line">  .namingPattern(<span class="string">"xxx-pool-%d"</span>)</span><br><span class="line">  .daemon(<span class="keyword">true</span>)</span><br><span class="line">  .build();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中<code>namingPattern()</code>方法是为了定义线程名字格式。(修改xxx).</p>
+</blockquote>
+<div class="title3">3.2 创建线程等待实例</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;(<span class="number">2048</span>);<span class="comment">//6核，8核。1，2核就512.</span></span><br></pre></td></tr></table></figure>
+<div class="title3">3.2 创建线程池实例</div>
+
+<ul>
+<li>创建<code>ThreadPoolExecutor</code>实例。 <blockquote>
+<p>构造函数参数说明</p>
+</blockquote>
+<table>
+<tr><th>参数序号</th><th>解释</th></tr>
+<tr><td>1</td><td>线程池初始化核心线程数量（一般两位数）</td></tr>
+<tr><td>2</td><td>线程池最大线程数（通常不超过200）</td></tr>
+<tr><td>3</td><td>线程数超过核心线程数时，如果没有任务经过多久回收（立即回收：0，通常30）</td></tr>
+<tr><td>4</td><td>第三个参数的时间单位（TimeUnit.SECONDS）</td></tr>
+<tr><td>5</td><td>等待队列实例</td></tr>
+<tr><td>6</td><td>线程工厂实例</td></tr>
+<tr><td>7</td><td>任务超过队列容量时，采用什么策略（AbortPolicy表拒绝，主程序自己处理）</td></tr>
+</table>
+
+</li>
+</ul>
+<blockquote>
+<p>线程池可以防止线程过多，做到对线程的精确控制</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//执行</span></span><br><span class="line">Thread t = <span class="keyword">new</span> Thread(runAbleImpl);</span><br><span class="line">t.start();</span><br><span class="line"><span class="comment">//--&gt;</span></span><br><span class="line">EXECUTOR.execute(runAbleImpl);</span><br><span class="line"><span class="comment">//EXECUTOR是ThreadPoolExecutor的实例，是static final对象。</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<div class="title2" id="并发和线程-partEX">EX、其他</div>
+
+<hr>
+<ul>
+<li>获得当前运行的线程的名字<br><code>Thread.currentThread().getName()</code></li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2021/03/09/%E5%B9%B6%E5%8F%91%E5%92%8C%E7%BA%BF%E7%A8%8B/" data-id="ckwlqil0o002vls3n6z67dao0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/03/20/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          字符集与编码
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/03/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Web/">Java Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/else/">else</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html-css-js/">html,css,js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/" rel="tag">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/" rel="tag">IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/" rel="tag">REST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/" rel="tag">RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Realm/" rel="tag">Realm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SCSS/" rel="tag">SCSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/" rel="tag">SQLite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/" rel="tag">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/" rel="tag">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/note/" rel="tag">note</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/IO/" style="font-size: 12.5px;">IO</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MongoDB/" style="font-size: 12.5px;">MongoDB</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SCSS/" style="font-size: 10px;">SCSS</a> <a href="/tags/SQLite/" style="font-size: 10px;">SQLite</a> <a href="/tags/dictionary/" style="font-size: 20px;">dictionary</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/note/" style="font-size: 17.5px;">note</a> <a href="/tags/study/" style="font-size: 15px;">study</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/11/30/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/03/Restful%E9%A3%8E%E6%A0%BC/">Restful风格</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/18/kafka/">kafka 初探</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/23/%E5%86%85%E6%A0%B8%E6%80%81%E4%B8%8E%E7%94%A8%E6%88%B7%E6%80%81/">内核态与用户态</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/19/java-io-2/">java_io_2</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 pawncs<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
