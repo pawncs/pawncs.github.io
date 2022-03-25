@@ -68,6 +68,917 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Redis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/04/23/Redis/" class="article-date">
+  <time datetime="2021-04-23T12:40:22.000Z" itemprop="datePublished">2021-04-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java-Web/">Java Web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/23/Redis/">Redis</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">零、简介</div>
+
+<hr>
+<p><a href="#Redis-1">一、Redis简介</a><br><a href="#Redis-1-1">1.1 nosql介绍</a><br><a href="#Redis-1-2">1.2 redis介绍</a><br><a href="#Redis-1-3">1.3 redis安装</a><br><a href="#Redis-1-4">1.4 jedis介绍</a><br><a href="#Redis-1-5">1.5 spring boot 集成 redis</a>  </p>
+<p><a href="#Redis-2">二、Redis常用数据类型</a><br><a href="#Redis-2-1">2.1 String</a><br><a href="#Redis-2-2">2.2 List</a><br><a href="#Redis-2-3">2.3 Hash</a><br><a href="#Redis-2-4">2.4 Set</a><br><a href="#Redis-2-5">2.5 Sorted Set</a>  </p>
+<p><a href="#Redis-3">三、Redis key操作</a>  </p>
+<p><a href="#Redis-4">四、Redis 特性</a><br>4.1 多数据库<br>4.2 支持事务</p>
+<p><a href="#Redis-5">五、Redis 持久化</a><br><a href="#Redis-5-1">5.1 RDB(redis database)</a><br><a href="#Redis-5-2">5.2 AOF(append only file)</a>  </p>
+<p><a href="#Redis-EX">EX、参考</a>  </p>
+<hr>
+<div class="title2" id="Redis-1">一、Redis 简介</div>
+
+<hr>
+<div class="title3" id="Redis-1-1">1.1 nosql介绍</div>
+NoSQL概述
++ 高并发读写
++ 海量数据的高效率存储和访问
++ 搞可扩展性和高可用性
+
+<p>NoSQL分类</p>
+<ul>
+<li>键值对存储（优势：快速查询）（劣势：缺少结构化）</li>
+<li>列存储（优势：查找速度快，扩展性强）（劣势：功能局限）</li>
+<li>文档数据库（优势：数据类型要求不严格）（劣势：性能不高，缺少统一查询语法）</li>
+<li>图形数据库（应用：社交网络啥的）（优势：应用图结构的算法）（劣势：需要对图进行运算才能得到结果，不方便做分布式集群方案）</li>
+</ul>
+<p>特点：</p>
+<ul>
+<li>易扩展</li>
+<li>灵活的数据模型</li>
+<li>大数据量，高性能</li>
+<li>高可用</li>
+<li>WEB2.0应用广泛</li>
+</ul>
+<div class="title3" id="Redis-1-2">1.2 redis介绍</div>
+Redis:  
++ NoSQL
++ 基于内存运行
++ 支持分布式
++ 数据类型丰富（String,List,Set,Ordered Set）
++ 应用场景：缓存，任务队列，网站访问统计，数据过期处理，分布式中session的分离等
+
+
+<div class="title3" id="Redis-1-3">1.3 Redis 安装</div>
+
+<p>安装Docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y update</span><br><span class="line">sudo yum -y install epel-release</span><br><span class="line">sudo yum -y install docker-io</span><br></pre></td></tr></table></figure>
+<p>启动Docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start docker</span><br><span class="line">sudo docker version</span><br></pre></td></tr></table></figure>
+
+<p>安装Redis并启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull redis:latest</span><br><span class="line">sudo docker images</span><br><span class="line">sudo docker run  --name redis -p 6379:6379 -d --restart=always redis:latest redis-server --appendonly yes --requirepass "[密码]"</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>6379是服务端口号<br>验证是否启动成功</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker ps</span><br></pre></td></tr></table></figure>
+
+<div class="title3" id="Redis-1-4">1.4 Jedis入门</div>
+
+<p>Jedis是Redis官方首选java客户端开发包</p>
+<p>new Jedis(“IP地址”,端口号)</p>
+<p>jedis.set,jedis.get<br>连接池：  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">JedisPoolConfig config = <span class="keyword">new</span> JedisPoolConfig();<span class="comment">//连接池配置对象</span></span><br><span class="line"></span><br><span class="line">config.setMaxTotal(<span class="number">30</span>);<span class="comment">//最大连接数</span></span><br><span class="line"></span><br><span class="line">config.setMaxIdle(<span class="number">10</span>);<span class="comment">//最大空闲连接数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//获得连接池</span></span><br><span class="line">JedisPool jedisPool = <span class="keyword">new</span> JedisPool(config,[IP地址],[端口]);</span><br><span class="line"></span><br><span class="line"><span class="comment">//获得核心对象(标准点要try,catch,finnally)</span></span><br><span class="line">Jedis jedis = jedisPool.getResource();</span><br></pre></td></tr></table></figure>
+
+<div class="title3" id="Redis-1-5">1.5 Spring Boot 集成 Redis </div>
+
+<ul>
+<li>引入依赖</li>
+<li>配置Redis服务器</li>
+<li>启动应用</li>
+</ul>
+<p>依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>配置</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Redis服务器地址</span></span><br><span class="line"><span class="meta">spring.redis.host</span>=<span class="string"></span></span><br><span class="line"><span class="comment"># Redis 服务器端口号</span></span><br><span class="line"><span class="meta">spring.redis.port</span>=<span class="string">6379</span></span><br><span class="line"><span class="comment"># Redis 服务器密码 </span></span><br><span class="line"><span class="meta">spring.redis.password</span>=<span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<p>而后会自动配置<code>StringRedisTemplate</code>类的对象。</p>
+<hr>
+<hr>
+<div class="title2" id="Redis-2">二、Redis常用数据类型</div>
+
+<hr>
+<ul>
+<li>String(字符串)</li>
+<li>list(字符串列表)</li>
+<li>hash（哈希）</li>
+<li>set（字符串集合）</li>
+<li>sorted set（有序字符串集合）</li>
+</ul>
+<p>key不要太长（降低性能），也不要太短（降低可读性），要有统一命名规范。</p>
+<div class="title3" id="Redis-2-1">2.1 String</div>
+
+<ul>
+<li><p>在redis中以2进制操作,安全 </p>
+</li>
+<li><p>value 最常数据为:512M</p>
+</li>
+<li><p>常用命令：赋值，取值，删除，数值增减，扩展命令。</p>
+</li>
+<li><p>get set getset del incr decr incrby append</p>
+<div class="title3" id="Redis-2-2">2.2 Hash</div>
+</li>
+<li><p><strong>String</strong> key 和<strong>String</strong> value的map容器</p>
+</li>
+<li><p>可以存储4294967295个键值对（4*10^9）</p>
+</li>
+<li><p>常用命令(myhash是key,Hash是value)</p>
+<ul>
+<li>赋值 hset myhash key value ;hmset(存多个)</li>
+<li>取值 hget myhash key;hmget(取多个)；hgetall （同时获得键值对）</li>
+<li>删除 hdel myhash key1 key2</li>
+<li>增加数字 hincrby myhash key</li>
+<li>扩展命令 (判断指定属性是否存在) hexists …… (获得属性数量) hlen myhash (获得所有key) hkeys myhash</li>
+</ul>
+</li>
+</ul>
+<div class="title3" id="Redis-2-3">2.3 List</div>
+
+<ul>
+<li><p>可以在左侧和右侧添加链表</p>
+</li>
+<li><p>ArrayList使用数组方式</p>
+</li>
+<li><p>linkedList使用双向链表方式</p>
+</li>
+<li><p>双向链表添加数据</p>
+</li>
+<li><p>双向链表删除数据</p>
+</li>
+<li><p>常用命令</p>
+<ul>
+<li>两端添加<br> lpush key a b c(a在最后面，c在最左侧)；rpush ……（从右端添加）</li>
+<li>查看列表<br>lrange key start end(0表示第一个，-1表示最后一个)</li>
+<li>两端弹出<br>lpop key(弹出并返回)</li>
+<li>获取列表元素个数<br>llen key</li>
+<li>扩展命令<br>lpushx  key (仅当key存在才插入)；<br>lrem key count value(count个为value的元素，总共删除count个。其为0时全删)；<br>lset key index value(在角标为index的位置添加value);<br>linsert key after value1 value2(在value1后添加value2)</li>
+</ul>
+</li>
+<li><p>使用场景：<br>经常用于消息队列的服务，来<strong>完成多个程序的消息的交互</strong>（存消息的是生产者，取的是消费者）——&gt;消费者可以在处理时添加进备份队列，处理完后从备份队列中删除，防止程序崩溃导致的消息丢失。备份中消息过期时可以重新添加进主队列中</p>
+<div class="title3" id="Redis-2-4">2.4 Set</div>
+</li>
+<li><p>没有排序的字符集合</p>
+</li>
+<li><p>和list不同：不允许出现重复元素</p>
+</li>
+<li><p>可以在服务端完成多个set的聚合操作(节省网络开销)</p>
+</li>
+<li><p>最大元素数量：4294967295</p>
+</li>
+<li><p>常用命令</p>
+<ul>
+<li>添加、删除 sadd key value1 value2 ;srem ……</li>
+<li>获得元素 sismember key value(返回1表存在 0表不存在) smembers key(获得所有元素)</li>
+<li>差集运算 sdiff key1 key2</li>
+<li>交集运算 sinter key1 key2</li>
+<li>并集运算 sunion ……</li>
+<li>扩展命令 srandmember ;scard; sdiffstore keyTarget key1 key2(将key1和key2差集运算的结果存储到keyTarget)(其他类似)</li>
+</ul>
+</li>
+<li><p>使用场景：用于跟踪一些具有唯一性的数据（比如访问博客的IP地址）（可以利用服务器端的运算来操作所有购买者的ID存储到set）</p>
+<div class="title3" id="Redis-2-5">2.5 Sorted-Set</div>
+</li>
+<li><p>和set的区别：sorted-set中的每个元素都有一个分数与之关联。redis通过这个分数将其从小到大排序。元素唯一，分数可以重复。时间复杂度为集合中元素的对数。因为其有序，所以访问中部的成员也是高效的。</p>
+</li>
+<li><p>对于1来说，想要在其他数据库中达到同样的效果是非常困难的。</p>
+</li>
+<li><p>应用场景：游戏排名，微博热点之类</p>
+</li>
+<li><p>常用命令</p>
+<ul>
+<li>添加元素 zadd key score value score value(每个元素都要有个分数，返回的是添加的个数)（若已有元素，则更改分数，不算进添加的个数）</li>
+<li>获得元素 zscore key value(获得value的分数)； zcard key(返回数量)</li>
+<li>删除元素 zrem key value1 value2(返回删除的个数)</li>
+<li>范围查询 zrange key start end(0是第一个，-1是最后一个。返回查询到的所有元素)；<br>zrange key start end withscores(带分数查询)<br>zrevrange …… (降序排序)<br>zremrangebyrank key start end（范围删除）<pre><code>zremrangebyscore ……（根据分数范围进行删除）</code></pre></li>
+<li>扩展命令<br>zrangebyscore ……（返回分数在某个区间的元素） limit 2(只显示2个)；<br>zincrby key score value(将value的分数加上score)<br>zcount key 80 90(统计分数位于80-90区间的个数)</li>
+</ul>
+</li>
+<li><p>使用场景 积分排行榜（zadd更新分数，zrange获得积分）构建索引数据</p>
+</li>
+</ul>
+<hr>
+<hr>
+<div class="title2" id="Redis-3">三、Redis key 操作</div>
+
+<hr>
+<ol>
+<li>查看所有keys ： keys *</li>
+<li>查看my开头的所有keys : keys my?</li>
+<li>删除指定key: del my1 my2 my3</li>
+<li>查看指定是否存在：exists my1</li>
+<li>重命名：rename key1 newName</li>
+<li>设置过期时间：expire key time(time的单位是s)</li>
+<li>查看超时时间 ttl key(key所剩时间,没设置返回-1)</li>
+<li>查看key类型：type key</li>
+</ol>
+<hr>
+<hr>
+<div class="title2" id="Redis-4">四、Redis 特性</div>
+
+<hr>
+<ul>
+<li>多数据库<ul>
+<li>一个redis实例可以包括多个数据库，客户端可以指定连接哪个数据库。一个redis实例最多可提供16个数据库，下标为0-15，客户端默认连接0号数据库，可通过select选择具体连接哪个数据库<br>select 1  </li>
+<li>移动key去其他数据库：move key 1(将key移动到1号数据库)</li>
+</ul>
+</li>
+<li>支持事务<ul>
+<li>multi exec discard</li>
+<li>串行化顺序执行。在事务执行的过程中，redis不会向其他客户端提供任何服务，保证所有命令原子化执行。在redis中，某个命令执行失败，后面的命令仍然被执行。</li>
+<li>multi 开启一个事务。之后的命令都是事务的命令。这些命令都会存储到队列当中。直到exec</li>
+<li>exec 相当于提交事务</li>
+<li>discard 相当于回滚事务</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<div class="title2" id="Redis-5">五、Redis 持久化</div>
+
+<hr>
+<p>redis的高性能：所有数据都存储在内存当中。为了数据不丢失，所以要存储到硬盘上。<br>两种持久化方式：</p>
+<ul>
+<li>RDB方式<ul>
+<li>默认支持</li>
+<li>在指定的时间间隔内，将内存的数据快照写进硬盘</li>
+</ul>
+</li>
+<li>AOF方式<ul>
+<li>以日志的方式存储服务器的每一个操作。服务器启动之初，会用日志来重新构建数据库，保证数据是完整的</li>
+</ul>
+</li>
+<li>不持久化<ul>
+<li>通过配置禁用RDB的功能。此时redis就是缓存的机制了。</li>
+</ul>
+</li>
+<li>同时使用RDB,AOF</li>
+</ul>
+<div class="title3" id="Redis-5-1">5.1 RDB(redis database)</div>
+
+<p>优势：</p>
+<ul>
+<li>只包含一个文件，利于文件备份。（每天归档一次，每30天归档一次……）当系统出现灾难性故障，可以非常容易的进行恢复。</li>
+<li>性能最大化。由（fork）子进程来完成持久化的工作。避免服务器进程执行IO操作。与AOF相比，若数据集很大，RDB启动效率更高。  </li>
+</ul>
+<p>劣势：</p>
+<ul>
+<li>无法完全保证数据不丢失</li>
+<li>当数据集很大时，要服务器停止一段时间来完成快照的录入</li>
+</ul>
+<p>配置：<br>redis.conf中（100多行左右）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
+<p>意为：900s内有一个数据改动，300s内有10个数据改动，或60s内有10000个数据改动，则记录一次快照</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dbfilename dump.rdb</span><br></pre></td></tr></table></figure>
+<p>意为数据的文件名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir .&#x2F;</span><br></pre></td></tr></table></figure>
+<p>为保存路径</p>
+<div class="title3" id="Redis-5-2">5.2 AOF(append only file)</div>
+
+<p>优势：</p>
+<ul>
+<li>更高的数据安全性<ul>
+<li>三种同步策略：每秒同步（异步完成），每修改同步（同步持久化，效率最低，最安全），不同步</li>
+</ul>
+</li>
+<li>对日志的操作是append模式（追加）。因此写入过程宕机不会影响已经写入的内容（一条只写入了一半数据时，启动之前，通过reids-check-aof 来解决数据一致性的问题）</li>
+<li>日志过大，则redis自动启动重写机制，使用append不断向老的磁盘写入数据，同时创建新的日志来记录此期间产生的数据。因此重写切换能更好的保证安全性</li>
+<li>AOF包含一个格式清晰，易于理解的日志文件，用于记录所有的修改操作。实际上也可以通过这个文件来完成数据的重建</li>
+</ul>
+<p>劣势：</p>
+<ul>
+<li>比RDB更大</li>
+<li>根据同步策略，效率往往低于RDB</li>
+</ul>
+<p>配置<br>还是redis.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appendonly no</span><br></pre></td></tr></table></figure>
+<p>默认情况下aof没有打开，需要改成yes</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appendonlyfilename &quot;appendonly.aof&quot;</span><br></pre></td></tr></table></figure>
+<p>日志文件名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">appendfsync always</span><br><span class="line">#appendfsync everysec</span><br><span class="line">#appendfsync no</span><br></pre></td></tr></table></figure>
+<p>同步策略，每修改同步，每秒同步，不同步</p>
+<hr>
+<hr>
+<div class="title2" id="Redis-EX">EX、参考</div>
+
+<hr>
+<ul>
+<li><a href="https://www.imooc.com/learn/839" target="_blank" rel="noopener">Redis入门</a></li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2021/04/23/Redis/" data-id="cl1665fb1003v4cgug7gx06d3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-io" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/04/07/java-io/" class="article-date">
+  <time datetime="2021-04-07T13:31:03.000Z" itemprop="datePublished">2021-04-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/07/java-io/">java_io</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">零、目录</div>
+
+<p><a href="#java-io-1">一、文件的编码</a><br><a href="#java-io-2">二、File类的使用</a><br><a href="#java-io-3">三、RandomAccessFile 基本操作</a><br><a href="#java-io-4">四、字节流</a><br><a href="#java-io-4-1">4.1 文件输入流FileInputStream</a><br><a href="#java-io-4-2">4.2 文件输出流FileOutputStream</a><br><a href="#java-io-4-3">4.3 数据输入输出流</a><br><a href="#java-io-4-4">4.4 字节缓冲流</a><br><a href="#java-io-5">五、字符流</a><br><a href="#java-io-6">六、对象的序列化和反序列化</a><br><a href="#java-io-6-1">6.1 序列化基本操作</a><br><a href="#java-io-6-2">6.2 transient及ArrayList源码分析</a><br><a href="#java-io-6-3">6.3 序列化中子父类构造函数问题</a><br><a href="#java-io-ex">EX、其他</a>  </p>
+<hr>
+<div class="title2" id="java-io-1">一、文件的编码</div>
+
+<hr>
+<p><a href="https://pawncs.github.io/2021/03/20/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/">字符集与编码</a></p>
+<p><code>s.getBytes(&quot;[指定的类型]&quot;)</code>得到字节序列<code>Byte[]</code>，若不指定，则获得项目默认编码</p>
+<ul>
+<li><p>补充GBK编码：中2英1(gbk是gb2312的扩充，加了更多的汉字)</p>
+</li>
+<li><p>JAVA是双字节编码UTF-16be（中英均为2字节）</p>
+</li>
+<li><p>(be:big endian：大端：高位字节放低地址)</p>
+</li>
+</ul>
+<blockquote>
+<p>乱码：当把字节序列变成字符串时，需要使用[项目]同样的编码方式解析，不然会出现乱码。<br><code>String a = new String(bytes,&#39;utf-16be&#39;)</code></p>
+</blockquote>
+<hr>
+<hr>
+<div class="title2" id="java-io-2">二、File类的使用</div>
+
+<hr>
+<div class="title3" id="java-io-2-1">2.1 File类 常用API</div>
+
+<p><code>java.io.File</code>可操作硬盘的文件（目录）</p>
+<blockquote>
+<p>File类只用于表达文件信息（名称，大小），不能访问文件内容<br><code>File file = new File(&quot;D:\\[路径]&quot;)</code></p>
+<ul>
+<li>双斜杠（转义字符）或者反斜杠。</li>
+<li><strong>或者可以<code>File(&quot;D:&quot;+File.separator+&quot;[路径]&quot;)</code>来使之可以在任何系统下添加分隔符。</strong></li>
+</ul>
+</blockquote>
+<ul>
+<li><p><code>file.exists()</code> 判断文件是否存在</p>
+</li>
+<li><p><code>file.mkdir()</code> （不存在的话可以）创建目录（<code>mkdirs()</code>可以创建多级目录）;<code>file.createNewFile()</code>创建文件</p>
+<blockquote>
+<p>个人感觉file对象似乎只是一个指向指定地址的引用一样的东西，所以可以新建立File对象，再去看他是否存在以及创建一个文件或目录</p>
+</blockquote>
+</li>
+<li><p><code>file.delete()</code>删除目录</p>
+</li>
+<li><p>是否是一个目录<code>isDirectory()</code>、是否是一个文件<code>isFile()</code></p>
+</li>
+<li><p>file的<code>toString</code>是他的路径。</p>
+</li>
+<li><p><code>getParent()</code>,<code>getName()</code>(文件名)，<code>getAbsolutePath()</code>……</p>
+</li>
+<li><p><strong>遍历</strong>：<code>String[]::list()</code>,<code>File[]:: listFiles()</code></p>
+</li>
+</ul>
+<hr>
+<hr>
+<div class="title2" id="java-io-3">三、RandomAccessFile 基本操作</div>
+
+<hr>
+<ul>
+<li><code>RandomAccessFile</code>提供了对文件内容的访问(读写)（<code>File</code>只用于表示文件或目录基本信息，不能用于访问内容）</li>
+<li><code>RandomAccessFile</code>支持随机访问文件（访问任意位置）</li>
+</ul>
+<p>~~</p>
+<ul>
+<li><p>java文件模型：硬盘上的文件是按byte存储的，是数据的集合</p>
+</li>
+<li><p>打开文件：两种模式：”rw”,”r”。（读写，只读）。</p>
+</li>
+<li><p>构造：<code>new RandomAccessFile(file,&quot;rw&quot;)</code>.打开后有个指针<code>pointer</code>。初始为0表示在开头。</p>
+</li>
+</ul>
+<p>~~</p>
+<ul>
+<li><p>写方法<code>write(int)</code>。（只写一个字节（后八位）），同时指针后移。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写一个整数</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0x7fffffff</span>;<span class="comment">//四字节，32位,所以写四次。</span></span><br><span class="line">raf.write(i&gt;&gt;&gt;<span class="number">24</span>);<span class="comment">//留下了高8位</span></span><br><span class="line">raf.write(i&gt;&gt;&gt;<span class="number">16</span>);</span><br><span class="line">raf.write(i&gt;&gt;&gt;<span class="number">8</span>);</span><br><span class="line">raf.write(i);</span><br><span class="line"></span><br><span class="line"><span class="comment">//writeInt等其他方法……</span></span><br></pre></td></tr></table></figure></li>
+<li><p>读方法<code>read()</code>(读1字节)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">raf.seek(<span class="number">0</span>);<span class="comment">//移动指针到开头</span></span><br><span class="line">raf.read(buf);<span class="comment">//参数为byte[],则直接读完。</span></span><br></pre></td></tr></table></figure></li>
+<li><p>文件读完后一定要关闭。</p>
+</li>
+<li><p>其他操作可查询java手册(javadoc)。</p>
+</li>
+</ul>
+<hr>
+<hr>
+<div class="title2" id="java-io-4">四、字节流</div>
+
+<hr>
+<blockquote>
+<p>IO流：输入+输出<br>也分为字节流和字符流</p>
+</blockquote>
+<blockquote>
+<p>这一章讲字节流，他有两个抽象父类（input,output）</p>
+</blockquote>
+<div class="title3" id="java-io-4-1">4.1 文件输入流FileInputStream</div>
+
+<blockquote>
+<p>EOF = End 读到-1就到结尾</p>
+</blockquote>
+<p>InputStream的抽象方法</p>
+<ul>
+<li><code>read()</code> 读一个字节无符号的填充到低八位</li>
+<li><code>read(byte[] buf)</code>读取到的直接填充到数组中</li>
+<li><code>read(byte[] buf，int start,int size)</code>读取到的直接填充到数组的start上，存放size长度。（返回读到的长度）（读取失败返回-1）<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//典型写法</span></span><br><span class="line"><span class="keyword">byte</span>[] buf = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">8</span>*<span class="number">1024</span>];<span class="comment">//[申请空间]</span></span><br><span class="line"><span class="keyword">int</span> bytes = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(bytes = in.read(buf,<span class="number">0</span>,buf.length) != -<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">//操作buf</span></span><br><span class="line">&#125;<span class="comment">//重复利用buf,完成输入操作</span></span><br></pre></td></tr></table></figure></li>
+<li>输出流与之对应（<code>write()</code>方法）</li>
+</ul>
+<blockquote>
+<p><code>Integer.toHexString(buf[i] &amp; 0xff)</code>这里<code>&amp;0xff</code>是为了将高位清零防止出现数据转换错误。</p>
+</blockquote>
+<div class="title3" id="java-io-4-2">4.2 文件输出流FileOutputStream</div>
+
+<p>继承了OutputStream,实现了向文件中写出byte数据的方法。</p>
+<p>构造函数里可确定是否是“追加”</p>
+<div class="title3" id="java-io-4-3">4.3 数据输入输出流</div>
+
+<blockquote>
+<p>DataInputStream,DataOutputStream 对流功能的扩展，可以更方便的读取int long 字符等类型数据</p>
+</blockquote>
+<p><code>writeInt writeDouble writeUTF</code>等，把本来写多次的操作包装好。</p>
+<div class="title3" id="java-io-4-4">4.3 字节缓冲流</div>
+
+<blockquote>
+<p>BufferedInputStream BufferedOutputStream,<br>为io提供了带缓冲区的操作，提高了IO的性能</p>
+</blockquote>
+<p><code>bos.flush()</code> 刷新缓冲区</p>
+<hr>
+<hr>
+<div class="title2" id="java-io-5">五、字符流</div>
+
+<hr>
+<ul>
+<li><p>注意编码问题</p>
+</li>
+<li><p>认识文本和文本文件</p>
+<ul>
+<li>java文本（char）是16位无符号整数，是字符的unicode编码（双字节）。文件是byte byte 的数据序列。</li>
+<li>文本文件是文本(char)序列按照某编码方案序列化为byte的存储结果。</li>
+</ul>
+</li>
+<li><p>字符流（Reader Writer）,一次处理一个字符。底层仍然是字节序列。–&gt;操作的是文本文件</p>
+<ul>
+<li>字符流基本实现<ul>
+<li><code>InputStreamReader</code>：byte流-&gt;char流,按照编码解析</li>
+<li><code>outputStreamWriter</code>:char流-&gt;byte流，按照编码处理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>字符流过滤器（缓冲？）</p>
+<ul>
+<li>BufferedReader/BufferedWriter。好处是通过嵌套可以设置编码，（FileReader等不行）同时提供一次读一行等的功能</li>
+<li>PrintReader等。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<hr>
+<div class="title2" id="java-io-6">六、对象的序列化和反序列化</div>
+
+<hr>
+<blockquote>
+<p>序列化和反序列化，就是Object和byte序列的互相转换。</p>
+</blockquote>
+<div class="title3" id="java-io-6-1">6.1 序列化基本操作</div>
+
+<ul>
+<li>序列化流<code>ObjectOutputStream</code>，是过滤流。核心方法<code>writeObject</code></li>
+<li>反序列化流<code>ObjectinputStream</code>，核心方法<code>readObject</code></li>
+<li>序列化接口（<code>Serializable</code>）对象必须实现序列化接口才能序列化。（否则将异常）</li>
+</ul>
+<div class="title3" id="java-io-6-2">6.2 transient及ArrayList源码分析</div>
+
+<ul>
+<li><p><code>transient</code>关键字：加了后不会进行JVM默认的序列化工作。（可以自己完成序列化）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//自己进行序列化</span></span><br><span class="line"><span class="comment">//在要序列化的方法中加入</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">writeObject</span><span class="params">(java.io.ObjectOutputSream s)</span> <span class="keyword">throws</span> java.io.IOException</span>&#123;</span><br><span class="line">    s.defaultWriteObject();<span class="comment">//完成jvm默认的序列化操作</span></span><br><span class="line">    s.writeInt([自己要完成的序列化属性]);</span><br><span class="line">    <span class="comment">//……</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readObject</span><span class="params">(java.io.ObjectOutputSream s)</span> <span class="keyword">throws</span> java.io.IOException,ClassNotFoundException</span>&#123;</span><br><span class="line">    s.defaultReadObject();<span class="comment">//完成jvm默认的反序列化操作</span></span><br><span class="line">    <span class="keyword">this</span>.[自己要完成反序列化的属性] = s.readInt();</span><br><span class="line">    <span class="comment">//……</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，序列化和反序列化操作元素的顺序需要一致。</p>
+</li>
+<li><p>自己写序列化可以提高性能。如ArrayList中自己完成了数组元素的序列化。——如此可以有效元素序列化而不是全部。</p>
+</li>
+</ul>
+<p><a href="https://blog.csdn.net/csndhu/article/details/102681015" target="_blank" rel="noopener">transient关键字的作用，writeObject和readObject方法的作用</a><br><a href="https://www.cnblogs.com/homesea/articles/10203270.html" target="_blank" rel="noopener">ArrayList底层代码中的writeObject和readObject问题思考</a></p>
+<div class="title3" id="java-io-6-3">6.3 序列化中子父类构造函数问题</div>
+
+<blockquote>
+<p>对子类进行反序列化操作时，若父类没有实现序列化接口，其构造函数会被显示调用</p>
+</blockquote>
+<hr>
+<hr>
+<div class="title2" id="java-io-ex">EX、其他</div>
+
+<hr>
+<p><a href="https://www.imooc.com/video/1832" target="_blank" rel="noopener">学习视频</a></p>
+<p>基本操作可查询<code>jdk api 1.8_google.CHM</code> (javadoc)</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2021/04/07/java-io/" data-id="cl1665fb2003y4cguavnbh9wu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IO/" rel="tag">IO</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Mybatis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/29/Mybatis/" class="article-date">
+  <time datetime="2021-03-29T00:57:24.000Z" itemprop="datePublished">2021-03-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java-Web/">Java Web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/29/Mybatis/">MyBatis</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">零、目录</div>
+
+<hr>
+<p><a class="title4" href="#Mybatis-1">一、MyBatis 入门</a><br><a href="#Mybatis-1-1">1.1 简介</a><br><a href="#Mybatis-1-2">1.2 sql语句</a><br><a href="#Mybatis-1-3">1.3  MyBatis 映射对象</a><br><a href="#Mybatis-1-4">1.4 MyBatis DAO</a><br><a  class="title4" href="#Mybatis-2">二、MyBatis XML</a><br><a href="#Mybatis-2-1">2.1 Mybatis XML Mapper</a><br><a href="#Mybatis-2-2">2.2 XML模式开发顺序</a><br><a class="title4" href="#Mybatis-3">三、MyBatis 动态SQL</a><br><a href="#Mybatis-3-1">3.1 条件</a><br><a href="#Mybatis-3-2">3.2 循环</a><br><a class="title4" href="#Mybatis-4">四、MyBatis 分页</a><br><a class="title4" href="#Mybatis-ex">EX、MyBatis 开发文档</a>  </p>
+<hr>
+<div class="title2" id="Mybatis-1">一、Mybatis入门</div>
+
+<hr>
+<div class="title3">1.1 简介</div>
+
+<blockquote>
+<p>Mybatis优势：可以灵活自定义SQL又兼具ORM框架的特性</p>
+</blockquote>
+<ul>
+<li>ORM(Object Relational Mapping)：对象关系映射，用于实现面向对象编程语言里不同类型系统的数据之间的转换</li>
+<li>基于JDBC(JAVA领域所有数据库框架都基于JDBC) </li>
+</ul>
+<p>集成Mybatis  </p>
+<ol>
+<li>添加Spring Web依赖</li>
+<li>添加MyBatis Framework依赖</li>
+<li>添加MySQL Driver依赖<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p style="color:red">此时无法启动，因为找不到数据库连接</p>
+
+</li>
+</ol>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.datasource.url</span>=<span class="string">jdbc:mysql://mysql数据库地址:数据库端口/数据库名称?serverTimezone=GMT%2B8</span></span><br><span class="line"><span class="meta">spring.datasource.username</span>=<span class="string">用户名</span></span><br><span class="line"><span class="meta">spring.datasource.password</span>=<span class="string">密码</span></span><br></pre></td></tr></table></figure>
+<p><code>serverTimezone=GMT%2B8</code> 的目的是设置时区为中国时区</p>
+<div class="title3" id="Mybatis-1-2">1.2 sql语句</div>
+
+<p><a href="https://www.w3school.com.cn/sql/sql_create_table.asp" target="_blank" rel="noopener">sql语句</a></p>
+<div class="title3" id="Mybatis-1-3">1.3 MyBatis 映射对象</div>
+
+<ul>
+<li>DO 对象(data object)：<br>用来映射数据库的表的对象。<br>一般放在dataobject的包下<ul>
+<li>注意：<code>DATETIME</code> 映射 <code>java.util.Date</code></li>
+</ul>
+</li>
+</ul>
+<div class="title3" id="Mybatis-1-4">1.4 MyBatis DAO</div>
+
+<ul>
+<li><p>DAO层 (data access object):DAO层会包含对数据库操作的接口和实现类</p>
+</li>
+<li><p>增删改查</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDAO</span> </span>&#123;</span><br><span class="line">    <span class="comment">//这里用了别名解决数据库名称和DO类名称不一致的问题</span></span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"SELECT id,user_name as userName,pwd,nick_name as nickName,avatar,gmt_created as gmtCreated,gmt_modified as gmtModified FROM user"</span>)</span><br><span class="line">    <span class="function">List&lt;UserDO&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//这里用了#&#123;userName&#125;来导入参数中的属性</span></span><br><span class="line">     <span class="meta">@Insert</span>(<span class="string">"INSERT INTO user (user_name, pwd, nick_name,avatar,gmt_created,gmt_modified) VALUES(#&#123;userName&#125;, #&#123;pwd&#125;, #&#123;nickName&#125;, #&#123;avatar&#125;,now(),now())"</span>)</span><br><span class="line">     <span class="comment">//三个设置分别是：允许数据库使用自增主键、设置表的主键字段名称，设置DO模型的主键字段</span></span><br><span class="line">    <span class="meta">@Options</span>(useGeneratedKeys = <span class="keyword">true</span>, keyColumn = <span class="string">"id"</span>, keyProperty = <span class="string">"id"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">insert</span><span class="params">(UserDO userDO)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Update</span>(<span class="string">"update comment set content = #&#123;content&#125;,gmt_modified = now() where id = #&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(CommentDO commentDO)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Delete</span>(<span class="string">"delete from comment where id = #&#123;key&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">delete</span><span class="params">(@Param(<span class="string">"key"</span>)</span><span class="keyword">long</span> id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<div class="title2" id="Mybatis-2">二、Mybatis XML</div>
+
+<hr>
+<p>一般情况下，我们不使用注解而是用XML来执行SQL语句。</p>
+<p>在application.properties中配置使用的映射xml文件。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">mybatis.mapper-locations</span>=<span class="string">classpath:[文件路径]/*.xml</span></span><br></pre></td></tr></table></figure>
+<p>配置完成并启动工程后，MyBatis会扫描指定路径，完成XML文件的加载。（如果有多个路径则用逗号隔开）</p>
+<div class="title3" id="Mybatis-2-1">2.1 Mybatis XML Mapper</div>
+
+<p>一个DAO.xml文件对应一个dao类。<br>其头信息为：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后加上根节点mapper(表示映射哪个dao类)和子节点（resultMap,表示某DO类的各个属性和数据库属性的关联）</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"[DAO类的完整路径]"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"[唯一标识]"</span> <span class="attr">type</span>=<span class="string">"[DO类（实体类）的完整路径]"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- id是设置主键 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span>/&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 其余属性 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"[数据库列名]"</span> <span class="attr">property</span>=<span class="string">"[DO类属性名]"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<div class="title4">具体语句映射</div>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"[方法名]"</span> <span class="attr">parameterType</span>=<span class="string">"[DO类全名]"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">    [对应insert的sql语句]</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"[方法名]"</span> <span class="attr">resultMap</span>=<span class="string">"[resultMap id名]"</span>&gt;</span></span><br><span class="line">    [select 的sql语句]</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其他语句同理。（<code>useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot;</code>这俩属性是insert独有）</p>
+<div class="title3" id="Mybatis-2-2">2.2 XML模式开发顺序</div>
+
+
+
+<ol>
+<li>创建DO对象</li>
+<li>创建DAO接口并配置<code>@Mapper</code>注解</li>
+<li>创建XML文件，完成<code>resultMap</code>配置</li>
+<li>创建DAO接口方法</li>
+<li>创建对应的XML语句</li>
+</ol>
+<hr>
+<div class="title2" id="Mybatis-3">三、MyBatis 动态SQL</div>
+<div class="title3" id="Mybatis-3-1">3.1 条件</div>
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"search"</span> <span class="attr">resultMap</span>=<span class="string">"userResultMap"</span>&gt;</span></span><br><span class="line">  select * from user where</span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"keyWord != null"</span>&gt;</span></span><br><span class="line">      user_name like CONCAT('%',#&#123;keyWord&#125;,'%')</span><br><span class="line">        or nick_name like CONCAT('%',#&#123;keyWord&#125;,'%')</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"time != null"</span>&gt;</span></span><br><span class="line">      and  gmt_created &lt;![CDATA[ &gt;= ]]&gt; #&#123;time&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里test通过才会让语句生效。</p>
+<blockquote>
+<p>为了防止batis解析失败，不能出现<code>&gt;&lt;=%&amp;</code>等符号。所以用<code>&lt;![CDATA[ key ]]&gt;</code>包裹。</p>
+</blockquote>
+<p>这里if未生效就会产生错误语句，所以将<code>where</code>换成对应语句。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"search"</span> <span class="attr">resultMap</span>=<span class="string">"userResultMap"</span>&gt;</span></span><br><span class="line">  select * from user</span><br><span class="line">   <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"keyWord != null"</span>&gt;</span></span><br><span class="line">          user_name like CONCAT('%',#&#123;keyWord&#125;,'%')</span><br><span class="line">            or nick_name like CONCAT('%',#&#123;keyWord&#125;,'%')</span><br><span class="line">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"time != null"</span>&gt;</span></span><br><span class="line">        and  gmt_created &lt;![CDATA[ &gt;= ]]&gt; #&#123;time&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<div class="title3" id="Mybatis-3-2">3.2 循环</div>
+
+<p>foreach标签</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 例1 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"[方法名]"</span> <span class="attr">parameterType</span>=<span class="string">"java.util.List"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">    INSERT INTO user (user_name, pwd, nick_name,avatar,gmt_created,gmt_modified)</span><br><span class="line">    VALUES</span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"it"</span> <span class="attr">index</span>=<span class="string">"index"</span> <span class="attr">separator</span> =<span class="string">","</span>&gt;</span></span><br><span class="line">        (#&#123;it.userName&#125;, #&#123;it.pwd&#125;, #&#123;it.nickName&#125;, #&#123;it.avatar&#125;,now(),now())</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 例2 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findByIds"</span> <span class="attr">resultMap</span>=<span class="string">"userResultMap"</span>&gt;</span></span><br><span class="line">    select * from user</span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">        id in</span><br><span class="line">        <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">item</span>=<span class="string">"item"</span> <span class="attr">index</span>=<span class="string">"index"</span> <span class="attr">collection</span>=<span class="string">"ids"</span></span></span><br><span class="line"><span class="tag">                    <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></span><br><span class="line">            #&#123;item&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>separator</code>是给每条记录添加的分隔符<br><code>index</code>是集合的索引值<br><code>open</code>和<code>close</code>是节点开始结束时自定义的分隔符</p>
+<div class="title2" id="Mybatis-4">四、MyBatis 分页</div>
+
+<hr>
+<p>通过第三方插件<code>pagehelper</code>来完成分页功能。</p>
+<blockquote>
+<p><code>pagehelper</code>的依赖</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>PageHelper.startPage(1, 3);</code>,第一个参数指定查询页数，第二个参数指定每页数目（从1开始而不是从0）。返回的是<code>Page</code>类型的对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> Paging&lt;UserDO&gt; <span class="title">getAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 设置当前页数为1，以及每页3条记录</span></span><br><span class="line">        Page&lt;UserDO&gt; page = PageHelper.startPage(<span class="number">1</span>, <span class="number">3</span>).doSelectPage(() -&gt; userDAO.findAll());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Paging&lt;&gt;(page.getPageNum(), page.getPageSize(), page.getPages(), page.getTotal(), page</span><br><span class="line">                .getResult());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里Paging是自制的分装类。</p>
+<hr>
+<div class="title2" id="Mybatis-ex">EX、文档</div>
+
+<p><a href="https://mybatis.org/mybatis-3/zh/dynamic-sql.html" target="_blank" rel="noopener">mybatis开发文档</a></p>
+<hr>
+<p>拓展.连接池,HikariCP(spring),<a href="https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter" target="_blank" rel="noopener">Druid(ali)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2021/03/29/Mybatis/" data-id="cl1665fb1003t4cgu33wdgrrv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-类加载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/23/java-%E7%B1%BB%E5%8A%A0%E8%BD%BD/" class="article-date">
+  <time datetime="2021-03-23T15:06:48.000Z" itemprop="datePublished">2021-03-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/23/java-%E7%B1%BB%E5%8A%A0%E8%BD%BD/">java-类加载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+
+<div class="name">by pawncs</div>
+
+<hr>
+<h2 id="类加载阶段"><a href="#类加载阶段" class="headerlink" title="类加载阶段"></a>类加载阶段</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> 加载(loading)</span><br><span class="line">  |</span><br><span class="line">  V</span><br><span class="line"> 连接(linking)（验证(verification)--&gt;准备(preparation)--&gt;解析(resolution)）</span><br><span class="line">  |</span><br><span class="line">  V</span><br><span class="line">初始化(initialization)</span><br><span class="line">  |</span><br><span class="line">  V </span><br><span class="line"> 使用 (using)</span><br><span class="line">  |</span><br><span class="line">  V</span><br><span class="line"> 卸载 (unloading)</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2021/03/23/java-%E7%B1%BB%E5%8A%A0%E8%BD%BD/" data-id="cl1665fab001n4cgu2yc5dsq4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-java-GC" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/03/20/java-GC/" class="article-date">
@@ -257,7 +1168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/20/java-GC/" data-id="ckwlqil0a001pls3n4goufops" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/20/java-GC/" data-id="cl1665fa500144cgu0o81145r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li></ul>
@@ -424,7 +1335,7 @@ FFFF
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/20/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/" data-id="ckwlqil0k002kls3n1jracgz6" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/20/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/" data-id="cl1665faj00284cguda924kne" class="article-share-link">Share</a>
       
       
     </footer>
@@ -628,7 +1539,7 @@ FFFF
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/09/%E5%B9%B6%E5%8F%91%E5%92%8C%E7%BA%BF%E7%A8%8B/" data-id="ckwlqil0o002vls3n6z67dao0" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/09/%E5%B9%B6%E5%8F%91%E5%92%8C%E7%BA%BF%E7%A8%8B/" data-id="cl1665faq002k4cgu1cvtex66" class="article-share-link">Share</a>
       
       
     </footer>
@@ -749,7 +1660,7 @@ FFFF
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="ckwlqil0v003hls3n5zg703bh" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cl1665fat002t4cgu3tiw0pvx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-Pattern/" rel="tag">Design Pattern</a></li></ul>
@@ -923,7 +1834,7 @@ FFFF
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/06/Stream-JAVA%E6%B5%81%E6%95%B0%E6%8D%AE/" data-id="ckwlqil010014ls3n9tf54cyt" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/06/Stream-JAVA%E6%B5%81%E6%95%B0%E6%8D%AE/" data-id="cl1665fa0000p4cgu85hjfhks" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1058,464 +1969,11 @@ FFFF
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/05/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="ckwlqikzp000dls3n5z2zed09" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/05/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="cl1665f9u000b4cgu53tpdivq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-CSS简单图形绘制" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/01/29/CSS%E7%AE%80%E5%8D%95%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6/" class="article-date">
-  <time datetime="2021-01-29T06:03:39.000Z" itemprop="datePublished">2021-01-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/01/29/CSS%E7%AE%80%E5%8D%95%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6/">CSS简单图形绘制</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <style>
-.title1{
-    font-size:36px;
-    color:#e7767f;
-    /* 桃红 */
-
-}
-.title2{
-    font-size:29px;
-    color:#176f58;
-    /* 祖母绿 */
-}
-.title3{
-    font-size:22px;
-    color:#21a675;
-    /* 石绿 */
-}
-.title4{
-    font-size:15px;
-    color:#a8cd34;
-    /* 柳绿 */
-}
-.name{
-
-    margin-left: auto;
-    text-align: right;
-    color: #d05667;
-    margin-right: 10px;
-    margin-top: 20px;
-    /*海棠红*/
-}
-
-.example1-1 {
-  width: 10px;
-  height: 1.5px;
-  background: #2F9842;
-  transform: rotate(45deg);
-  border-radius: 1.5px;
-  margin-top: 6.0113154173px;
-  margin-bottom:9.5px;
-  position: relative;
-  left: 7px;
-}
-.example1-1::before {
-  position: relative;
-  display: block;
-  content: "";
-  width: 10px;
-  height: 1.5px;
-  background: #2F9842;
-  transform: rotate(90deg);
-  border-radius: 1.5px;
-  left: 4.25px;
-  top: 4.25px;
-}
-.example1-1-2{
-    border: 10px solid;
-  border-top-color: #2F9842;
-  border-left-color: #4A4A4A;
-  border-right-color: yellow;
-  border-bottom-color: red;
-}
-
-</style>
-
-<div class="name">by pawncs</div>
-
-<hr>
-<div class="title2">一、简单符号</div>
-
-<hr>
-<div class="title3">1.1 箭头</div>
-
-<div class="example1-1"></div>
-<div class="example1-1"></div>
-<div class="example1-1"></div>
-<div >。，。</div>
-<div class="example1-1"></div>
-
-
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.img</span> &#123;</span><br><span class="line">      <span class="variable">$lineWidth</span>: <span class="number">1.5px</span>;</span><br><span class="line">      <span class="variable">$lineLong</span>: <span class="number">10px</span>;</span><br><span class="line"></span><br><span class="line">      &amp;<span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">        <span class="attribute">position</span>: relative;</span><br><span class="line">        <span class="attribute">display</span>: block;</span><br><span class="line">        <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">        <span class="attribute">width</span>: <span class="variable">$lineLong</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="variable">$lineWidth</span>;</span><br><span class="line">        <span class="attribute">background</span>: <span class="number">#2F9842</span>;</span><br><span class="line">        <span class="attribute">transform</span>: rotate(<span class="number">90deg</span>);</span><br><span class="line">        <span class="attribute">border-radius</span>: <span class="variable">$lineWidth</span>;</span><br><span class="line">        <span class="attribute">left</span>: -(<span class="variable">$lineWidth</span> - <span class="variable">$lineLong</span>)/<span class="number">2</span>;</span><br><span class="line">        <span class="attribute">top</span>: -(<span class="variable">$lineWidth</span> - <span class="variable">$lineLong</span>)/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="attribute">width</span>: <span class="variable">$lineLong</span>;</span><br><span class="line">      <span class="attribute">height</span>: <span class="variable">$lineWidth</span>;</span><br><span class="line">      <span class="attribute">background</span>: <span class="number">#2F9842</span>;</span><br><span class="line">      <span class="attribute">transform</span>: rotate(<span class="number">45deg</span>);</span><br><span class="line">      <span class="attribute">border-radius</span>: <span class="variable">$lineWidth</span>;</span><br><span class="line">      <span class="attribute">margin-top</span>: (<span class="variable">$lineLong</span> - <span class="variable">$lineWidth</span>)/<span class="number">1.414</span>;</span><br><span class="line">      <span class="attribute">margin-bottom</span>: (<span class="variable">$lineLong</span> - <span class="variable">$lineWidth</span>)/<span class="number">1.414</span>;</span><br><span class="line">      <span class="attribute">position</span>: relative;</span><br><span class="line">      <span class="attribute">left</span>: <span class="number">7px</span>;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>思路是先画出两个一模一样的矩形，再进行旋转拼凑出箭头。</li>
-<li>网上查过很多教程，大多采用边框画三角形的方式（border宽度等于块的宽度时几条边挤压在一起画出三角形），再用遮叠来画。如下图所示，然后更改各条边的颜色或透明度。</li>
-</ul>
-<div class="example1-1-2"></div>
-
-<blockquote>
-<p>然而这种方式并不能画出圆滑的线，在底图变化的情况下也不好用，所以采用上面的方式。</p>
-</blockquote>
-<hr>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/01/29/CSS%E7%AE%80%E5%8D%95%E5%9B%BE%E5%BD%A2%E7%BB%98%E5%88%B6/" data-id="ckwlqikzk0007ls3n86g2dcwu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-flutter学习" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/11/10/flutter%E5%AD%A6%E4%B9%A0/" class="article-date">
-  <time datetime="2020-11-10T01:22:29.000Z" itemprop="datePublished">2020-11-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/10/flutter%E5%AD%A6%E4%B9%A0/">flutter学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <style>
-.title1{
-    font-size:36px;
-    color:#e7767f;
-    /* 桃红 */
-
-}
-.title2{
-    font-size:29px;
-    color:#176f58;
-    /* 祖母绿 */
-}
-.title3{
-    font-size:22px;
-    color:#21a675;
-    /* 石绿 */
-}
-.title4{
-    font-size:15px;
-    color:#a8cd34;
-    /* 柳绿 */
-}
-.name{
-
-    margin-left: auto;
-    text-align: right;
-    color: #d05667;
-    margin-right: 10px;
-    margin-top: 20px;
-    /*海棠红*/
-}
-</style>
-
-<!-- ~~~
-制表符
-┏ ┳ ┓ ━ ╔ ╦ ╗ ═ ╒ ╤ ╕ 
-┣ ╋ ┫ ┃ ╠ ╬ ╣ ║ ╞ ╪ ╡
-┗ ┻ ┛   ╚ ╩ ╝   ╘ ╧ ╛
-
- ╱╲      ┄ ┄  ┅ ┅
-╱╱╲╲
-╲╲╱╱
- ╲╱      ┆ ┆  ┇ ┇ 
-~~~ -->
-
-<div class="name">by pawncs</div>
-
-<hr>
-<div class="title2">一、工具书</div>
-
-<hr>
-<p><a href="https://book.flutterchina.club/intro.html" target="_blank" rel="noopener">《Flutter实战》</a>  </p>
-<blockquote>
-<p>本书是第一本系统介绍Flutter技术的中文书籍，它是Flutter中文社区发起的开源项目之一，旨在帮助开发者入门，系统地、循序渐进的了解Flutter。</p>
-</blockquote>
-<p><a href="https://github.com/flutterchina/flutter-in-action/blob/master/_book/index.md" target="_blank" rel="noopener">《Flutter实战》</a>github地址</p>
-<hr>
-<div class="title2">二、教程</div>
-
-<hr>
-<p><a href="https://flutterchina.club/get-started/codelab/" target="_blank" rel="noopener">Flutter中文网</a><br>完整介绍Flutter开发过程</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2020/11/10/flutter%E5%AD%A6%E4%B9%A0/" data-id="ckwlqil020018ls3n8ri17p4e" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JAVA一些配置和依赖" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/10/25/JAVA%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BE%9D%E8%B5%96/" class="article-date">
-  <time datetime="2020-10-25T09:24:12.000Z" itemprop="datePublished">2020-10-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java-Web/">Java Web</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/25/JAVA%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BE%9D%E8%B5%96/">java数据库以及依赖等的配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <style>
-.title1{
-    font-size:36px;
-    color:#e7767f;
-    /* 桃红 */
-
-}
-.title2{
-    font-size:29px;
-    color:#176f58;
-    /* 祖母绿 */
-}
-.title3{
-    font-size:22px;
-    color:#21a675;
-    /* 石绿 */
-}
-.title4{
-    font-size:15px;
-    color:#a8cd34;
-    /* 柳绿 */
-}
-.name{
-
-    margin-left: auto;
-    text-align: right;
-    color: #d05667;
-    margin-right: 10px;
-    margin-top: 20px;
-    /*海棠红*/
-}
-</style>
-
-<div class="name">by pawncs</div>
-
-<hr>
-<div class="title2">一、数据库</div>
-
-<hr>
-<div class="title3">1.1 MYSQL</div>
-链接SQL：(YML)
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.datasource.driver-class-name</span>=<span class="string">……cj.……</span></span><br><span class="line"><span class="meta">spring.datasource.url</span>=<span class="string">jdbc:mysql://[地址]:[端口号]/database_name</span></span><br><span class="line"><span class="comment"># database_name为数据库名</span></span><br><span class="line"><span class="meta">spring.datasource.username</span>=<span class="string">[用户名]</span></span><br><span class="line"><span class="meta">spring.datasource.password</span>=<span class="string">[密码]</span></span><br><span class="line"><span class="comment"># 上面是mysql的配置</span></span><br></pre></td></tr></table></figure>
-JPA
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jpa:</span></span><br><span class="line"><span class="attr">hibernate:</span></span><br><span class="line"><span class="string">ddl-auto:create(或update)</span></span><br><span class="line"><span class="string">show-sql:true</span></span><br></pre></td></tr></table></figure>
-Spring DATA MYSQL配置(XML)  
-    先加依赖。  `spring-boot-starter-data-jpa
-mysql-connector-java`
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--mybatis配置(XML)--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<div class="title3">1.2 MongoDB</div>
-
-<p>连接MongoDB(proerties)</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 购买的云服务器的公网 IP</span></span><br><span class="line"><span class="meta">spring.data.mongodb.host</span>=<span class="string">xxx.xxx.xxx.xxx</span></span><br><span class="line"><span class="comment"># MongoDB 服务的端口号</span></span><br><span class="line"><span class="meta">spring.data.mongodb.port</span>=<span class="string">27017</span></span><br><span class="line"><span class="comment"># 创建的数据库及用户名和密码</span></span><br><span class="line"><span class="meta">spring.data.mongodb.database</span>=<span class="string">practice</span></span><br><span class="line"><span class="meta">spring.data.mongodb.username</span>=<span class="string">pppp</span></span><br><span class="line"><span class="meta">spring.data.mongodb.password</span>=<span class="string">111aaa</span></span><br></pre></td></tr></table></figure>
-<p>spring data mongoDB 配置（XML）</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-mongodb<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<hr>
-<div class="title2">二、其他依赖</div>
-
-<hr>
-<p>Thymeleaf:(XML)<br>添加 Thymeleaf 框架，打开 pom.xml 文件，添加以下的依赖，<br>    添加后选 择 maven 的 auto import </p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	 <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-devtools<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>spring使用AOP(XML)<br>使用AOP，添加依赖<br><code>spring-boot-starter-aop</code>(不加版本号)</p>
-<p>spring session支持（XML）</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.session<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-session-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>Netty框架（XML）？？</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.netty<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>netty-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.38.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>Okhttp3库（XML）</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.squareup.okhttp3<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>okhttp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>fastjson依赖（XML）</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.62<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>easyexcel依赖（XML）</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>easyexcel<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>lombok依赖（XML）</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span>  </span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  </span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>   </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>JavaMail依赖 （XML）</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.mail<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mail<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>Kumo依赖（XML）（词云）</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.kennycason<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>kumo-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 下面tokenizers是为了中文分词引入 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.kennycason<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>kumo-tokenizers<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2020/10/25/JAVA%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E5%92%8C%E4%BE%9D%E8%B5%96/" data-id="ckwlqikzn000als3nemz8afvc" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-爬虫注意点" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/10/25/%E7%88%AC%E8%99%AB%E6%B3%A8%E6%84%8F%E7%82%B9/" class="article-date">
-  <time datetime="2020-10-25T09:16:05.000Z" itemprop="datePublished">2020-10-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java-Web/">Java Web</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/25/%E7%88%AC%E8%99%AB%E6%B3%A8%E6%84%8F%E7%82%B9/">爬虫注意点</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <style>
-.title1{
-    font-size:36px;
-    color:#e7767f;
-    /* 桃红 */
-
-}
-.title2{
-    font-size:29px;
-    color:#176f58;
-    /* 祖母绿 */
-}
-.title3{
-    font-size:22px;
-    color:#21a675;
-    /* 石绿 */
-}
-.title4{
-    font-size:15px;
-    color:#a8cd34;
-    /* 柳绿 */
-}
-.name{
-
-    margin-left: auto;
-    text-align: right;
-    color: #d05667;
-    margin-right: 10px;
-    margin-top: 20px;
-    /*海棠红*/
-}
-</style>
-
-<!-- ~~~
-制表符
-┏ ┳ ┓ ━ ╔ ╦ ╗ ═ ╒ ╤ ╕ 
-┣ ╋ ┫ ┃ ╠ ╬ ╣ ║ ╞ ╪ ╡
-┗ ┻ ┛   ╚ ╩ ╝   ╘ ╧ ╛
-
- ╱╲      ┄ ┄  ┅ ┅
-╱╱╲╲
-╲╲╱╱
- ╲╱      ┆ ┆  ┇ ┇ 
-~~~ -->
-
-<div class="name">by pawncs</div>
-
-<hr>
-<div class="title2">一、Header</div>
-
-<p>保证四个header和直接访问该网址的相同</p>
-<ul>
-<li>User-Agent</li>
-<li>Referer</li>
-<li>Host</li>
-<li>Cookie</li>
-</ul>
-<hr>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2020/10/25/%E7%88%AC%E8%99%AB%E6%B3%A8%E6%84%8F%E7%82%B9/" data-id="ckwlqil0r0036ls3n0fgohqrj" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -1548,7 +2006,7 @@ mysql-connector-java`
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/" rel="tag">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/" rel="tag">IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/" rel="tag">REST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/" rel="tag">RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Realm/" rel="tag">Realm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SCSS/" rel="tag">SCSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/" rel="tag">SQLite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/" rel="tag">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/" rel="tag">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/note/" rel="tag">note</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/" rel="tag">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/" rel="tag">IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/" rel="tag">REST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/" rel="tag">RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Realm/" rel="tag">Realm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SCSS/" rel="tag">SCSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/" rel="tag">SQLite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThreadPool/" rel="tag">ThreadPool</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/" rel="tag">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/" rel="tag">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/note/" rel="tag">note</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study/" rel="tag">study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
     </div>
   </div>
 
@@ -1558,7 +2016,7 @@ mysql-connector-java`
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/IO/" style="font-size: 12.5px;">IO</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MongoDB/" style="font-size: 12.5px;">MongoDB</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SCSS/" style="font-size: 10px;">SCSS</a> <a href="/tags/SQLite/" style="font-size: 10px;">SQLite</a> <a href="/tags/dictionary/" style="font-size: 20px;">dictionary</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/note/" style="font-size: 17.5px;">note</a> <a href="/tags/study/" style="font-size: 15px;">study</a>
+      <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/IO/" style="font-size: 12.5px;">IO</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MongoDB/" style="font-size: 12.5px;">MongoDB</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SCSS/" style="font-size: 10px;">SCSS</a> <a href="/tags/SQLite/" style="font-size: 10px;">SQLite</a> <a href="/tags/ThreadPool/" style="font-size: 10px;">ThreadPool</a> <a href="/tags/dictionary/" style="font-size: 20px;">dictionary</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/note/" style="font-size: 17.5px;">note</a> <a href="/tags/study/" style="font-size: 15px;">study</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
     </div>
   </div>
 
@@ -1567,7 +2025,7 @@ mysql-connector-java`
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
     </div>
   </div>
 
@@ -1580,23 +2038,23 @@ mysql-connector-java`
       <ul>
         
           <li>
+            <a href="/2022/03/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A6%82%E8%A7%88/">线程池概览</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A6%82%E8%A7%88/">线程池概览</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/02/git%E6%89%8B%E5%86%8C%E6%A6%82%E8%A7%88/">git手册概览</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/07/vue/">vue</a>
+          </li>
+        
+          <li>
             <a href="/2021/11/30/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2021/09/03/Restful%E9%A3%8E%E6%A0%BC/">Restful风格</a>
-          </li>
-        
-          <li>
-            <a href="/2021/08/18/kafka/">kafka 初探</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/23/%E5%86%85%E6%A0%B8%E6%80%81%E4%B8%8E%E7%94%A8%E6%88%B7%E6%80%81/">内核态与用户态</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/19/java-io-2/">java_io_2</a>
           </li>
         
       </ul>
@@ -1611,7 +2069,7 @@ mysql-connector-java`
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2021 pawncs<br>
+      &copy; 2022 pawncs<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

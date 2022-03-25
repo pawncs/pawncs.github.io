@@ -68,6 +68,453 @@
       <div class="outer">
         <section id="main">
   
+    <article id="clone-oa-system遇到的问题" class="article article-type-clone" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/16/oa-system%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+  <time datetime="2020-07-16T09:20:19.000Z" itemprop="datePublished">2020-07-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java-Web/">Java Web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/16/oa-system%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">oa_system遇到的问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+</style>
+
+<p><a href="https://gitee.com/aaluoxiang/oa_system" target="_blank" rel="noopener">oasys:办公自动化项目地址</a></p>
+<div class="title3">前言</div>
+
+<p>在将该项目clone到本地后，发现无法运行。在搜索引擎和朋友的帮助下，做出以下措施。</p>
+<div class="title4">增加Maven镜像地址：增加下载速度</div>
+
+<p>在maven的安装目录下找到settings.xml文件。</p>
+<blockquote>
+<p>D:\maven\apache-maven-3.6.3-bin\apache-maven-3.6.3\conf</p>
+</blockquote>
+<p>然后在其<code>&lt;mirrors&gt;</code>标签内添加阿里镜像</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>下载速度和飞一样<br>mvn -U idea:idea</p>
+</blockquote>
+<div class="title4">解决plugin飘红</div>
+
+<p>在解决了这个问题后，仍然存在plugin中存在红色。经过百度后查得，需要在控制台中输入一下<code>mvn -U idea:idea</code>来解决</p>
+<div class="title4">数据库</div>
+
+<p>修改application.properties为自己的数据库</p>
+<p>再运行SQL语句</p>
+<p>此时就可以启动项目了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/07/16/oa-system%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" data-id="cl1665fac001q4cguah1f8b6c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/note/" rel="tag">note</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Session的简单使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/14/Session%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2020-07-14T10:24:05.000Z" itemprop="datePublished">2020-07-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java-Web/">Java Web</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/14/Session%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/">Session和简易登录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+</style>
+
+<div class="title3">关于获取Session</div>
+
+<p>读和写Session分别借助了HttpServletRequest类和HttpServletResponse类。在控制类中添加其为参数，Spring会自动导入。<br>其中获得session为<code>request.getSession()</code>。</p>
+<div class="title3">关于修改Session内容</div>
+
+<p>获得Session的内容用<code>getAttribute</code>,显然修改内容用的是<code>setAttribute</code>。这里放入Seesion的为对象，则其要求可序列化，即继承了<code>Serializable</code>接口。</p>
+<div class="title4">简易登录界面</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// com.pawncs.fourth.control.IndexController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"index"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">index</span><span class="params">(ModelAndView modelAndView,HttpServletRequest request)</span></span>&#123;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        UserLoginInfo userLoginInfo = (UserLoginInfo) session.getAttribute(<span class="string">"userLoginInfo"</span>);</span><br><span class="line">        <span class="keyword">if</span>(userLoginInfo == <span class="keyword">null</span>)&#123;</span><br><span class="line">            modelAndView.setViewName(<span class="string">"login"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            modelAndView.setViewName(<span class="string">"index"</span>);</span><br><span class="line">            modelAndView.addObject(userLoginInfo);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> modelAndView;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//这里login和index都用了freemaker模板，其为模板名。</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"login"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map <span class="title">login</span><span class="params">(@RequestParam(<span class="string">"username"</span>)</span>String username,</span></span><br><span class="line"><span class="function">                     @<span class="title">RequestParam</span><span class="params">(<span class="string">"password"</span>)</span>String password,</span></span><br><span class="line"><span class="function">                     HttpServletRequest request,</span></span><br><span class="line"><span class="function">                     HttpServletResponse response)</span>&#123;</span><br><span class="line">        Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        UserLoginInfo userLoginInfo = <span class="keyword">new</span> UserLoginInfo();</span><br><span class="line">        userLoginInfo.setUserId(session.getId());</span><br><span class="line">        userLoginInfo.setUserName(username);</span><br><span class="line"></span><br><span class="line">        session.setAttribute(<span class="string">"userLoginInfo"</span>,userLoginInfo);</span><br><span class="line">        map.put(<span class="string">"code"</span>,<span class="string">"200"</span>);</span><br><span class="line">        map.put(<span class="string">"message"</span>,<span class="string">"登录成功"</span>);</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于freemaker的配置还是要说一下，自己总是忘。在导包导完后，还要在application.yml里写入freemaker的配置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># application.yml</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">freemarker:</span></span><br><span class="line">    <span class="attr">suffix:</span> <span class="string">.ftl</span>                    <span class="comment"># 设置模板后缀名</span></span><br><span class="line">    <span class="attr">content-type:</span> <span class="string">text/html</span>                      <span class="comment"># 设置文档类型</span></span><br><span class="line">    <span class="attr">charset:</span> <span class="string">UTF-8</span>                               <span class="comment"># 设置页面编码格式</span></span><br><span class="line">    <span class="attr">cache:</span> <span class="literal">false</span>                                 <span class="comment"># 设置页面缓存</span></span><br><span class="line">    <span class="attr">template-loader-path:</span> <span class="string">classpath:/templates</span>   <span class="comment"># 设置ftl文件路径</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/07/14/Session%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/" data-id="cl1665f9x000h4cgu466v3l18" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/note/" rel="tag">note</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于安卓的打包" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/12/%E5%85%B3%E4%BA%8E%E5%AE%89%E5%8D%93%E7%9A%84%E6%89%93%E5%8C%85/" class="article-date">
+  <time datetime="2020-07-12T06:57:27.000Z" itemprop="datePublished">2020-07-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/12/%E5%85%B3%E4%BA%8E%E5%AE%89%E5%8D%93%E7%9A%84%E6%89%93%E5%8C%85/">关于安卓的打包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+</style>
+<div class="title3">当不想在生成包时再检查错误时。。。</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">    <span class="comment">// 其他</span></span><br><span class="line">    lintOptions &#123;</span><br><span class="line">        checkReleaseBuilds <span class="keyword">false</span></span><br><span class="line">        abortOnError <span class="keyword">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<div class="title3">修改版本号</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">    <span class="comment">// 其他</span></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        applicationId <span class="string">"com.pawncs.[appName]"</span>   <span class="comment">//包名</span></span><br><span class="line">        minSdkVersion <span class="number">15</span></span><br><span class="line">        targetSdkVersion <span class="number">29</span></span><br><span class="line">        versionCode <span class="number">1</span>   <span class="comment">//大版本</span></span><br><span class="line">        versionName <span class="string">"1.1"</span>  <span class="comment">//小版本</span></span><br><span class="line">        testInstrumentationRunner <span class="string">"androidx.test.runner.AndroidJUnitRunner"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="title3">指定生成的apk名</div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">    <span class="comment">// 其他</span></span><br><span class="line">    android.applicationVariants.all &#123;</span><br><span class="line">        variant -&gt;</span><br><span class="line">            variant.outputs.all &#123;</span><br><span class="line">                <span class="comment">// 此处指定生成的apk文件名</span></span><br><span class="line">                outputFileName = <span class="string">"PK.apk"</span></span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/07/12/%E5%85%B3%E4%BA%8E%E5%AE%89%E5%8D%93%E7%9A%84%E6%89%93%E5%8C%85/" data-id="cl1665fai00244cgu81ldg79z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/note/" rel="tag">note</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-有关命令行的那些事儿" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/07/%E6%9C%89%E5%85%B3%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/" class="article-date">
+  <time datetime="2020-07-07T09:28:59.000Z" itemprop="datePublished">2020-07-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/07/%E6%9C%89%E5%85%B3%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/">命令行相关</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title3">常见的Linux命令</div>
+
+<blockquote>
+<p>时刻注意自己的路径</p>
+</blockquote>
+<ul>
+<li>查看当前目录<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>若要包括隐藏文件，则使用：<code>ls -a</code></p>
+</blockquote>
+</li>
+<li>当前目录创建文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch 文件</span><br></pre></td></tr></table></figure></li>
+<li>当前目录修改文件(i修改，ZZ保存退出)<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi 文件</span><br></pre></td></tr></table></figure></li>
+<li>当前目录创建文件夹<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> 文件夹</span><br></pre></td></tr></table></figure></li>
+<li>进入某文件夹<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd 文件目录</span><br></pre></td></tr></table></figure></li>
+<li>删除当前目录制定文件(<span style="color:red">慎用</span>)<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf 文件</span><br></pre></td></tr></table></figure></li>
+<li>查看所有java进程<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep java</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<div class="title3">有关git</div>
+<div class="title4">全局配置</div>
+
+<blockquote>
+<p>仓库地址在仓库中获取（ssh）</p>
+</blockquote>
+<ul>
+<li><p>告诉git你是谁</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name "your_name"</span><br></pre></td></tr></table></figure></li>
+<li><p>告诉git你的邮箱</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email "your_email@example.com"</span><br></pre></td></tr></table></figure>
+<div class="title4">clone</div>
+</li>
+<li><p>git clone(将github上的仓库下载到本地)</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone 仓库地址</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>仓库地址在仓库中获取（ssh）</p>
+</blockquote>
+<div class="title4">绑定本地仓库到github上</div>
+</li>
+<li><p>初始化仓库</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></li>
+<li><p>设置远程地址(将本地仓库绑定到远程仓库)</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 仓库地址</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>一般在空仓库页面复制命令。（可用git remote -v 查看已有地址）</p>
+</blockquote>
+<div class="title4">Git提交三部曲</div>
+</li>
+<li><p>git add</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -A</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>git add .</code>命令效果与之前相同，此处<code>-A</code>指all.</p>
+</blockquote>
+</li>
+<li><p>git commit</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m "本次提交的修改备注"</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用<code>git commit -am &quot;本次修改备注&quot;</code>来合并之前的步骤</p>
+</blockquote>
+</li>
+<li><p>git push</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push oringin master</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第一次提交到本分支，<code>origin</code>是远程仓库默认名称，<code>master</code>是分支名称<br>第2-n次提交到相同分支时，可简化为<code>git push</code>;同时，若仓库和本地不一致，应先执行<code>git pull</code></p>
+</blockquote>
+<div class="title4">Git分支</div>
+</li>
+<li><p>新建分支</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure></li>
+<li><p>切换到新的分支</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>合并使用<code>git checkout -b 分支名</code></p>
+</blockquote>
+</li>
+<li><p>合并分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout Branch-A</span><br><span class="line">git rebase Branch-B</span><br></pre></td></tr></table></figure>
+<div class="title4">Git回退</div>
+</li>
+<li><p>git reset</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git log    [查看commit记录]</span><br><span class="line">//这个<span class="number">3628164</span> 是一个commit版本号，可以指定回退到那个版本</span><br><span class="line">git reset --hard <span class="number">3628164</span> </span><br><span class="line">&lt;!-- 这里可以用git reset --hard HEAD^的方式 回到上个版本--&gt;</span><br><span class="line"></span><br><span class="line">//或者可以查看提交记录</span><br><span class="line">git reflog [查看本地会影响HEAD指针的命令操作记录，这个不会同步到远程仓库]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>按Q退出历史记录</p>
+</blockquote>
+</li>
+</ul>
+<div class="title4">Git提交忽略文件</div>
+
+<blockquote>
+<p>在.gitignore文件中写入需要忽略的文件就可以了</p>
+</blockquote>
+<hr>
+<div class="title3">有关ssh</div>
+
+<ul>
+<li>查看SSH内容（可以检查是否生成了本地SSH）<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure></li>
+<li>生成本地SSH<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b <span class="number">4096</span> -C "your_email@example.com"</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<div class="title3">有关hexo</div>
+
+<ul>
+<li><p>创建博客文件夹</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>blog处可替换为其他文件夹名称</p>
+</blockquote>
+</li>
+<li><p>安装发布工具</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>需要先进入博客目录</p>
+</blockquote>
+</li>
+<li><p>hexo的提交</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>三个命令分别是：清除缓存，生成新的静态文件，发布。<br>需要先修改config文件</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&gt;deploy:</span></span><br><span class="line"></span><br><span class="line"> <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line"></span><br><span class="line"> <span class="attr">repository:</span> <span class="string">你的GitHub仓库地址</span></span><br><span class="line"></span><br><span class="line"> <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></blockquote>
+</li>
+<li><p>创建新博客</p>
+<pre><code>hexo new 博客名</code></pre><blockquote>
+<p>提交就是<code>hexo的提交</code>章节</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<p><img src="https://qgt-style.oss-cn-hangzhou.aliyuncs.com/newcoursep4/g1/g1-2-2/tenor.gif" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2020/07/07/%E6%9C%89%E5%85%B3%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/" data-id="cl1665fap002f4cgu2j6k49ks" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-简易报名系统总结-BOBO" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/07/%E7%AE%80%E6%98%93%E6%8A%A5%E5%90%8D%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93-BOBO/" class="article-date">
@@ -257,7 +704,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2020/07/07/%E7%AE%80%E6%98%93%E6%8A%A5%E5%90%8D%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93-BOBO/" data-id="ckwlqil0u003dls3ne80z5vlo" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2020/07/07/%E7%AE%80%E6%98%93%E6%8A%A5%E5%90%8D%E7%B3%BB%E7%BB%9F%E6%80%BB%E7%BB%93-BOBO/" data-id="cl1665fbf004e4cgug4l31q7i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/note/" rel="tag">note</a></li></ul>
@@ -294,7 +741,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/" rel="tag">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/" rel="tag">IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/" rel="tag">REST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/" rel="tag">RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Realm/" rel="tag">Realm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SCSS/" rel="tag">SCSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/" rel="tag">SQLite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/" rel="tag">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/" rel="tag">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/note/" rel="tag">note</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study/" rel="tag">study</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/" rel="tag">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/" rel="tag">IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/" rel="tag">REST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/" rel="tag">RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Realm/" rel="tag">Realm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SCSS/" rel="tag">SCSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/" rel="tag">SQLite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThreadPool/" rel="tag">ThreadPool</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/" rel="tag">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/" rel="tag">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/note/" rel="tag">note</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study/" rel="tag">study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
     </div>
   </div>
 
@@ -304,7 +751,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/IO/" style="font-size: 12.5px;">IO</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MongoDB/" style="font-size: 12.5px;">MongoDB</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SCSS/" style="font-size: 10px;">SCSS</a> <a href="/tags/SQLite/" style="font-size: 10px;">SQLite</a> <a href="/tags/dictionary/" style="font-size: 20px;">dictionary</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/note/" style="font-size: 17.5px;">note</a> <a href="/tags/study/" style="font-size: 15px;">study</a>
+      <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/IO/" style="font-size: 12.5px;">IO</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MongoDB/" style="font-size: 12.5px;">MongoDB</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SCSS/" style="font-size: 10px;">SCSS</a> <a href="/tags/SQLite/" style="font-size: 10px;">SQLite</a> <a href="/tags/ThreadPool/" style="font-size: 10px;">ThreadPool</a> <a href="/tags/dictionary/" style="font-size: 20px;">dictionary</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/note/" style="font-size: 17.5px;">note</a> <a href="/tags/study/" style="font-size: 15px;">study</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
     </div>
   </div>
 
@@ -313,7 +760,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
     </div>
   </div>
 
@@ -326,23 +773,23 @@
       <ul>
         
           <li>
+            <a href="/2022/03/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A6%82%E8%A7%88/">线程池概览</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A6%82%E8%A7%88/">线程池概览</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/02/git%E6%89%8B%E5%86%8C%E6%A6%82%E8%A7%88/">git手册概览</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/07/vue/">vue</a>
+          </li>
+        
+          <li>
             <a href="/2021/11/30/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2021/09/03/Restful%E9%A3%8E%E6%A0%BC/">Restful风格</a>
-          </li>
-        
-          <li>
-            <a href="/2021/08/18/kafka/">kafka 初探</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/23/%E5%86%85%E6%A0%B8%E6%80%81%E4%B8%8E%E7%94%A8%E6%88%B7%E6%80%81/">内核态与用户态</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/19/java-io-2/">java_io_2</a>
           </li>
         
       </ul>
@@ -357,7 +804,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2021 pawncs<br>
+      &copy; 2022 pawncs<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
