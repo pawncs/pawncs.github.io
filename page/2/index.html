@@ -68,692 +68,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-http协议" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/07/07/http%E5%8D%8F%E8%AE%AE/" class="article-date">
-  <time datetime="2021-07-07T04:02:36.000Z" itemprop="datePublished">2021-07-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/network/">network</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/07/http%E5%8D%8F%E8%AE%AE/">http协议</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <style>
-.title1{
-    font-size:36px;
-    color:#e7767f;
-    /* 桃红 */
-
-}
-.title2{
-    font-size:29px;
-    color:#176f58;
-    /* 祖母绿 */
-}
-.title3{
-    font-size:22px;
-    color:#21a675;
-    /* 石绿 */
-}
-.title4{
-    font-size:15px;
-    color:#a8cd34;
-    /* 柳绿 */
-}
-.name{
-
-    margin-left: auto;
-    text-align: right;
-    color: #d05667;
-    margin-right: 10px;
-    margin-top: 20px;
-    /*海棠红*/
-}
-</style>
-
-<div class="name">by pawncs</div>
-
-<hr>
-<div class="title2">零、目录</div>
-
-<hr>
-<p><a href="#http-1">一、web和网络基础</a><br><a href="#http-1-1">1.1 http版本区别</a><br><a href="#http-1-2">1.2 tcp/ip协议族</a><br><a href="#http-1-3">1.3 与http密切相关的ip,tcp,dns</a><br><a href="#http-1-4">1.4 url,uri</a>  </p>
-<p><a href="#http-2">二、简单的http协议</a><br><a href="#http-2-1">2.1 请求报文、响应报文</a><br><a href="#http-2-2">2.2 请求方法</a><br><a href="#http-2-3">2.3 持久连接</a>  </p>
-<p><a href="#http-3">三、http报文内的http信息（未完成）</a><br><a href="#http-3-1">3.1 首部字段</a><br><a href="#http-3-2">3.2 压缩传输编码、分块传输编码</a><br><a href="#http-3-3">3.3 发送多种数据的多部分对象集合</a><br><a href="#http-3-1">3.4 范围请求</a><br><a href="#http-3-2">3.5 内容协商</a>  </p>
-<p><a href="#http-4">四、http状态码</a><br><a href="#http-4-1">4.1 代表性状态码</a><br><a href="#http-4-2">4.2 状态码详解</a>  </p>
-<p><a href="#http-5">五、与http协作的web服务器</a><br><a href="#http-5-1">5.1 单台虚拟主机实现多个域名</a><br><a href="#http-5-2">5.2 通信数据转发程序：代理、网关、隧道</a>  </p>
-<p><a href="#http-6">六、http首部</a><br><a href="#http-6-1">6.1 http首部字段概况</a><br><a href="#http-6-2">6.2 http首部字段详细</a>  </p>
-<p><a href="#http-7">七、https</a>  </p>
-<p><a href="#http-8">八、用户身份认证</a><br><a href ="#http-8-1" >8.1 BASIC 认证</a><br><a href ="#http-8-2">8.2 DIGEST 认证</a><br><a href ="#http-8-3">8.3 SSL 客户端认证</a><br><a href ="#http-8-4">8.4 基于表单认证</a>   </p>
-<p><a href="#http-9">九、基于http的功能追加协议</a>  </p>
-<p><a href="#http-10">十、构建web内容的技术</a>  </p>
-<p><a href="#http-11">十一、web的攻击技术</a><br><a href ="#http-11-1" >11.1 因输出值转义不完全引发的安全漏洞</a><br><a href ="#http-11-2" >11.2 因设置或设计上的缺陷引发的安全漏洞</a><br><a href ="#http-11-3" >11.3 因会话管理疏忽引发的安全漏洞</a><br><a href ="#http-11-4" >11.4 其它安全漏洞</a>  </p>
-<p><a href="#http-ex">EX、额外</a></p>
-<hr>
-<hr>
-<div id ="http-1" class="title2">一、web和网络基础</div>
-
-<hr>
-<blockquote>
-<p>http(HyperText Transfer Protocol):超文本传输协议</p>
-</blockquote>
-<p>web使用其作为规范，完成从客户端到服务端等一系列运作过程。</p>
-<div id="http-1-1" class="title3">1.1 http版本区别</div>
-
-<ul>
-<li>http0.9：正式版本之前的版本的意思</li>
-<li>http1.0：正式版本</li>
-<li>http1.1：主流版本（<a href="#http-2-3">持久连接</a>）</li>
-<li>http2.0：升级版（<a href="#http-9">改善速度体验</a>）<div id="http-1-2" class="title3">1.2 TCP/IP协议族</div>
-
-</li>
-</ul>
-<blockquote>
-<p>具体可阅读《详解TCP/IP》  </p>
-</blockquote>
-<p>分层：</p>
-<ul>
-<li>应用层<ul>
-<li>其决定了向用户提供应用服务时通信的活动</li>
-<li>FTP（file transfer protocol,文件传输协议）,DNS（domain name system,域名系统）,HTTP</li>
-</ul>
-</li>
-<li>传输层<ul>
-<li>其为上层提供处于网络连接中的两台计算机之间的数据传输</li>
-<li>TCP（transmission control protocol，传输控制协议）,UDP（user data protocol，用户数据报协议）</li>
-</ul>
-</li>
-<li>网络层<ul>
-<li>其用于处理网络上流动的数据包，该层规定了通过了路径到达对方的计算机（选择路径）</li>
-</ul>
-</li>
-<li>链路层<ul>
-<li>用于处理连接网络的硬件部分，包括控制操作系统、设备驱动、NIC（网卡），光纤</li>
-</ul>
-</li>
-</ul>
-<div id="http-1-3" class="title3">1.3 与HTTP密切相关的IP,TCP,DNS</div>
-
-<div class="title4">IP</div>
-
-<p>其作用为把数据包传送给对方。为此需要得知IP地址和MAC地址。IP地址指明了节点被分配到的地址，MAC指明了网卡所知的固定地址。</p>
-<ul>
-<li>IP间的通信依赖MAC地址，通常通过ARP协议来搜寻中转目标。（ARP协议根据通信方IP地址反查对应的MAC地址）</li>
-<li>没人能全面掌握互联网中的传输状况；路由选择机制。<div class="title4">TCP</div>
-
-</li>
-</ul>
-<p>三次握手，四次挥手。SYN，ACK。</p>
-<p>TCP确保可靠性。</p>
-<div class="title4">DNS</div>
-
-<p>负责域名解析。提供了域名到IP地址的解析服务。</p>
-<div id="http-1-4" class="title3">1.4 URL,URI</div>
-
-<blockquote>
-<p>url(uniform resource locator:统一资源定位符)<br>uri(uniform resource identifier:统一资源标识符)</p>
-</blockquote>
-<p>uri用字符串标识某一互联网资源，url表示资源的地点。url是uri的子集。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">RFC3986：URI例子</span><br><span class="line"></span><br><span class="line">ftp:&#x2F;&#x2F;ftp.xx.xx.xx&#x2F;xxx&#x2F;xxxx.txt</span><br><span class="line">http:&#x2F;&#x2F;www.xxx.xx&#x2F;xxx&#x2F;xxx.txt</span><br><span class="line">tel:+1-816-555-1212</span><br><span class="line">telnet:&#x2F;&#x2F;192.9.2.16:80&#x2F;</span><br><span class="line">……</span><br><span class="line">等。</span><br></pre></td></tr></table></figure>
-<p>绝对URI格式：<br>[协议方案名]://[登录信息]@[服务器地址]:[服务器端口号]/[带层次的文件路径]?[查询字符串]#[片段标识符]</p>
-<ul>
-<li>协议方案名也可为数据方案名或者脚本方案名（data:,javascript:）</li>
-</ul>
-<hr>
-<hr>
-<div id ="http-2" class="title2">二、简单的http协议</div>
-
-<hr>
-<div id ="http-2-1" class="title3">2.1 请求报文、响应报文</div>
-
-<ul>
-<li><p>请求报文：<br>请求方法(get)、请求URI、协议版本(http/1.1)、请求首部字段(request field)、内容实体</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/index</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: xxxx.xx</span><br><span class="line"><span class="attribute">Connection</span>: keep-alive</span><br><span class="line"><span class="attribute">Content-type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Content-Length</span>: 16</span><br><span class="line"></span><br><span class="line">name=ueno&amp;age=37</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>请求头和内容实体由空行分隔  </p>
-</blockquote>
-</li>
-<li><p>响应报文:<br>服务器对应HTTP版本（http/1.1）、状态码和原因短语(200 OK)，首部字段(head field)，空行分隔，资源实体的主体</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Http/1.1 200 OK</span><br><span class="line"><span class="attribute">Date</span>: Tue,10 Jul 2012 06:50:15 GMT</span><br><span class="line"><span class="attribute">Content-Length</span>: 362</span><br><span class="line"><span class="attribute">Content-Type</span>: text/html</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">……</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<div id ="http-2-2" class="title3">2.2 请求方法</div>
-</li>
-<li><p>GET：获取资源  </p>
-<ul>
-<li>返回URI对应的资源</li>
-</ul>
-</li>
-<li><p>POST：传输实体主体  </p>
-<ul>
-<li>虽然可以用GET方法传输，但一般不那么做  </li>
-<li>POST的主要目的不是为了获得响应的主体内容</li>
-</ul>
-</li>
-<li><p>PUT：传输文件  </p>
-<ul>
-<li>如同FTP协议的文件上传，其要求报文的主体包含文件内容，保存到请求URI指定的位置</li>
-<li>由于HTTP/1.1自身不带验证机制，所以WEB网站一般不使用该方法，若配合web应用程序验证机制或架构为REST等，则可能开放PUT</li>
-</ul>
-</li>
-<li><p>HEAD：获得报文首部  </p>
-<ul>
-<li>和GET相同，但不返回报文主体。用于确认URI有效性及资源更新的日期时间等。</li>
-</ul>
-</li>
-<li><p>DELETE：删除文件  </p>
-<ul>
-<li>用法和PUT相反。</li>
-<li>和PUT一样，由于http/1.1自身不带验证机制，因此一般也不使用，若配合web应用程序的验证机制，或遵守REST标准还是可能开放使用的</li>
-</ul>
-</li>
-<li><p>OPTIONS：询问支持的方法  </p>
-<ul>
-<li>用于查询针对请求URI指定的资源支持的方法</li>
-</ul>
-</li>
-<li><p>TRACE：追踪路径  </p>
-<ul>
-<li>让web服务器将之前的请求通信返回给客户端</li>
-<li>具体流程：在Max-forwards首部字段填入数值，每过一个服务器端就将该数字减1，数值为0时停止传输，最后接收到请求的服务器端返回状态码200 OK的响应</li>
-<li>客户端通过Trace方法可以查询发送出去的请求是如何被加工、篡改的。TRACE方法用于确认连接过程中发生的一系列操作。</li>
-<li>TRACE方法本身不常用，加上容易引起XST攻击（Cross-site tracing，跨站追踪），就更不会用到了。</li>
-</ul>
-</li>
-<li><p>CONNECT：要求用隧道协议连接代理</p>
-<ul>
-<li>要求在与代理服务器通信时建立隧道，实现用隧道协议进行TCP通信。</li>
-<li>主要使用 SSL和TLS协议把通信内容加密后经网络隧道传输。</li>
-<li>格式：<code>CONNECT 代理服务器名：端口号 HTTP版本</code></li>
-<li><a href="#http-5-2">隧道</a></li>
-</ul>
-</li>
-</ul>
-<div id ="http-2-3" class="title3">2.3 持久连接</div>
-
-<p>http初始版本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">建立TCP连接</span><br><span class="line">HTTP请求、响应（获取html文档）</span><br><span class="line">断开TCP连接</span><br><span class="line"></span><br><span class="line">建立TCP连接</span><br><span class="line">HTTP请求、响应（获取图片）</span><br><span class="line">断开TCP连接</span><br><span class="line"></span><br><span class="line">建立TCP连接</span><br><span class="line">HTTP请求、响应（获取图片）</span><br><span class="line">断开TCP连接</span><br></pre></td></tr></table></figure>
-
-<p>http/1.1和一部分1.0提出了持久连接（http keep-alive）（任意一方未提出断开连接则一直保持连接）  </p>
-<ul>
-<li>持久连接：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-------SYN--------&gt;   ╕</span><br><span class="line">&lt;----SYN&#x2F;ACK-------   ╞ 建立TCP连接</span><br><span class="line">-------ACK--------&gt;   ╛</span><br><span class="line">-----HTTP请求-----&gt;</span><br><span class="line">&lt;----HTTP响应------</span><br><span class="line">-----HTTP请求-----&gt;</span><br><span class="line">&lt;----HTTP响应------</span><br><span class="line">&lt;-------FIN--------   ╗</span><br><span class="line">--------ACK-------&gt;   ╠ 断开TCP连接</span><br><span class="line">--------FIN-------&gt;   ║</span><br><span class="line">&lt;-------ACK--------   ╝</span><br></pre></td></tr></table></figure></li>
-<li>管线化<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;---建立TCP连接---&gt;</span><br><span class="line">-----HTTP请求-----&gt;</span><br><span class="line">-----HTTP请求-----&gt;</span><br><span class="line">&lt;----HTTP响应------</span><br><span class="line">&lt;----HTTP响应------</span><br><span class="line">&lt;---断开TCP连接---&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>持久连接使得管线化（pipelining）成为可能。管线化：不用等待响应即可发下个请求</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<hr>
-<div id ="http-3" class="title2">三、http报文内的http信息</div>
-
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http报文结构：</span><br><span class="line">[  报文首部 ]</span><br><span class="line">[空行(CR+LF)]</span><br><span class="line">[  报文主体 ]</span><br></pre></td></tr></table></figure>
-
-<div class="title3" id="http-3-1">3.1 首部字段</div>
-
-<ul>
-<li>请求/响应首部字段</li>
-<li>通用首部字段</li>
-<li>实体首部字段</li>
-</ul>
-<div class="title3" id="http-3-2">3.2 压缩传输编码、分块传输编码</div>
-<div class="title3" id="http-3-3">3.3 发送多种数据的多部分对象集合</div>
-<div class="title3" id="http-3-4">3.4 范围请求</div>
-<div class="title3" id="http-3-5">3.5 内容协商</div>
-
-<hr>
-<hr>
-<div id ="http-4" class="title2">四、http状态码</div>
-
-<hr>
-<table>
-<tr>
-<th></th>
-<th>类别</th>
-<th>原因短语</th>
-</tr>
-<tr>
-<td>1XX</td>
-<td>Informational(信息性状态码)</td>
-<td>接收的请求正在处理</td>
-</tr>
-<tr>
-<td>2XX</td>
-<td>Success(成功状态码)</td>
-<td>请求正常处理完毕</td>
-</tr>
-<tr>
-<td>3XX</td>
-<td>Redirection(重定向状态码)</td>
-<td>需要进行附加操作完成请求</td>
-</tr>
-<tr>
-<td>4XX</td>
-<td>Client Error(客户端错误状态码)</td>
-<td>服务器无法处理请求(客户端出错)</td>
-</tr>
-<tr>
-<td>5XX</td>
-<td>Server Error(服务端错误状态码)</td>
-<td>服务器请求出错</td>
-</tr>
-</table>
-
-<div class="title3" id="http-4-1">4.1代表性状态码</div>
-
-<ul>
-<li><p>200 OK</p>
-<ul>
-<li>请求已正常处理</li>
-</ul>
-</li>
-<li><p>204 No Content</p>
-<ul>
-<li>请求处理成功，但返回的响应报文不含主体</li>
-</ul>
-</li>
-<li><p>206 Partial Content</p>
-<ul>
-<li>该状态码表示客户端进行了范围请求（只要一部分），服务器成功执行。</li>
-<li>响应报文Content-Range 指定报文实体内容</li>
-</ul>
-</li>
-<li><p>301 Moved Permanently</p>
-<ul>
-<li>永久性重定向。</li>
-<li>表示请求的资源已经被分配了新的URI，以后应用现在的URI（应按Location的首部重新保存URI）</li>
-</ul>
-</li>
-<li><p>302 Found</p>
-<ul>
-<li>临时性重定向。</li>
-<li>表示希望用户（本次）使用新的URI访问（需要保留原先的URI）</li>
-</ul>
-</li>
-<li><p>303 See Other</p>
-<ul>
-<li>该请求对应的资源存在另一个URI，应使用GET定向获取请求的资源</li>
-<li>和302类似，但要求POST换GET</li>
-</ul>
-</li>
-<li><p>304 Not Modified</p>
-<ul>
-<li>服务端接受客户端的请求，但发生了请求的条件未满足的情况（If-Match，If-Range等首部）将直接返回304（不包含响应主体）</li>
-<li>虽然在3XX，但和重定向无关</li>
-</ul>
-</li>
-<li><p>307 Temporary Redirect</p>
-<ul>
-<li>临时重定向</li>
-<li>和302相同。</li>
-</ul>
-</li>
-<li><p>400 Bad Request</p>
-<ul>
-<li>请求报文中存在语法错误</li>
-<li>需修改请求内容后重发请求</li>
-<li>浏览器会像对待200一样对待400</li>
-</ul>
-</li>
-<li><p>401 Unauthorized</p>
-<ul>
-<li>请求需要有通过HTTP认证的认证信息。</li>
-<li>返回401的响应必须由一个适用于被请求资源的WWW-Authenticate首部用以质询（challenge）用户信息。当浏览器初次接收401时，会弹出认证用的对话窗口。</li>
-<li>若之前有过1次请求，则表明认证失败。</li>
-</ul>
-</li>
-<li><p>403 Forbidden</p>
-<ul>
-<li>对请求资源的访问被服务器拒绝</li>
-<li>服务器可能在响应主体部分给出说明</li>
-</ul>
-</li>
-<li><p>404 Not Found</p>
-<ul>
-<li>服务器没有请求的资源</li>
-</ul>
-</li>
-<li><p>500 Internal Server Error</p>
-<ul>
-<li>服务器在执行请求时发生了错误，也可能是Web应用存在的BUG或某些临时的故障</li>
-</ul>
-</li>
-<li><p>503 Service Unavailable</p>
-<ul>
-<li>服务器正处于超负载或正在进行停机维护，无法处理请求</li>
-<li>如果事先知道解除以上状况时间，可写入Retry-After首部字段再发回客户端</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>不少情况状态码是错误的，例如Web应用程序内部发生错误，可能仍会返回200</p>
-</blockquote>
-<div class="title3" id="http-4-2">4.2 状态码详解</div>
-
-<p><a href="https://tool.oschina.net/commons?type=5" target="_blank" rel="noopener">http状态码详解</a></p>
-<hr>
-<hr>
-<div id ="http-5" class="title2">五、与http协作的web服务器</div>
-
-<hr>
-<div id ="http-5-1" class="title3">5.1 单台虚拟主机实现多个域名</div>
-
-<ul>
-<li>虚拟主机实现多个域名，host的作用<blockquote>
-<p>因为DNS服务已将域名映射到ip地址，因此请求到达服务器时已经是ip地址形式了。因此服务器若托管了两个域名，需要先弄清楚是哪个域名。所以在http请求的Host首部需指定主机名或域名的URI</p>
-</blockquote>
-<div id ="http-5-2" class="title3">5.2 通信数据转发程序：代理、网关、隧道</div>
-
-</li>
-</ul>
-<p>这些应用程序和服务器可以将请求转发给通信线路的下一站服务器，并且能接受到从那台服务器发送的响应并再转发给客户端</p>
-<ul>
-<li><p>代理</p>
-<ul>
-<li>扮演了中间人的角色，将一方的请求/响应转发给另一方</li>
-<li>可级联多台代理服务器，转发时，需用Via首部字段标记出经过的主机信息。</li>
-<li>代理目的：缓存技术减少流量，组织内部针对特定网站的访问控制，获取访问日志等</li>
-<li>缓存代理<ul>
-<li>代理转发响应时，缓存代理（Caching Proxy）会预先将资源的副本保存在代理服务器，当代理再次接收相同的请求时，就不会再次访问源服务器，而是直接返回缓存的资源。<ul>
-<li>浏览器也可储存缓存</li>
-</ul>
-</li>
-<li>优势：源服务器不必多次处理相同的请求，客户端可以就近从缓存服务器获取资源</li>
-<li>缓存期限问题，需要向源服务器确认是否为“旧资源”</li>
-</ul>
-</li>
-<li>透明代理<ul>
-<li>转发请求或响应时，不对报文做任何加工。反之，则为不透明代理</li>
-</ul>
-</li>
-<li>正向代理（隐藏客户端）</li>
-<li>反向代理（隐藏服务器）</li>
-</ul>
-</li>
-<li><p>网关</p>
-<ul>
-<li>网关是转发其他服务器通信数据的服务器<ul>
-<li>接收请求时，向自己拥有源服务器资源一样对请求进行处理，客户端甚至不会察觉自己通信目标是网关</li>
-</ul>
-</li>
-<li>网关的工作原理和代理相似，而网关能使通信线路上的服务器提供非http协议服务<ul>
-<li>利用网关可以由HTTP请求转化为其他协议通信</li>
-</ul>
-</li>
-<li>网关能提高通信安全性，因为可以在客户端和网关之间的通信线路上加密以确保连接安全</li>
-<li>网关可以连接数据库，使用sql查询数据，也可与信用卡结算系统联动</li>
-</ul>
-</li>
-<li><p>隧道</p>
-<ul>
-<li>隧道是在相隔甚远的客户端和服务器两者间进行周转，并保持双方通信连接的应用程序。</li>
-<li>隧道可按要求建立一条与其他服务器通信的线路，届时使用SSL等加密手段进行通信。</li>
-<li>隧道的目的是确保客户端和服务器进行安全的通信</li>
-<li>隧道本身不会解析HTTP请求</li>
-</ul>
-</li>
-</ul>
-<hr>
-<hr>
-<div id ="http-6" class="title2">六、http首部</div>
-
-<hr>
-<div id ="http-6-1" class="title3">6.1 http首部字段概况</div>
-
-<div class="title4">1.Http请求报文：</div>
-
-<ul>
-<li>报文首部<ul>
-<li>请求行<ul>
-<li>方法、URL、HTTP版本</li>
-</ul>
-</li>
-<li>请求首部字段</li>
-<li>通用首部字段</li>
-<li>实体首部字段</li>
-</ul>
-</li>
-<li>空行（CR+LF）</li>
-<li>报文主体</li>
-</ul>
-<div class="title4">2.HTTP响应报文：</div>
-
-<ul>
-<li>报文首部<ul>
-<li>状态行<ul>
-<li>HTTP版本、状态码</li>
-</ul>
-</li>
-<li>响应首部字段</li>
-<li>通用首部字段</li>
-<li>实体首部字段</li>
-</ul>
-</li>
-<li>空行（CR+LF）</li>
-<li>报文主体</li>
-</ul>
-<div class="title4">3.若首部字段重复：</div>
-
-<p>规范内尚未明确，不同浏览器处理结果不一致。有的浏览器优先第一次出现的，有的浏览器优先最后出现的</p>
-<div class="title4">4.首部字段类型</div>
-
-<ul>
-<li><p>通用首部字段(General Header Fields)<br>请求和响应都会用的首部</p>
-</li>
-<li><p>请求首部字段(Request Header Fields)<br>补充了请求的附加内容，客户端信息，相应内容相关优先级</p>
-</li>
-<li><p>响应首部字段(Response Header Fields)<br>补充了响应的附加内容，也会要求客户端附加额外的内容信息</p>
-</li>
-<li><p>实体首部字段(Entity Header Fields)<br>补充了资源内容更新时间等与实体有关的信息</p>
-</li>
-</ul>
-<div class="title4">5.End to End 首部和 Hop by Hop 首部</div>
-
-<ul>
-<li>端到端首部(End-to-end Header)：<br>此类别的首部会转发到最终接受目标：要求必须被转发</li>
-<li>逐跳首部(Hop-by-hop Header):<br>此类别首部只对单次转发有效，通过缓存或代理将不再转发。另，1.1/HTTP 之后，使用逐跳首部必须提供 Connection 首部字段。</li>
-</ul>
-<div id ="http-6-2" class="title3">6.2 http首部字段详细</div>
-
-<p><a href="https://blog.csdn.net/xsvklftj/article/details/110008840" target="_blank" rel="noopener">首部字段详解</a></p>
-<hr>
-<hr>
-<div id ="http-7" class="title2">七、https</div>
-
-<hr>
-<div  class="title3">http不足</div>
-<div  class="title3">认证</div>
-<div  class="title3">SSL握手</div>
-<div  class="title3">完整性保护</div>
-
-
-<blockquote>
-<p>http + 加密 + 认证 + 完整性保护 = https</p>
-</blockquote>
-<p>（有待更新）</p>
-<hr>
-<hr>
-<div id ="http-8" class="title2">八、用户身份认证</div>
-
-<hr>
-<p>某些Web页面只想让部分人或者仅仅让本人浏览。为达到这个目标我们需要认证功能。</p>
-<div class="title4">何为认证</div>
-
-<p>为了确认使用者是否有登陆者权限，需要核对“登陆者本人才知道的信息”或是“登陆者本人才会有的信息”</p>
-<p>这些信息通常为：</p>
-<ul>
-<li><p>密码：只有本人才知道的字符串信息</p>
-</li>
-<li><p>动态令牌：仅限本人持有设备内显示的一次性密码</p>
-</li>
-<li><p>数字证书：仅限本人（终端）持有的信息</p>
-</li>
-<li><p>生物认证：指纹和虹膜等本人的生理信息</p>
-</li>
-<li><p>IC卡：仅限本人持有的信息</p>
-</li>
-</ul>
-<div id ="http-8-1" class="title3">8.1 BASIC 认证</div>
-
-<blockquote>
-<p>BASIC 认证(基本认证)是1.0就定义的认证方式。是Web服务器和通信客户端之间进行的认证方式。</p>
-</blockquote>
-<p>认证步骤：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">发送请求------------------------------&gt;</span><br><span class="line">&lt;--------------------返回401告知需要认证</span><br><span class="line">用户ID和密码以Base64方式编码发送--------&gt;</span><br><span class="line">&lt;----------认证成功返回200，不成功返回401</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>显而易见，传递的信息明文解码后就是用户名和密码，因此在非加密的HTTP线路上传输并不安全。另外，一般浏览器也无法进行认证注销操作。<br>因为其不够灵活、安全，因此并不常用。</p>
-</blockquote>
-<div id ="http-8-2" class="title3">8.2 DIGEST 认证</div>
-
-<blockquote>
-<p>DIGEST认证 ：1.1启用，为弥补BASIC缺陷。采用质询/响应的方式(challenge/response),但不会像BASIC一样明文发送。</p>
-</blockquote>
-<p>质询响应方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">认证要求----------------&gt;</span><br><span class="line">&lt;------------------质询码</span><br><span class="line">响应码(根据质询码计算)---&gt;</span><br></pre></td></tr></table></figure>
-<p>因为响应码是根据质询码计算得到，因此比起BASIC认证，密码泄露概率就低了。</p>
-<p>DIGEST认证概要也类似，区别在于返回的值为响应码和响应概要。（最后200表示认证成功，401表示认证失败）</p>
-<blockquote>
-<p>DIGEST认证提高了BASIC认证的安全等级，但是仍比不上HTTP客户端认证。<br>其提供了防止密码被窃听的机制，但并未防止用户伪装。<br>DIGEST和BASIC一样，使用不灵活，也达不到使用者的安全需求，因此使用范围也有限。</p>
-</blockquote>
-<div id ="http-8-3" class="title3">8.3 SSL 客户端认证</div>
-
-<p><a href = "#http-7">具体</a></p>
-<p>一般情况下，SSL客户端不会仅靠证书完成认证，一般会和基于表单认证组合成双因素认证。前者确认是客户端计算机，后者确认是用户本人。<br>通过双因素认证后，就可确认是本人使用匹配的计算机访问服务器。</p>
-<div id ="http-8-4" class="title3">8.4 基于表单认证</div>
-
-<p>表单认证并未在HTTP协议中定义。但因为其便利性和安全性，大部分认证均为表单认证。</p>
-<div  class="title4">cookie 保存session</div>
-
-<p>http没有提供状态管理的功能，因此通过cookie保存session ID来保存会话信息来完成这个功能。</p>
-<div  class="title4">盐（salt）</div>
-
-<p>用给密码加盐(salt)的方式增加额外信息，再用散列函数计算出散列值后保存。</p>
-<blockquote>
-<p>盐为随机生成的字符串（足够长），和密码前后拼接。因为盐是不同的，因此散列值也是不同的，可以极大的减少密码的特征性，防止被破译。</p>
-</blockquote>
-<hr>
-<hr>
-<div id ="http-9" class="title2">九、基于http的功能追加协议</div>
-
-<hr>
-<p>Http虽简单快捷，但随着时代的发展仍疲态尽显。因此出现了一些补充协议试图解决WEB的瓶颈。HTTP2.0也在指定规划中。<br>HTTP/2.0 七项核心技术：</p>
-<table>
-<thead>
-<tr>
-<th>技术</th>
-<th>协议</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>压缩</td>
-<td>SPDY,Friendly</td>
-</tr>
-<tr>
-<td>多路复用</td>
-<td>SPDY</td>
-</tr>
-<tr>
-<td>TLS义务化</td>
-<td>Speed+Mobility</td>
-</tr>
-<tr>
-<td>协商</td>
-<td>Speed+Mobility,Friendly</td>
-</tr>
-<tr>
-<td>客户端拉曳(Client Pull)/服务器推送(Servel Push)</td>
-<td>Speed+Mobility</td>
-</tr>
-<tr>
-<td>流量控制</td>
-<td>SPDY</td>
-</tr>
-<tr>
-<td>WebSocket</td>
-<td>Speed+Mobility</td>
-</tr>
-</tbody></table>
-<hr>
-<hr>
-<div id ="http-10" class="title2">十、构建web内容的技术</div>
-
-<hr>
-<p>略。（html,css,servlet(java)，json，RSS/Atom等的简单介绍）</p>
-<hr>
-<hr>
-<div id ="http-11" class="title2">十一、web的攻击技术</div>
-
-<hr>
-<div id ="http-11-1" class="title3">11.1 因输出值转义不完全引发的安全漏洞</div>
-
-<div class="title4">跨站脚本攻击</div>
-<div class="title4">SQL注入攻击</div>
-<div class="title4">OS命令注入攻击</div>
-<div class="title4">HTTP首部注入攻击</div>
-<div class="title4">邮件首部注入攻击</div>
-<div class="title4">目录遍历攻击</div>
-<div class="title4">远程文件包含漏洞</div>
-
-<div id ="http-11-2" class="title3">11.2 因设置或设计上的缺陷引发的安全漏洞</div>
-
-<div class="title4">强制浏览</div>
-<div class="title4">不正确的错误消息处理</div>
-<div class="title4">开放重定向</div>
-
-<div id ="http-11-3" class="title3">11.3 因会话管理疏忽引发的安全漏洞</div>
-
-<div class="title4">会话劫持</div>
-<div class="title4">会话固定攻击</div>
-<div class="title4">跨站点请求伪造</div>
-
-<div id ="http-11-4" class="title3">11.4 其它安全漏洞</div>
-
-<div class="title4">密码破解</div>
-<div class="title4">点击劫持</div>
-<div class="title4">DoS攻击</div>
-<div class="title4">后面程序</div>
-
-<hr>
-<hr>
-<div id ="http-ex" class="title2">EX、额外</div>
-
-<hr>
-<div class="title3">参考目录</div>
-
-<p>《图解HTTP》 [日]上野宣  2014.5</p>
-<hr>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/07/07/http%E5%8D%8F%E8%AE%AE/" data-id="cl4cp4for004efcgu4sxperuf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/" rel="tag">http</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-Redis" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/04/23/Redis/" class="article-date">
@@ -1110,7 +424,7 @@ Redis:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/04/23/Redis/" data-id="cl4cp4foi003yfcgu91pg2v50" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/04/23/Redis/" data-id="cl4cp9tb90041nggu6w1f5a4v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li></ul>
@@ -1384,7 +698,7 @@ Redis:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/04/07/java-io/" data-id="cl4cp4foi003zfcgu55lkedke" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/04/07/java-io/" data-id="cl4cp9tba0044nggu3uf01poz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IO/" rel="tag">IO</a></li></ul>
@@ -1576,7 +890,7 @@ Redis:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/29/Mybatis/" data-id="cl4cp4fo7003ifcgugn9h8btp" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/29/Mybatis/" data-id="cl4cp9tba0042ngguazzrdgst" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li></ul>
@@ -1655,7 +969,7 @@ Redis:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/23/java-%E7%B1%BB%E5%8A%A0%E8%BD%BD/" data-id="cl4cp4fns0023fcguan2h974k" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/23/java-%E7%B1%BB%E5%8A%A0%E8%BD%BD/" data-id="cl4cp9t9x001lnggu23jr6mgr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1854,7 +1168,7 @@ Redis:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/20/java-GC/" data-id="cl4cp4fnr0022fcgues6ud926" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/20/java-GC/" data-id="cl4cp9t9v001fnggu5p56bxn3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li></ul>
@@ -2021,7 +1335,7 @@ FFFF
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/20/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/" data-id="cl4cp4fo20032fcgu6n391fzl" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/20/%E5%AD%97%E7%AC%A6%E9%9B%86%E4%B8%8E%E7%BC%96%E7%A0%81/" data-id="cl4cp9ta7002cnggu32zlc8gk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2225,7 +1539,7 @@ FFFF
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/09/%E5%B9%B6%E5%8F%91%E5%92%8C%E7%BA%BF%E7%A8%8B/" data-id="cl4cp4fny002lfcgu4raabt0s" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/09/%E5%B9%B6%E5%8F%91%E5%92%8C%E7%BA%BF%E7%A8%8B/" data-id="cl4cp9taf002hnggue1j025yp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2346,7 +1660,7 @@ FFFF
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cl4cp4fo5003bfcgu0bynbson" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/07/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cl4cp9tau0036nggu9r0rde37" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Design-Pattern/" rel="tag">Design Pattern</a></li></ul>
@@ -2520,9 +1834,146 @@ FFFF
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/03/06/Stream-JAVA%E6%B5%81%E6%95%B0%E6%8D%AE/" data-id="cl4cp4fn9000zfcgu842xfy7h" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/03/06/Stream-JAVA%E6%B5%81%E6%95%B0%E6%8D%AE/" data-id="cl4cp9t9q0010nggu7qh07sha" class="article-share-link">Share</a>
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Lambda表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/03/05/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="article-date">
+  <time datetime="2021-03-05T15:17:35.000Z" itemprop="datePublished">2021-03-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/03/05/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">Lambda表达式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">一、无类型参数</div>
+
+<hr>
+<div class="title4">基本定义</div>
+
+<ul>
+<li>表达式的基本结构：<code>f-&gt;{}</code><br>  在功能上等同于匿名方法  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unknown</span><span class="params">(f)</span> </span>&#123;</span><br><span class="line">    System.out.println(f.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<div class="title4">类型识别</div>
+
+<ul>
+<li><p>f的变量类型是上下文自动识别的。</p>
+</li>
+<li><p>必须配合上下文和其他方法使用，不能独立使用。</p>
+<div class="title4">多参数/无参数</div>
+</li>
+<li><p>箭头前表示参数变量：<code>(a,b)-&gt;{}</code></p>
+</li>
+<li><p>无参数：<code>()-&gt;{}</code></p>
+</li>
+</ul>
+<blockquote>
+<p>当执行语句只有一条时，不需要加大括号（大括号本身只是划分块）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">list.add(<span class="number">1</span>);</span><br><span class="line">list.add(<span class="number">3</span>);</span><br><span class="line">list.add(<span class="number">2</span>);</span><br><span class="line">list.sort((a, b) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> a.compareTo(b);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<hr>
+<div class="title2">二、有类型参数</div>
+
+<hr>
+<p>其实就是为了代码易阅读。<br><code>(Type a)-&gt;{}</code>.其他跟无类型一样。</p>
+<hr>
+<div class="title2">三、引用外部变量&规范</div>
+
+<hr>
+<ul>
+<li>规范一：引用的外部变量不能被修改。（最终变量或实际上的最终变量）(final)。（表达式前允许一次赋值）（Lambda表达式内或者后面不允许修改）</li>
+<li>规范二：参数不能和局部变量同名。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">"aaa"</span>;</span><br><span class="line">list.forEach(s -&gt;&#123;&#125;);</span><br><span class="line"><span class="comment">//参数同名，是错误的</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<hr>
+<div class="title2">四、双冒号操作符</div>
+
+<hr>
+<p><code>System.out::println</code><br>即：<br><code>n -&gt; {System.out.println(n);}</code>  </p>
+<ul>
+<li><p><code>A::B</code><br>将参数传递给A类（或A对象）的B方法。（省略了参数）</p>
+</li>
+<li><p>用法一.调用静态或非静态方法：<br>  <code>fruits.forEach(System.out::println)</code></p>
+</li>
+<li><p>用法二.多参数：系统会自动获取上下文参数，并按顺序传给指定方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//定义函数</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">compute</span><span class="params">(Student s1, Student s2)</span> </span>&#123;</span><br><span class="line">... ...</span><br><span class="line">... ...</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//排序就可以写为</span></span><br><span class="line">  Collections.sort(students, SortTest::compute);</span><br></pre></td></tr></table></figure></li>
+<li><p>用法三.调用父类方法:<br><code>list.forEach(super::print);</code></p>
+</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2021/03/05/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" data-id="cl4cp9t9j000hnggu3szm535z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li></ul>
+
     </footer>
   </div>
   
@@ -2574,7 +2025,7 @@ FFFF
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
     </div>
   </div>
 
@@ -2585,10 +2036,6 @@ FFFF
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2022/04/01/Oracle%E5%AD%A6%E4%B9%A0/">Oracle学习</a>
-          </li>
         
           <li>
             <a href="/2022/03/28/Oracle%E5%AD%A6%E4%B9%A0/">Oracle学习</a>
@@ -2604,6 +2051,10 @@ FFFF
         
           <li>
             <a href="/2021/12/07/vue/">vue</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/30/hello-world/">Hello World</a>
           </li>
         
       </ul>
