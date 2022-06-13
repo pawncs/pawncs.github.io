@@ -68,6 +68,1338 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Oracle学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/04/01/Oracle%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2022-04-01T04:03:36.548Z" itemprop="datePublished">2022-04-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/01/Oracle%E5%AD%A6%E4%B9%A0/">Oracle学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!DOCTYPE html><html><head>
+      <title>Oracle&#x5B66;&#x4E60;</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    <meta name="generator" content="Hexo 4.2.1"></head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+<div class="name">by pawncs</div>
+<hr>
+<div class="title2">&#x96F6;&#x3001;&#x76EE;&#x5F55;</div>
+<hr>
+<ul>
+<li><a href="#oracle-arch-1">&#x4E00;&#x3001;Oracle&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x6982;&#x8FF0;</a></li>
+<li><a href="#oracle-arch-2">&#x4E8C;&#x3001;&#x6587;&#x4EF6;</a></li>
+<li><a href="#oracle-arch-3">&#x4E09;&#x3001;&#x5185;&#x5B58;&#x7ED3;&#x6784;</a></li>
+<li><a href="#oracle-arch-4">&#x56DB;&#x3001;Oracle&#x8FDB;&#x7A0B;</a></li>
+<li><a href="#oracle-arch-5">&#x4E94;&#x3001;redo&#x4E0E;undo</a></li>
+<li><a href="#oracle-arch-EX">EX&#x3001;&#x9644;&#x5F55;</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>&#x5E94;&#x7528;&#x4E0D;&#x505C;&#x53D8;&#x5316;&#xFF0C;&#x6570;&#x636E;&#x6C38;&#x5B58;&#x3002;&#x4ECE;&#x957F;&#x8FDC;&#x6765;&#x8BB2;&#xFF0C;&#x6211;&#x4EEC;&#x7684;&#x76EE;&#x6807;&#x5E76;&#x4E0D;&#x662F;&#x6784;&#x5EFA;&#x5E94;&#x7528;&#xFF0C;&#x800C;&#x662F;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x5E94;&#x7528;&#x5E95;&#x5C42;&#x7684;&#x6570;&#x636E;</p>
+</blockquote>
+<hr>
+<div class="title2" id="oracle-arch-1">&#x4E00;&#x3001;Oracle&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x6982;&#x8FF0;</div>
+<hr>
+<div class="title4">&#x7269;&#x7406;&#x67B6;&#x6784;</div>
+<p>Oracle&#x5728;&#x4E0D;&#x540C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E0A;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x7269;&#x7406;&#x67B6;&#x6784;&#xFF0C;&#x5982;Linux&#x4E3A;&#x591A;&#x8FDB;&#x7A0B;&#x8FD0;&#x4F5C;&#xFF0C;Windows&#x4E3A;&#x5355;&#x8FDB;&#x7A0B;&#x591A;&#x7EBF;&#x7A0B;&#x7B49;&#x3002;Oracle&#x867D;&#x7136;&#x5728;&#x4E0D;&#x540C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E0A;&#x5DEE;&#x5F02;&#x5F88;&#x5927;&#xFF0C;&#x4F46;Oracle&#x4F1A;&#x5C06;&#x8FD9;&#x4E9B;&#x5DEE;&#x5F02;&#x5305;&#x88C5;&#x8D77;&#x6765;&#xFF0C;&#x5E76;&#x5728;&#x8FD9;&#x4E4B;&#x4E0A;&#x6784;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x66F4;&#x5177;&#x901A;&#x7528;&#x6027;&#x5E76;&#x4E14;&#x9002;&#x7528;&#x4E8E;&#x6240;&#x6709;&#x5E73;&#x53F0;&#x7684;&#x6570;&#x636E;&#x5E93;&#x67B6;&#x6784;&#x3002;</p>
+<div class="title4">Oracle&#x7684;&#x4E24;&#x79CD;&#x67B6;&#x6784;</div>
+<ul>
+<li>6-11g:&#x5355;&#x79DF;&#x6237;&#x67B6;&#x6784;(single tenant)</li>
+<li>12c&#x4E4B;&#x540E;&#xFF1A;&#x591A;&#x79DF;&#x6237;&#x67B6;&#x6784;(multitenant)</li>
+</ul>
+<div class="title4">&#x6570;&#x636E;&#x5E93;&#x548C;&#x5B9E;&#x4F8B;&#x672F;&#x8BED;&#x5B9A;&#x4E49;</div>
+<ul>
+<li>
+<p>&#x6570;&#x636E;&#x5E93;: &#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x6587;&#x4EF6;&#x6216;&#x78C1;&#x76D8;&#x7684;&#x96C6;&#x5408;&#xFF08;&#x5F53;&#x65F6;&#x7528;ASM(&#x81EA;&#x52A8;&#x5B58;&#x50A8;&#x7BA1;&#x7406;&#xFF0C;Automatic Storage Management)&#x6216;&#x88F8;&#x8BBE;&#x5907;&#x5206;&#x533A;&#x65F6;&#xFF0C;&#x6570;&#x636E;&#x5E93;&#x53EF;&#x80FD;&#x4E0D;&#x662F;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4E2D;&#x5355;&#x72EC;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x4F46;&#x5B9A;&#x4E49;&#x4E0D;&#x53D8;&#xFF09;</p>
+<ul>
+<li>&#x5355;&#x79DF;&#x6237;&#x6570;&#x636E;&#x5E93;&#xFF1A;&#x5305;&#x542B;&#x5168;&#x5957;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x3001;&#x63A7;&#x5236;&#x6587;&#x4EF6;&#x3001;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x3001;&#x53C2;&#x6570;&#x6587;&#x4EF6;&#x7B49;&#x3002;&#x5305;&#x542B;Oracle&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x7684;&#x548C;&#x5E94;&#x7528;&#x7684;&#x5143;&#x6570;&#x636E;&#x3001;&#x6570;&#x636E;&#x3001;&#x4EE3;&#x7801;&#x3002;</li>
+<li>&#x5BB9;&#x5668;&#x6570;&#x636E;&#x5E93;(12c)(CDB)&#xFF1A;&#x5305;&#x542B;&#x5168;&#x5957;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x3001;&#x63A7;&#x5236;&#x6587;&#x4EF6;&#x3001;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x3001;&#x53C2;&#x6570;&#x6587;&#x4EF6;&#x7B49;&#x3002;&#x5305;&#x542B;Oracle&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x7684;&#x5143;&#x6570;&#x636E;&#x3001;&#x6570;&#x636E;&#x3001;&#x4EE3;&#x7801;&#x3002;(&#x4EC5;&#x5B58;&#x653E;Oracle&#x81EA;&#x7528;&#x7684;&#x5B9E;&#x4F53;)</li>
+<li>&#x53EF;&#x63D2;&#x62D4;&#x6570;&#x636E;&#x5E93;(12c)(PDB)&#xFF1A;&#x4EC5;&#x5305;&#x542B;&#x6570;&#x636E;&#x6587;&#x4EF6;&#xFF08;&#x5E94;&#x7528;&#x7684;&#x5143;&#x6570;&#x636E;&#x3001;&#x6570;&#x636E;&#x3001;&#x4EE3;&#x7801;&#xFF09;</li>
+</ul>
+</li>
+<li>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;<br>
+&#x4E00;&#x7EC4;Oracle&#x540E;&#x53F0;&#x8FDB;&#x7A0B;/&#x7EBF;&#x7A0B;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x5171;&#x4EAB;&#x7684;<strong>&#x5185;&#x5B58;</strong>&#x533A;&#x57DF;&#x3002;(&#x7EF4;&#x62A4;&#x975E;&#x6301;&#x4E45;&#x5185;&#x5BB9;)</p>
+</li>
+<li>
+<p>&#x5173;&#x7CFB;&#xFF1A;&#x6570;&#x636E;&#x5E93;&#x53EF;&#x7531;&#x591A;&#x4E2A;&#x5B9E;&#x4F8B;&#x88C5;&#x8F7D;&#x548C;&#x6253;&#x5F00;&#xFF0C;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x53EA;&#x80FD;&#x88C5;&#x8F7D;&#x548C;&#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;</p>
+</li>
+<li>
+<p>SGA(&#x7CFB;&#x7EDF;&#x5168;&#x5C40;&#x533A;):&#x5305;&#x542B;&#x5B9E;&#x4F8B;&#x6570;&#x636E;&#x548C;&#x63A7;&#x5236;&#x4FE1;&#x606F;&#x7684;&#x5171;&#x4EAB;&#x5185;&#x5B58;&#x7ED3;&#x6784;&#x3002;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#xFF1A;&#x6570;&#x636E;&#x5E93;&#x9AD8;&#x901F;&#x7F13;&#x51B2;&#xFF0C;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x7F13;&#x51B2;&#x3001;&#x5171;&#x4EAB;&#x6C60;(&#x5E93;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#x3001;&#x6570;&#x636E;&#x5B57;&#x5178;&#x7F13;&#x5B58;)&#x3002;&#x5176;&#x7528;&#x4E8E;(&#x4F46;&#x4E0D;&#x9650;&#x4E8E;)&#xFF1A;&#x7EF4;&#x62A4;&#x6240;&#x6709;&#x8FDB;&#x7A0B;&#x9700;&#x8981;&#x8BBF;&#x95EE;&#x7684;&#x5185;&#x90E8;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF1B;&#x7F13;&#x5B58;&#x78C1;&#x76D8;&#x4E0A;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x53E6;&#x5916;&#x91CD;&#x505A;&#x6570;&#x636E;&#x5199;&#x8FDB;&#x78C1;&#x76D8;&#x524D;&#x5728;&#x6B64;&#x7F13;&#x5B58;&#xFF1B;&#x4FDD;&#x62A4;&#x5DF2;&#x89E3;&#x6790;&#x7684;SQL&#x8BA1;&#x5212;&#x3002;</p>
+</li>
+</ul>
+<div class="title3">&#x8FDE;&#x63A5;Oracle&#x6570;&#x636E;&#x5E93;</div>
+<div class="title4">Oracle&#x670D;&#x52A1;&#x5668;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#x7684;&#x4E24;&#x79CD;&#x5E38;&#x89C1;&#x65B9;&#x5F0F;</div>
+<ul>
+<li>&#x4E13;&#x7528;&#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;
+<ul>
+<li>&#x603B;&#x662F;&#x5728;&#x767B;&#x5F55;&#x65F6;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x8FDB;&#x7A0B;&#x3002;&#x5176;&#x548C;&#x4F1A;&#x8BDD;&#x5B58;&#x5728;&#x4E00;&#x5BF9;&#x4E00;&#x7684;&#x6620;&#x5C04;</li>
+</ul>
+</li>
+<li>&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;
+<ul>
+<li>&#x5B9E;&#x8D28;&#x662F;&#x4E00;&#x79CD;&#x8FDE;&#x63A5;&#x6C60;&#x673A;&#x5236;&#x3002;</li>
+<li>&#x901A;&#x8FC7;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#xFF08;&#x5206;&#x6D3E;&#x7A0B;&#x5E8F;&#xFF09;&#x8FDB;&#x884C;&#x8FDB;&#x7A0B;&#x7684;&#x8C03;&#x5EA6;&#xFF1A;&#x5C06;&#x5BA2;&#x6237;&#x7684;&#x8BF7;&#x6C42;&#x653E;&#x5165;SGA&#x4E2D;&#x7684;&#x8BF7;&#x6C42;&#x961F;&#x5217;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x7A7A;&#x95F2;&#x7684;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x5F97;&#x5230;&#x8FD9;&#x4E2A;&#x8BF7;&#x6C42;&#x5E76;&#x5904;&#x7406;&#x3002;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x5C06;&#x5176;&#x8FD4;&#x56DE;&#x503C;&#x653E;&#x5165;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x7684;&#x54CD;&#x5E94;&#x961F;&#x5217;&#x4E2D;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<div class="title4">&#x5982;&#x4F55;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;</div>
+<p>&#x8BFB;&#x53D6;tnsnames.ora&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x3002;&#x83B7;&#x5F97;&#x5982;&#x4F55;&#x548C;&#x8FDC;&#x7A0B;&#x6570;&#x636E;&#x5E93;&#x8FDE;&#x63A5;&#x3002;&#x6839;&#x636E;&#x5176;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x8F6F;&#x4EF6;&#x83B7;&#x5F97;&#x4E3B;&#x673A;&#x540D;&#x3001;&#x8BE5;&#x4E3B;&#x673A;&#x4E0A;&#x76D1;&#x542C;&#x5668;&#x8FDB;&#x7A0B;&#x63A5;&#x53D7;&#x8FDE;&#x63A5;&#x7684;&#x7AEF;&#x53E3;&#xFF0C;&#x8BE5;&#x4E3B;&#x673A;&#x4E0A;&#x6240;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#x7684;&#x670D;&#x52A1;&#x540D;&#x3002;</p>
+<blockquote>
+<p>&#x7B80;&#x5355;&#x8FDE;&#x63A5;&#xFF1A;oracle&#x63D0;&#x4F9B;&#x4E86;&#x4E0D;&#x9700;&#x8981;&#x8BE5;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;&#xFF0C;&#x5373;&#x76F4;&#x63A5;&#x901A;&#x8FC7;&#x4E3B;&#x673A;&#x540D;&#xFF0C;&#x76D1;&#x542C;&#x5668;&#x7AEF;&#x53E3;&#x4EE5;&#x53CA;&#x670D;&#x52A1;&#x540D;&#x8FDB;&#x884C;&#x8FDE;&#x63A5;&#xFF1A;<br>
+<code>sqlplus username@[//]host[:port][/service_name][:server][/instance_name]</code></p>
+</blockquote>
+<p>&#x670D;&#x52A1;&#x5668;&#x6536;&#x5230;&#x8BF7;&#x6C42;&#x540E;&#xFF0C;&#x68C0;&#x67E5;&#x81EA;&#x5DF1;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x62D2;&#x7EDD;&#xFF0C;&#x6216;&#x8005;&#x771F;&#x6B63;&#x7684;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#x3002;</p>
+<div class="title4">&#x76D1;&#x542C;&#x5668;&#x8FDB;&#x7A0B;&#x5728;&#x4E24;&#x79CD;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#x65F6;&#x5DE5;&#x4F5C;&#x65B9;&#x5F0F;&#x7684;&#x4E0D;&#x540C;&#x4E4B;&#x5904;&#xFF1A;</div>
++ &#x4E13;&#x7528;&#xFF1A;
+    + windows:&#x4E3A;&#x7528;&#x6237;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x5E76;&#x5C06;&#x5BA2;&#x6237;&#x91CD;&#x5B9A;&#x5411;&#x5230;&#x8BE5;&#x7EBF;&#x7A0B;
+    + linux:&#x901A;&#x8FC7;fork()&#x6216;exec()&#x521B;&#x5EFA;&#x65B0;&#x8FDB;&#x7A0B;&#x3002;&#x56E0;&#x5176;&#x7EE7;&#x627F;&#x4E86;&#x952E;&#x8FDE;&#x63A5;&#xFF0C;&#x56E0;&#x6B64;&#x548C;&#x6570;&#x636E;&#x5E93;&#x7269;&#x7406;&#x7684;&#x8FDE;&#x63A5;&#x4E0A;&#x4E86;
++ &#x5171;&#x4EAB;&#xFF1A;
+    + &#x4ECE;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x6C60;&#x4E2D;&#x9009;&#x53D6;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#xFF0C;&#x8FD4;&#x56DE;&#x5BA2;&#x6237;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;&#xFF08;&#x5982;&#x4F55;&#x548C;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x8FDE;&#x63A5;&#xFF09;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x65AD;&#x5F00;&#x548C;&#x76D1;&#x542C;&#x5668;&#x7684;&#x8FDE;&#x63A5;&#xFF0C;&#x76F4;&#x63A5;&#x548C;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x8FDE;&#x63A5;
+<hr>
+<div class="title2" id="oracle-arch-2">&#x4E8C;&#x3001;&#x6587;&#x4EF6;</div>
+<hr>
+<blockquote>
+<p>&#x5728;Oracle&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x56DB;&#x79CD;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x673A;&#x5236;&#x5B58;&#x50A8;&#x5173;&#x5FC3;&#x7684;&#x6570;&#x636E;&#xFF08;&#x6570;&#x636E;&#x5B57;&#x5178;&#xFF0C;redo,undo,&#x8868;&#xFF0C;&#x7D22;&#x5F15;&#xFF0C;lob&#xFF09;</p>
+<ul>
+<li>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF1A;&#x7528;&#x6587;&#x4EF6;&#x6765;&#x5B58;&#x50A8;&#x6570;&#x636E;</li>
+<li>&#x88F8;&#x5206;&#x533A;&#xFF1A;&#x4E0D;&#x662F;&#x6587;&#x4EF6;&#xFF0C;&#x53EA;&#x662F;&#x78C1;&#x76D8;&#x7684;&#x4E00;&#x4E2A;&#x6247;&#x533A;&#xFF0C;&#x4E0D;&#x80FD;&#x7528;ls&#x6216;&#x6587;&#x4EF6;&#x8D44;&#x6E90;&#x7BA1;&#x7406;&#x5668;&#x67E5;&#x770B;&#x3002;&#x7BA1;&#x7406;&#x5F00;&#x9500;&#x5927;&#xFF0C;&#x6CA1;&#x6709;&#x7F13;&#x51B2;&#xFF0C;&#x6240;&#x6709;IO&#x90FD;&#x662F;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;</li>
+<li>&#x81EA;&#x52A8;&#x5B58;&#x50A8;&#x7BA1;&#x7406;(ASM)&#xFF1A;&#x6570;&#x636E;&#x5E93;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF0C;&#x4EC5;&#x80FD;&#x5B58;&#x50A8;&#x6570;&#x636E;&#x5E93;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#x3002;</li>
+<li>&#x96C6;&#x7FA4;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;(RAC): &#x4E3A;&#x96C6;&#x7FA4;&#x4E2D;&#x6240;&#x6709;&#x8282;&#x70B9;&#x63D0;&#x4F9B;&#x5171;&#x4EAB;&#x7684;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;<br>
+oracle&#x4E0D;&#x4F1A;&#x9650;&#x5236;&#x53EA;&#x80FD;&#x9009;&#x62E9;&#x5176;&#x4E2D;&#x7684;&#x67D0;&#x4E00;&#x4E2A;&#xFF08;&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x9009;&#x62E9;&#x591A;&#x4E2A;&#xFF09;</li>
+</ul>
+</blockquote>
+<p>&#x4E3B;&#x8981;&#x8BB2;&#x6784;&#x6210;&#x6570;&#x636E;&#x5E93;&#x548C;&#x5B9E;&#x4F8B;&#x7684;&#x516B;&#x7C7B;&#x6587;&#x4EF6;</p>
+<div class="title4">&#x5B9E;&#x4F8B;&#x76F8;&#x5173;&#x6587;&#x4EF6;&#xFF1A;</div>
+<ul>
+<li>&#x53C2;&#x6570;&#x6587;&#x4EF6;</li>
+<li>&#x8DDF;&#x8E2A;&#x6587;&#x4EF6;</li>
+<li>&#x8B66;&#x544A;&#x6587;&#x4EF6;</li>
+</ul>
+<div class="title4">&#x6570;&#x636E;&#x5E93;&#x76F8;&#x5173;&#x6587;&#x4EF6;&#xFF1A;</div>
+<ul>
+<li>
+<p><strong>&#x6570;&#x636E;&#x6587;&#x4EF6;</strong>&#xFF1A;&#x5305;&#x62EC;&#x8868;&#x3001;&#x7D22;&#x5F15;&#x548C;&#x5176;&#x4ED6;&#x6BB5;</p>
+<ul>
+<li>Oracle&#x4E2D;&#x7684;&#x5B58;&#x50A8;&#x5C42;&#x6B21;&#x4F53;&#x7CFB;&#xFF1A;</li>
+</ul>
+<blockquote>
+<ul>
+<li>&#x8868;&#x7A7A;&#x95F4;(tablespace)&#xFF1A;Oracle&#x4E2D;&#x7684;&#x903B;&#x8F91;&#x5B58;&#x50A8;&#x903B;&#x8F91;&#xFF0C;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x3002;&#x8868;&#x7A7A;&#x95F4;&#x5305;&#x542B;&#x6BB5;&#x3002;</li>
+<li>&#x6BB5;(segment)&#xFF1A;&#x8868;&#x7A7A;&#x95F4;&#x4E2D;&#x4E3B;&#x8981;&#x7684;&#x7EC4;&#x7EC7;&#x7ED3;&#x6784;&#xFF0C;&#x5176;&#x4E3A;&#x5360;&#x7528;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x7684;&#x6570;&#x636E;&#x5E93;&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#x8868;&#x3001;&#x7D22;&#x5F15;&#x3001;&#x56DE;&#x6EDA;&#x6BB5;&#x7B49;&#x3002;&#x5360;&#x7528;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x90FD;&#x4F1A;&#x5B58;&#x50A8;&#x5728;&#x6BB5;&#x4E2D;</li>
+<li>&#x533A;&#x6BB5;(extent)&#xFF1A;&#x6BB5;&#x672C;&#x8EAB;&#x7531;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x533A;&#x6BB5;&#x7EC4;&#x6210;&#x3002;&#x533A;&#x6BB5;&#x662F;&#x6587;&#x4EF6;&#x4E2D;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x4E0A;&#x8FDE;&#x7EED;&#x5206;&#x914D;&#x7684;&#x7A7A;&#x95F4;&#x3002;11gR2&#x540E;&#xFF0C;&#x5F15;&#x5165;&#x5EF6;&#x8FDF;&#x6982;&#x5FF5;&#x3002;&#xFF08;&#x521B;&#x5EFA;&#x5BF9;&#x8C61;&#x65F6;&#x4E0D;&#x4F1A;&#x5206;&#x914D;&#x533A;&#x6BB5;&#xFF0C;&#x5F53;&#x5199;&#x5165;&#x771F;&#x5B9E;&#x53D1;&#x751F;&#xFF08;insert&#xFF09;&#x65F6;&#x624D;&#x4F1A;&#x5206;&#x914D;&#x533A;&#x6BB5;&#xFF09;&#x3002;&#x591A;&#x4E2A;&#x533A;&#x6BB5;&#x53EF;&#x80FD;&#x4E0D;&#x5728;&#x540C;&#x4E00;&#x6BB5;&#x78C1;&#x76D8;&#x6216;&#x540C;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x4F46;&#x5355;&#x4E2A;&#x533A;&#x6BB5;&#x662F;&#x6587;&#x4EF6;&#x4E2D;&#x903B;&#x8F91;&#x8FDE;&#x7EED;&#x7684;&#x7A7A;&#x95F4;&#x3002;</li>
+<li>&#x5757;(block)&#xFF1A;&#x533A;&#x6BB5;&#x7531;&#x5757;&#x7EC4;&#x6210;&#x3002;&#x4E3A;&#x6700;&#x5C0F;&#x7A7A;&#x95F4;&#x5206;&#x914D;&#x5355;&#x4F4D;(&#x5E38;&#x89C1;&#x5927;&#x5C0F;&#xFF1A;2kB,4kB,8KB,18KB).&#x5B58;&#x50A8;&#x884C;&#x6570;&#x636E;&#x3001;&#x7D22;&#x5F15;&#x6761;&#x76EE;&#x3001;&#x4E34;&#x65F6;&#x6392;&#x5E8F;&#x7ED3;&#x679C;&#x7B49;&#x3002;&#x8868;&#x7A7A;&#x95F4;&#x5185;&#x90E8;&#xFF0C;&#x6240;&#x6709;&#x5757;&#x5927;&#x5C0F;&#x90FD;&#x662F;&#x4E00;&#x81F4;&#x7684;</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>&#x4E34;&#x65F6;&#x6587;&#x4EF6;</p>
+</li>
+<li>
+<p>&#x63A7;&#x5236;&#x6587;&#x4EF6;</p>
+</li>
+<li>
+<p><strong>&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;</strong>&#xFF1A;&#x4E8B;&#x52A1;&#x65E5;&#x5FD7;&#x3002;&#x5F53;&#x8FDB;&#x884C;&#x9519;&#x8BEF;&#x64CD;&#x4F5C;&#x65F6;&#x53EF;&#x7528;&#x5176;&#x8FDB;&#x884C;&#x6062;&#x590D;&#x3002;</p>
+<ul>
+<li>
+<p>&#x5728;&#x7EBF;&#x91CD;&#x505A;&#x65E5;&#x5FD7;</p>
+<ul>
+<li>
+<p>&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x81F3;&#x5C11;&#x6709;&#x4E24;&#x4E2A;&#x5728;&#x7EBF;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x7EC4;&#xFF0C;&#x4E3A;&#x955C;&#x50CF;&#x3002;&#x5207;&#x6362;&#x7684;&#x52A8;&#x4F5C;&#x79F0;&#x4E3A;&#x65E5;&#x5FD7;&#x5207;&#x6362;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x7CFB;&#x7EDF;&#x4E34;&#x65F6;&#x6027;&#x6682;&#x505C;&#x3002;&#xFF08;&#x4F1A;&#x6682;&#x65F6;&#x6302;&#x8D77;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x4F5C;&#xFF0C;&#x53BB;&#x786E;&#x8BA4;&#x7F13;&#x5B58;&#x4E2D;&#x6570;&#x636E;&#x662F;&#x5426;&#x5B89;&#x5168;&#x5199;&#x5165;&#xFF09;(&#x68C0;&#x67E5;&#x70B9;)&#xFF08;&#x53BB;&#x68C0;&#x67E5;&#x5728;&#x7EBF;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x7684;&#x5185;&#x5BB9;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x88AB;&#x5199;&#x5165;&#x78C1;&#x76D8;&#xFF09;&#xFF08;&#x6B64;&#x65F6;&#x4F1A;&#x5C06;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x5DF2;&#x63D0;&#x4EA4;&#x5185;&#x5BB9;&#x5237;&#x5165;&#x78C1;&#x76D8;&#xFF09;&#xFF08;&#x53E6;&#x4E00;&#x4E2A;&#x5237;&#x5165;&#x78C1;&#x76D8;&#x65F6;&#x95F4;&#x662F;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#x6EE1;&#x4E86;&#x65F6;&#xFF09;</p>
+</li>
+<li>
+<p>&#x6BCF;&#x4E2A;&#x65E5;&#x5FD7;&#x7EC4;&#x6709;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x65E5;&#x5FD7;&#x6210;&#x5458;&#xFF0C;&#x5927;&#x5C0F;&#x56FA;&#x5B9A;&#xFF0C;&#x5FAA;&#x73AF;&#x4F7F;&#x7528;(1&#x5199;&#x6EE1;&#x4E86;&#x53BB;&#x8986;&#x76D6;2,2&#x5199;&#x6EE1;&#x4E86;&#x53BB;&#x8986;&#x76D6;1)</p>
+</li>
+</ul>
+<blockquote>
+<p>&#x6570;&#x636E;&#x5E93;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#xFF0C;&#x662F;Oracle SGA&#x4E2D;&#x7684;&#x7ED3;&#x6784;&#x3002;&#x63D0;&#x4EA4;update&#x4F1A;&#x5199;&#x5165;&#x5176;&#x4E2D;(&#x4E5F;&#x4F1A;&#x5199;&#x5165;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x7F13;&#x51B2;&#x533A;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;SGA&#x7ED3;&#x6784;)&#xFF0C;&#x63D0;&#x4EA4;commit&#x4F1A;&#x5C06;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x7F13;&#x51B2;&#x533A;&#x5199;&#x5165;&#x5728;&#x7EBF;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x3002;&#x82E5;&#x65AD;&#x7535;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x7F13;&#x5B58;&#x6E05;&#x7A7A;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x7EBF;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x6062;&#x590D;&#x3002;&#x56E0;&#x6B64;&#x5F53;&#x7F13;&#x51B2;&#x533A;&#x88AB;&#x5237;&#x5165;&#x78C1;&#x76D8;&#x524D;&#xFF0C;&#x5728;&#x7EBF;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x4E0D;&#x80FD;&#x88AB;&#x8986;&#x76D6;</p>
+</blockquote>
+<blockquote>
+<p>&#x5982;&#x679C;&#x5728;&#x5B8C;&#x6210;&#x68C0;&#x67E5;&#x70B9;&#x524D;&#x60F3;&#x4F7F;&#x7528;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#xFF0C;&#x4F1A;&#x51FA;&#x73B0;<code>Checkpoint not complete</code>&#x4FE1;&#x606F;&#xFF0C;&#x6B64;&#x65F6;&#x5176;&#x4ED6;&#x5904;&#x7406;&#x90FD;&#x4F1A;&#x6682;&#x505C;&#xFF0C;&#x4F1A;&#x5168;&#x529B;&#x5B8C;&#x6210;&#x68C0;&#x67E5;&#x70B9;&#x3002;&#x5982;&#x679C;&#x4F18;&#x5316;&#x662F;&#x59A5;&#x5F53;&#x7684;&#xFF0C;&#x4E0D;&#x5E94;&#x8BE5;&#x770B;&#x5230;&#x6B64;&#x6761;&#x4FE1;&#x606F;&#x3002;(&#x901A;&#x5E38;&#x4E3A;&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;&#x8DB3;&#x591F;&#x591A;&#x7684;&#x5728;&#x7EBF;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#xFF0C;&#x6216;&#x672A;&#x5BF9;DBWn(Database Block writer)&#x8C03;&#x4F18;)</p>
+</blockquote>
+<blockquote>
+<p>&#x8BBE;&#x7F6E;&#x5728;&#x7EBF;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x5927;&#x5C0F;&#x9700;&#x8981;&#x8003;&#x8651;&#x7684;&#xFF1A;</p>
+<ul>
+<li>&#x9AD8;&#x5CF0;&#x8D1F;&#x8F7D;&#xFF0C;&#x5927;&#x5C0F;&#x5E94;&#x4EE5;&#x9AD8;&#x5CF0;&#x671F;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x751F;&#x6210;&#x91CF;&#x4E3A;&#x51C6;&#xFF0C;&#x9632;&#x6B62;&#x51FA;&#x73B0;&#x68C0;&#x67E5;&#x70B9;&#x7B49;&#x5F85;</li>
+<li>&#x5927;&#x91CF;&#x7528;&#x6237;&#x4FEE;&#x6539;&#x76F8;&#x540C;&#x7684;&#x5757;&#xFF0C;&#x9700;&#x8981;&#x5C06;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x8BBE;&#x7F6E;&#x7684;&#x5927;&#x4E00;&#x70B9;&#xFF0C;&#xFF08;&#x6BCF;&#x4E2A;&#x7528;&#x6237;&#x4FEE;&#x6539;&#x76F8;&#x540C;&#x7684;&#x5757;&#xFF0C;&#x6700;&#x597D;&#x505A;&#x66F4;&#x591A;&#x7684;&#x66F4;&#x65B0;&#x518D;&#x4E00;&#x6B21;&#x5237;&#x8FDB;&#x78C1;&#x76D8;&#xFF09;</li>
+<li>&#x5E73;&#x5747;&#x56DE;&#x590D;&#x65F6;&#x95F4;&#x3002;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x8D8A;&#x5927;&#xFF0C;&#x56DE;&#x590D;&#x65F6;&#x95F4;&#x8D8A;&#x957F;&#x3002;&#x5C0F;&#x7684;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x4F1A;&#x5BFC;&#x81F4;&#x66F4;&#x591A;&#x7684;&#x68C0;&#x67E5;&#x70B9;&#x64CD;&#x4F5C;&#xFF0C;&#x66F4;&#x6162;&#x7684;&#x7CFB;&#x7EDF;&#x8FD0;&#x884C;&#x901F;&#x5EA6;&#xFF0C;&#x66F4;&#x5FEB;&#x7684;&#x6062;&#x590D;&#x65F6;&#x95F4;&#x3002;</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>&#x5F52;&#x6863;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#xFF1A;&#x5728;&#x66F4;&#x957F;&#x7684;&#x65F6;&#x95F4;&#x7EF4;&#x5EA6;&#x6062;&#x590D;&#x6570;&#x636E;&#x3002;&#x9700;&#x5728;&#x5F52;&#x6863;&#x6A21;&#x5F0F;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4EE5;&#x5FEB;&#x8FDB;&#x7684;&#x65B9;&#x5F0F;&#x91CD;&#x505A;&#x6574;&#x4E2A;&#x661F;&#x671F;&#x7684;&#x4E8B;&#x52A1;&#x3002;</p>
+<blockquote>
+<p>&#x4E0D;&#x4EE5;&#x5F52;&#x6863;&#x6A21;&#x5F0F;&#x8FD0;&#x884C;&#x7684;&#x6570;&#x636E;&#x5E93;&#x603B;&#x6709;&#x4E00;&#x5929;&#x4F1A;&#x4E22;&#x5931;&#x6570;&#x636E;</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>&#x5BC6;&#x7801;&#x6587;&#x4EF6;</p>
+</li>
+</ul>
+<div class="title4">Oracle Database 10g&#x65B0;&#x589E;2&#x53EF;&#x9009;&#x6587;&#x4EF6;&#xFF0C;&#x4EE5;&#x5B9E;&#x73B0;&#x66F4;&#x5FEB;&#x7684;&#x5907;&#x4EFD;&#x548C;&#x6062;&#x590D;&#x64CD;&#x4F5C;&#xFF1A;</div>
+<ul>
+<li>&#x4FEE;&#x6539;&#x8DDF;&#x8E2A;&#x6587;&#x4EF6;</li>
+<li>&#x95EA;&#x56DE;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;</li>
+</ul>
+<div class="title4">&#x4E0E;&#x6570;&#x636E;&#x5E93;&#x6709;&#x5173;&#x7684;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x6587;&#x4EF6;</div>
+<ul>
+<li>&#x8F6C;&#x50A8;&#x6587;&#x4EF6;</li>
+<li>&#x6570;&#x636E;&#x6CF5;&#x6587;&#x4EF6;</li>
+<li>&#x5E73;&#x9762;&#x6587;&#x4EF6;</li>
+</ul>
+<hr>
+<div class="title2" id="oracle-arch-3">&#x4E09;&#x3001;&#x5185;&#x5B58;&#x7ED3;&#x6784;</div>
+<hr>
+<ul>
+<li>
+<p><strong>&#x7CFB;&#x7EDF;&#x5168;&#x5C40;&#x533A;(SGA)</strong>:&#x4E00;&#x4E2A;&#x5927;&#x7684;&#x5171;&#x4EAB;&#x5185;&#x5B58;&#x6BB5;&#xFF0C;&#x51E0;&#x4E4E;&#x6240;&#x6709;Oracle&#x8FDB;&#x7A0B;&#x90FD;&#x8981;&#x8BBF;&#x95EE;&#x8FD9;&#x4E2A;&#x533A;&#x57DF;&#x3002;&#x5728;&#x5C0F;&#x578B;&#x6D4B;&#x8BD5;&#x7CFB;&#x7EDF;&#x4E2D;&#x53EF;&#x80FD;&#x53EA;&#x6709;&#x51E0;&#x5341;MB&#xFF0C;&#x4F46;&#x5728;&#x4E2D;&#x5927;&#x578B;&#x4E43;&#x81F3;&#x5DE8;&#x578B;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x53EF;&#x80FD;&#x591A;&#x8FBE;&#x51E0;&#x767E;GB</p>
+<blockquote>
+<p>&#x67E5;&#x770B;sga:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql"><span class="token keyword keyword-select">select</span> pool<span class="token punctuation">,</span>name<span class="token punctuation">,</span>bytes
+  <span class="token keyword keyword-from">from</span> v$sgastat
+  <span class="token keyword keyword-order">order</span> <span class="token keyword keyword-by">by</span> pool<span class="token punctuation">,</span>name<span class="token punctuation">;</span>
+</pre><p>&#x5185;&#x542B;&#x591A;&#x4E2A;&#x6C60;</p>
+</blockquote>
+<ul>
+<li>
+<p>java pool:&#x4E3A;java&#x865A;&#x62DF;&#x673A;(jvm)&#x5206;&#x914D;&#x7684;&#x56FA;&#x5B9A;&#x5927;&#x5C0F;&#x7684;&#x5185;&#x5B58;(oracle 10g&#x4EE5;&#x4E0A;&#x8BFE;&#x542F;&#x52A8;&#x6216;&#x8FD0;&#x884C;&#x65F6;&#x8C03;&#x6574;&#x5927;&#x5C0F;)<code>JAVA_POOL_SIZE</code></p>
+</li>
+<li>
+<p>large pool&#xFF1A;&#x7528;&#x4E8E;&#x5927;&#x5757;&#x5185;&#x5B58;&#x7684;&#x5206;&#x914D;&#x3002;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x65F6;&#x5B58;&#x50A8;UGA,&#x5E76;&#x884C;&#x6267;&#x884C;&#x529F;&#x80FD;&#x65F6;&#x4F5C;&#x4E3A;&#x6D88;&#x606F;&#x7F13;&#x51B2;&#x533A;&#xFF0C;RMAN&#x5907;&#x4EFD;&#x65F6;&#x4F5C;&#x4E3A;&#x78C1;&#x76D8;I/O&#x7F13;&#x51B2;&#x533A;&#x3002;&#x53EF;&#x52A8;&#x6001;&#x8C03;&#x6574;&#x5927;&#x5C0F;<code>LARGE_POOL_SIZE</code></p>
+</li>
+<li>
+<p><strong>shared pool(&#x5171;&#x4EAB;&#x6C60;)</strong>&#xFF1A;&#x5171;&#x4EAB;&#x6E38;&#x6807;&#x3001;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x3001;&#x72B6;&#x6001;&#x5BF9;&#x8C61;&#x3001;&#x5B57;&#x5178;&#x7F13;&#x5B58;&#x548C;&#x8BF8;&#x5982;&#x6B64;&#x7C7B;&#x7684;&#x5927;&#x91CF;&#x5176;&#x4ED6;&#x6570;&#x636E;&#x3002;9i&#x53CA;&#x4EE5;&#x4E0A;&#x7248;&#x672C;&#x53EF;&#x52A8;&#x6001;&#x8C03;&#x6574;&#x5927;&#x5C0F;<code>SHARED_POOL_SIZE</code></p>
+<ul>
+<li>&#x7F13;&#x5B58;Orale&#x7A0B;&#x5E8F;&#x6570;&#x636E;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x4F8B;&#x5982;&#x89E3;&#x6790;&#x67E5;&#x8BE2;&#x65F6;&#xFF0C;&#x5C06;&#x89E3;&#x6790;&#x7ED3;&#x679C;&#x50A8;&#x5B58;&#x5728;&#x8FD9;&#x3002;</li>
+<li>PL/SQL&#x4EE3;&#x7801;&#x4E5F;&#x50A8;&#x5B58;&#x5728;&#x8FD9;&#x5E76;&#x88AB;&#x5171;&#x4EAB;&#x3002;</li>
+<li>&#x6839;&#x636E;LRU&#xFF08;&#x6700;&#x8FD1;&#x6700;&#x5C11;&#x4F7F;&#x7528;&#xFF09;&#x539F;&#x5219;&#x7BA1;&#x7406;&#x3002;&#x6216;&#x8005;&#x901A;&#x8FC7;<code>DBMS_SHARED_POOL</code>&#x5305;&#x5C06;&#x5BF9;&#x8C61;&#x957F;&#x4E45;&#x4FDD;&#x5B58;&#x5728;&#x5171;&#x4EAB;&#x6C60;&#x4E2D;</li>
+<li><strong>&#x4E0D;&#x4F7F;&#x7528;&#x7ED1;&#x5B9A;&#x53D8;&#x91CF;&#xFF0C;&#x5219;&#x4F1A;&#x7834;&#x574F;&#x5171;&#x4EAB;&#x6C60;&#x673A;&#x5236;</strong>,&#x552F;&#x4E00;&#x4F7F;&#x5F97;oracle&#x80FD;&#x591F;&#x91CD;&#x590D;&#x5229;&#x7528;&#x6267;&#x884C;&#x8BA1;&#x5212;&#x7684;&#x65B9;&#x6CD5;&#x5C31;&#x662F;&#x91C7;&#x7528;&#x7ED1;&#x5B9A;&#x53D8;&#x91CF;
+<blockquote>
+<p>&#x7CFB;&#x7EDF;&#x82B1;&#x5927;&#x91CF;CPU&#x89E3;&#x6790;&#x67E5;&#x8BE2;<br>
+&#x7CFB;&#x7EDF;&#x4F7F;&#x7528;&#x5927;&#x91CF;&#x8D44;&#x6E90;&#x7BA1;&#x7406;&#x5171;&#x4EAB;&#x6C60;&#x4E2D;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x5176;&#x4E0D;&#x88AB;&#x91CD;&#x7528;<br>
+&#x786C;&#x89E3;&#x6790;&#xFF08;&#x8BED;&#x6CD5;&#x6811;&#x5206;&#x6790;&#xFF09;&#x3001;&#x8F6F;&#x89E3;&#x6790;&#xFF08;&#x6C60;&#x4E2D;&#x67E5;&#x5230;&#xFF0C;&#x76F4;&#x63A5;&#x83B7;&#x53D6;&#x6267;&#x884C;&#x8BA1;&#x5212;&#xFF09;&#x3001;&#x6267;&#x884C;</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>streams pool:&#x4E13;&#x95E8;&#x9488;&#x5BF9;&#x6570;&#x636E;&#x4F20;&#x8F93;/&#x5171;&#x4EAB;&#x5DE5;&#x5177;&#x7684;&#x5185;&#x5B58;&#x6C60;&#x3002;&#x53EF;&#x52A8;&#x6001;&#x8C03;&#x6574;&#x5927;&#x5C0F;&#x3002;&#x82E5;&#x672A;&#x914D;&#x7F6E;&#x8BE5;&#x6C60;&#xFF0C;&#x5219;oracle&#x4F1A;&#x4F7F;&#x7528;shared pool&#x6700;&#x591A;10%&#x7684;&#x7A7A;&#x95F4;&#x4F5C;&#x4E3A;&#x6D41;&#x5185;&#x5B58;<code>STREAMS_POOL_SIZE</code></p>
+</li>
+<li>
+<p>&quot;null&quot; pool(pool&#x5B57;&#x6BB5;&#x4E3A;&#x7A7A;&#x7684;&#x6C60;)&#xFF1A;&#x5757;&#x7F13;&#x51B2;&#x533A;&#xFF08;&#x7F13;&#x5B58;&#x6570;&#x636E;&#x5E93;&#x5757;&#xFF09;&#x3001;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x7F13;&#x51B2;&#x533A;&#x548C;&quot;&#x56FA;&#x5B9A;SGA&quot;&#x533A;&#x4E13;&#x7528;&#x7684;&#x5185;&#x5B58;&#xFF08;<code>LOG_BUFFER</code>&#x67D0;&#x79CD;&#x7A0B;&#x5EA6;&#x63A7;&#x5236;&#x65E5;&#x5FD7;&#x7F13;&#x51B2;&#x533A;&#x5927;&#x5C0F;&#xFF09;</p>
+</li>
+<li>
+<p>&#x65E0;&#x8BBA;&#x4F55;&#x79CD;&#x5206;&#x914D;&#x65B9;&#x5F0F;&#xFF0C;&#x5404;&#x4E2A;&#x6C60;&#x7684;&#x5185;&#x5B58;&#x5206;&#x914D;&#x90FD;&#x662F;&#x57FA;&#x4E8E;&#x9897;&#x7C92;&#x7684;&#xFF08;&#x9897;&#x7C92;&#x7684;&#x500D;&#x6570;&#xFF09;&#x3002;&#x9897;&#x7C92;&#x7684;&#x5927;&#x5C0F;&#x4E3A;4,8,16MB&#x7684;&#x5185;&#x5B58;&#x533A;&#x3002;&#x82E5;&#x5206;&#x914D;5MB&#xFF0C;&#x9897;&#x7C92;&#x4E3A;4&#xFF0C;&#x5219;&#x5B9E;&#x9645;&#x4E0A;&#x4F1A;&#x5206;&#x914D;8MB</p>
+</li>
+</ul>
+<blockquote>
+<pre data-role="codeBlock" data-info="sql" class="language-sql">V$SGA_DYNAMIC_COMPONENTS
+<span class="token comment">---&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x5404;&#x4E2A;&#x6C60;&#x4E2D;&#x7684;&#x9897;&#x7C92;&#x5927;&#x5C0F;(&#x5B57;&#x6BB5;(granule_size))&#xFF0C;&#x6216;SGA&#x603B;&#x5927;&#x5C0F;&#x5982;&#x4F55;&#x5F71;&#x54CD;&#x9897;&#x7C92;&#x5927;&#x5C0F;</span>
+</pre></blockquote>
+</li>
+<li>
+<p><strong>&#x8FDB;&#x7A0B;&#x5168;&#x5C40;&#x533A;(PGA)</strong>:&#x8FDB;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#x4E13;&#x7528;&#x5185;&#x5B58;&#x3002;&#x7531;&#x8FDB;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#x81EA;&#x8EAB;&#x5206;&#x914D;&#x3002;&#x9664;&#x4E86;UGA&#xFF08;&#x5982;&#x679C;&#x6709;&#xFF09;&#xFF0C;&#x51E0;&#x4E4E;&#x7528;&#x4E8E;&#x5185;&#x5B58;&#x6392;&#x5E8F;&#xFF0C;&#x4F4D;&#x56FE;&#x5408;&#x5E76;&#x3001;&#x6563;&#x5217;&#x3002;&#x53EF;&#x4EE5;&#x624B;&#x52A8;&#x544A;&#x8BC9;Oracle&#x5141;&#x8BB8;&#x591A;&#x5C11;&#x5185;&#x5B58;&#x7528;&#x4E8E;&#x6392;&#x5E8F;&#x548C;&#x6563;&#x5217;&#x7B49;&#xFF0C;&#x4E5F;&#x53EF;&#x81EA;&#x52A8;&#x5206;&#x914D;&#x6574;&#x4E2A;PGA&#xFF08;&#x9700;&#x8BBE;&#x7F6E;&#x6700;&#x591A;&#x5141;&#x8BB8;&#x591A;&#x5C11;&#x5185;&#x5B58;<code>PGA_AGGREGATE_TARGET</code>&#xFF09;&#xFF08;&#x6216;&#x8005;SGA&#x548C;PGA&#x603B;&#x5171;&#x53EF;&#x4EE5;&#x7528;&#x591A;&#x5927;&#x5185;&#x5B58;<code>MEMORY_TARGET</code>&#xFF09;</p>
+<blockquote>
+<p>&#x624B;&#x52A8;PGA&#x7BA1;&#x7406;</p>
+<ul>
+<li><code>SORT_AREA_SIZE</code> &#x6392;&#x5E8F;&#x4FE1;&#x606F;&#x4EA4;&#x6362;&#x5230;&#x78C1;&#x76D8;&#x524D;&#xFF0C;&#x6240;&#x4F7F;&#x7528;&#x7684;&#x5185;&#x5B58;&#x603B;&#x91CF;</li>
+<li><code>SORT_AREA_RETAINED_SIZE</code> &#x6392;&#x5E8F;&#x5B8C;&#x6210;&#x540E;&#x7528;&#x4E8E;&#x4FDD;&#x5B58;&#x5DF2;&#x6392;&#x5E8F;&#x6570;&#x636E;&#x7684;&#x5185;&#x5B58;&#x603B;&#x91CF;</li>
+<li><code>HASH_AREA_SIZE</code> &#x5B58;&#x50A8;&#x6563;&#x5217;&#x8868;&#x6240;&#x7528;&#x7684;&#x5185;&#x5B58;&#x91CF;&#x3002;&#x901A;&#x5E38;&#x5728;&#x505A;&#x5927;&#x6570;&#x636E;&#x96C6;&#x548C;&#x53E6;&#x4E00;&#x6570;&#x636E;&#x96C6;&#x7684;&#x8FDE;&#x63A5;&#x65F6;&#xFF0C;&#x4F1A;&#x8FDB;&#x884C;&#x6563;&#x5217;&#x8FDE;&#x63A5;&#x5E76;&#x7528;&#x5230;&#x8FD9;&#x90E8;&#x5206;&#x5185;&#x5B58;&#x3002;&#x8F83;&#x5C0F;&#x7684;&#x6570;&#x636E;&#x96C6;&#x4F1A;&#x88AB;&#x6563;&#x5217;&#x5230;&#x5185;&#x5B58;&#xFF0C;&#x653E;&#x4E0D;&#x4E0B;&#x7684;&#x90E8;&#x5206;&#x4F1A;&#x901A;&#x8FC7;&#x8FDE;&#x63A5;&#x952E;&#x5B58;&#x50A8;&#x5230;&#x4E34;&#x65F6;&#x8868;&#x7A7A;&#x95F4;&#x4E2D;</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p><strong>&#x7528;&#x6237;&#x5168;&#x5C40;&#x533A;(UGA)</strong>:&#x4E0E;&#x7279;&#x5B9A;&#x7684;&#x4F1A;&#x8BDD;&#x5173;&#x8054;&#x3002;&#x53EF;&#x4EE5;&#x7531;SGA&#xFF08;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#xFF09;&#xFF08;&#x6B64;&#x65F6;UGA&#x5728;SGA&#x5185;&#x90E8;&#xFF09;&#x6216;PGA&#xFF08;&#x4E13;&#x7528;&#x670D;&#x52A1;&#x5668;&#xFF09;&#xFF08;&#x6B64;&#x65F6;UGA&#x548C;PGA&#x51E0;&#x4E4E;&#x4E3A;&#x540C;&#x4E49;&#x8BCD;&#xFF09;&#x5206;&#x914D;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#x6765;&#x8BF4;&#xFF0C;&#x5C31;&#x662F;&#x4F1A;&#x8BDD;&#x72B6;&#x6001;</p>
+</li>
+</ul>
+<hr>
+<div class="title2" id="oracle-arch-4">&#x56DB;&#x3001;Oracle&#x8FDB;&#x7A0B;</div>
+<hr>
+<p>Oracle&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x8FDB;&#x7A0B;&#x90FD;&#x8981;&#x6267;&#x884C;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x4EFB;&#x52A1;(&#x6216;&#x4E00;&#x7EC4;&#x4EFB;&#x52A1;)&#xFF0C;&#x6BCF;&#x4E2A;&#x8FDB;&#x7A0B;&#x90FD;&#x4F1A;&#x7ED9;&#x81EA;&#x5DF1;&#x5206;&#x914D;&#x5185;&#x5B58;&#xFF08;PGA&#xFF09;&#x6765;&#x5B8C;&#x6210;&#x5B83;&#x7684;&#x4EFB;&#x52A1;&#x3002;&#x4E00;&#x4E2A;Oracle&#x5B9E;&#x4F8B;&#x4E3B;&#x8981;&#x7531;&#x4EE5;&#x4E0B;&#x4E09;&#x7C7B;&#x8FDB;&#x7A0B;&#x3002;</p>
+<ul>
+<li>
+<p>&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x7A0B;<br>
+&#x6839;&#x636E;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x8BF7;&#x6C42;&#x5B8C;&#x6210;&#x5DE5;&#x4F5C;&#x3002;&#xFF08;&#x4E13;&#x7528;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x5C31;&#x662F;&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x7A0B;&#xFF09;</p>
+</li>
+<li>
+<p>&#x540E;&#x53F0;&#x8FDB;&#x7A0B;<br>
+&#x968F;&#x7740;&#x6570;&#x636E;&#x5E93;&#x7684;&#x542F;&#x52A8;&#x800C;&#x542F;&#x52A8;&#xFF0C;&#x7528;&#x4EE5;&#x5B8C;&#x6210;&#x5404;&#x79CD;&#x7EF4;&#x62A4;&#x4EFB;&#x52A1;&#x3002;&#xFF08;&#x5982;&#x5C06;&#x6570;&#x636E;&#x5E93;&#x5199;&#x5165;&#x78C1;&#x76D8;&#x3001;&#x7EF4;&#x62A4;&#x5728;&#x7EBF;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#xFF0C;&#x6E05;&#x7406;&#x5F02;&#x5E38;&#x7EC8;&#x6B62;&#x7684;&#x8FDB;&#x7A0B;&#x4EE5;&#x53CA;&#x7EF4;&#x62A4;&#x81EA;&#x52A8;&#x5DE5;&#x4F5C;&#x8D1F;&#x8F7D;&#x5B58;&#x50A8;&#x5E93;&#x7B49;&#xFF09;</p>
+</li>
+<li>
+<p>&#x4ECE;&#x5C5E;&#x8FDB;&#x7A0B;<br>
+&#x7C7B;&#x4F3C;&#x540E;&#x53F0;&#x8FDB;&#x7A0B;&#xFF0C;&#x4EE3;&#x8868;&#x540E;&#x4EE3;&#x8FDB;&#x7A0B;&#x6216;&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x7A0B;&#x5B8C;&#x6210;&#x4E00;&#x4E9B;&#x989D;&#x5916;&#x7684;&#x5DE5;&#x4F5C;</p>
+</li>
+</ul>
+<div class="title4">&#x670D;&#x52A1;&#x5668;&#x8FDB;&#x7A0B;</div>
+<p>&#x5373;&#x6267;&#x884C;&#x5BA2;&#x6237;&#x7AEF;&#x4F1A;&#x8BDD;&#x6307;&#x4EE4;&#x7684;&#x8FDB;&#x7A0B;&#x3002;&#x8D1F;&#x8D23;&#x63A5;&#x53D7;&#x6709;&#x5E94;&#x7528;&#x53D1;&#x9001;&#x7ED9;&#x6570;&#x636E;&#x5E93;&#x7684;SQL&#x8BED;&#x53E5;&#xFF0C;&#x5E76;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x5F53;&#x4F60;&#x63D0;&#x4EA4;&#x4E00;&#x6761;SQL&#x8BED;&#x53E5;&#x65F6;&#xFF0C;&#x4E13;&#x7528;&#x670D;&#x52A1;&#x5668;&#x6216;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x5C31;&#x8FDB;&#x7A0B;&#x5C31;&#x4F1A;&#x89E3;&#x6790;&#x8FD9;&#x4E2A;&#x67E5;&#x8BE2;&#xFF0C;&#x653E;&#x5165;&#x5171;&#x4EAB;&#x6C60;(&#x6216;&#x76F4;&#x63A5;&#x5728;&#x5171;&#x4EAB;&#x6C60;&#x53D1;&#x73B0;&#x4ED6;)&#x3002;&#x8FD9;&#x4E2A;&#x8FDB;&#x7A0B;&#x8981;&#x6307;&#x5B9A;&#x67E5;&#x8BE2;&#x8BA1;&#x5212;&#xFF08;&#x82E5;&#x9700;&#x8981;&#xFF09;&#x5E76;&#x6267;&#x884C;&#x4ED6;&#x3002;</p>
+<p>&#x8BE5;&#x7C7B;&#x7EBF;&#x7A0B;&#x662F;&#x5E72;&#x91CD;&#x6D3B;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x51E0;&#x4E4E;&#x6240;&#x6709;&#x5DE5;&#x4F5C;&#x90FD;&#x662F;&#x8FD9;&#x4E9B;&#x7EBF;&#x7A0B;&#x505A;&#x7684;</p>
+<blockquote>
+<p>&#x8FDE;&#x63A5;&#x4E0E;&#x4F1A;&#x8BDD;&#xFF1A;</p>
+<ul>
+<li>&#x8FDE;&#x63A5;&#xFF1A;<strong>&#x4ECE;&#x5BA2;&#x6237;&#x7AEF;&#x5230;Oracle&#x6570;&#x636E;&#x5E93;&#x5B9E;&#x4F8B;&#x7684;&#x4E00;&#x6761;&#x7269;&#x7406;&#x8DEF;&#x5F84;</strong>&#x3002;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;&#x4E0A;&#x53EF;&#x4EE5;&#x6CA1;&#x6709;&#x6216;&#x6709;&#x591A;&#x4E2A;&#x4F1A;&#x8BDD;&#xFF0C;&#x4E00;&#x4E2A;&#x4F1A;&#x8BDD;&#x4E5F;&#x53EF;&#x4EE5;&#x6709;&#x8FDE;&#x63A5;&#x6216;&#x6CA1;&#x8FDE;&#x63A5;</li>
+<li>&#x4F1A;&#x8BDD;&#xFF1A;<strong>&#x6570;&#x636E;&#x5E93;&#x5B9E;&#x4F8B;&#x4E2D;&#x5B58;&#x5728;&#x7684;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x5B9E;&#x4F53;</strong>&#x3002;&#x6211;&#x4EEC;&#x6240;&#x770B;&#x5230;&#x7684;&#x4F1A;&#x8BDD;&#x72B6;&#x6001;&#x4FE1;&#x606F;&#xFF0C;&#x4EE3;&#x8868;&#x4E86;&#x4F1A;&#x8BDD;&#x5728;&#x5B9E;&#x4F8B;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x96C6;&#x5408;&#x3002;&#x540C;&#x65F6;&#xFF0C;&#x4F1A;&#x8BDD;&#x662F;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E0A;&#x6267;&#x884C;SQL&#xFF0C;&#x63D0;&#x4EA4;&#x4E8B;&#x52A1;&#x548C;&#x8FD0;&#x884C;&#x5B58;&#x50A8;&#x8FC7;&#x7A0B;&#x7684;&#x5730;&#x65B9;</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>&#x9664;&#x4E86;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;&#x548C;&#x4E13;&#x7528;&#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;&#x5916;&#x7684;&#x7B2C;&#x4E09;&#x79CD;&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;&#xFF1A;&#x6570;&#x636E;&#x5E93;&#x5E38;&#x9A7B;&#x8FDE;&#x63A5;&#x6C60;&#x3002;&#x7EE7;&#x627F;&#x4E86;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x7684;&#x5171;&#x4EAB;&#x6982;&#x5FF5;&#x548C;&#x4E13;&#x7528;&#x670D;&#x52A1;&#x5668;&#x7684;&#x4E13;&#x7528;&#x6982;&#x5FF5;&#x2014;&#x2014;&#x5728;&#x6C60;&#x5B50;&#x91CC;&#x653E;&#x7684;&#x662F;&#x4E13;&#x7528;&#x670D;&#x52A1;&#x5668;&#x7684;&#x8FDE;&#x63A5;&#xFF0C;&#x5728;&#x4E00;&#x6B21;&#x4F1A;&#x8BDD;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x91CC;&#xFF0C;&#x5176;&#x7528;&#x7684;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x5668;&#x7EBF;&#x7A0B;</p>
+</blockquote>
+<p>&#x4E09;&#x79CD;&#x8FDE;&#x63A5;&#x6A21;&#x5F0F;&#x7684;&#x9002;&#x7528;&#x573A;&#x666F;&#xFF1A;</p>
+<ul>
+<li>
+<p>&#x4E13;&#x7528;&#x670D;&#x52A1;&#x5668;<br>
+&#x662F;Oracle&#x7684;&#x63A8;&#x8350;&#x914D;&#x7F6E;&#xFF0C;&#x8BBE;&#x7F6E;&#x5176;&#x6700;&#x7B80;&#x5355;&#xFF0C;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x4EC0;&#x4E48;&#x914D;&#x7F6E;&#xFF0C;&#x80FD;&#x5F88;&#x597D;&#x5730;&#x6269;&#x5C55;&#x3002;<br>
+&#x56E0;&#x4E3A;&#x662F;1V1&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x5FC5;&#x62C5;&#x5FC3;&#x957F;&#x65F6;&#x95F4;&#x8FD0;&#x884C;&#x7684;&#x4E8B;&#x52A1;&#x4F1A;&#x963B;&#x585E;&#x5176;&#x4ED6;&#x4E8B;&#x52A1;&#x3002;<br>
+&#x56E0;&#x6B64;&#xFF0C;&#x5728;&#x975E;OLTP&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x4E5F;&#x5373;&#x6709;&#x53EF;&#x80FD;&#x957F;&#x65F6;&#x95F4;&#x8FD0;&#x884C;&#x4E8B;&#x52A1;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5E94;&#x8BE5;&#x8003;&#x8651;&#x7528;&#x8FD9;&#x79CD;&#x6A21;&#x5F0F;&#x3002;</p>
+</li>
+<li>
+<p>&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;<br>
+&#x914D;&#x7F6E;&#x4E0D;&#x96BE;&#xFF0C;&#x4EC5;&#x6BD4;&#x4E13;&#x7528;&#x670D;&#x52A1;&#x5668;&#x591A;&#x4E00;&#x6B65;&#x3002;<br>
+&#x662F;nV1,&#x591A;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x5BF9;&#x5E94;&#x7740;&#x4E00;&#x4E2A;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x3002;&#x4F7F;&#x7528;&#x65F6;&#x5FC5;&#x987B;&#x5F53;&#x5FC3;&#xFF0C;&#x4E0D;&#x80FD;&#x957F;&#x65F6;&#x95F4;&#x72EC;&#x5360;&#x8D44;&#x6E90;&#x3002;<br>
+&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x7684;&#x539F;&#x5219;&#x662F;&#xFF1A;&#x4E8B;&#x52A1;&#x53EF;&#x4EE5;&#x9891;&#x7E41;&#x7684;&#x6267;&#x884C;&#xFF0C;&#x4F46;&#x5FC5;&#x987B;&#x77ED;&#x65F6;&#x95F4;&#x6267;&#x884C;&#x5B8C;&#xFF08;OLTP&#x7CFB;&#x7EDF;&#x7684;&#x7279;&#x70B9;&#xFF09;&#x3002;<br>
+&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x53EF;&#x80FD;&#x4F1A;&#x4EA7;&#x751F;&#x4EBA;&#x4E3A;&#x6B7B;&#x9501;&#x3002;&#xFF08;&#x5171;&#x4EAB;&#x8D44;&#x6E90;&#x7684;&#x6301;&#x6709;&#x8005;&#x56E0;&#x4E3A;&#x8868;&#x88AB;&#x9501;&#x4F4F;&#x800C;&#x963B;&#x585E;&#xFF0C;&#x800C;&#x9501;&#x7684;&#x6301;&#x6709;&#x8005;&#x6C38;&#x8FDC;&#x62FF;&#x4E0D;&#x5230;&#x5171;&#x4EAB;&#x8D44;&#x6E90;&#x6765;&#x91CA;&#x653E;&#x9501;&#xFF09;<br>
+&#x7531;&#x4E8E;&#x8FD9;&#x4E9B;&#x539F;&#x56E0;&#xFF0C;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x53EA;&#x9002;&#x5408;OLTP&#x7CFB;&#x7EDF;</p>
+<blockquote>
+<p>(<code>On-Line Transaction Processing&#x8054;&#x673A;&#x4E8B;&#x52A1;&#x5904;&#x7406;&#x8FC7;&#x7A0B;(OLTP)</code>)<br>
+OLTP&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x4EFB;&#x52A1;&#x4EE5;&#x6BEB;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x8FDB;&#x884C;&#x6267;&#x884C;&#xFF0C;&#x4EFB;&#x4F55;&#x4E8B;&#x52A1;&#x90FD;&#x4F1A;&#x5728;1S&#x5185;&#x5B8C;&#x6210;</p>
+</blockquote>
+<p>&#x82E5;OLTP&#x548C;&#x975E;PLTP&#x6DF7;&#x6742;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x5171;&#x7528;&#x4E13;&#x7528;&#x548C;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x7684;&#x6A21;&#x5F0F;</p>
+<blockquote>
+<p>&#x7531;&#x4E8E;&#x8BB8;&#x591A;&#x9AD8;&#x7EA7;&#x7279;&#x6027;&#x8981;&#x6C42;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x6240;&#x4EE5;&#x6709;&#x4E9B;&#x65F6;&#x5019;&#x4E5F;&#x6CA1;&#x5F97;&#x9009;&#x3002;&#x4F8B;&#x5982;Oracle Net&#x8FDE;&#x63A5;&#x6C60;&#xFF0C;&#x6216;&#x8005;&#x96C6;&#x4E2D;&#x5F0F;&#x6570;&#x636E;&#x5E93;&#x94FE;&#x3002;</p>
+</blockquote>
+<blockquote>
+<p>&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x7684;&#x597D;&#x5904;&#xFF1A;&#x51CF;&#x5C11;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x8FDB;&#x7A0B;&#x6570;&#xFF0C;&#x8BA4;&#x4E3A;&#x9650;&#x5236;&#x5E76;&#x53D1;&#x5EA6;&#xFF0C;&#x51CF;&#x5C11;&#x7CFB;&#x7EDF;&#x6240;&#x9700;&#x7684;&#x5185;&#x5B58;</p>
+</blockquote>
+</li>
+<li>
+<p>&#x6570;&#x636E;&#x5E93;&#x5E38;&#x9A7B;&#x8FDE;&#x63A5;&#x6C60;<br>
+&#x6709;&#x5171;&#x4EAB;&#x670D;&#x52A1;&#x5668;&#x7684;&#x8BB8;&#x591A;&#x4F18;&#x70B9;&#xFF0C;&#x540C;&#x65F6;&#x907F;&#x514D;&#x4EBA;&#x4E3A;&#x6B7B;&#x9501;&#x3002;&#x4F46;&#x5176;&#x6CA1;&#x6709;&#x591A;&#x7EBF;&#x7A0B;&#x529F;&#x80FD;&#x3002;&#x4ED6;&#x83B7;&#x5F97;&#x8FDB;&#x7A0B;&#x540E;&#xFF0C;&#x4F1A;&#x4E00;&#x76F4;&#x6301;&#x6709;&#x4ED6;&#x76F4;&#x5230;&#x5BA2;&#x6237;&#x7AEF;&#x91CA;&#x653E;&#x4ED6;&#x3002;<br>
+&#x66F4;&#x9002;&#x5408;&#x9700;&#x8981;&#x9891;&#x7E41;&#x8FDE;&#x63A5;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x8FDB;&#x884C;&#x5C0F;&#x5904;&#x7406;&#x53C8;&#x65AD;&#x5F00;&#x7684;&#x573A;&#x666F;&#x3002;&#x6216;&#x8005;&#x8BF4;&#xFF0C;DRCP&#x66F4;&#x9002;&#x5408;&#x5BA2;&#x6237;&#x7AEF;&#x5E94;&#x7528;&#x672C;&#x8EAB;&#x7684;API&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x9AD8;&#x6548;&#x8FDE;&#x63A5;&#x6C60;&#x7684;&#x60C5;&#x51B5;</p>
+</li>
+</ul>
+<div class="title4">&#x540E;&#x53F0;&#x8FDB;&#x7A0B;</div>
+<p>&#x662F;Oracle&#x5B9E;&#x4F8B;&#x7684;&#x7EC4;&#x6210;&#x90E8;&#x5206;(&#x5B9E;&#x4F8B;&#x7531;SGA&#x548C;&#x4E00;&#x7EC4;&#x540E;&#x53F0;&#x8FDB;&#x7A0B;&#x7EC4;&#x6210;)</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql"> <span class="token comment">----&#x67E5;&#x770B;&#x540E;&#x53F0;&#x8FDB;&#x7A0B;</span>
+ 
+ <span class="token keyword keyword-select">select</span> <span class="token operator">*</span>
+        <span class="token keyword keyword-from">from</span> V$bgprocess<span class="token punctuation">;</span>
+</pre><p>&#x5404;&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x4F5C;&#x7528;(&#x5982;PMON,LREG,SMON&#x7B49;)&#x89C1;&#x300A;Oracle&#x7F16;&#x7A0B;&#x827A;&#x672F;&#x300B;P179&#x3002;</p>
+<div class="title4">&#x4ECE;&#x5C5E;&#x8FDB;&#x7A0B;</div>
+<p>Oracle&#x4E2D;&#x6709;&#x4E24;&#x7C7B;&#x4ECE;&#x5C5E;&#x8FDB;&#x7A0B;&#xFF1A;I/O&#x4ECE;&#x5C5E;&#x8FDB;&#x7A0B;&#x548C;&#x5E76;&#x884C;&#x67E5;&#x8BE2;&#x4ECE;&#x5C5E;&#x8FDB;&#x7A0B;</p>
+<p>IO&#x4ECE;&#x5C5E;&#x8FDB;&#x7A0B;&#xFF1A;&#x7528;&#x4E8E;&#x5728;&#x4E0D;&#x652F;&#x6301;&#x5F02;&#x6B65;IO&#x7684;&#x7CFB;&#x7EDF;&#x6216;&#x8BBE;&#x5907;&#x4E0A;&#x6A21;&#x62DF;&#x5F02;&#x6B65;IO</p>
+<p>&#x5E76;&#x884C;&#x67E5;&#x8BE2;&#x4ECE;&#x5C5E;&#x5B50;&#x8FDB;&#x7A0B;:&#x5BF9;&#x4E8E;select&#x3001;create table&#x3001;create index &#x3001;update&#x7B49;sql&#x8BED;&#x53E5;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6267;&#x884C;&#x8BA1;&#x5212;&#xFF0C;&#x5305;&#x542B;&#x4E86;&#x591A;&#x4E2A;&#x540C;&#x65F6;&#x6267;&#x884C;&#x7684;&#x5B50;&#x8BA1;&#x5212;&#xFF0C;&#x5C06;&#x8F93;&#x51FA;&#x5408;&#x5E76;&#x518D;&#x8F93;&#x51FA;&#xFF0C;&#x5B8C;&#x6210;&#x8282;&#x7EA6;&#x65F6;&#x95F4;&#x7684;&#x76EE;&#x7684;&#x3002;</p>
+<hr>
+<div class="title2" id="oracle-arch-5">&#x4E94;&#x3001;redo&#x4E0E;undo</div>
+<hr>
+<p>redo:&#x91CD;&#x505A;&#x4FE1;&#x606F;&#xFF0C;&#x53EF;&#x4EE5;&#x91CD;&#x653E;&#x4E8B;&#x52A1;<br>
+undo:&#x56DE;&#x6EDA;&#x4FE1;&#x606F;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x53D6;&#x6D88;&#x6216;&#x8005;&#x56DE;&#x6EDA;&#x4E8B;&#x52A1;</p>
+<div class="title4">redo</div>
+<p>&#x5728;&#x7EBF;&#x91CD;&#x505A;&#x65E5;&#x5FD7;&#x3001;&#x5F52;&#x6863;&#x91CD;&#x505A;&#x65E5;&#x5FD7;(&#x5747;&#x5DF2;&#x4ECB;&#x7ECD;)</p>
+<div class="title4">undo</div>
+<p>&#x6982;&#x5FF5;&#x4E0A;&#x548C;redo&#x521A;&#x597D;&#x76F8;&#x53CD;&#x3002;&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x4FEE;&#x6539;&#x65F6;&#x4F1A;&#x751F;&#x6210;undo&#x4FE1;&#x606F;&#x3002;&#x9700;&#x8981;&#x65F6;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x56DE;&#x6EDA;&#xFF08;&#x6267;&#x884C;&#x7684;&#x4E8B;&#x52A1;&#x6216;&#x8BED;&#x53E5;&#x5931;&#x8D25;&#x6216;ROLLBACK&#x8BF7;&#x6C42;&#x56DE;&#x6EDA;&#x65F6;&#xFF09;</p>
+<blockquote>
+<p>undo&#x4F1A;&#x903B;&#x8F91;&#x7684;&#x56DE;&#x6EDA;&#x800C;&#x975E;&#x7269;&#x7406;&#x7684;&#x56DE;&#x6EDA;&#x3002;&#x610F;&#x601D;&#x662F;&#x7269;&#x7406;&#x7ED3;&#x6784;&#x5B58;&#x50A8;&#x524D;&#x540E;&#x53EF;&#x80FD;&#x4F1A;&#x4E0D;&#x540C;</p>
+<blockquote>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x8868;&#x5E76;&#x52A0;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x7136;&#x540E;&#x56DE;&#x6EDA;&#x540E;&#xFF0C;&#x56E0;&#x52A0;&#x5165;&#x6570;&#x636E;&#x800C;&#x5206;&#x914D;&#x7684;&#x7A7A;&#x95F4;&#x5E76;&#x6CA1;&#x6709;&#x6D88;&#x5931;&#x3002;&#x56E0;&#x6B64;&#x52A0;&#x5165;&#x524D;&#x7684;IO&#x548C;&#x56DE;&#x6EDA;&#x540E;&#x7684;IO&#x64CD;&#x4F5C;&#x6570;&#x76EE;&#x5E76;&#x4E0D;&#x76F8;&#x540C;</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><strong>&#x76F4;&#x63A5;&#x8DEF;&#x5F84;&#x64CD;&#x4F5C;</strong>&#x7684;undo&#x4F1A;&#x4E0D;&#x751F;&#x6210;&#x6216;&#x751F;&#x6210;&#x5F88;&#x5C11;&#x7684;undo</p>
+</blockquote>
+<p>&#x5C3D;&#x7BA1;undo&#x6570;&#x636E;&#x5B58;&#x50A8;&#x5728;undo&#x8868;&#x7A7A;&#x95F4;&#x548C;undo&#x6BB5;&#x4E2D;&#xFF0C;&#x4F46;&#x5176;&#x4E5F;&#x6536;&#x5230;redo&#x7684;&#x4FDD;&#x62A4;&#x3002;</p>
+<div class="title4">redo&#x548C;undo&#x7684;&#x534F;&#x4F5C;</div>
+<hr>
+<div class="title2" id="oracle-arch-EX">EX&#x3001;&#x9644;&#x5F55;</div>
+<hr>
+<p>&#x53C2;&#x8003;&#x4E66;&#x7C4D;&#xFF1A;&#x300A;Oracle&#x7F16;&#x7A0B;&#x827A;&#x672F;&#xFF1A;&#x6DF1;&#x5165;&#x7406;&#x89E3;&#x6570;&#x636E;&#x5E93;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;(&#x7B2C;3&#x7248;)&#x300B;.[&#x7F8E;]Thomas Kyte Darl Kuhn.&#x4EBA;&#x6C11;&#x90AE;&#x7535;&#x51FA;&#x7248;&#x793E;.2016-4</p>
+<hr>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2022/04/01/Oracle%E5%AD%A6%E4%B9%A0/" data-id="cl4cp4fp3004ufcgu2oi6arcr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Oracle学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/03/28/Oracle%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2022-03-28T05:22:54.000Z" itemprop="datePublished">2022-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/03/28/Oracle%E5%AD%A6%E4%B9%A0/">Oracle学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">零、目录</div>
+
+<hr>
+<ul>
+<li><a href="#oracle-arch-1">一、Oracle体系结构概述</a></li>
+<li><a href="#oracle-arch-2">二、文件</a></li>
+<li><a href="#oracle-arch-3">三、内存结构</a></li>
+<li><a href="#oracle-arch-4">四、Oracle进程</a></li>
+<li><a href="#oracle-arch-5">五、锁与闩</a></li>
+<li><a href="#oracle-arch-8">八、redo与undo</a></li>
+<li><a href="#oracle-arch-11">十一、数据类型</a></li>
+<li><a href="#oracle-arch-EX">EX、附录</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>应用不停变化，数据永存。从长远来讲，我们的目标并不是构建应用，而是如何使用这些应用底层的数据</p>
+</blockquote>
+<hr>
+<div class="title2" id="oracle-arch-1">一、Oracle体系结构概述</div>
+
+<hr>
+<div class="title4">物理架构</div>
+
+<p>Oracle在不同操作系统上有不同的物理架构，如Linux为多进程运作，Windows为单进程多线程等。Oracle虽然在不同操作系统上差异很大，但Oracle会将这些差异包装起来，并在这之上构建了一个更具通用性并且适用于所有平台的数据库架构。</p>
+<div class="title4">Oracle的两种架构</div>
+
+<ul>
+<li>6-11g:单租户架构(single tenant)</li>
+<li>12c之后：多租户架构(multitenant)</li>
+</ul>
+<div class="title4">数据库和实例术语定义</div>
+
+<ul>
+<li><p>数据库: 操作系统文件或磁盘的集合（当时用ASM(自动存储管理，Automatic Storage Management)或裸设备分区时，数据库可能不是操作系统中单独的文件，但定义不变）</p>
+<ul>
+<li>单租户数据库：包含全套数据文件、控制文件、重做日志文件、参数文件等。包含Oracle内部使用的和应用的元数据、数据、代码。</li>
+<li>容器数据库(12c)(CDB)：包含全套数据文件、控制文件、重做日志文件、参数文件等。包含Oracle内部使用的元数据、数据、代码。(仅存放Oracle自用的实体)</li>
+<li>可插拔数据库(12c)(PDB)：仅包含数据文件（应用的元数据、数据、代码）</li>
+</ul>
+</li>
+<li><p>实例：<br>  一组Oracle后台进程/线程以及一个共享的<strong>内存</strong>区域。(维护非持久内容)</p>
+</li>
+<li><p>关系：数据库可由多个实例装载和打开，一个实例只能装载和打开一个数据库</p>
+</li>
+<li><p>SGA(系统全局区):包含实例数据和控制信息的共享内存结构。主要包括：数据库高速缓冲，重做日志缓冲、共享池(库高速缓存、数据字典缓存)。其用于(但不限于)：维护所有进程需要访问的内部数据结构；缓存磁盘上的数据，另外重做数据写进磁盘前在此缓存；保护已解析的SQL计划。</p>
+</li>
+</ul>
+<div class="title3">连接Oracle数据库</div>
+
+<div class="title4">Oracle服务器处理请求的两种常见方式</div>
+
+<ul>
+<li>专用服务器连接<ul>
+<li>总是在登录时创建一个新的进程。其和会话存在一对一的映射</li>
+</ul>
+</li>
+<li>共享服务器连接<ul>
+<li>实质是一种连接池机制。</li>
+<li>通过调度程序（分派程序）进行进程的调度：将客户的请求放入SGA中的请求队列，第一个空闲的共享服务器会得到这个请求并处理。完成后，将其返回值放入调度程序的响应队列中。</li>
+</ul>
+</li>
+</ul>
+<div class="title4">如何建立连接</div>
+
+<p>读取tnsnames.ora配置文件。获得如何和远程数据库连接。根据其配置信息，客户端软件获得主机名、该主机上监听器进程接受连接的端口，该主机上所连接数据库的服务名。</p>
+<blockquote>
+<p>简单连接：oracle提供了不需要该配置文件的连接方式，即直接通过主机名，监听器端口以及服务名进行连接：<br><code>sqlplus username@[//]host[:port][/service_name][:server][/instance_name]</code></p>
+</blockquote>
+<p>服务器收到请求后，检查自己的配置文件，可能会拒绝，或者真正的建立连接。</p>
+<div class="title4">监听器进程在两种处理方式时工作方式的不同之处：</div>
++ 专用：
+    + windows:为用户建立一个新的线程，并将客户重定向到该线程
+    + linux:通过fork()或exec()创建新进程。因其继承了键连接，因此和数据库物理的连接上了
++ 共享：
+    + 从调度程序池中选取调度程序，返回客户连接信息（如何和调度程序连接），客户端断开和监听器的连接，直接和调度程序连接
+
+<hr>
+<div class="title2" id="oracle-arch-2">二、文件</div>
+
+<hr>
+<blockquote>
+<p>在Oracle中，可以用四种文件系统机制存储关心的数据（数据字典，redo,undo,表，索引，lob）</p>
+<ul>
+<li>操作系统文件系统：用文件来存储数据</li>
+<li>裸分区：不是文件，只是磁盘的一个扇区，不能用ls或文件资源管理器查看。管理开销大，没有缓冲，所有IO都是直接操作</li>
+<li>自动存储管理(ASM)：数据库文件系统，仅能存储数据库相关信息。</li>
+<li>集群文件系统(RAC): 为集群中所有节点提供共享的文件系统<br>oracle不会限制只能选择其中的某一个（可以同时选择多个）</li>
+</ul>
+</blockquote>
+<p>主要讲构成数据库和实例的八类文件</p>
+<div class="title4">实例相关文件：</div>
+
+<ul>
+<li>参数文件</li>
+<li>跟踪文件</li>
+<li>警告文件  </li>
+</ul>
+<div class="title4">数据库相关文件：</div>
+
+<ul>
+<li><p><strong>数据文件</strong>：包括表、索引和其他段</p>
+<ul>
+<li>Oracle中的存储层次体系：<blockquote>
+<ul>
+<li>表空间(tablespace)：Oracle中的逻辑存储逻辑，包含一个或多个数据文件。表空间包含段。</li>
+<li>段(segment)：表空间中主要的组织结构，其为占用存储空间的数据库对象，如表、索引、回滚段等。占用存储空间的每一个对象都会存储在段中</li>
+<li>区段(extent)：段本身由一个或多个区段组成。区段是文件中一个逻辑上连续分配的空间。11gR2后，引入延迟概念。（创建对象时不会分配区段，当写入真实发生（insert）时才会分配区段）。多个区段可能不在同一段磁盘或同个文件中，但单个区段是文件中逻辑连续的空间。</li>
+<li>块(block)：区段由块组成。为最小空间分配单位(常见大小：2kB,4kB,8KB,18KB).存储行数据、索引条目、临时排序结果等。表空间内部，所有块大小都是一致的</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>临时文件</p>
+</li>
+<li><p>控制文件</p>
+</li>
+<li><p><strong>重做日志文件</strong>：事务日志。当进行错误操作时可用其进行恢复。</p>
+<ul>
+<li><p>在线重做日志</p>
+<ul>
+<li><p>每个数据库至少有两个在线重做日志组，为镜像。切换的动作称为日志切换，可能会导致系统临时性暂停。（会暂时挂起数据库操作，去确认缓存中数据是否安全写入）(检查点)（去检查在线重做日志的内容是否已经被写入磁盘）（此时会将缓冲区的已提交内容刷入磁盘）（另一个刷入磁盘时间是高速缓存满了时）</p>
+</li>
+<li><p>每个日志组有一个或多个日志成员，大小固定，循环使用(1写满了去覆盖2,2写满了去覆盖1) </p>
+<blockquote>
+<p>数据库高速缓存，是Oracle SGA中的结构。提交update会写入其中(也会写入重做日志缓冲区，另一个SGA结构)，提交commit会将重做日志缓冲区写入在线重做日志。若断电，会导致缓存清空，需要在线重做日志恢复。因此当缓冲区被刷入磁盘前，在线重做日志不能被覆盖</p>
+</blockquote>
+<blockquote>
+<p>如果在完成检查点前想使用日志文件，会出现<code>Checkpoint not complete</code>信息，此时其他处理都会暂停，会全力完成检查点。如果优化是妥当的，不应该看到此条信息。(通常为没有设置足够多的在线重做日志文件，或未对DBWn(Database Block writer)调优)</p>
+</blockquote>
+<blockquote>
+<p>设置在线重做日志大小需要考虑的：</p>
+<ul>
+<li>高峰负载，大小应以高峰期重做日志生成量为准，防止出现检查点等待</li>
+<li>大量用户修改相同的块，需要将重做日志设置的大一点，（每个用户修改相同的块，最好做更多的更新再一次刷进磁盘）</li>
+<li>平均回复时间。重做日志文件越大，回复时间越长。小的日志文件会导致更多的检查点操作，更慢的系统运行速度，更快的恢复时间。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>归档重做日志：在更长的时间维度恢复数据。需在归档模式。实际上是以快进的方式重做整个星期的事务。</p>
+<blockquote>
+<p>不以归档模式运行的数据库总有一天会丢失数据</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>密码文件</p>
+</li>
+</ul>
+<div class="title4">Oracle Database 10g新增2可选文件，以实现更快的备份和恢复操作：</div>
+
+<ul>
+<li>修改跟踪文件</li>
+<li>闪回日志文件</li>
+</ul>
+<div class="title4">与数据库有关的其他类型文件</div>
+
+<ul>
+<li>转储文件</li>
+<li>数据泵文件</li>
+<li>平面文件</li>
+</ul>
+<hr>
+<div class="title2" id="oracle-arch-3">三、内存结构</div>
+
+<hr>
+<ul>
+<li><strong>系统全局区(SGA)</strong>:一个大的共享内存段，几乎所有Oracle进程都要访问这个区域。在小型测试系统中可能只有几十MB，但在中大型乃至巨型系统中，可能多达几百GB<blockquote>
+<p>查看sga:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &gt;select pool,name,bytes</span><br><span class="line">from v$sgastat</span><br><span class="line">order by pool,name;</span><br></pre></td></tr></table></figure>
+<p>内含多个池</p>
+</blockquote>
+<ul>
+<li>java pool:为java虚拟机(jvm)分配的固定大小的内存(oracle 10g以上课启动或运行时调整大小)<code>JAVA_POOL_SIZE</code></li>
+<li>large pool：用于大块内存的分配。共享服务器时存储UGA,并行执行功能时作为消息缓冲区，RMAN备份时作为磁盘I/O缓冲区。可动态调整大小<code>LARGE_POOL_SIZE</code></li>
+</ul>
+</li>
+</ul>
+<pre><code>+ &lt;strong&gt;shared pool(共享池)&lt;/strong&gt;：共享游标、存储过程、状态对象、字典缓存和诸如此类的大量其他数据。9i及以上版本可动态调整大小`SHARED_POOL_SIZE`
+    + 缓存Orale程序数据的地方，例如解析查询时，将解析结果储存在这。
+    + PL/SQL代码也储存在这并被共享。
+    + 根据LRU（最近最少使用）原则管理。或者通过`DBMS_SHARED_POOL`包将对象长久保存在共享池中
+    + &lt;strong&gt;不使用绑定变量，则会破坏共享池机制&lt;/strong&gt;,唯一使得oracle能够重复利用执行计划的方法就是采用绑定变量
+        &gt;系统花大量CPU解析查询
+        &gt;系统使用大量资源管理共享池中对象，但其不被重用
+        &gt;硬解析（语法树分析）、软解析（池中查到，直接获取执行计划）、执行
+
+
++ streams pool:专门针对数据传输/共享工具的内存池。可动态调整大小。若未配置该池，则oracle会使用shared pool最多10%的空间作为流内存`STREAMS_POOL_SIZE`
++ &quot;null&quot; pool(pool字段为空的池)：块缓冲区（缓存数据库块）、重做日志缓冲区和&quot;固定SGA&quot;区专用的内存（`LOG_BUFFER`某种程度控制日志缓冲区大小）
+
++ 无论何种分配方式，各个池的内存分配都是基于颗粒的（颗粒的倍数）。颗粒的大小为4,8,16MB的内存区。若分配5MB，颗粒为4，则实际上会分配8MB
+&gt;<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;V$SGA_DYNAMIC_COMPONENTS</span><br><span class="line">&gt;---可以查看各个池中的颗粒大小(字段(granule_size))，或SGA总大小如何影响颗粒大小</span><br></pre></td></tr></table></figure></code></pre><ul>
+<li><p><strong>进程全局区(PGA)</strong>:进程或线程专用内存。由进程或线程自身分配。除了UGA（如果有），几乎用于内存排序，位图合并、散列。可以手动告诉Oracle允许多少内存用于排序和散列等，也可自动分配整个PGA（需设置最多允许多少内存<code>PGA_AGGREGATE_TARGET</code>）（或者SGA和PGA总共可以用多大内存<code>MEMORY_TARGET</code>）</p>
+<blockquote>
+<p>手动PGA管理</p>
+<ul>
+<li><code>SORT_AREA_SIZE</code> 排序信息交换到磁盘前，所使用的内存总量</li>
+<li><code>SORT_AREA_RETAINED_SIZE</code> 排序完成后用于保存已排序数据的内存总量</li>
+<li><code>HASH_AREA_SIZE</code> 存储散列表所用的内存量。通常在做大数据集和另一数据集的连接时，会进行散列连接并用到这部分内存。较小的数据集会被散列到内存，放不下的部分会通过连接键存储到临时表空间中</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>用户全局区(UGA)</strong>:与特定的会话关联。可以由SGA（共享服务器）（此时UGA在SGA内部）或PGA（专用服务器）（此时UGA和PGA几乎为同义词）分配。实际上来说，就是会话状态</p>
+</li>
+</ul>
+<hr>
+<div class="title2" id="oracle-arch-4">四、Oracle进程</div>
+
+<hr>
+<p>Oracle中的每个进程都要执行一个特定的任务(或一组任务)，每个进程都会给自己分配内存（PGA）来完成它的任务。一个Oracle实例主要由以下三类进程。</p>
+<ul>
+<li><p>服务器进程<br>  根据客户端的请求完成工作。（专用服务器，共享服务器就是服务器进程）</p>
+</li>
+<li><p>后台进程<br>  随着数据库的启动而启动，用以完成各种维护任务。（如将数据库写入磁盘、维护在线重做日志，清理异常终止的进程以及维护自动工作负载存储库等） </p>
+</li>
+<li><p>从属进程<br>  类似后台进程，代表后代进程或服务器进程完成一些额外的工作</p>
+</li>
+</ul>
+<div class="title4">服务器进程</div>
+
+<p>即执行客户端会话指令的进程。负责接受有应用发送给数据库的SQL语句，并在数据库中执行。</p>
+<p>当你提交一条SQL语句时，专用服务器或共享服务器就进程就会解析这个查询，放入共享池(或直接在共享池发现他)。这个进程要指定查询计划（若需要）并执行他。</p>
+<p>该类线程是干重活的线程，几乎所有工作都是这些线程做的</p>
+<blockquote>
+<p>连接与会话：</p>
+<ul>
+<li>连接：<strong>从客户端到Oracle数据库实例的一条物理路径</strong>。一个连接上可以没有或有多个会话，一个会话也可以有连接或没连接</li>
+<li>会话：<strong>数据库实例中存在的一个逻辑实体</strong>。我们所看到的会话状态信息，代表了会话在实例内存中的数据结构的集合。同时，会话是在数据库上执行SQL，提交事务和运行存储过程的地方</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>除了共享服务器连接和专用服务器连接外的第三种连接方式：数据库常驻连接池。继承了共享服务器的共享概念和专用服务器的专用概念——在池子里放的是专用服务器的连接，在一次会话的生命周期里，其用的是同一个服务器线程</p>
+</blockquote>
+<p>三种连接模式的适用场景：</p>
+<ul>
+<li><p>专用服务器<br>  是Oracle的推荐配置，设置其最简单，也不需要什么配置，能很好地扩展。<br>  因为是1V1，因此不必担心长时间运行的事务会阻塞其他事务。<br>  因此，在非OLTP环境中，也即有可能长时间运行事务的情况下，应该考虑用这种模式。</p>
+</li>
+<li><p>共享服务器<br>  配置不难，仅比专用服务器多一步。<br>  是nV1,多个客户端对应着一个共享服务器。使用时必须当心，不能长时间独占资源。<br>  共享服务器的原则是：事务可以频繁的执行，但必须短时间执行完（OLTP系统的特点）。<br>  共享服务器可能会产生人为死锁。（共享资源的持有者因为表被锁住而阻塞，而锁的持有者永远拿不到共享资源来释放锁）<br>  由于这些原因，共享服务器只适合OLTP系统  </p>
+<blockquote>
+<p>(<code>On-Line Transaction Processing联机事务处理过程(OLTP)</code>)<br>OLTP系统中，任务以毫秒为单位进行执行，任何事务都会在1S内完成   </p>
+</blockquote>
+<p>  若OLTP和非PLTP混杂，则可以共用专用和共享服务器的模式</p>
+<blockquote>
+<p>由于许多高级特性要求共享服务器，所以有些时候也没得选。例如Oracle Net连接池，或者集中式数据库链。</p>
+</blockquote>
+<blockquote>
+<p>共享服务器的好处：减少操作系统进程数，认为限制并发度，减少系统所需的内存</p>
+</blockquote>
+</li>
+<li><p>数据库常驻连接池<br>  有共享服务器的许多优点，同时避免人为死锁。但其没有多线程功能。他获得进程后，会一直持有他直到客户端释放他。<br>  更适合需要频繁连接数据库，进行小处理又断开的场景。或者说，DRCP更适合客户端应用本身的API没有提供高效连接池的情况</p>
+</li>
+</ul>
+<div class="title4">后台进程</div>
+
+<p>是Oracle实例的组成部分(实例由SGA和一组后台进程组成)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">----查看后台进程</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line">       <span class="keyword">from</span> V$bgprocess;</span><br></pre></td></tr></table></figure>
+<p>各个线程的作用(如PMON,LREG,SMON等)见《Oracle编程艺术》P179。</p>
+<div class="title4">从属进程</div>
+
+<p>Oracle中有两类从属进程：I/O从属进程和并行查询从属进程</p>
+<p>IO从属进程：用于在不支持异步IO的系统或设备上模拟异步IO</p>
+<p>并行查询从属子进程:对于select、create table、create index 、update等sql语句，创建一个执行计划，包含了多个同时执行的子计划，将输出合并再输出，完成节约时间的目的。</p>
+<hr>
+<div class="title2" id="oracle-arch-5">五、锁与闩</div>
+
+<hr>
+<p>在Oracle中：</p>
+<ul>
+<li>事务是数据库的核心</li>
+<li>事务应延迟到必要的时刻才提交，不要太快提交已对系统造成压力。</li>
+<li>只要需要，应尽可能延长对数据加的锁。</li>
+<li>在Oracle中，行级锁没有对应开销。</li>
+<li>锁升级（行级锁到表锁）不会对系统更好，也不会节省任何资源。</li>
+<li>可以同时得到并发性和一致性，数据读取器不会被数据写入器阻塞。</li>
+</ul>
+<div class="title3" >锁的问题</div>
+
+<h6 id="丢失更新"><a href="#丢失更新" class="headerlink" title="丢失更新"></a>丢失更新</h6><h6 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h6><h6 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h6><h6 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h6><h6 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h6><h6 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h6><div class="title3" >锁类型</div>
+
+<h6 id="DML锁"><a href="#DML锁" class="headerlink" title="DML锁"></a>DML锁</h6><blockquote>
+<p>DML:<code>Data Manipulation Language</code>，数据操纵语言</p>
+</blockquote>
+<p>其用于确保一次只能有一个人能修改某一行。</p>
+<h6 id="DDL锁"><a href="#DDL锁" class="headerlink" title="DDL锁"></a>DDL锁</h6><h6 id="闩"><a href="#闩" class="headerlink" title="闩"></a>闩</h6><h6 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h6><h6 id="手动锁定和用户定义锁"><a href="#手动锁定和用户定义锁" class="headerlink" title="手动锁定和用户定义锁"></a>手动锁定和用户定义锁</h6><hr>
+<div class="title2" id="oracle-arch-8">八、redo与undo</div>
+
+<hr>
+<p>redo:重做信息，可以重放事务<br>undo:回滚信息，主要用于取消或者回滚事务</p>
+<div class="title4" >redo</div>
+
+<p>在线重做日志、归档重做日志(均已介绍)</p>
+<div class="title4" >undo</div>
+
+<p>概念上和redo刚好相反。对数据库修改时会生成undo信息。需要时可以进行回滚（执行的事务或语句失败或ROLLBACK请求回滚时）</p>
+<blockquote>
+<p>undo会逻辑的回滚而非物理的回滚。意思是物理结构存储前后可能会不同</p>
+<blockquote>
+<p>当我们创建表并加入数据，然后回滚后，因加入数据而分配的空间并没有消失。因此加入前的IO和回滚后的IO操作数目并不相同</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><strong>直接路径操作</strong>的undo会不生成或生成很少的undo</p>
+</blockquote>
+<p>尽管undo数据存储在undo表空间和undo段中，但其也收到redo的保护。（undo文件丢失可以redo恢复）</p>
+<div class="title4">redo和undo的协作</div>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(</span><br><span class="line">    x <span class="built_in">int</span>,</span><br><span class="line">    y <span class="built_in">int</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">index</span> ti <span class="keyword">on</span> t(x);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t(x,y)</span><br><span class="line">    <span class="keyword">values</span>(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> t </span><br><span class="line">    <span class="keyword">set</span> x = x + <span class="number">1</span> </span><br><span class="line">    <span class="keyword">where</span> x = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> t <span class="keyword">where</span> x = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>######Question</p>
+<ol>
+<li>系统在不同时间点失败，会发生什么   </li>
+<li>缓冲区写满会发生什么</li>
+<li>某个时间点ROLLBACK会发生什么</li>
+<li>全部成功COMMIT发生什么</li>
+</ol>
+<ul>
+<li><code>insert</code><br>  insert发生后生成redo和undo.此时块缓冲区中有表信息、索引信息、undo信息，均被重做日志缓冲区保护<ol>
+<li>系统崩溃<br> 没有任何影响，SGA被清空，因此数据库重启后如同一切尚未发生。（redo未被写入磁盘）</li>
+<li>缓冲区缓存已满<br> DBWn会把一部分改动的块刷到磁盘上。首先其会将redo条目进磁盘（若刷的过程出现宕机，可以用redo回复SGA，而后会有相应的undo（被redo保护）进行回滚）（否则，刷到磁盘的内容会缺少对应的undo）,在更新对应的表数据和索引数据</li>
+</ol>
+</li>
+<li><code>update</code><br>  和insert大体一样，但是undo量更大（需要保存原数据）。假设之前的重做日志均已刷到磁盘，缓冲区中的为update的重做日志和修改的表数据<ol>
+<li>系统崩溃<br> update的redo会丢失。但是没有问题，因为可以当做update没发生。<br> insert的redo被保存，表信息丢失。可以用redo恢复缓存（undo块，表块，索引块）。而后其会undo所有未提交的事务（包括insert）.(注：undo为逻辑恢复而非物理恢复，上面有讲)（物理是否恢复取决于insert修改的表数据是否刷到了磁盘上，若刷了，则insert仅仅逻辑上恢复到了之前的位置）<blockquote>
+<p>实例恢复的细节：先前滚，系统重放到失败点，再回滚所有尚未提交的操作</p>
+</blockquote>
+</li>
+<li>回滚事务<br> 通过undo将对应的内容放到缓冲区进行更改，在恢复后输出到数据文件。这过程不涉及重做日志。<blockquote>
+<p>oracle的目标是，可以顺序的写日志，而且在写日志时别人不会读日志</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><code>delete</code><br>  和update无什么太大不同</li>
+<li><code>commit</code><br>  Oracle会将重做日志缓冲区刷新输出到磁盘。此后数据就有了持久性</li>
+</ul>
+<div class="title4">提交和回滚处理</div>
+
+<h6 id="commit做了什么"><a href="#commit做了什么" class="headerlink" title="commit做了什么"></a>commit做了什么</h6><blockquote>
+<p>过于频繁的提交并不会节省资源，反而会浪费资源，因为commit消耗的系统资源是基本相同的。<br>如每次update后立即提交与一千次update之后提交，commit消耗的时间分别为X与1000X<br>如果我们只在必要时提交，不仅能提高性能，也能减少对数据库共享资源的竞争（日志文件，各种内部闩）（java代码中要把autocommit设置为off）</p>
+<blockquote>
+<p>mybatis无参则自动事务默认为false.true的优势是一个事务失败只会回滚当前事务，不会影响前面的事务</p>
+</blockquote>
+<blockquote>
+<p>这里和mysql的区别是，mysql的自动提交默认为on。oracle默认为off.oracle的提交会动日志，这个是串行的，反复提交影响性能</p>
+</blockquote>
+</blockquote>
+<p>commit的开销来自两个方面：</p>
+<ul>
+<li>客户端和数据库之间的往返通讯</li>
+<li>每次提交等待redo写到磁盘。此时日志文件同步会显著降低系统性能</li>
+</ul>
+<p>因为commit在执行前已经完成了大部分工作，所以单次提交的动作消耗资源大体相同。</p>
+<p>执行commit前：</p>
+<ul>
+<li>SGA生成undo,修改数据（表，索引），以及前两者的redo缓存</li>
+<li>若耗时长，则部分已经输出到磁盘</li>
+<li>获取全部所需的锁</li>
+</ul>
+<p>commit做的工作：</p>
+<ul>
+<li>为事务生成SCN（System Change Number,系统改变号）,其是一种简单的计时机制（每次commit加1），保证事务顺序，支持失败恢复。还用于读一致性和检查点（类似Mysql的MVCC？）</li>
+<li>LGWR将所有未写入磁盘的重做日志条目写到磁盘，把SVN记录到在线重做日志文件中。此步为真正的commit,到这一步后，事务的状态为已提交。从V$TRANSACTION中会”删除”</li>
+<li>V$LOCK释放记录的锁</li>
+<li>若事务修改的块还在缓冲区中，Oracle会快速的访问并清理。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.jdbc.datasource.DataSourceTransactionManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.transaction.support.DefaultTransactionDefinition;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="comment">// @Resource(name = "manager") 看情况</span></span><br><span class="line"><span class="keyword">private</span> DataSourceTransactionManager transactionManager;</span><br><span class="line"> </span><br><span class="line">TransactionStatus transactionStatus = transactionManager.getTransaction(<span class="keyword">new</span> DefaultTransactionDefinition());</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">　　<span class="comment">//dosomething</span></span><br><span class="line">　　transactionManager.commit(transactionStatus);</span><br><span class="line">&#125;<span class="keyword">catch</span>（Exception ex）&#123;</span><br><span class="line">　　transactionManager.rollback(transactionStatus);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Spring 非autocommit时需中途提交的解决方案</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="ROLLBACK-做了什么"><a href="#ROLLBACK-做了什么" class="headerlink" title="ROLLBACK 做了什么"></a>ROLLBACK 做了什么</h6><blockquote>
+<p>和提交不同，回滚时间一定和修改数据量成正比</p>
+</blockquote>
+<p>回滚前已经做了的工作：</p>
+<ul>
+<li><p>SGA已生成undo</p>
+</li>
+<li><p>SGA已生成已修改数据块</p>
+</li>
+<li><p>SGA生成了对应前两项的redo缓存</p>
+</li>
+<li><p>若前三者比较大且耗时较长，则可能已被输出到磁盘</p>
+</li>
+<li><p>已经得到所需的全部锁</p>
+</li>
+</ul>
+<p>回滚时做的工作：</p>
+<ul>
+<li><p>撤销所有更改.Oracle数据库读取undo段，将其应用到数据块以撤销更改，并将对应的undo条目标记为已应用。</p>
+</li>
+<li><p>释放会话持有的所有锁，并唤醒队列</p>
+</li>
+</ul>
+<div class="title4" >分析redo</div>
+
+<p>redo管理是数据库中的一个串行点。任何Oracle实例都只有一个LGWR，最终所有事务都回汇集到LGWR——这些事务提交时都回请求该进程管理redo.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 测量生成的redo量</span></span><br><span class="line"><span class="keyword">select</span> a.name,b.value </span><br><span class="line">    <span class="keyword">from</span> v$statname a </span><br><span class="line">    <span class="keyword">join</span> v$mystat b </span><br><span class="line">    <span class="keyword">on</span> a.statistic<span class="comment"># = b.statistic# </span></span><br><span class="line">    <span class="keyword">where</span> a.name=<span class="string">'redo size'</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>重做日志不能关闭，他不是累赘，或者开销。其对数据库必不可少。<br>不过，在某些场合确实可以少生成重做日志</p>
+</blockquote>
+<p>可以设置NOLOGGING执行语句来生成更少的重做日志。或是直接设置NOLOGGING段（索引或表），从而隐式的使用该模式进行某些操作。</p>
+<blockquote>
+<p>例如移植一个表到另一个表空间时，可以设置为NOLOGGING模式移植，重建索引后再改为LOGGING。这样可以节约一半的时间。（要注意所有维护人员均需知道使用了这个特性，防止介质失败后造成的数据丢失）</p>
+</blockquote>
+<h6 id="拿不到重做日志空间的原因："><a href="#拿不到重做日志空间的原因：" class="headerlink" title="拿不到重做日志空间的原因："></a>拿不到重做日志空间的原因：</h6><ol>
+<li>检查点操作正在写入将要被重用的在线重做日志所保护的数据</li>
+<li>ARCn尚未把重做日志文件复制到归档目标</li>
+</ol>
+<p>因此Oracle必须等待以上目标完成才能安全地使用这个重做日志文件</p>
+<h6 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h6><ol>
+<li><p>让DBWn更快。如启用ASYNC I/O、DBWn I/O从属进程，或者更多的DBWn进程。好处是不用付出什么代价，不用修改逻辑代码。</p>
+</li>
+<li><p>增加更加的重做日志文件。这种方式会延迟检查点的出现。好处是消除系统的暂停，缺点是消耗了更多的磁盘空间。</p>
+</li>
+<li><p>重新创建更大的日志文件。扩大在线重做日志和重用该文件的时间间隙。优缺点和2同。</p>
+</li>
+<li><p>让检查点发生的更频繁。使用更小的缓冲区缓存或者使用诸如<code>FAST_START_MTTR_TARGET</code>,<code>LOG_CHECKPOINT_INTERVAL</code>,<code>LOG_CHECKPOINT_TIMEOUT</code>等参数。这会强制DBWn更频繁的刷新输出脏块。好处是实例恢复时间少。缺点是若修改大量数据块，那么数据块同步到磁盘的动作会更加频繁（降低缓冲区缓存的功效，可能会影响到块清除）</p>
+</li>
+</ol>
+<h5 id="块清除-block-cleanout"><a href="#块清除-block-cleanout" class="headerlink" title="块清除(block cleanout)"></a>块清除(block cleanout)</h5><p>即删除所修改数据库块上与“锁”有关的信息。</p>
+<p>问题：当我们修改数据块却未在事务结束前清理事务信息，则下次访问该块时会进行对其的删除，同时产生redo——即select语句也会产生redo，导致下个检查点可能有大量的数据要写入磁盘。</p>
+<blockquote>
+<p>在OLTP系统中很少发生这种事，因为其设计目标是短而精，每个事务通常只修改几个块，其在提交时得到清理。</p>
+</blockquote>
+<blockquote>
+<p>在进行大批量数据加载后，可以先运行例如DBMS_STATS之类来收集统计信息。在这个过程因为其是修改后第一次接触块的，因此会一并完成块清除。</p>
+</blockquote>
+<h5 id="日志竞争"><a href="#日志竞争" class="headerlink" title="日志竞争"></a>日志竞争</h5><p><code>log contention</code>，系统会花大量时间在<code>log file sync</code>(日志文件同步) 和 <code>file parallel write</code>（日志文件并行写）上</p>
+<p>原因是重做日志写的不够快。<br>原因：</p>
+<ol>
+<li>提交过于频繁，如insert循环提交</li>
+<li>redo放在一个慢速设备上。磁盘性能不佳（需更换）</li>
+<li>redo与其他频繁访问的文件放在同一个设备上。redo应放在专用设备上。</li>
+<li>日志放在有缓冲的设备上。操作系统会缓冲日志文件，但数据库已经在缓冲日志数据了。双缓冲会让速度慢下来。</li>
+<li>redo的存储采用了一种慢速技术，如RAID-5。其读性能很好，但写性能很差</li>
+</ol>
+<h5 id="临时表"><a href="#临时表" class="headerlink" title="临时表"></a>临时表</h5><p>12c之前：临时表的数据块不会生成redo,因此，对临时表的操作是不可恢复的。临时表会生成undo，且会写入日志。<br>由于undo会生成redo:</p>
+<ul>
+<li>insert会生成很少甚至不生成redo</li>
+<li>update生成的redo大约为永久表update的一半</li>
+<li>delete生成和永久表相同的redo</li>
+</ul>
+<div class="title4" >分析undo</div>
+
+<p>不同命令生成的文件大小和redo刚好相反。</p>
+<blockquote>
+<p><code>ORA-01555:snapshot too old</code>错误</p>
+<blockquote>
+<p>该错误和数据损坏或丢失毫无关系。唯一的影响是收到这个错误的查询无法继续处理。</p>
+</blockquote>
+<p>原因：</p>
+<ul>
+<li>undo段太小，不足以支撑系统上执行的工作</li>
+<li>程序跨COMMIT获取数据</li>
+<li>块清除</li>
+</ul>
+</blockquote>
+<p>orale使用undo获取读一致性的数据，因此两个语句（update where x=2,insert …… select from where x =2）同时用到了这个读一致性来获取一致的数据，又用他防备事务失败时带来的回滚，就会产生ORA-01555错误。</p>
+<h6 id="0RA-01555的解决方案"><a href="#0RA-01555的解决方案" class="headerlink" title="0RA-01555的解决方案"></a>0RA-01555的解决方案</h6><ul>
+<li><p>设置参数UNDO_RETENTION大于运行时间最长的事务所需时间.可以通过V$UNDOSTAT确认长时查询的持续时间。(这也是自动UNDO管理更能避免ORA-01555的原因)</p>
+</li>
+<li><p>若undo手动管理，则极大或增加更多的undo段。这样在长时间运行的查询执行期间，查询所需要的undo数据被覆盖的可能性就会降低。</p>
+</li>
+<li><p>减少查询的运行时间。（对undo的需求降低）</p>
+</li>
+<li><p>在大批量update或加载后收集统计信息（进行块清除）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 收集统计信息</span></span><br><span class="line">exec DBMS_STATS.gather_table_stats(USER,tablename);</span><br><span class="line"><span class="comment">-- sqlplus执行</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<div class="title2" id="oracle-arch-11">十一、数据类型</div>
+
+<hr>
+<p>在选择什么类型存储数据后，我们很难去更改他，只能忍耐。因此，选择适当的数据类型至关重要。</p>
+<div class="title3">字符类型</div>
+
+<p>字符串数字类型包括<code>CHAR</code>和<code>VARCHAR2</code>（这两个用了<code>NLS</code>）及其带N的变体(包含<code>unicode</code>格式)。前者（<code>CHAR</code>,<code>NCHAR</code>）能存储2000字节的文本，后者（<code>VARCHAR2</code>,<code>NVARCHAR2</code>）可容纳4000字节（12c后为32767字节）。前者为定长字符串（用空格填满剩余位置），后者为变长字符串。</p>
+<blockquote>
+<p><code>NLS</code>(<code>National Language Support</code>,国家语言支持)控制着数据的许多方面，但最重要的是这两个方面：</p>
+<ul>
+<li>文本数据持久存储在磁盘上时如何编码</li>
+<li>透明地将数据从一个字符集转换到另一个字符集<br>转换的过程中，如果是例如八位字符集转七位字符集（ASCLL），再转回去插回数据库，很有可能发生信息丢失。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;---- 查看字符集</span><br><span class="line">&gt;select * </span><br><span class="line">   from nls_database_parameters</span><br><span class="line">   where parameter='NLS_CHARACTERSET';</span><br></pre></td></tr></table></figure>
+这里应该把NLS_LANG改为和数据库的一致。（windows在注册表改）</li>
+</ul>
+</blockquote>
+<h6 id="存储格式"><a href="#存储格式" class="headerlink" title="存储格式"></a>存储格式</h6><p>1-3字节的长度数据，后跟具体数据。若数据为<code>NULL</code>，则长度为单字节0xFF.若长度小于等于250(0x01~0xFA),则单字节表长度，否则会在标志字节0xFE后跟2字节表示长度。</p>
+<p>尽量避免使用<code>CHAR</code>，而使用<code>VARCHAR2</code>.不提前者的填充空格占用更多的资源，使用CHAR也会导致部分情况下找不到数据的情况：使用<code>varcharParamter = charParamter</code>时，哪怕其值是一样的，也找不到对应的记录——char类型的属性后面被空格填充了。</p>
+<p>定义长度时，可以用<code>VARCHAR2(10 byte)</code>或者<code>VARCHAR2(10 char)</code>.建议使用后者（不加修饰默认为字节而非字符）（特别是使用了utf-8等字符集时）</p>
+<h6 id="N系列："><a href="#N系列：" class="headerlink" title="N系列："></a>N系列：</h6><p>作用：系统需要管理和存储多种字符集时可以使用。其将单字节定长字符集作为首要字符集的同时也维护和存储了一些多字节数据。<br>和非N系列的区别：</p>
+<ul>
+<li>文本采用数据库的国家字符集来存储和管理，而非默认字符集</li>
+<li>长度总是字符数（非N系列可以指定是字节还是字符）</li>
+</ul>
+<div class="title3">二进制串RAW类型</div>
+
+<p>raw，变长二进制数据类型，因此不会发生字符集转换。做多可存储2000字节。<br>raw类型不做字符集转换，因此不适合存储文本数据，但适合存储加密信息。</p>
+<blockquote>
+<p>从数据库的角度看，如果某个字节串算不上文本（或其他基本数据类型，如数值，日期等），并且这个字符串不应在字符集发生变化是发生转换，则其应当存储在二进制的数据类型（如RAW）中。</p>
+<blockquote>
+<p>HEXTORAW:十六进制转RAW串<br>ROWTOHEX:RAW串转16进制</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;select rawtohex(raw_data) from t;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<div class="title3">数值类型</div>
+
+<ul>
+<li><code>NUNBER</code>,存储38位数字，范围为10<sup>-130</sup>到10<sup>126</sup>，变长存储，长度为0~22字节(<code>null</code>值为0)(<strong>变长类型</strong>),精度高于编程语言的flout和double</li>
+<li><code>BINARY_FLOUT</code>,32位单精度浮点数，至少支持6位精度（有效数字），占用5字节</li>
+<li><code>BINARY_DOUBLE</code>，64位双精度浮点数，15位精度，占用9字节</li>
+</ul>
+<p>可以看到<code>number</code>比后两者占用空间更大，但取值更小，也就是更精确。后两者并不适合金融运用（有效保存的位数太少）。需要注意的是，当<code>number</code>的计算位数大于38位（此时存储位数可能小于38位）时，其也会出现丢失精度的现象。</p>
+<p>可以通过规定number的精度和小数位防止其出现</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(num_col <span class="built_in">number</span>(<span class="number">5</span>,<span class="number">2</span>));</span><br><span class="line"><span class="comment">-- 5表示5位数，0表示小数点右边2位。</span></span><br><span class="line"><span class="comment">-- 此时小数点左边最多3位，否则报错。</span></span><br><span class="line"><span class="comment">-- 即此时其可存储-999.99——999.99的数据</span></span><br><span class="line"><span class="comment">-- 若精度超出，则数据库直接报错，可以防止存储了失真的数据。若小数位超出，则会舍入到规定的位数。</span></span><br></pre></td></tr></table></figure>
+<p>小数位可以为负值，若为负值，则为对小数点右边的约束。（-2即舍入到100为单位的数）</p>
+<blockquote>
+<p>精度是完整性约束，小数位是对数据剪辑。<br>一位<code>number</code>转换的<code>java</code>类型是<code>boolean</code>,2位<code>byte</code>,3-4<code>short</code>,5-9<code>int</code>,10-18<code>long</code>,19-38<code>BigInteger</code>.</p>
+</blockquote>
+<blockquote>
+<p>除了这3类型，其他所有非固有类型，例如FLOAT,DOUBLE PRECISION，REAL,NUMRIC等，最终都会映射到NUMBER，底层实现其实都是NUMBER。</p>
+</blockquote>
+<div class="title3">DATE、TIMESTAMP、INTERVAL类型</div>
+
+<ul>
+<li><code>DATE</code>:七字节的定宽日期/时间数据类型，包含世纪、世纪中的哪一年，月份，月份中的那一天，时分秒。</li>
+<li><code>TIMESTAMP</code>：七字节或十一字节的定宽日期/时间数据类型。和<code>DATE</code>的不同是可以保留小数秒（最多9位）</li>
+<li><code>INTERVAL</code>：五字节/11字节定宽。存储一个时段，如9个小时，是两个<code>DATE</code>或者<code>TIMESTAMP</code>的差值，可用于前者的计算。</li>
+</ul>
+<p>DATE更常用，但TIMESTAMP可存储小数时间和时区，功能更强.</p>
+<p>进行TIMESTAMP运算时，最好使用INTERVAL类型，这样不会被隐式的转换为DATE。两个TIMESTAMP类型之差为INTERVAL。</p>
+<blockquote>
+<p>对数据的处理还是放到代码里比较好吧，所以这里就不介绍这几个数据类型自带的函数了</p>
+</blockquote>
+<blockquote>
+<p>自己试了试，若只需要年月日信息的话，<code>20220405</code>用NUMBER保存只需要5个字节，小于7字节，更节省空间。但是设计到秒为止，则<code>202204051222</code>，占用内存要大于9位，使用时间类型更节省空间</p>
+</blockquote>
+<div class="title3">LOB类型</div>
+
+<blockquote>
+<p>LOB,large Object</p>
+</blockquote>
+<ul>
+<li><p><code>CLOB</code>:能存储(4GB-1)×(数据库块大小)字节的数据（XML文件或纯文本）。会受到字符集转换影响。存储大块纯文本信息（大于4000字节）</p>
+</li>
+<li><p><code>NCLOB</code>：和CLOB一样，不过存储的是以数据库国家字符集编码的信息（而不是数据库默认字符集）。</p>
+</li>
+<li><p><code>BLOB</code>：能存储(4GB-1)×(数据库块大小)字节的数据。包含不需要进行二进制转换的二进制数据。如存储电子表格，字处理文档，图像文件数据。</p>
+</li>
+<li><p><code>BFILE</code>：在数据库列中存储一个Oracle目录对象（操作系统目录的一个指针）和一个文件名，可以通过它来读取这个文件。（该文件在数据库之外维护，并不是数据库的一部分。BFILE只能对其只读）。</p>
+</li>
+</ul>
+<blockquote>
+<p>映射的<code>java</code>实体<code>CLOB</code>和<code>BLOB</code>分别为<code>char[]</code>（或<code>String</code>）,和<code>byte[]</code></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//todo</span></span><br><span class="line"><span class="comment">// lob组件详细待续</span></span><br></pre></td></tr></table></figure>
+<div class="title3">ROWID/UROWID类型</div>
+
+<ul>
+<li><p>ROWID：数据库表的行地址，十字节，其不但足以在磁盘中定位每一行，也能识别出ROWID指向的那行数据所属的对象（表等）。</p>
+</li>
+<li><p>UROWID：通用的ROWID，用于没有固定ROWID的表。其通常表现为主键的值，因此其大小会根据所指向对象而有所变化。</p>
+</li>
+</ul>
+<p>因为ROWID是物理地址，因此通过ROWID访问数据是最快的方式。但是使用时需要结合其他字段或校验和（checksum）一起使用。（需要先确定数据在读取之后未改变）</p>
+<p>导致rowid改变的因素：</p>
+<ul>
+<li>分区表中，更新一行的分区键列，使这一行从某分区到另一分区。</li>
+<li>使用FLASHBACK TABLE命令讲一个数据库表恢复到以前某个时间点</li>
+<li>MOVE操作或者多分区操作（分解(<code>SPLIT</code>)或合并(<code>MERGE</code>)分区）</li>
+<li>使用<code>ALTER TABLE SHRINK SPACE</code>命令来收缩段</li>
+</ul>
+<blockquote>
+<p>不建议将其作为数据库列的类型。</p>
+</blockquote>
+<hr>
+<div class="title2" id="oracle-arch-EX">EX、附录</div>
+
+<hr>
+<p>参考书籍：《Oracle编程艺术：深入理解数据库体系结构(第3版)》.[美]Thomas Kyte Darl Kuhn.人民邮电出版社.2016-4</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2022/03/28/Oracle%E5%AD%A6%E4%B9%A0/" data-id="cl4cp4fp1004tfcgu2i77fets" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-线程池概览" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/03/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A6%82%E8%A7%88/" class="article-date">
@@ -286,7 +1618,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2022/03/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A6%82%E8%A7%88/" data-id="cl166yb3h002w94guhngw9rpt" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2022/03/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A6%82%E8%A7%88/" data-id="cl4cp4foj0041fcguafiw9j7c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ThreadPool/" rel="tag">ThreadPool</a></li></ul>
@@ -435,7 +1767,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2022/03/02/git%E6%89%8B%E5%86%8C%E6%A6%82%E8%A7%88/" data-id="cl166yb2y001a94guc23o6sor" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2022/03/02/git%E6%89%8B%E5%86%8C%E6%A6%82%E8%A7%88/" data-id="cl4cp4fnp001xfcgu82re4rab" class="article-share-link">Share</a>
       
       
     </footer>
@@ -534,7 +1866,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/12/07/vue/" data-id="cl166yb38002194gu021r8mz2" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/12/07/vue/" data-id="cl4cp4fok0043fcgu5o8afuld" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
@@ -585,7 +1917,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/11/30/hello-world/" data-id="cl166yb31001f94gu2krfc1gi" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/11/30/hello-world/" data-id="cl4cp4fnp001yfcgu4eu1arnx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -686,7 +2018,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/09/03/Restful%E9%A3%8E%E6%A0%BC/" data-id="cl166yb2n000j94gudgosajsp" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/09/03/Restful%E9%A3%8E%E6%A0%BC/" data-id="cl4cp4fn2000dfcgu96oo0vr2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/REST/" rel="tag">REST</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RESTful/" rel="tag">RESTful</a></li></ul>
@@ -831,7 +2163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/08/18/kafka/" data-id="cl166yb34001n94gu460b5a2s" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/08/18/kafka/" data-id="cl4cp4fnw002efcgucvvnfi5g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MQ/" rel="tag">MQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kafka/" rel="tag">kafka</a></li></ul>
@@ -973,7 +2305,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/07/23/%E5%86%85%E6%A0%B8%E6%80%81%E4%B8%8E%E7%94%A8%E6%88%B7%E6%80%81/" data-id="cl166yb39002494guhzvt0mp8" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/07/23/%E5%86%85%E6%A0%B8%E6%80%81%E4%B8%8E%E7%94%A8%E6%88%B7%E6%80%81/" data-id="cl4cp4fo1002xfcgugzw785h6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/note/" rel="tag">note</a></li></ul>
@@ -1144,1064 +2476,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/07/19/java-io-2/" data-id="cl166yb32001i94guhzsi89jd" class="article-share-link">Share</a>
+      <a data-url="http://pawncs.github.io/2021/07/19/java-io-2/" data-id="cl4cp4fnt0025fcgu9re55ebw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IO/" rel="tag">IO</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-http协议" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/07/07/http%E5%8D%8F%E8%AE%AE/" class="article-date">
-  <time datetime="2021-07-07T04:02:36.000Z" itemprop="datePublished">2021-07-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/network/">network</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/07/07/http%E5%8D%8F%E8%AE%AE/">http协议</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <style>
-.title1{
-    font-size:36px;
-    color:#e7767f;
-    /* 桃红 */
-
-}
-.title2{
-    font-size:29px;
-    color:#176f58;
-    /* 祖母绿 */
-}
-.title3{
-    font-size:22px;
-    color:#21a675;
-    /* 石绿 */
-}
-.title4{
-    font-size:15px;
-    color:#a8cd34;
-    /* 柳绿 */
-}
-.name{
-
-    margin-left: auto;
-    text-align: right;
-    color: #d05667;
-    margin-right: 10px;
-    margin-top: 20px;
-    /*海棠红*/
-}
-</style>
-
-<div class="name">by pawncs</div>
-
-<hr>
-<div class="title2">零、目录</div>
-
-<hr>
-<p><a href="#http-1">一、web和网络基础</a><br><a href="#http-1-1">1.1 http版本区别</a><br><a href="#http-1-2">1.2 tcp/ip协议族</a><br><a href="#http-1-3">1.3 与http密切相关的ip,tcp,dns</a><br><a href="#http-1-4">1.4 url,uri</a>  </p>
-<p><a href="#http-2">二、简单的http协议</a><br><a href="#http-2-1">2.1 请求报文、响应报文</a><br><a href="#http-2-2">2.2 请求方法</a><br><a href="#http-2-3">2.3 持久连接</a>  </p>
-<p><a href="#http-3">三、http报文内的http信息（未完成）</a><br><a href="#http-3-1">3.1 首部字段</a><br><a href="#http-3-2">3.2 压缩传输编码、分块传输编码</a><br><a href="#http-3-3">3.3 发送多种数据的多部分对象集合</a><br><a href="#http-3-1">3.4 范围请求</a><br><a href="#http-3-2">3.5 内容协商</a>  </p>
-<p><a href="#http-4">四、http状态码</a><br><a href="#http-4-1">4.1 代表性状态码</a><br><a href="#http-4-2">4.2 状态码详解</a>  </p>
-<p><a href="#http-5">五、与http协作的web服务器</a><br><a href="#http-5-1">5.1 单台虚拟主机实现多个域名</a><br><a href="#http-5-2">5.2 通信数据转发程序：代理、网关、隧道</a>  </p>
-<p><a href="#http-6">六、http首部</a><br><a href="#http-6-1">6.1 http首部字段概况</a><br><a href="#http-6-2">6.2 http首部字段详细</a>  </p>
-<p><a href="#http-7">七、https</a>  </p>
-<p><a href="#http-8">八、用户身份认证</a><br><a href ="#http-8-1" >8.1 BASIC 认证</a><br><a href ="#http-8-2">8.2 DIGEST 认证</a><br><a href ="#http-8-3">8.3 SSL 客户端认证</a><br><a href ="#http-8-4">8.4 基于表单认证</a>   </p>
-<p><a href="#http-9">九、基于http的功能追加协议</a>  </p>
-<p><a href="#http-10">十、构建web内容的技术</a>  </p>
-<p><a href="#http-11">十一、web的攻击技术</a><br><a href ="#http-11-1" >11.1 因输出值转义不完全引发的安全漏洞</a><br><a href ="#http-11-2" >11.2 因设置或设计上的缺陷引发的安全漏洞</a><br><a href ="#http-11-3" >11.3 因会话管理疏忽引发的安全漏洞</a><br><a href ="#http-11-4" >11.4 其它安全漏洞</a>  </p>
-<p><a href="#http-ex">EX、额外</a></p>
-<hr>
-<hr>
-<div id ="http-1" class="title2">一、web和网络基础</div>
-
-<hr>
-<blockquote>
-<p>http(HyperText Transfer Protocol):超文本传输协议</p>
-</blockquote>
-<p>web使用其作为规范，完成从客户端到服务端等一系列运作过程。</p>
-<div id="http-1-1" class="title3">1.1 http版本区别</div>
-
-<ul>
-<li>http0.9：正式版本之前的版本的意思</li>
-<li>http1.0：正式版本</li>
-<li>http1.1：主流版本（<a href="#http-2-3">持久连接</a>）</li>
-<li>http2.0：升级版（<a href="#http-9">改善速度体验</a>）<div id="http-1-2" class="title3">1.2 TCP/IP协议族</div>
-
-</li>
-</ul>
-<blockquote>
-<p>具体可阅读《详解TCP/IP》  </p>
-</blockquote>
-<p>分层：</p>
-<ul>
-<li>应用层<ul>
-<li>其决定了向用户提供应用服务时通信的活动</li>
-<li>FTP（file transfer protocol,文件传输协议）,DNS（domain name system,域名系统）,HTTP</li>
-</ul>
-</li>
-<li>传输层<ul>
-<li>其为上层提供处于网络连接中的两台计算机之间的数据传输</li>
-<li>TCP（transmission control protocol，传输控制协议）,UDP（user data protocol，用户数据报协议）</li>
-</ul>
-</li>
-<li>网络层<ul>
-<li>其用于处理网络上流动的数据包，该层规定了通过了路径到达对方的计算机（选择路径）</li>
-</ul>
-</li>
-<li>链路层<ul>
-<li>用于处理连接网络的硬件部分，包括控制操作系统、设备驱动、NIC（网卡），光纤</li>
-</ul>
-</li>
-</ul>
-<div id="http-1-3" class="title3">1.3 与HTTP密切相关的IP,TCP,DNS</div>
-
-<div class="title4">IP</div>
-
-<p>其作用为把数据包传送给对方。为此需要得知IP地址和MAC地址。IP地址指明了节点被分配到的地址，MAC指明了网卡所知的固定地址。</p>
-<ul>
-<li>IP间的通信依赖MAC地址，通常通过ARP协议来搜寻中转目标。（ARP协议根据通信方IP地址反查对应的MAC地址）</li>
-<li>没人能全面掌握互联网中的传输状况；路由选择机制。<div class="title4">TCP</div>
-
-</li>
-</ul>
-<p>三次握手，四次挥手。SYN，ACK。</p>
-<p>TCP确保可靠性。</p>
-<div class="title4">DNS</div>
-
-<p>负责域名解析。提供了域名到IP地址的解析服务。</p>
-<div id="http-1-4" class="title3">1.4 URL,URI</div>
-
-<blockquote>
-<p>url(uniform resource locator:统一资源定位符)<br>uri(uniform resource identifier:统一资源标识符)</p>
-</blockquote>
-<p>uri用字符串标识某一互联网资源，url表示资源的地点。url是uri的子集。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">RFC3986：URI例子</span><br><span class="line"></span><br><span class="line">ftp:&#x2F;&#x2F;ftp.xx.xx.xx&#x2F;xxx&#x2F;xxxx.txt</span><br><span class="line">http:&#x2F;&#x2F;www.xxx.xx&#x2F;xxx&#x2F;xxx.txt</span><br><span class="line">tel:+1-816-555-1212</span><br><span class="line">telnet:&#x2F;&#x2F;192.9.2.16:80&#x2F;</span><br><span class="line">……</span><br><span class="line">等。</span><br></pre></td></tr></table></figure>
-<p>绝对URI格式：<br>[协议方案名]://[登录信息]@[服务器地址]:[服务器端口号]/[带层次的文件路径]?[查询字符串]#[片段标识符]</p>
-<ul>
-<li>协议方案名也可为数据方案名或者脚本方案名（data:,javascript:）</li>
-</ul>
-<hr>
-<hr>
-<div id ="http-2" class="title2">二、简单的http协议</div>
-
-<hr>
-<div id ="http-2-1" class="title3">2.1 请求报文、响应报文</div>
-
-<ul>
-<li><p>请求报文：<br>请求方法(get)、请求URI、协议版本(http/1.1)、请求首部字段(request field)、内容实体</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/index</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: xxxx.xx</span><br><span class="line"><span class="attribute">Connection</span>: keep-alive</span><br><span class="line"><span class="attribute">Content-type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Content-Length</span>: 16</span><br><span class="line"></span><br><span class="line">name=ueno&amp;age=37</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>请求头和内容实体由空行分隔  </p>
-</blockquote>
-</li>
-<li><p>响应报文:<br>服务器对应HTTP版本（http/1.1）、状态码和原因短语(200 OK)，首部字段(head field)，空行分隔，资源实体的主体</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Http/1.1 200 OK</span><br><span class="line"><span class="attribute">Date</span>: Tue,10 Jul 2012 06:50:15 GMT</span><br><span class="line"><span class="attribute">Content-Length</span>: 362</span><br><span class="line"><span class="attribute">Content-Type</span>: text/html</span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">……</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<div id ="http-2-2" class="title3">2.2 请求方法</div>
-</li>
-<li><p>GET：获取资源  </p>
-<ul>
-<li>返回URI对应的资源</li>
-</ul>
-</li>
-<li><p>POST：传输实体主体  </p>
-<ul>
-<li>虽然可以用GET方法传输，但一般不那么做  </li>
-<li>POST的主要目的不是为了获得响应的主体内容</li>
-</ul>
-</li>
-<li><p>PUT：传输文件  </p>
-<ul>
-<li>如同FTP协议的文件上传，其要求报文的主体包含文件内容，保存到请求URI指定的位置</li>
-<li>由于HTTP/1.1自身不带验证机制，所以WEB网站一般不使用该方法，若配合web应用程序验证机制或架构为REST等，则可能开放PUT</li>
-</ul>
-</li>
-<li><p>HEAD：获得报文首部  </p>
-<ul>
-<li>和GET相同，但不返回报文主体。用于确认URI有效性及资源更新的日期时间等。</li>
-</ul>
-</li>
-<li><p>DELETE：删除文件  </p>
-<ul>
-<li>用法和PUT相反。</li>
-<li>和PUT一样，由于http/1.1自身不带验证机制，因此一般也不使用，若配合web应用程序的验证机制，或遵守REST标准还是可能开放使用的</li>
-</ul>
-</li>
-<li><p>OPTIONS：询问支持的方法  </p>
-<ul>
-<li>用于查询针对请求URI指定的资源支持的方法</li>
-</ul>
-</li>
-<li><p>TRACE：追踪路径  </p>
-<ul>
-<li>让web服务器将之前的请求通信返回给客户端</li>
-<li>具体流程：在Max-forwards首部字段填入数值，每过一个服务器端就将该数字减1，数值为0时停止传输，最后接收到请求的服务器端返回状态码200 OK的响应</li>
-<li>客户端通过Trace方法可以查询发送出去的请求是如何被加工、篡改的。TRACE方法用于确认连接过程中发生的一系列操作。</li>
-<li>TRACE方法本身不常用，加上容易引起XST攻击（Cross-site tracing，跨站追踪），就更不会用到了。</li>
-</ul>
-</li>
-<li><p>CONNECT：要求用隧道协议连接代理</p>
-<ul>
-<li>要求在与代理服务器通信时建立隧道，实现用隧道协议进行TCP通信。</li>
-<li>主要使用 SSL和TLS协议把通信内容加密后经网络隧道传输。</li>
-<li>格式：<code>CONNECT 代理服务器名：端口号 HTTP版本</code></li>
-<li><a href="#http-5-2">隧道</a></li>
-</ul>
-</li>
-</ul>
-<div id ="http-2-3" class="title3">2.3 持久连接</div>
-
-<p>http初始版本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">建立TCP连接</span><br><span class="line">HTTP请求、响应（获取html文档）</span><br><span class="line">断开TCP连接</span><br><span class="line"></span><br><span class="line">建立TCP连接</span><br><span class="line">HTTP请求、响应（获取图片）</span><br><span class="line">断开TCP连接</span><br><span class="line"></span><br><span class="line">建立TCP连接</span><br><span class="line">HTTP请求、响应（获取图片）</span><br><span class="line">断开TCP连接</span><br></pre></td></tr></table></figure>
-
-<p>http/1.1和一部分1.0提出了持久连接（http keep-alive）（任意一方未提出断开连接则一直保持连接）  </p>
-<ul>
-<li>持久连接：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-------SYN--------&gt;   ╕</span><br><span class="line">&lt;----SYN&#x2F;ACK-------   ╞ 建立TCP连接</span><br><span class="line">-------ACK--------&gt;   ╛</span><br><span class="line">-----HTTP请求-----&gt;</span><br><span class="line">&lt;----HTTP响应------</span><br><span class="line">-----HTTP请求-----&gt;</span><br><span class="line">&lt;----HTTP响应------</span><br><span class="line">&lt;-------FIN--------   ╗</span><br><span class="line">--------ACK-------&gt;   ╠ 断开TCP连接</span><br><span class="line">--------FIN-------&gt;   ║</span><br><span class="line">&lt;-------ACK--------   ╝</span><br></pre></td></tr></table></figure></li>
-<li>管线化<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;---建立TCP连接---&gt;</span><br><span class="line">-----HTTP请求-----&gt;</span><br><span class="line">-----HTTP请求-----&gt;</span><br><span class="line">&lt;----HTTP响应------</span><br><span class="line">&lt;----HTTP响应------</span><br><span class="line">&lt;---断开TCP连接---&gt;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>持久连接使得管线化（pipelining）成为可能。管线化：不用等待响应即可发下个请求</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<hr>
-<div id ="http-3" class="title2">三、http报文内的http信息</div>
-
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http报文结构：</span><br><span class="line">[  报文首部 ]</span><br><span class="line">[空行(CR+LF)]</span><br><span class="line">[  报文主体 ]</span><br></pre></td></tr></table></figure>
-
-<div class="title3" id="http-3-1">3.1 首部字段</div>
-
-<ul>
-<li>请求/响应首部字段</li>
-<li>通用首部字段</li>
-<li>实体首部字段</li>
-</ul>
-<div class="title3" id="http-3-2">3.2 压缩传输编码、分块传输编码</div>
-<div class="title3" id="http-3-3">3.3 发送多种数据的多部分对象集合</div>
-<div class="title3" id="http-3-4">3.4 范围请求</div>
-<div class="title3" id="http-3-5">3.5 内容协商</div>
-
-<hr>
-<hr>
-<div id ="http-4" class="title2">四、http状态码</div>
-
-<hr>
-<table>
-<tr>
-<th></th>
-<th>类别</th>
-<th>原因短语</th>
-</tr>
-<tr>
-<td>1XX</td>
-<td>Informational(信息性状态码)</td>
-<td>接收的请求正在处理</td>
-</tr>
-<tr>
-<td>2XX</td>
-<td>Success(成功状态码)</td>
-<td>请求正常处理完毕</td>
-</tr>
-<tr>
-<td>3XX</td>
-<td>Redirection(重定向状态码)</td>
-<td>需要进行附加操作完成请求</td>
-</tr>
-<tr>
-<td>4XX</td>
-<td>Client Error(客户端错误状态码)</td>
-<td>服务器无法处理请求(客户端出错)</td>
-</tr>
-<tr>
-<td>5XX</td>
-<td>Server Error(服务端错误状态码)</td>
-<td>服务器请求出错</td>
-</tr>
-</table>
-
-<div class="title3" id="http-4-1">4.1代表性状态码</div>
-
-<ul>
-<li><p>200 OK</p>
-<ul>
-<li>请求已正常处理</li>
-</ul>
-</li>
-<li><p>204 No Content</p>
-<ul>
-<li>请求处理成功，但返回的响应报文不含主体</li>
-</ul>
-</li>
-<li><p>206 Partial Content</p>
-<ul>
-<li>该状态码表示客户端进行了范围请求（只要一部分），服务器成功执行。</li>
-<li>响应报文Content-Range 指定报文实体内容</li>
-</ul>
-</li>
-<li><p>301 Moved Permanently</p>
-<ul>
-<li>永久性重定向。</li>
-<li>表示请求的资源已经被分配了新的URI，以后应用现在的URI（应按Location的首部重新保存URI）</li>
-</ul>
-</li>
-<li><p>302 Found</p>
-<ul>
-<li>临时性重定向。</li>
-<li>表示希望用户（本次）使用新的URI访问（需要保留原先的URI）</li>
-</ul>
-</li>
-<li><p>303 See Other</p>
-<ul>
-<li>该请求对应的资源存在另一个URI，应使用GET定向获取请求的资源</li>
-<li>和302类似，但要求POST换GET</li>
-</ul>
-</li>
-<li><p>304 Not Modified</p>
-<ul>
-<li>服务端接受客户端的请求，但发生了请求的条件未满足的情况（If-Match，If-Range等首部）将直接返回304（不包含响应主体）</li>
-<li>虽然在3XX，但和重定向无关</li>
-</ul>
-</li>
-<li><p>307 Temporary Redirect</p>
-<ul>
-<li>临时重定向</li>
-<li>和302相同。</li>
-</ul>
-</li>
-<li><p>400 Bad Request</p>
-<ul>
-<li>请求报文中存在语法错误</li>
-<li>需修改请求内容后重发请求</li>
-<li>浏览器会像对待200一样对待400</li>
-</ul>
-</li>
-<li><p>401 Unauthorized</p>
-<ul>
-<li>请求需要有通过HTTP认证的认证信息。</li>
-<li>返回401的响应必须由一个适用于被请求资源的WWW-Authenticate首部用以质询（challenge）用户信息。当浏览器初次接收401时，会弹出认证用的对话窗口。</li>
-<li>若之前有过1次请求，则表明认证失败。</li>
-</ul>
-</li>
-<li><p>403 Forbidden</p>
-<ul>
-<li>对请求资源的访问被服务器拒绝</li>
-<li>服务器可能在响应主体部分给出说明</li>
-</ul>
-</li>
-<li><p>404 Not Found</p>
-<ul>
-<li>服务器没有请求的资源</li>
-</ul>
-</li>
-<li><p>500 Internal Server Error</p>
-<ul>
-<li>服务器在执行请求时发生了错误，也可能是Web应用存在的BUG或某些临时的故障</li>
-</ul>
-</li>
-<li><p>503 Service Unavailable</p>
-<ul>
-<li>服务器正处于超负载或正在进行停机维护，无法处理请求</li>
-<li>如果事先知道解除以上状况时间，可写入Retry-After首部字段再发回客户端</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>不少情况状态码是错误的，例如Web应用程序内部发生错误，可能仍会返回200</p>
-</blockquote>
-<div class="title3" id="http-4-2">4.2 状态码详解</div>
-
-<p><a href="https://tool.oschina.net/commons?type=5" target="_blank" rel="noopener">http状态码详解</a></p>
-<hr>
-<hr>
-<div id ="http-5" class="title2">五、与http协作的web服务器</div>
-
-<hr>
-<div id ="http-5-1" class="title3">5.1 单台虚拟主机实现多个域名</div>
-
-<ul>
-<li>虚拟主机实现多个域名，host的作用<blockquote>
-<p>因为DNS服务已将域名映射到ip地址，因此请求到达服务器时已经是ip地址形式了。因此服务器若托管了两个域名，需要先弄清楚是哪个域名。所以在http请求的Host首部需指定主机名或域名的URI</p>
-</blockquote>
-<div id ="http-5-2" class="title3">5.2 通信数据转发程序：代理、网关、隧道</div>
-
-</li>
-</ul>
-<p>这些应用程序和服务器可以将请求转发给通信线路的下一站服务器，并且能接受到从那台服务器发送的响应并再转发给客户端</p>
-<ul>
-<li><p>代理</p>
-<ul>
-<li>扮演了中间人的角色，将一方的请求/响应转发给另一方</li>
-<li>可级联多台代理服务器，转发时，需用Via首部字段标记出经过的主机信息。</li>
-<li>代理目的：缓存技术减少流量，组织内部针对特定网站的访问控制，获取访问日志等</li>
-<li>缓存代理<ul>
-<li>代理转发响应时，缓存代理（Caching Proxy）会预先将资源的副本保存在代理服务器，当代理再次接收相同的请求时，就不会再次访问源服务器，而是直接返回缓存的资源。<ul>
-<li>浏览器也可储存缓存</li>
-</ul>
-</li>
-<li>优势：源服务器不必多次处理相同的请求，客户端可以就近从缓存服务器获取资源</li>
-<li>缓存期限问题，需要向源服务器确认是否为“旧资源”</li>
-</ul>
-</li>
-<li>透明代理<ul>
-<li>转发请求或响应时，不对报文做任何加工。反之，则为不透明代理</li>
-</ul>
-</li>
-<li>正向代理（隐藏客户端）</li>
-<li>反向代理（隐藏服务器）</li>
-</ul>
-</li>
-<li><p>网关</p>
-<ul>
-<li>网关是转发其他服务器通信数据的服务器<ul>
-<li>接收请求时，向自己拥有源服务器资源一样对请求进行处理，客户端甚至不会察觉自己通信目标是网关</li>
-</ul>
-</li>
-<li>网关的工作原理和代理相似，而网关能使通信线路上的服务器提供非http协议服务<ul>
-<li>利用网关可以由HTTP请求转化为其他协议通信</li>
-</ul>
-</li>
-<li>网关能提高通信安全性，因为可以在客户端和网关之间的通信线路上加密以确保连接安全</li>
-<li>网关可以连接数据库，使用sql查询数据，也可与信用卡结算系统联动</li>
-</ul>
-</li>
-<li><p>隧道</p>
-<ul>
-<li>隧道是在相隔甚远的客户端和服务器两者间进行周转，并保持双方通信连接的应用程序。</li>
-<li>隧道可按要求建立一条与其他服务器通信的线路，届时使用SSL等加密手段进行通信。</li>
-<li>隧道的目的是确保客户端和服务器进行安全的通信</li>
-<li>隧道本身不会解析HTTP请求</li>
-</ul>
-</li>
-</ul>
-<hr>
-<hr>
-<div id ="http-6" class="title2">六、http首部</div>
-
-<hr>
-<div id ="http-6-1" class="title3">6.1 http首部字段概况</div>
-
-<div class="title4">1.Http请求报文：</div>
-
-<ul>
-<li>报文首部<ul>
-<li>请求行<ul>
-<li>方法、URL、HTTP版本</li>
-</ul>
-</li>
-<li>请求首部字段</li>
-<li>通用首部字段</li>
-<li>实体首部字段</li>
-</ul>
-</li>
-<li>空行（CR+LF）</li>
-<li>报文主体</li>
-</ul>
-<div class="title4">2.HTTP响应报文：</div>
-
-<ul>
-<li>报文首部<ul>
-<li>状态行<ul>
-<li>HTTP版本、状态码</li>
-</ul>
-</li>
-<li>响应首部字段</li>
-<li>通用首部字段</li>
-<li>实体首部字段</li>
-</ul>
-</li>
-<li>空行（CR+LF）</li>
-<li>报文主体</li>
-</ul>
-<div class="title4">3.若首部字段重复：</div>
-
-<p>规范内尚未明确，不同浏览器处理结果不一致。有的浏览器优先第一次出现的，有的浏览器优先最后出现的</p>
-<div class="title4">4.首部字段类型</div>
-
-<ul>
-<li><p>通用首部字段(General Header Fields)<br>请求和响应都会用的首部</p>
-</li>
-<li><p>请求首部字段(Request Header Fields)<br>补充了请求的附加内容，客户端信息，相应内容相关优先级</p>
-</li>
-<li><p>响应首部字段(Response Header Fields)<br>补充了响应的附加内容，也会要求客户端附加额外的内容信息</p>
-</li>
-<li><p>实体首部字段(Entity Header Fields)<br>补充了资源内容更新时间等与实体有关的信息</p>
-</li>
-</ul>
-<div class="title4">5.End to End 首部和 Hop by Hop 首部</div>
-
-<ul>
-<li>端到端首部(End-to-end Header)：<br>此类别的首部会转发到最终接受目标：要求必须被转发</li>
-<li>逐跳首部(Hop-by-hop Header):<br>此类别首部只对单次转发有效，通过缓存或代理将不再转发。另，1.1/HTTP 之后，使用逐跳首部必须提供 Connection 首部字段。</li>
-</ul>
-<div id ="http-6-2" class="title3">6.2 http首部字段详细</div>
-
-<p><a href="https://blog.csdn.net/xsvklftj/article/details/110008840" target="_blank" rel="noopener">首部字段详解</a></p>
-<hr>
-<hr>
-<div id ="http-7" class="title2">七、https</div>
-
-<hr>
-<div  class="title3">http不足</div>
-<div  class="title3">认证</div>
-<div  class="title3">SSL握手</div>
-<div  class="title3">完整性保护</div>
-
-
-<blockquote>
-<p>http + 加密 + 认证 + 完整性保护 = https</p>
-</blockquote>
-<p>（有待更新）</p>
-<hr>
-<hr>
-<div id ="http-8" class="title2">八、用户身份认证</div>
-
-<hr>
-<p>某些Web页面只想让部分人或者仅仅让本人浏览。为达到这个目标我们需要认证功能。</p>
-<div class="title4">何为认证</div>
-
-<p>为了确认使用者是否有登陆者权限，需要核对“登陆者本人才知道的信息”或是“登陆者本人才会有的信息”</p>
-<p>这些信息通常为：</p>
-<ul>
-<li><p>密码：只有本人才知道的字符串信息</p>
-</li>
-<li><p>动态令牌：仅限本人持有设备内显示的一次性密码</p>
-</li>
-<li><p>数字证书：仅限本人（终端）持有的信息</p>
-</li>
-<li><p>生物认证：指纹和虹膜等本人的生理信息</p>
-</li>
-<li><p>IC卡：仅限本人持有的信息</p>
-</li>
-</ul>
-<div id ="http-8-1" class="title3">8.1 BASIC 认证</div>
-
-<blockquote>
-<p>BASIC 认证(基本认证)是1.0就定义的认证方式。是Web服务器和通信客户端之间进行的认证方式。</p>
-</blockquote>
-<p>认证步骤：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">发送请求------------------------------&gt;</span><br><span class="line">&lt;--------------------返回401告知需要认证</span><br><span class="line">用户ID和密码以Base64方式编码发送--------&gt;</span><br><span class="line">&lt;----------认证成功返回200，不成功返回401</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>显而易见，传递的信息明文解码后就是用户名和密码，因此在非加密的HTTP线路上传输并不安全。另外，一般浏览器也无法进行认证注销操作。<br>因为其不够灵活、安全，因此并不常用。</p>
-</blockquote>
-<div id ="http-8-2" class="title3">8.2 DIGEST 认证</div>
-
-<blockquote>
-<p>DIGEST认证 ：1.1启用，为弥补BASIC缺陷。采用质询/响应的方式(challenge/response),但不会像BASIC一样明文发送。</p>
-</blockquote>
-<p>质询响应方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">认证要求----------------&gt;</span><br><span class="line">&lt;------------------质询码</span><br><span class="line">响应码(根据质询码计算)---&gt;</span><br></pre></td></tr></table></figure>
-<p>因为响应码是根据质询码计算得到，因此比起BASIC认证，密码泄露概率就低了。</p>
-<p>DIGEST认证概要也类似，区别在于返回的值为响应码和响应概要。（最后200表示认证成功，401表示认证失败）</p>
-<blockquote>
-<p>DIGEST认证提高了BASIC认证的安全等级，但是仍比不上HTTP客户端认证。<br>其提供了防止密码被窃听的机制，但并未防止用户伪装。<br>DIGEST和BASIC一样，使用不灵活，也达不到使用者的安全需求，因此使用范围也有限。</p>
-</blockquote>
-<div id ="http-8-3" class="title3">8.3 SSL 客户端认证</div>
-
-<p><a href = "#http-7">具体</a></p>
-<p>一般情况下，SSL客户端不会仅靠证书完成认证，一般会和基于表单认证组合成双因素认证。前者确认是客户端计算机，后者确认是用户本人。<br>通过双因素认证后，就可确认是本人使用匹配的计算机访问服务器。</p>
-<div id ="http-8-4" class="title3">8.4 基于表单认证</div>
-
-<p>表单认证并未在HTTP协议中定义。但因为其便利性和安全性，大部分认证均为表单认证。</p>
-<div  class="title4">cookie 保存session</div>
-
-<p>http没有提供状态管理的功能，因此通过cookie保存session ID来保存会话信息来完成这个功能。</p>
-<div  class="title4">盐（salt）</div>
-
-<p>用给密码加盐(salt)的方式增加额外信息，再用散列函数计算出散列值后保存。</p>
-<blockquote>
-<p>盐为随机生成的字符串（足够长），和密码前后拼接。因为盐是不同的，因此散列值也是不同的，可以极大的减少密码的特征性，防止被破译。</p>
-</blockquote>
-<hr>
-<hr>
-<div id ="http-9" class="title2">九、基于http的功能追加协议</div>
-
-<hr>
-<p>Http虽简单快捷，但随着时代的发展仍疲态尽显。因此出现了一些补充协议试图解决WEB的瓶颈。HTTP2.0也在指定规划中。<br>HTTP/2.0 七项核心技术：</p>
-<table>
-<thead>
-<tr>
-<th>技术</th>
-<th>协议</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>压缩</td>
-<td>SPDY,Friendly</td>
-</tr>
-<tr>
-<td>多路复用</td>
-<td>SPDY</td>
-</tr>
-<tr>
-<td>TLS义务化</td>
-<td>Speed+Mobility</td>
-</tr>
-<tr>
-<td>协商</td>
-<td>Speed+Mobility,Friendly</td>
-</tr>
-<tr>
-<td>客户端拉曳(Client Pull)/服务器推送(Servel Push)</td>
-<td>Speed+Mobility</td>
-</tr>
-<tr>
-<td>流量控制</td>
-<td>SPDY</td>
-</tr>
-<tr>
-<td>WebSocket</td>
-<td>Speed+Mobility</td>
-</tr>
-</tbody></table>
-<hr>
-<hr>
-<div id ="http-10" class="title2">十、构建web内容的技术</div>
-
-<hr>
-<p>略。（html,css,servlet(java)，json，RSS/Atom等的简单介绍）</p>
-<hr>
-<hr>
-<div id ="http-11" class="title2">十一、web的攻击技术</div>
-
-<hr>
-<div id ="http-11-1" class="title3">11.1 因输出值转义不完全引发的安全漏洞</div>
-
-<div class="title4">跨站脚本攻击</div>
-<div class="title4">SQL注入攻击</div>
-<div class="title4">OS命令注入攻击</div>
-<div class="title4">HTTP首部注入攻击</div>
-<div class="title4">邮件首部注入攻击</div>
-<div class="title4">目录遍历攻击</div>
-<div class="title4">远程文件包含漏洞</div>
-
-<div id ="http-11-2" class="title3">11.2 因设置或设计上的缺陷引发的安全漏洞</div>
-
-<div class="title4">强制浏览</div>
-<div class="title4">不正确的错误消息处理</div>
-<div class="title4">开放重定向</div>
-
-<div id ="http-11-3" class="title3">11.3 因会话管理疏忽引发的安全漏洞</div>
-
-<div class="title4">会话劫持</div>
-<div class="title4">会话固定攻击</div>
-<div class="title4">跨站点请求伪造</div>
-
-<div id ="http-11-4" class="title3">11.4 其它安全漏洞</div>
-
-<div class="title4">密码破解</div>
-<div class="title4">点击劫持</div>
-<div class="title4">DoS攻击</div>
-<div class="title4">后面程序</div>
-
-<hr>
-<hr>
-<div id ="http-ex" class="title2">EX、额外</div>
-
-<hr>
-<div class="title3">参考目录</div>
-
-<p>《图解HTTP》 [日]上野宣  2014.5</p>
-<hr>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/07/07/http%E5%8D%8F%E8%AE%AE/" data-id="cl166yb4e004b94gu8rbi6uba" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/" rel="tag">http</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Redis" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/04/23/Redis/" class="article-date">
-  <time datetime="2021-04-23T12:40:22.000Z" itemprop="datePublished">2021-04-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java-Web/">Java Web</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/04/23/Redis/">Redis</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <style>
-.title1{
-    font-size:36px;
-    color:#e7767f;
-    /* 桃红 */
-
-}
-.title2{
-    font-size:29px;
-    color:#176f58;
-    /* 祖母绿 */
-}
-.title3{
-    font-size:22px;
-    color:#21a675;
-    /* 石绿 */
-}
-.title4{
-    font-size:15px;
-    color:#a8cd34;
-    /* 柳绿 */
-}
-.name{
-
-    margin-left: auto;
-    text-align: right;
-    color: #d05667;
-    margin-right: 10px;
-    margin-top: 20px;
-    /*海棠红*/
-}
-</style>
-
-
-<div class="name">by pawncs</div>
-
-<hr>
-<div class="title2">零、简介</div>
-
-<hr>
-<p><a href="#Redis-1">一、Redis简介</a><br><a href="#Redis-1-1">1.1 nosql介绍</a><br><a href="#Redis-1-2">1.2 redis介绍</a><br><a href="#Redis-1-3">1.3 redis安装</a><br><a href="#Redis-1-4">1.4 jedis介绍</a><br><a href="#Redis-1-5">1.5 spring boot 集成 redis</a>  </p>
-<p><a href="#Redis-2">二、Redis常用数据类型</a><br><a href="#Redis-2-1">2.1 String</a><br><a href="#Redis-2-2">2.2 List</a><br><a href="#Redis-2-3">2.3 Hash</a><br><a href="#Redis-2-4">2.4 Set</a><br><a href="#Redis-2-5">2.5 Sorted Set</a>  </p>
-<p><a href="#Redis-3">三、Redis key操作</a>  </p>
-<p><a href="#Redis-4">四、Redis 特性</a><br>4.1 多数据库<br>4.2 支持事务</p>
-<p><a href="#Redis-5">五、Redis 持久化</a><br><a href="#Redis-5-1">5.1 RDB(redis database)</a><br><a href="#Redis-5-2">5.2 AOF(append only file)</a>  </p>
-<p><a href="#Redis-EX">EX、参考</a>  </p>
-<hr>
-<div class="title2" id="Redis-1">一、Redis 简介</div>
-
-<hr>
-<div class="title3" id="Redis-1-1">1.1 nosql介绍</div>
-NoSQL概述
-+ 高并发读写
-+ 海量数据的高效率存储和访问
-+ 搞可扩展性和高可用性
-
-<p>NoSQL分类</p>
-<ul>
-<li>键值对存储（优势：快速查询）（劣势：缺少结构化）</li>
-<li>列存储（优势：查找速度快，扩展性强）（劣势：功能局限）</li>
-<li>文档数据库（优势：数据类型要求不严格）（劣势：性能不高，缺少统一查询语法）</li>
-<li>图形数据库（应用：社交网络啥的）（优势：应用图结构的算法）（劣势：需要对图进行运算才能得到结果，不方便做分布式集群方案）</li>
-</ul>
-<p>特点：</p>
-<ul>
-<li>易扩展</li>
-<li>灵活的数据模型</li>
-<li>大数据量，高性能</li>
-<li>高可用</li>
-<li>WEB2.0应用广泛</li>
-</ul>
-<div class="title3" id="Redis-1-2">1.2 redis介绍</div>
-Redis:  
-+ NoSQL
-+ 基于内存运行
-+ 支持分布式
-+ 数据类型丰富（String,List,Set,Ordered Set）
-+ 应用场景：缓存，任务队列，网站访问统计，数据过期处理，分布式中session的分离等
-
-
-<div class="title3" id="Redis-1-3">1.3 Redis 安装</div>
-
-<p>安装Docker</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y update</span><br><span class="line">sudo yum -y install epel-release</span><br><span class="line">sudo yum -y install docker-io</span><br></pre></td></tr></table></figure>
-<p>启动Docker</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start docker</span><br><span class="line">sudo docker version</span><br></pre></td></tr></table></figure>
-
-<p>安装Redis并启动</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo docker pull redis:latest</span><br><span class="line">sudo docker images</span><br><span class="line">sudo docker run  --name redis -p 6379:6379 -d --restart=always redis:latest redis-server --appendonly yes --requirepass "[密码]"</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>6379是服务端口号<br>验证是否启动成功</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker ps</span><br></pre></td></tr></table></figure>
-
-<div class="title3" id="Redis-1-4">1.4 Jedis入门</div>
-
-<p>Jedis是Redis官方首选java客户端开发包</p>
-<p>new Jedis(“IP地址”,端口号)</p>
-<p>jedis.set,jedis.get<br>连接池：  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">JedisPoolConfig config = <span class="keyword">new</span> JedisPoolConfig();<span class="comment">//连接池配置对象</span></span><br><span class="line"></span><br><span class="line">config.setMaxTotal(<span class="number">30</span>);<span class="comment">//最大连接数</span></span><br><span class="line"></span><br><span class="line">config.setMaxIdle(<span class="number">10</span>);<span class="comment">//最大空闲连接数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//获得连接池</span></span><br><span class="line">JedisPool jedisPool = <span class="keyword">new</span> JedisPool(config,[IP地址],[端口]);</span><br><span class="line"></span><br><span class="line"><span class="comment">//获得核心对象(标准点要try,catch,finnally)</span></span><br><span class="line">Jedis jedis = jedisPool.getResource();</span><br></pre></td></tr></table></figure>
-
-<div class="title3" id="Redis-1-5">1.5 Spring Boot 集成 Redis </div>
-
-<ul>
-<li>引入依赖</li>
-<li>配置Redis服务器</li>
-<li>启动应用</li>
-</ul>
-<p>依赖</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>配置</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Redis服务器地址</span></span><br><span class="line"><span class="meta">spring.redis.host</span>=<span class="string"></span></span><br><span class="line"><span class="comment"># Redis 服务器端口号</span></span><br><span class="line"><span class="meta">spring.redis.port</span>=<span class="string">6379</span></span><br><span class="line"><span class="comment"># Redis 服务器密码 </span></span><br><span class="line"><span class="meta">spring.redis.password</span>=<span class="string"></span></span><br></pre></td></tr></table></figure>
-
-<p>而后会自动配置<code>StringRedisTemplate</code>类的对象。</p>
-<hr>
-<hr>
-<div class="title2" id="Redis-2">二、Redis常用数据类型</div>
-
-<hr>
-<ul>
-<li>String(字符串)</li>
-<li>list(字符串列表)</li>
-<li>hash（哈希）</li>
-<li>set（字符串集合）</li>
-<li>sorted set（有序字符串集合）</li>
-</ul>
-<p>key不要太长（降低性能），也不要太短（降低可读性），要有统一命名规范。</p>
-<div class="title3" id="Redis-2-1">2.1 String</div>
-
-<ul>
-<li><p>在redis中以2进制操作,安全 </p>
-</li>
-<li><p>value 最常数据为:512M</p>
-</li>
-<li><p>常用命令：赋值，取值，删除，数值增减，扩展命令。</p>
-</li>
-<li><p>get set getset del incr decr incrby append</p>
-<div class="title3" id="Redis-2-2">2.2 Hash</div>
-</li>
-<li><p><strong>String</strong> key 和<strong>String</strong> value的map容器</p>
-</li>
-<li><p>可以存储4294967295个键值对（4*10^9）</p>
-</li>
-<li><p>常用命令(myhash是key,Hash是value)</p>
-<ul>
-<li>赋值 hset myhash key value ;hmset(存多个)</li>
-<li>取值 hget myhash key;hmget(取多个)；hgetall （同时获得键值对）</li>
-<li>删除 hdel myhash key1 key2</li>
-<li>增加数字 hincrby myhash key</li>
-<li>扩展命令 (判断指定属性是否存在) hexists …… (获得属性数量) hlen myhash (获得所有key) hkeys myhash</li>
-</ul>
-</li>
-</ul>
-<div class="title3" id="Redis-2-3">2.3 List</div>
-
-<ul>
-<li><p>可以在左侧和右侧添加链表</p>
-</li>
-<li><p>ArrayList使用数组方式</p>
-</li>
-<li><p>linkedList使用双向链表方式</p>
-</li>
-<li><p>双向链表添加数据</p>
-</li>
-<li><p>双向链表删除数据</p>
-</li>
-<li><p>常用命令</p>
-<ul>
-<li>两端添加<br> lpush key a b c(a在最后面，c在最左侧)；rpush ……（从右端添加）</li>
-<li>查看列表<br>lrange key start end(0表示第一个，-1表示最后一个)</li>
-<li>两端弹出<br>lpop key(弹出并返回)</li>
-<li>获取列表元素个数<br>llen key</li>
-<li>扩展命令<br>lpushx  key (仅当key存在才插入)；<br>lrem key count value(count个为value的元素，总共删除count个。其为0时全删)；<br>lset key index value(在角标为index的位置添加value);<br>linsert key after value1 value2(在value1后添加value2)</li>
-</ul>
-</li>
-<li><p>使用场景：<br>经常用于消息队列的服务，来<strong>完成多个程序的消息的交互</strong>（存消息的是生产者，取的是消费者）——&gt;消费者可以在处理时添加进备份队列，处理完后从备份队列中删除，防止程序崩溃导致的消息丢失。备份中消息过期时可以重新添加进主队列中</p>
-<div class="title3" id="Redis-2-4">2.4 Set</div>
-</li>
-<li><p>没有排序的字符集合</p>
-</li>
-<li><p>和list不同：不允许出现重复元素</p>
-</li>
-<li><p>可以在服务端完成多个set的聚合操作(节省网络开销)</p>
-</li>
-<li><p>最大元素数量：4294967295</p>
-</li>
-<li><p>常用命令</p>
-<ul>
-<li>添加、删除 sadd key value1 value2 ;srem ……</li>
-<li>获得元素 sismember key value(返回1表存在 0表不存在) smembers key(获得所有元素)</li>
-<li>差集运算 sdiff key1 key2</li>
-<li>交集运算 sinter key1 key2</li>
-<li>并集运算 sunion ……</li>
-<li>扩展命令 srandmember ;scard; sdiffstore keyTarget key1 key2(将key1和key2差集运算的结果存储到keyTarget)(其他类似)</li>
-</ul>
-</li>
-<li><p>使用场景：用于跟踪一些具有唯一性的数据（比如访问博客的IP地址）（可以利用服务器端的运算来操作所有购买者的ID存储到set）</p>
-<div class="title3" id="Redis-2-5">2.5 Sorted-Set</div>
-</li>
-<li><p>和set的区别：sorted-set中的每个元素都有一个分数与之关联。redis通过这个分数将其从小到大排序。元素唯一，分数可以重复。时间复杂度为集合中元素的对数。因为其有序，所以访问中部的成员也是高效的。</p>
-</li>
-<li><p>对于1来说，想要在其他数据库中达到同样的效果是非常困难的。</p>
-</li>
-<li><p>应用场景：游戏排名，微博热点之类</p>
-</li>
-<li><p>常用命令</p>
-<ul>
-<li>添加元素 zadd key score value score value(每个元素都要有个分数，返回的是添加的个数)（若已有元素，则更改分数，不算进添加的个数）</li>
-<li>获得元素 zscore key value(获得value的分数)； zcard key(返回数量)</li>
-<li>删除元素 zrem key value1 value2(返回删除的个数)</li>
-<li>范围查询 zrange key start end(0是第一个，-1是最后一个。返回查询到的所有元素)；<br>zrange key start end withscores(带分数查询)<br>zrevrange …… (降序排序)<br>zremrangebyrank key start end（范围删除）<pre><code>zremrangebyscore ……（根据分数范围进行删除）</code></pre></li>
-<li>扩展命令<br>zrangebyscore ……（返回分数在某个区间的元素） limit 2(只显示2个)；<br>zincrby key score value(将value的分数加上score)<br>zcount key 80 90(统计分数位于80-90区间的个数)</li>
-</ul>
-</li>
-<li><p>使用场景 积分排行榜（zadd更新分数，zrange获得积分）构建索引数据</p>
-</li>
-</ul>
-<hr>
-<hr>
-<div class="title2" id="Redis-3">三、Redis key 操作</div>
-
-<hr>
-<ol>
-<li>查看所有keys ： keys *</li>
-<li>查看my开头的所有keys : keys my?</li>
-<li>删除指定key: del my1 my2 my3</li>
-<li>查看指定是否存在：exists my1</li>
-<li>重命名：rename key1 newName</li>
-<li>设置过期时间：expire key time(time的单位是s)</li>
-<li>查看超时时间 ttl key(key所剩时间,没设置返回-1)</li>
-<li>查看key类型：type key</li>
-</ol>
-<hr>
-<hr>
-<div class="title2" id="Redis-4">四、Redis 特性</div>
-
-<hr>
-<ul>
-<li>多数据库<ul>
-<li>一个redis实例可以包括多个数据库，客户端可以指定连接哪个数据库。一个redis实例最多可提供16个数据库，下标为0-15，客户端默认连接0号数据库，可通过select选择具体连接哪个数据库<br>select 1  </li>
-<li>移动key去其他数据库：move key 1(将key移动到1号数据库)</li>
-</ul>
-</li>
-<li>支持事务<ul>
-<li>multi exec discard</li>
-<li>串行化顺序执行。在事务执行的过程中，redis不会向其他客户端提供任何服务，保证所有命令原子化执行。在redis中，某个命令执行失败，后面的命令仍然被执行。</li>
-<li>multi 开启一个事务。之后的命令都是事务的命令。这些命令都会存储到队列当中。直到exec</li>
-<li>exec 相当于提交事务</li>
-<li>discard 相当于回滚事务</li>
-</ul>
-</li>
-</ul>
-<hr>
-<hr>
-<div class="title2" id="Redis-5">五、Redis 持久化</div>
-
-<hr>
-<p>redis的高性能：所有数据都存储在内存当中。为了数据不丢失，所以要存储到硬盘上。<br>两种持久化方式：</p>
-<ul>
-<li>RDB方式<ul>
-<li>默认支持</li>
-<li>在指定的时间间隔内，将内存的数据快照写进硬盘</li>
-</ul>
-</li>
-<li>AOF方式<ul>
-<li>以日志的方式存储服务器的每一个操作。服务器启动之初，会用日志来重新构建数据库，保证数据是完整的</li>
-</ul>
-</li>
-<li>不持久化<ul>
-<li>通过配置禁用RDB的功能。此时redis就是缓存的机制了。</li>
-</ul>
-</li>
-<li>同时使用RDB,AOF</li>
-</ul>
-<div class="title3" id="Redis-5-1">5.1 RDB(redis database)</div>
-
-<p>优势：</p>
-<ul>
-<li>只包含一个文件，利于文件备份。（每天归档一次，每30天归档一次……）当系统出现灾难性故障，可以非常容易的进行恢复。</li>
-<li>性能最大化。由（fork）子进程来完成持久化的工作。避免服务器进程执行IO操作。与AOF相比，若数据集很大，RDB启动效率更高。  </li>
-</ul>
-<p>劣势：</p>
-<ul>
-<li>无法完全保证数据不丢失</li>
-<li>当数据集很大时，要服务器停止一段时间来完成快照的录入</li>
-</ul>
-<p>配置：<br>redis.conf中（100多行左右）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
-<p>意为：900s内有一个数据改动，300s内有10个数据改动，或60s内有10000个数据改动，则记录一次快照</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dbfilename dump.rdb</span><br></pre></td></tr></table></figure>
-<p>意为数据的文件名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir .&#x2F;</span><br></pre></td></tr></table></figure>
-<p>为保存路径</p>
-<div class="title3" id="Redis-5-2">5.2 AOF(append only file)</div>
-
-<p>优势：</p>
-<ul>
-<li>更高的数据安全性<ul>
-<li>三种同步策略：每秒同步（异步完成），每修改同步（同步持久化，效率最低，最安全），不同步</li>
-</ul>
-</li>
-<li>对日志的操作是append模式（追加）。因此写入过程宕机不会影响已经写入的内容（一条只写入了一半数据时，启动之前，通过reids-check-aof 来解决数据一致性的问题）</li>
-<li>日志过大，则redis自动启动重写机制，使用append不断向老的磁盘写入数据，同时创建新的日志来记录此期间产生的数据。因此重写切换能更好的保证安全性</li>
-<li>AOF包含一个格式清晰，易于理解的日志文件，用于记录所有的修改操作。实际上也可以通过这个文件来完成数据的重建</li>
-</ul>
-<p>劣势：</p>
-<ul>
-<li>比RDB更大</li>
-<li>根据同步策略，效率往往低于RDB</li>
-</ul>
-<p>配置<br>还是redis.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appendonly no</span><br></pre></td></tr></table></figure>
-<p>默认情况下aof没有打开，需要改成yes</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appendonlyfilename &quot;appendonly.aof&quot;</span><br></pre></td></tr></table></figure>
-<p>日志文件名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">appendfsync always</span><br><span class="line">#appendfsync everysec</span><br><span class="line">#appendfsync no</span><br></pre></td></tr></table></figure>
-<p>同步策略，每修改同步，每秒同步，不同步</p>
-<hr>
-<hr>
-<div class="title2" id="Redis-EX">EX、参考</div>
-
-<hr>
-<ul>
-<li><a href="https://www.imooc.com/learn/839" target="_blank" rel="noopener">Redis入门</a></li>
-</ul>
-<hr>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://pawncs.github.io/2021/04/23/Redis/" data-id="cl166yb43003x94guc48u2xdf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li></ul>
 
     </footer>
   </div>
@@ -2254,7 +2532,7 @@ Redis:
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
     </div>
   </div>
 
@@ -2267,6 +2545,14 @@ Redis:
       <ul>
         
           <li>
+            <a href="/2022/04/01/Oracle%E5%AD%A6%E4%B9%A0/">Oracle学习</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/28/Oracle%E5%AD%A6%E4%B9%A0/">Oracle学习</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A6%82%E8%A7%88/">线程池概览</a>
           </li>
         
@@ -2276,14 +2562,6 @@ Redis:
         
           <li>
             <a href="/2021/12/07/vue/">vue</a>
-          </li>
-        
-          <li>
-            <a href="/2021/11/30/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2021/09/03/Restful%E9%A3%8E%E6%A0%BC/">Restful风格</a>
           </li>
         
       </ul>
