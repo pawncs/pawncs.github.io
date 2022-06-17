@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Oracle学习 | 诺亚方舟的货运仓</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content=".title1{     font-size:36px;     color:#e7767f;     &#x2F;* 桃红 *&#x2F;  } .title2{     font-size:29px;     color:#176f58;     &#x2F;* 祖母绿 *&#x2F; } .title3{     font-size:22px;     color:#21a675;     &#x2F;* 石绿 *&#x2F; } .title4{">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle学习">
+<meta property="og:url" content="http://pawncs.github.io/2022/03/28/Oracle%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="诺亚方舟的货运仓">
+<meta property="og:description" content=".title1{     font-size:36px;     color:#e7767f;     &#x2F;* 桃红 *&#x2F;  } .title2{     font-size:29px;     color:#176f58;     &#x2F;* 祖母绿 *&#x2F; } .title3{     font-size:22px;     color:#21a675;     &#x2F;* 石绿 *&#x2F; } .title4{">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-28T05:22:54.000Z">
+<meta property="article:modified_time" content="2022-06-17T06:34:15.123Z">
+<meta property="article:author" content="pawncs">
+<meta property="article:tag" content="Oracle">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="诺亚方舟的货运仓" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">诺亚方舟的货运仓</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">pawncs的笔记之地</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://pawncs.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Oracle学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/03/28/Oracle%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2022-03-28T05:22:54.000Z" itemprop="datePublished">2022-03-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/sql/">sql</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Oracle学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <style>
+.title1{
+    font-size:36px;
+    color:#e7767f;
+    /* 桃红 */
+
+}
+.title2{
+    font-size:29px;
+    color:#176f58;
+    /* 祖母绿 */
+}
+.title3{
+    font-size:22px;
+    color:#21a675;
+    /* 石绿 */
+}
+.title4{
+    font-size:15px;
+    color:#a8cd34;
+    /* 柳绿 */
+}
+.name{
+
+    margin-left: auto;
+    text-align: right;
+    color: #d05667;
+    margin-right: 10px;
+    margin-top: 20px;
+    /*海棠红*/
+}
+</style>
+
+
+<div class="name">by pawncs</div>
+
+<hr>
+<div class="title2">零、目录</div>
+
+<hr>
+<ul>
+<li><a href="#oracle-arch-1">一、Oracle体系结构概述</a></li>
+<li><a href="#oracle-arch-2">二、文件</a></li>
+<li><a href="#oracle-arch-3">三、内存结构</a></li>
+<li><a href="#oracle-arch-4">四、Oracle进程</a></li>
+<li><a href="#oracle-arch-5">五、锁与闩</a></li>
+<li><a href="#oracle-arch-8">八、redo与undo</a></li>
+<li><a href="#oracle-arch-11">十一、数据类型</a></li>
+<li><a href="#oracle-arch-EX">EX、附录</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>应用不停变化，数据永存。从长远来讲，我们的目标并不是构建应用，而是如何使用这些应用底层的数据</p>
+</blockquote>
+<hr>
+<div class="title2" id="oracle-arch-1">一、Oracle体系结构概述</div>
+
+<hr>
+<div class="title4">物理架构</div>
+
+<p>Oracle在不同操作系统上有不同的物理架构，如Linux为多进程运作，Windows为单进程多线程等。Oracle虽然在不同操作系统上差异很大，但Oracle会将这些差异包装起来，并在这之上构建了一个更具通用性并且适用于所有平台的数据库架构。</p>
+<div class="title4">Oracle的两种架构</div>
+
+<ul>
+<li>6-11g:单租户架构(single tenant)</li>
+<li>12c之后：多租户架构(multitenant)</li>
+</ul>
+<div class="title4">数据库和实例术语定义</div>
+
+<ul>
+<li><p>数据库: 操作系统文件或磁盘的集合（当时用ASM(自动存储管理，Automatic Storage Management)或裸设备分区时，数据库可能不是操作系统中单独的文件，但定义不变）</p>
+<ul>
+<li>单租户数据库：包含全套数据文件、控制文件、重做日志文件、参数文件等。包含Oracle内部使用的和应用的元数据、数据、代码。</li>
+<li>容器数据库(12c)(CDB)：包含全套数据文件、控制文件、重做日志文件、参数文件等。包含Oracle内部使用的元数据、数据、代码。(仅存放Oracle自用的实体)</li>
+<li>可插拔数据库(12c)(PDB)：仅包含数据文件（应用的元数据、数据、代码）</li>
+</ul>
+</li>
+<li><p>实例：<br>  一组Oracle后台进程/线程以及一个共享的<strong>内存</strong>区域。(维护非持久内容)</p>
+</li>
+<li><p>关系：数据库可由多个实例装载和打开，一个实例只能装载和打开一个数据库</p>
+</li>
+<li><p>SGA(系统全局区):包含实例数据和控制信息的共享内存结构。主要包括：数据库高速缓冲，重做日志缓冲、共享池(库高速缓存、数据字典缓存)。其用于(但不限于)：维护所有进程需要访问的内部数据结构；缓存磁盘上的数据，另外重做数据写进磁盘前在此缓存；保护已解析的SQL计划。</p>
+</li>
+</ul>
+<div class="title3">连接Oracle数据库</div>
+
+<div class="title4">Oracle服务器处理请求的两种常见方式</div>
+
+<ul>
+<li>专用服务器连接<ul>
+<li>总是在登录时创建一个新的进程。其和会话存在一对一的映射</li>
+</ul>
+</li>
+<li>共享服务器连接<ul>
+<li>实质是一种连接池机制。</li>
+<li>通过调度程序（分派程序）进行进程的调度：将客户的请求放入SGA中的请求队列，第一个空闲的共享服务器会得到这个请求并处理。完成后，将其返回值放入调度程序的响应队列中。</li>
+</ul>
+</li>
+</ul>
+<div class="title4">如何建立连接</div>
+
+<p>读取tnsnames.ora配置文件。获得如何和远程数据库连接。根据其配置信息，客户端软件获得主机名、该主机上监听器进程接受连接的端口，该主机上所连接数据库的服务名。</p>
+<blockquote>
+<p>简单连接：oracle提供了不需要该配置文件的连接方式，即直接通过主机名，监听器端口以及服务名进行连接：<br><code>sqlplus username@[//]host[:port][/service_name][:server][/instance_name]</code></p>
+</blockquote>
+<p>服务器收到请求后，检查自己的配置文件，可能会拒绝，或者真正的建立连接。</p>
+<div class="title4">监听器进程在两种处理方式时工作方式的不同之处：</div>
++ 专用：
+    + windows:为用户建立一个新的线程，并将客户重定向到该线程
+    + linux:通过fork()或exec()创建新进程。因其继承了键连接，因此和数据库物理的连接上了
++ 共享：
+    + 从调度程序池中选取调度程序，返回客户连接信息（如何和调度程序连接），客户端断开和监听器的连接，直接和调度程序连接
+
+<hr>
+<div class="title2" id="oracle-arch-2">二、文件</div>
+
+<hr>
+<blockquote>
+<p>在Oracle中，可以用四种文件系统机制存储关心的数据（数据字典，redo,undo,表，索引，lob）</p>
+<ul>
+<li>操作系统文件系统：用文件来存储数据</li>
+<li>裸分区：不是文件，只是磁盘的一个扇区，不能用ls或文件资源管理器查看。管理开销大，没有缓冲，所有IO都是直接操作</li>
+<li>自动存储管理(ASM)：数据库文件系统，仅能存储数据库相关信息。</li>
+<li>集群文件系统(RAC): 为集群中所有节点提供共享的文件系统<br>oracle不会限制只能选择其中的某一个（可以同时选择多个）</li>
+</ul>
+</blockquote>
+<p>主要讲构成数据库和实例的八类文件</p>
+<div class="title4">实例相关文件：</div>
+
+<ul>
+<li>参数文件</li>
+<li>跟踪文件</li>
+<li>警告文件  </li>
+</ul>
+<div class="title4">数据库相关文件：</div>
+
+<ul>
+<li><p><strong>数据文件</strong>：包括表、索引和其他段</p>
+<ul>
+<li>Oracle中的存储层次体系：<blockquote>
+<ul>
+<li>表空间(tablespace)：Oracle中的逻辑存储逻辑，包含一个或多个数据文件。表空间包含段。</li>
+<li>段(segment)：表空间中主要的组织结构，其为占用存储空间的数据库对象，如表、索引、回滚段等。占用存储空间的每一个对象都会存储在段中</li>
+<li>区段(extent)：段本身由一个或多个区段组成。区段是文件中一个逻辑上连续分配的空间。11gR2后，引入延迟概念。（创建对象时不会分配区段，当写入真实发生（insert）时才会分配区段）。多个区段可能不在同一段磁盘或同个文件中，但单个区段是文件中逻辑连续的空间。</li>
+<li>块(block)：区段由块组成。为最小空间分配单位(常见大小：2kB,4kB,8KB,18KB).存储行数据、索引条目、临时排序结果等。表空间内部，所有块大小都是一致的</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>临时文件</p>
+</li>
+<li><p>控制文件</p>
+</li>
+<li><p><strong>重做日志文件</strong>：事务日志。当进行错误操作时可用其进行恢复。</p>
+<ul>
+<li><p>在线重做日志</p>
+<ul>
+<li><p>每个数据库至少有两个在线重做日志组，为镜像。切换的动作称为日志切换，可能会导致系统临时性暂停。（会暂时挂起数据库操作，去确认缓存中数据是否安全写入）(检查点)（去检查在线重做日志的内容是否已经被写入磁盘）（此时会将缓冲区的已提交内容刷入磁盘）（另一个刷入磁盘时间是高速缓存满了时）</p>
+</li>
+<li><p>每个日志组有一个或多个日志成员，大小固定，循环使用(1写满了去覆盖2,2写满了去覆盖1) </p>
+<blockquote>
+<p>数据库高速缓存，是Oracle SGA中的结构。提交update会写入其中(也会写入重做日志缓冲区，另一个SGA结构)，提交commit会将重做日志缓冲区写入在线重做日志。若断电，会导致缓存清空，需要在线重做日志恢复。因此当缓冲区被刷入磁盘前，在线重做日志不能被覆盖</p>
+</blockquote>
+<blockquote>
+<p>如果在完成检查点前想使用日志文件，会出现<code>Checkpoint not complete</code>信息，此时其他处理都会暂停，会全力完成检查点。如果优化是妥当的，不应该看到此条信息。(通常为没有设置足够多的在线重做日志文件，或未对DBWn(Database Block writer)调优)</p>
+</blockquote>
+<blockquote>
+<p>设置在线重做日志大小需要考虑的：</p>
+<ul>
+<li>高峰负载，大小应以高峰期重做日志生成量为准，防止出现检查点等待</li>
+<li>大量用户修改相同的块，需要将重做日志设置的大一点，（每个用户修改相同的块，最好做更多的更新再一次刷进磁盘）</li>
+<li>平均回复时间。重做日志文件越大，回复时间越长。小的日志文件会导致更多的检查点操作，更慢的系统运行速度，更快的恢复时间。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>归档重做日志：在更长的时间维度恢复数据。需在归档模式。实际上是以快进的方式重做整个星期的事务。</p>
+<blockquote>
+<p>不以归档模式运行的数据库总有一天会丢失数据</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>密码文件</p>
+</li>
+</ul>
+<div class="title4">Oracle Database 10g新增2可选文件，以实现更快的备份和恢复操作：</div>
+
+<ul>
+<li>修改跟踪文件</li>
+<li>闪回日志文件</li>
+</ul>
+<div class="title4">与数据库有关的其他类型文件</div>
+
+<ul>
+<li>转储文件</li>
+<li>数据泵文件</li>
+<li>平面文件</li>
+</ul>
+<hr>
+<div class="title2" id="oracle-arch-3">三、内存结构</div>
+
+<hr>
+<ul>
+<li><strong>系统全局区(SGA)</strong>:一个大的共享内存段，几乎所有Oracle进程都要访问这个区域。在小型测试系统中可能只有几十MB，但在中大型乃至巨型系统中，可能多达几百GB<blockquote>
+<p>查看sga:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> &gt;select pool,name,bytes</span><br><span class="line">from v$sgastat</span><br><span class="line">order by pool,name;</span><br></pre></td></tr></table></figure>
+<p>内含多个池</p>
+</blockquote>
+<ul>
+<li>java pool:为java虚拟机(jvm)分配的固定大小的内存(oracle 10g以上课启动或运行时调整大小)<code>JAVA_POOL_SIZE</code></li>
+<li>large pool：用于大块内存的分配。共享服务器时存储UGA,并行执行功能时作为消息缓冲区，RMAN备份时作为磁盘I/O缓冲区。可动态调整大小<code>LARGE_POOL_SIZE</code></li>
+</ul>
+</li>
+</ul>
+<pre><code>+ &lt;strong&gt;shared pool(共享池)&lt;/strong&gt;：共享游标、存储过程、状态对象、字典缓存和诸如此类的大量其他数据。9i及以上版本可动态调整大小`SHARED_POOL_SIZE`
+    + 缓存Orale程序数据的地方，例如解析查询时，将解析结果储存在这。
+    + PL/SQL代码也储存在这并被共享。
+    + 根据LRU（最近最少使用）原则管理。或者通过`DBMS_SHARED_POOL`包将对象长久保存在共享池中
+    + &lt;strong&gt;不使用绑定变量，则会破坏共享池机制&lt;/strong&gt;,唯一使得oracle能够重复利用执行计划的方法就是采用绑定变量
+        &gt;系统花大量CPU解析查询
+        &gt;系统使用大量资源管理共享池中对象，但其不被重用
+        &gt;硬解析（语法树分析）、软解析（池中查到，直接获取执行计划）、执行
+
+
++ streams pool:专门针对数据传输/共享工具的内存池。可动态调整大小。若未配置该池，则oracle会使用shared pool最多10%的空间作为流内存`STREAMS_POOL_SIZE`
++ &quot;null&quot; pool(pool字段为空的池)：块缓冲区（缓存数据库块）、重做日志缓冲区和&quot;固定SGA&quot;区专用的内存（`LOG_BUFFER`某种程度控制日志缓冲区大小）
+
++ 无论何种分配方式，各个池的内存分配都是基于颗粒的（颗粒的倍数）。颗粒的大小为4,8,16MB的内存区。若分配5MB，颗粒为4，则实际上会分配8MB
+&gt;<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;V$SGA_DYNAMIC_COMPONENTS</span><br><span class="line">&gt;---可以查看各个池中的颗粒大小(字段(granule_size))，或SGA总大小如何影响颗粒大小</span><br></pre></td></tr></table></figure></code></pre><ul>
+<li><p><strong>进程全局区(PGA)</strong>:进程或线程专用内存。由进程或线程自身分配。除了UGA（如果有），几乎用于内存排序，位图合并、散列。可以手动告诉Oracle允许多少内存用于排序和散列等，也可自动分配整个PGA（需设置最多允许多少内存<code>PGA_AGGREGATE_TARGET</code>）（或者SGA和PGA总共可以用多大内存<code>MEMORY_TARGET</code>）</p>
+<blockquote>
+<p>手动PGA管理</p>
+<ul>
+<li><code>SORT_AREA_SIZE</code> 排序信息交换到磁盘前，所使用的内存总量</li>
+<li><code>SORT_AREA_RETAINED_SIZE</code> 排序完成后用于保存已排序数据的内存总量</li>
+<li><code>HASH_AREA_SIZE</code> 存储散列表所用的内存量。通常在做大数据集和另一数据集的连接时，会进行散列连接并用到这部分内存。较小的数据集会被散列到内存，放不下的部分会通过连接键存储到临时表空间中</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>用户全局区(UGA)</strong>:与特定的会话关联。可以由SGA（共享服务器）（此时UGA在SGA内部）或PGA（专用服务器）（此时UGA和PGA几乎为同义词）分配。实际上来说，就是会话状态</p>
+</li>
+</ul>
+<hr>
+<div class="title2" id="oracle-arch-4">四、Oracle进程</div>
+
+<hr>
+<p>Oracle中的每个进程都要执行一个特定的任务(或一组任务)，每个进程都会给自己分配内存（PGA）来完成它的任务。一个Oracle实例主要由以下三类进程。</p>
+<ul>
+<li><p>服务器进程<br>  根据客户端的请求完成工作。（专用服务器，共享服务器就是服务器进程）</p>
+</li>
+<li><p>后台进程<br>  随着数据库的启动而启动，用以完成各种维护任务。（如将数据库写入磁盘、维护在线重做日志，清理异常终止的进程以及维护自动工作负载存储库等） </p>
+</li>
+<li><p>从属进程<br>  类似后台进程，代表后代进程或服务器进程完成一些额外的工作</p>
+</li>
+</ul>
+<div class="title4">服务器进程</div>
+
+<p>即执行客户端会话指令的进程。负责接受有应用发送给数据库的SQL语句，并在数据库中执行。</p>
+<p>当你提交一条SQL语句时，专用服务器或共享服务器就进程就会解析这个查询，放入共享池(或直接在共享池发现他)。这个进程要指定查询计划（若需要）并执行他。</p>
+<p>该类线程是干重活的线程，几乎所有工作都是这些线程做的</p>
+<blockquote>
+<p>连接与会话：</p>
+<ul>
+<li>连接：<strong>从客户端到Oracle数据库实例的一条物理路径</strong>。一个连接上可以没有或有多个会话，一个会话也可以有连接或没连接</li>
+<li>会话：<strong>数据库实例中存在的一个逻辑实体</strong>。我们所看到的会话状态信息，代表了会话在实例内存中的数据结构的集合。同时，会话是在数据库上执行SQL，提交事务和运行存储过程的地方</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>除了共享服务器连接和专用服务器连接外的第三种连接方式：数据库常驻连接池。继承了共享服务器的共享概念和专用服务器的专用概念——在池子里放的是专用服务器的连接，在一次会话的生命周期里，其用的是同一个服务器线程</p>
+</blockquote>
+<p>三种连接模式的适用场景：</p>
+<ul>
+<li><p>专用服务器<br>  是Oracle的推荐配置，设置其最简单，也不需要什么配置，能很好地扩展。<br>  因为是1V1，因此不必担心长时间运行的事务会阻塞其他事务。<br>  因此，在非OLTP环境中，也即有可能长时间运行事务的情况下，应该考虑用这种模式。</p>
+</li>
+<li><p>共享服务器<br>  配置不难，仅比专用服务器多一步。<br>  是nV1,多个客户端对应着一个共享服务器。使用时必须当心，不能长时间独占资源。<br>  共享服务器的原则是：事务可以频繁的执行，但必须短时间执行完（OLTP系统的特点）。<br>  共享服务器可能会产生人为死锁。（共享资源的持有者因为表被锁住而阻塞，而锁的持有者永远拿不到共享资源来释放锁）<br>  由于这些原因，共享服务器只适合OLTP系统  </p>
+<blockquote>
+<p>(<code>On-Line Transaction Processing联机事务处理过程(OLTP)</code>)<br>OLTP系统中，任务以毫秒为单位进行执行，任何事务都会在1S内完成   </p>
+</blockquote>
+<p>  若OLTP和非PLTP混杂，则可以共用专用和共享服务器的模式</p>
+<blockquote>
+<p>由于许多高级特性要求共享服务器，所以有些时候也没得选。例如Oracle Net连接池，或者集中式数据库链。</p>
+</blockquote>
+<blockquote>
+<p>共享服务器的好处：减少操作系统进程数，认为限制并发度，减少系统所需的内存</p>
+</blockquote>
+</li>
+<li><p>数据库常驻连接池<br>  有共享服务器的许多优点，同时避免人为死锁。但其没有多线程功能。他获得进程后，会一直持有他直到客户端释放他。<br>  更适合需要频繁连接数据库，进行小处理又断开的场景。或者说，DRCP更适合客户端应用本身的API没有提供高效连接池的情况</p>
+</li>
+</ul>
+<div class="title4">后台进程</div>
+
+<p>是Oracle实例的组成部分(实例由SGA和一组后台进程组成)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">----查看后台进程</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> *</span><br><span class="line">       <span class="keyword">from</span> V$bgprocess;</span><br></pre></td></tr></table></figure>
+<p>各个线程的作用(如PMON,LREG,SMON等)见《Oracle编程艺术》P179。</p>
+<div class="title4">从属进程</div>
+
+<p>Oracle中有两类从属进程：I/O从属进程和并行查询从属进程</p>
+<p>IO从属进程：用于在不支持异步IO的系统或设备上模拟异步IO</p>
+<p>并行查询从属子进程:对于select、create table、create index 、update等sql语句，创建一个执行计划，包含了多个同时执行的子计划，将输出合并再输出，完成节约时间的目的。</p>
+<hr>
+<div class="title2" id="oracle-arch-5">五、锁与闩</div>
+
+<hr>
+<p>在Oracle中：</p>
+<ul>
+<li>事务是数据库的核心</li>
+<li>事务应延迟到必要的时刻才提交，不要太快提交已对系统造成压力。</li>
+<li>只要需要，应尽可能延长对数据加的锁。</li>
+<li>在Oracle中，行级锁没有对应开销。</li>
+<li>锁升级（行级锁到表锁）不会对系统更好，也不会节省任何资源。</li>
+<li>可以同时得到并发性和一致性，数据读取器不会被数据写入器阻塞。</li>
+</ul>
+<div class="title3" >锁的问题</div>
+
+<h6 id="丢失更新"><a href="#丢失更新" class="headerlink" title="丢失更新"></a>丢失更新</h6><h6 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h6><h6 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h6><h6 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h6><h6 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h6><h6 id="锁升级"><a href="#锁升级" class="headerlink" title="锁升级"></a>锁升级</h6><div class="title3" >锁类型</div>
+
+<h6 id="DML锁"><a href="#DML锁" class="headerlink" title="DML锁"></a>DML锁</h6><blockquote>
+<p>DML:<code>Data Manipulation Language</code>，数据操纵语言</p>
+</blockquote>
+<p>其用于确保一次只能有一个人能修改某一行。</p>
+<h6 id="DDL锁"><a href="#DDL锁" class="headerlink" title="DDL锁"></a>DDL锁</h6><h6 id="闩"><a href="#闩" class="headerlink" title="闩"></a>闩</h6><h6 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h6><h6 id="手动锁定和用户定义锁"><a href="#手动锁定和用户定义锁" class="headerlink" title="手动锁定和用户定义锁"></a>手动锁定和用户定义锁</h6><hr>
+<div class="title2" id="oracle-arch-8">八、redo与undo</div>
+
+<hr>
+<p>redo:重做信息，可以重放事务<br>undo:回滚信息，主要用于取消或者回滚事务</p>
+<div class="title4" >redo</div>
+
+<p>在线重做日志、归档重做日志(均已介绍)</p>
+<div class="title4" >undo</div>
+
+<p>概念上和redo刚好相反。对数据库修改时会生成undo信息。需要时可以进行回滚（执行的事务或语句失败或ROLLBACK请求回滚时）</p>
+<blockquote>
+<p>undo会逻辑的回滚而非物理的回滚。意思是物理结构存储前后可能会不同</p>
+<blockquote>
+<p>当我们创建表并加入数据，然后回滚后，因加入数据而分配的空间并没有消失。因此加入前的IO和回滚后的IO操作数目并不相同</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p><strong>直接路径操作</strong>的undo会不生成或生成很少的undo</p>
+</blockquote>
+<p>尽管undo数据存储在undo表空间和undo段中，但其也收到redo的保护。（undo文件丢失可以redo恢复）</p>
+<div class="title4">redo和undo的协作</div>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(</span><br><span class="line">    x <span class="built_in">int</span>,</span><br><span class="line">    y <span class="built_in">int</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">index</span> ti <span class="keyword">on</span> t(x);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t(x,y)</span><br><span class="line">    <span class="keyword">values</span>(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> t </span><br><span class="line">    <span class="keyword">set</span> x = x + <span class="number">1</span> </span><br><span class="line">    <span class="keyword">where</span> x = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> t <span class="keyword">where</span> x = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>######Question</p>
+<ol>
+<li>系统在不同时间点失败，会发生什么   </li>
+<li>缓冲区写满会发生什么</li>
+<li>某个时间点ROLLBACK会发生什么</li>
+<li>全部成功COMMIT发生什么</li>
+</ol>
+<ul>
+<li><code>insert</code><br>  insert发生后生成redo和undo.此时块缓冲区中有表信息、索引信息、undo信息，均被重做日志缓冲区保护<ol>
+<li>系统崩溃<br> 没有任何影响，SGA被清空，因此数据库重启后如同一切尚未发生。（redo未被写入磁盘）</li>
+<li>缓冲区缓存已满<br> DBWn会把一部分改动的块刷到磁盘上。首先其会将redo条目进磁盘（若刷的过程出现宕机，可以用redo回复SGA，而后会有相应的undo（被redo保护）进行回滚）（否则，刷到磁盘的内容会缺少对应的undo）,在更新对应的表数据和索引数据</li>
+</ol>
+</li>
+<li><code>update</code><br>  和insert大体一样，但是undo量更大（需要保存原数据）。假设之前的重做日志均已刷到磁盘，缓冲区中的为update的重做日志和修改的表数据<ol>
+<li>系统崩溃<br> update的redo会丢失。但是没有问题，因为可以当做update没发生。<br> insert的redo被保存，表信息丢失。可以用redo恢复缓存（undo块，表块，索引块）。而后其会undo所有未提交的事务（包括insert）.(注：undo为逻辑恢复而非物理恢复，上面有讲)（物理是否恢复取决于insert修改的表数据是否刷到了磁盘上，若刷了，则insert仅仅逻辑上恢复到了之前的位置）<blockquote>
+<p>实例恢复的细节：先前滚，系统重放到失败点，再回滚所有尚未提交的操作</p>
+</blockquote>
+</li>
+<li>回滚事务<br> 通过undo将对应的内容放到缓冲区进行更改，在恢复后输出到数据文件。这过程不涉及重做日志。<blockquote>
+<p>oracle的目标是，可以顺序的写日志，而且在写日志时别人不会读日志</p>
+</blockquote>
+</li>
+</ol>
+</li>
+<li><code>delete</code><br>  和update无什么太大不同</li>
+<li><code>commit</code><br>  Oracle会将重做日志缓冲区刷新输出到磁盘。此后数据就有了持久性</li>
+</ul>
+<div class="title4">提交和回滚处理</div>
+
+<h6 id="commit做了什么"><a href="#commit做了什么" class="headerlink" title="commit做了什么"></a>commit做了什么</h6><blockquote>
+<p>过于频繁的提交并不会节省资源，反而会浪费资源，因为commit消耗的系统资源是基本相同的。<br>如每次update后立即提交与一千次update之后提交，commit消耗的时间分别为X与1000X<br>如果我们只在必要时提交，不仅能提高性能，也能减少对数据库共享资源的竞争（日志文件，各种内部闩）（java代码中要把autocommit设置为off）</p>
+<blockquote>
+<p>mybatis无参则自动事务默认为false.true的优势是一个事务失败只会回滚当前事务，不会影响前面的事务</p>
+</blockquote>
+<blockquote>
+<p>这里和mysql的区别是，mysql的自动提交默认为on。oracle默认为off.oracle的提交会动日志，这个是串行的，反复提交影响性能</p>
+</blockquote>
+</blockquote>
+<p>commit的开销来自两个方面：</p>
+<ul>
+<li>客户端和数据库之间的往返通讯</li>
+<li>每次提交等待redo写到磁盘。此时日志文件同步会显著降低系统性能</li>
+</ul>
+<p>因为commit在执行前已经完成了大部分工作，所以单次提交的动作消耗资源大体相同。</p>
+<p>执行commit前：</p>
+<ul>
+<li>SGA生成undo,修改数据（表，索引），以及前两者的redo缓存</li>
+<li>若耗时长，则部分已经输出到磁盘</li>
+<li>获取全部所需的锁</li>
+</ul>
+<p>commit做的工作：</p>
+<ul>
+<li>为事务生成SCN（System Change Number,系统改变号）,其是一种简单的计时机制（每次commit加1），保证事务顺序，支持失败恢复。还用于读一致性和检查点（类似Mysql的MVCC？）</li>
+<li>LGWR将所有未写入磁盘的重做日志条目写到磁盘，把SVN记录到在线重做日志文件中。此步为真正的commit,到这一步后，事务的状态为已提交。从V$TRANSACTION中会”删除”</li>
+<li>V$LOCK释放记录的锁</li>
+<li>若事务修改的块还在缓冲区中，Oracle会快速的访问并清理。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.jdbc.datasource.DataSourceTransactionManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.transaction.support.DefaultTransactionDefinition;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="comment">// @Resource(name = "manager") 看情况</span></span><br><span class="line"><span class="keyword">private</span> DataSourceTransactionManager transactionManager;</span><br><span class="line"> </span><br><span class="line">TransactionStatus transactionStatus = transactionManager.getTransaction(<span class="keyword">new</span> DefaultTransactionDefinition());</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">　　<span class="comment">//dosomething</span></span><br><span class="line">　　transactionManager.commit(transactionStatus);</span><br><span class="line">&#125;<span class="keyword">catch</span>（Exception ex）&#123;</span><br><span class="line">　　transactionManager.rollback(transactionStatus);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Spring 非autocommit时需中途提交的解决方案</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="ROLLBACK-做了什么"><a href="#ROLLBACK-做了什么" class="headerlink" title="ROLLBACK 做了什么"></a>ROLLBACK 做了什么</h6><blockquote>
+<p>和提交不同，回滚时间一定和修改数据量成正比</p>
+</blockquote>
+<p>回滚前已经做了的工作：</p>
+<ul>
+<li><p>SGA已生成undo</p>
+</li>
+<li><p>SGA已生成已修改数据块</p>
+</li>
+<li><p>SGA生成了对应前两项的redo缓存</p>
+</li>
+<li><p>若前三者比较大且耗时较长，则可能已被输出到磁盘</p>
+</li>
+<li><p>已经得到所需的全部锁</p>
+</li>
+</ul>
+<p>回滚时做的工作：</p>
+<ul>
+<li><p>撤销所有更改.Oracle数据库读取undo段，将其应用到数据块以撤销更改，并将对应的undo条目标记为已应用。</p>
+</li>
+<li><p>释放会话持有的所有锁，并唤醒队列</p>
+</li>
+</ul>
+<div class="title4" >分析redo</div>
+
+<p>redo管理是数据库中的一个串行点。任何Oracle实例都只有一个LGWR，最终所有事务都回汇集到LGWR——这些事务提交时都回请求该进程管理redo.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 测量生成的redo量</span></span><br><span class="line"><span class="keyword">select</span> a.name,b.value </span><br><span class="line">    <span class="keyword">from</span> v$statname a </span><br><span class="line">    <span class="keyword">join</span> v$mystat b </span><br><span class="line">    <span class="keyword">on</span> a.statistic<span class="comment"># = b.statistic# </span></span><br><span class="line">    <span class="keyword">where</span> a.name=<span class="string">'redo size'</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>重做日志不能关闭，他不是累赘，或者开销。其对数据库必不可少。<br>不过，在某些场合确实可以少生成重做日志</p>
+</blockquote>
+<p>可以设置NOLOGGING执行语句来生成更少的重做日志。或是直接设置NOLOGGING段（索引或表），从而隐式的使用该模式进行某些操作。</p>
+<blockquote>
+<p>例如移植一个表到另一个表空间时，可以设置为NOLOGGING模式移植，重建索引后再改为LOGGING。这样可以节约一半的时间。（要注意所有维护人员均需知道使用了这个特性，防止介质失败后造成的数据丢失）</p>
+</blockquote>
+<h6 id="拿不到重做日志空间的原因："><a href="#拿不到重做日志空间的原因：" class="headerlink" title="拿不到重做日志空间的原因："></a>拿不到重做日志空间的原因：</h6><ol>
+<li>检查点操作正在写入将要被重用的在线重做日志所保护的数据</li>
+<li>ARCn尚未把重做日志文件复制到归档目标</li>
+</ol>
+<p>因此Oracle必须等待以上目标完成才能安全地使用这个重做日志文件</p>
+<h6 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h6><ol>
+<li><p>让DBWn更快。如启用ASYNC I/O、DBWn I/O从属进程，或者更多的DBWn进程。好处是不用付出什么代价，不用修改逻辑代码。</p>
+</li>
+<li><p>增加更加的重做日志文件。这种方式会延迟检查点的出现。好处是消除系统的暂停，缺点是消耗了更多的磁盘空间。</p>
+</li>
+<li><p>重新创建更大的日志文件。扩大在线重做日志和重用该文件的时间间隙。优缺点和2同。</p>
+</li>
+<li><p>让检查点发生的更频繁。使用更小的缓冲区缓存或者使用诸如<code>FAST_START_MTTR_TARGET</code>,<code>LOG_CHECKPOINT_INTERVAL</code>,<code>LOG_CHECKPOINT_TIMEOUT</code>等参数。这会强制DBWn更频繁的刷新输出脏块。好处是实例恢复时间少。缺点是若修改大量数据块，那么数据块同步到磁盘的动作会更加频繁（降低缓冲区缓存的功效，可能会影响到块清除）</p>
+</li>
+</ol>
+<h5 id="块清除-block-cleanout"><a href="#块清除-block-cleanout" class="headerlink" title="块清除(block cleanout)"></a>块清除(block cleanout)</h5><p>即删除所修改数据库块上与“锁”有关的信息。</p>
+<p>问题：当我们修改数据块却未在事务结束前清理事务信息，则下次访问该块时会进行对其的删除，同时产生redo——即select语句也会产生redo，导致下个检查点可能有大量的数据要写入磁盘。</p>
+<blockquote>
+<p>在OLTP系统中很少发生这种事，因为其设计目标是短而精，每个事务通常只修改几个块，其在提交时得到清理。</p>
+</blockquote>
+<blockquote>
+<p>在进行大批量数据加载后，可以先运行例如DBMS_STATS之类来收集统计信息。在这个过程因为其是修改后第一次接触块的，因此会一并完成块清除。</p>
+</blockquote>
+<h5 id="日志竞争"><a href="#日志竞争" class="headerlink" title="日志竞争"></a>日志竞争</h5><p><code>log contention</code>，系统会花大量时间在<code>log file sync</code>(日志文件同步) 和 <code>file parallel write</code>（日志文件并行写）上</p>
+<p>原因是重做日志写的不够快。<br>原因：</p>
+<ol>
+<li>提交过于频繁，如insert循环提交</li>
+<li>redo放在一个慢速设备上。磁盘性能不佳（需更换）</li>
+<li>redo与其他频繁访问的文件放在同一个设备上。redo应放在专用设备上。</li>
+<li>日志放在有缓冲的设备上。操作系统会缓冲日志文件，但数据库已经在缓冲日志数据了。双缓冲会让速度慢下来。</li>
+<li>redo的存储采用了一种慢速技术，如RAID-5。其读性能很好，但写性能很差</li>
+</ol>
+<h5 id="临时表"><a href="#临时表" class="headerlink" title="临时表"></a>临时表</h5><p>12c之前：临时表的数据块不会生成redo,因此，对临时表的操作是不可恢复的。临时表会生成undo，且会写入日志。<br>由于undo会生成redo:</p>
+<ul>
+<li>insert会生成很少甚至不生成redo</li>
+<li>update生成的redo大约为永久表update的一半</li>
+<li>delete生成和永久表相同的redo</li>
+</ul>
+<div class="title4" >分析undo</div>
+
+<p>不同命令生成的文件大小和redo刚好相反。</p>
+<blockquote>
+<p><code>ORA-01555:snapshot too old</code>错误</p>
+<blockquote>
+<p>该错误和数据损坏或丢失毫无关系。唯一的影响是收到这个错误的查询无法继续处理。</p>
+</blockquote>
+<p>原因：</p>
+<ul>
+<li>undo段太小，不足以支撑系统上执行的工作</li>
+<li>程序跨COMMIT获取数据</li>
+<li>块清除</li>
+</ul>
+</blockquote>
+<p>orale使用undo获取读一致性的数据，因此两个语句（update where x=2,insert …… select from where x =2）同时用到了这个读一致性来获取一致的数据，又用他防备事务失败时带来的回滚，就会产生ORA-01555错误。</p>
+<h6 id="0RA-01555的解决方案"><a href="#0RA-01555的解决方案" class="headerlink" title="0RA-01555的解决方案"></a>0RA-01555的解决方案</h6><ul>
+<li><p>设置参数UNDO_RETENTION大于运行时间最长的事务所需时间.可以通过V$UNDOSTAT确认长时查询的持续时间。(这也是自动UNDO管理更能避免ORA-01555的原因)</p>
+</li>
+<li><p>若undo手动管理，则极大或增加更多的undo段。这样在长时间运行的查询执行期间，查询所需要的undo数据被覆盖的可能性就会降低。</p>
+</li>
+<li><p>减少查询的运行时间。（对undo的需求降低）</p>
+</li>
+<li><p>在大批量update或加载后收集统计信息（进行块清除）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 收集统计信息</span></span><br><span class="line">exec DBMS_STATS.gather_table_stats(USER,tablename);</span><br><span class="line"><span class="comment">-- sqlplus执行</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+<div class="title2" id="oracle-arch-11">十一、数据类型</div>
+
+<hr>
+<p>在选择什么类型存储数据后，我们很难去更改他，只能忍耐。因此，选择适当的数据类型至关重要。</p>
+<div class="title3">字符类型</div>
+
+<p>字符串数字类型包括<code>CHAR</code>和<code>VARCHAR2</code>（这两个用了<code>NLS</code>）及其带N的变体(包含<code>unicode</code>格式)。前者（<code>CHAR</code>,<code>NCHAR</code>）能存储2000字节的文本，后者（<code>VARCHAR2</code>,<code>NVARCHAR2</code>）可容纳4000字节（12c后为32767字节）。前者为定长字符串（用空格填满剩余位置），后者为变长字符串。</p>
+<blockquote>
+<p><code>NLS</code>(<code>National Language Support</code>,国家语言支持)控制着数据的许多方面，但最重要的是这两个方面：</p>
+<ul>
+<li>文本数据持久存储在磁盘上时如何编码</li>
+<li>透明地将数据从一个字符集转换到另一个字符集<br>转换的过程中，如果是例如八位字符集转七位字符集（ASCLL），再转回去插回数据库，很有可能发生信息丢失。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;---- 查看字符集</span><br><span class="line">&gt;select * </span><br><span class="line">   from nls_database_parameters</span><br><span class="line">   where parameter='NLS_CHARACTERSET';</span><br></pre></td></tr></table></figure>
+这里应该把NLS_LANG改为和数据库的一致。（windows在注册表改）</li>
+</ul>
+</blockquote>
+<h6 id="存储格式"><a href="#存储格式" class="headerlink" title="存储格式"></a>存储格式</h6><p>1-3字节的长度数据，后跟具体数据。若数据为<code>NULL</code>，则长度为单字节0xFF.若长度小于等于250(0x01~0xFA),则单字节表长度，否则会在标志字节0xFE后跟2字节表示长度。</p>
+<p>尽量避免使用<code>CHAR</code>，而使用<code>VARCHAR2</code>.不提前者的填充空格占用更多的资源，使用CHAR也会导致部分情况下找不到数据的情况：使用<code>varcharParamter = charParamter</code>时，哪怕其值是一样的，也找不到对应的记录——char类型的属性后面被空格填充了。</p>
+<p>定义长度时，可以用<code>VARCHAR2(10 byte)</code>或者<code>VARCHAR2(10 char)</code>.建议使用后者（不加修饰默认为字节而非字符）（特别是使用了utf-8等字符集时）</p>
+<h6 id="N系列："><a href="#N系列：" class="headerlink" title="N系列："></a>N系列：</h6><p>作用：系统需要管理和存储多种字符集时可以使用。其将单字节定长字符集作为首要字符集的同时也维护和存储了一些多字节数据。<br>和非N系列的区别：</p>
+<ul>
+<li>文本采用数据库的国家字符集来存储和管理，而非默认字符集</li>
+<li>长度总是字符数（非N系列可以指定是字节还是字符）</li>
+</ul>
+<div class="title3">二进制串RAW类型</div>
+
+<p>raw，变长二进制数据类型，因此不会发生字符集转换。做多可存储2000字节。<br>raw类型不做字符集转换，因此不适合存储文本数据，但适合存储加密信息。</p>
+<blockquote>
+<p>从数据库的角度看，如果某个字节串算不上文本（或其他基本数据类型，如数值，日期等），并且这个字符串不应在字符集发生变化是发生转换，则其应当存储在二进制的数据类型（如RAW）中。</p>
+<blockquote>
+<p>HEXTORAW:十六进制转RAW串<br>ROWTOHEX:RAW串转16进制</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;select rawtohex(raw_data) from t;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<div class="title3">数值类型</div>
+
+<ul>
+<li><code>NUNBER</code>,存储38位数字，范围为10<sup>-130</sup>到10<sup>126</sup>，变长存储，长度为0~22字节(<code>null</code>值为0)(<strong>变长类型</strong>),精度高于编程语言的flout和double</li>
+<li><code>BINARY_FLOUT</code>,32位单精度浮点数，至少支持6位精度（有效数字），占用5字节</li>
+<li><code>BINARY_DOUBLE</code>，64位双精度浮点数，15位精度，占用9字节</li>
+</ul>
+<p>可以看到<code>number</code>比后两者占用空间更大，但取值更小，也就是更精确。后两者并不适合金融运用（有效保存的位数太少）。需要注意的是，当<code>number</code>的计算位数大于38位（此时存储位数可能小于38位）时，其也会出现丢失精度的现象。</p>
+<p>可以通过规定number的精度和小数位防止其出现</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t(num_col <span class="built_in">number</span>(<span class="number">5</span>,<span class="number">2</span>));</span><br><span class="line"><span class="comment">-- 5表示5位数，0表示小数点右边2位。</span></span><br><span class="line"><span class="comment">-- 此时小数点左边最多3位，否则报错。</span></span><br><span class="line"><span class="comment">-- 即此时其可存储-999.99——999.99的数据</span></span><br><span class="line"><span class="comment">-- 若精度超出，则数据库直接报错，可以防止存储了失真的数据。若小数位超出，则会舍入到规定的位数。</span></span><br></pre></td></tr></table></figure>
+<p>小数位可以为负值，若为负值，则为对小数点右边的约束。（-2即舍入到100为单位的数）</p>
+<blockquote>
+<p>精度是完整性约束，小数位是对数据剪辑。<br>一位<code>number</code>转换的<code>java</code>类型是<code>boolean</code>,2位<code>byte</code>,3-4<code>short</code>,5-9<code>int</code>,10-18<code>long</code>,19-38<code>BigInteger</code>.</p>
+</blockquote>
+<blockquote>
+<p>除了这3类型，其他所有非固有类型，例如FLOAT,DOUBLE PRECISION，REAL,NUMRIC等，最终都会映射到NUMBER，底层实现其实都是NUMBER。</p>
+</blockquote>
+<div class="title3">DATE、TIMESTAMP、INTERVAL类型</div>
+
+<ul>
+<li><code>DATE</code>:七字节的定宽日期/时间数据类型，包含世纪、世纪中的哪一年，月份，月份中的那一天，时分秒。</li>
+<li><code>TIMESTAMP</code>：七字节或十一字节的定宽日期/时间数据类型。和<code>DATE</code>的不同是可以保留小数秒（最多9位）</li>
+<li><code>INTERVAL</code>：五字节/11字节定宽。存储一个时段，如9个小时，是两个<code>DATE</code>或者<code>TIMESTAMP</code>的差值，可用于前者的计算。</li>
+</ul>
+<p>DATE更常用，但TIMESTAMP可存储小数时间和时区，功能更强.</p>
+<p>进行TIMESTAMP运算时，最好使用INTERVAL类型，这样不会被隐式的转换为DATE。两个TIMESTAMP类型之差为INTERVAL。</p>
+<blockquote>
+<p>对数据的处理还是放到代码里比较好吧，所以这里就不介绍这几个数据类型自带的函数了</p>
+</blockquote>
+<blockquote>
+<p>自己试了试，若只需要年月日信息的话，<code>20220405</code>用NUMBER保存只需要5个字节，小于7字节，更节省空间。但是设计到秒为止，则<code>202204051222</code>，占用内存要大于9位，使用时间类型更节省空间</p>
+</blockquote>
+<div class="title3">LOB类型</div>
+
+<blockquote>
+<p>LOB,large Object</p>
+</blockquote>
+<ul>
+<li><p><code>CLOB</code>:能存储(4GB-1)×(数据库块大小)字节的数据（XML文件或纯文本）。会受到字符集转换影响。存储大块纯文本信息（大于4000字节）</p>
+</li>
+<li><p><code>NCLOB</code>：和CLOB一样，不过存储的是以数据库国家字符集编码的信息（而不是数据库默认字符集）。</p>
+</li>
+<li><p><code>BLOB</code>：能存储(4GB-1)×(数据库块大小)字节的数据。包含不需要进行二进制转换的二进制数据。如存储电子表格，字处理文档，图像文件数据。</p>
+</li>
+<li><p><code>BFILE</code>：在数据库列中存储一个Oracle目录对象（操作系统目录的一个指针）和一个文件名，可以通过它来读取这个文件。（该文件在数据库之外维护，并不是数据库的一部分。BFILE只能对其只读）。</p>
+</li>
+</ul>
+<blockquote>
+<p>映射的<code>java</code>实体<code>CLOB</code>和<code>BLOB</code>分别为<code>char[]</code>（或<code>String</code>）,和<code>byte[]</code></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//todo</span></span><br><span class="line"><span class="comment">// lob组件详细待续</span></span><br></pre></td></tr></table></figure>
+<div class="title3">ROWID/UROWID类型</div>
+
+<ul>
+<li><p>ROWID：数据库表的行地址，十字节，其不但足以在磁盘中定位每一行，也能识别出ROWID指向的那行数据所属的对象（表等）。</p>
+</li>
+<li><p>UROWID：通用的ROWID，用于没有固定ROWID的表。其通常表现为主键的值，因此其大小会根据所指向对象而有所变化。</p>
+</li>
+</ul>
+<p>因为ROWID是物理地址，因此通过ROWID访问数据是最快的方式。但是使用时需要结合其他字段或校验和（checksum）一起使用。（需要先确定数据在读取之后未改变）</p>
+<p>导致rowid改变的因素：</p>
+<ul>
+<li>分区表中，更新一行的分区键列，使这一行从某分区到另一分区。</li>
+<li>使用FLASHBACK TABLE命令讲一个数据库表恢复到以前某个时间点</li>
+<li>MOVE操作或者多分区操作（分解(<code>SPLIT</code>)或合并(<code>MERGE</code>)分区）</li>
+<li>使用<code>ALTER TABLE SHRINK SPACE</code>命令来收缩段</li>
+</ul>
+<blockquote>
+<p>不建议将其作为数据库列的类型。</p>
+</blockquote>
+<hr>
+<div class="title2" id="oracle-arch-EX">EX、附录</div>
+
+<hr>
+<p>参考书籍：《Oracle编程艺术：深入理解数据库体系结构(第3版)》.[美]Thomas Kyte Darl Kuhn.人民邮电出版社.2016-4</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://pawncs.github.io/2022/03/28/Oracle%E5%AD%A6%E4%B9%A0/" data-id="cl4i2x7q7004q2sgu5r7kerzd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A6%82%E8%A7%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">线程池概览</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Web/">Java Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/else/">else</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/html-css-js/">html,css,js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/network/">network</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/sql/">sql</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/" rel="tag">Design Pattern</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IO/" rel="tag">IO</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MQ/" rel="tag">MQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MongoDB/" rel="tag">MongoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/REST/" rel="tag">REST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RESTful/" rel="tag">RESTful</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Realm/" rel="tag">Realm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SCSS/" rel="tag">SCSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQLite/" rel="tag">SQLite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThreadPool/" rel="tag">ThreadPool</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/" rel="tag">dictionary</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gradle/" rel="tag">gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/" rel="tag">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/note/" rel="tag">note</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/study/" rel="tag">study</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CSS/" style="font-size: 12.5px;">CSS</a> <a href="/tags/Design-Pattern/" style="font-size: 10px;">Design Pattern</a> <a href="/tags/Flutter/" style="font-size: 10px;">Flutter</a> <a href="/tags/IO/" style="font-size: 12.5px;">IO</a> <a href="/tags/JVM/" style="font-size: 10px;">JVM</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MongoDB/" style="font-size: 12.5px;">MongoDB</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/REST/" style="font-size: 10px;">REST</a> <a href="/tags/RESTful/" style="font-size: 10px;">RESTful</a> <a href="/tags/Realm/" style="font-size: 10px;">Realm</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SCSS/" style="font-size: 10px;">SCSS</a> <a href="/tags/SQLite/" style="font-size: 10px;">SQLite</a> <a href="/tags/ThreadPool/" style="font-size: 10px;">ThreadPool</a> <a href="/tags/dictionary/" style="font-size: 20px;">dictionary</a> <a href="/tags/gradle/" style="font-size: 10px;">gradle</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/note/" style="font-size: 17.5px;">note</a> <a href="/tags/study/" style="font-size: 15px;">study</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">八月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/28/Oracle%E5%AD%A6%E4%B9%A0/">Oracle学习</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A6%82%E8%A7%88/">线程池概览</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/02/git%E6%89%8B%E5%86%8C%E6%A6%82%E8%A7%88/">git手册概览</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/07/vue/">vue</a>
+          </li>
+        
+          <li>
+            <a href="/2021/11/30/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 pawncs<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
